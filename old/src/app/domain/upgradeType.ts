@@ -11,6 +11,7 @@ export enum UpgradeType {
   Ordnance = "Ordnance",
   SupportTeam = "SupportTeam",
   Title = "Title",
-  WeaponsTeam = "WeaponsTeam",
-  WeaponsTeamAndOffensiveRetrofit = "WeaponsTeamAndOffensiveRetrofit"
+  WeaponsTeam = "WeaponsTeam"//,
+  // WeaponsTeamAndOffensiveRetrofit = "WeaponsTeamAndOffensiveRetrofit"
 }
+

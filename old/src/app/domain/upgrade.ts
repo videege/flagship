@@ -4,7 +4,7 @@ import { Ship } from "./ship";
 
 export class Upgrade {
   name: string;
-  type: UpgradeType;
+  types: UpgradeType[];
   faction: Faction;
   text: string;
   modification: boolean;
