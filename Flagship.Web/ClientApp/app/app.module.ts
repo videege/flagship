@@ -13,7 +13,7 @@ import { sharedConfig } from './app.shared.module';
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        ...sharedConfig.imports
+        ...(<any>sharedConfig.imports)
     ],
     providers: [
         { provide: 'ORIGIN_URL', useValue: location.origin }

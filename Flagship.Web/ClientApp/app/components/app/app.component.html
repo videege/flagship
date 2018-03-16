@@ -1,22 +1,22 @@
 <div class="app-frame">
-    <md-toolbar color="primary" class="fixed-toolbar">
-        <button md-button (click)="sidenav.open()">Menu</button>
+    <mat-toolbar color="primary" class="fixed-toolbar">
+        <button mat-button (click)="sidenav.open()">Menu</button>
         <span class="toolbar-header">ASP.NET Core Angular Material</span>
         <span class="example-spacer"></span>
-        <a md-button href="https://github.com/JaimeStill/AspNetCoreMaterial" target="_blank">GitHub</a>
-    </md-toolbar>
-    <md-sidenav-container class="mat-typography">
-        <md-sidenav #sidenav>
-            <md-toolbar color="primary">
+        <a mat-button href="https://github.com/JaimeStill/AspNetCoreMaterial" target="_blank">GitHub</a>
+    </mat-toolbar>
+    <mat-sidenav-container class="mat-typography">
+        <mat-sidenav #sidenav>
+            <mat-toolbar color="primary">
                 <span>ASP.NET Core Angular Material</span>
-            </md-toolbar>
-            <md-nav-list>
-                <h3 md-subheader>Getting Started</h3>
-                <a md-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">Home</a>
-            </md-nav-list>
-        </md-sidenav>
+            </mat-toolbar>
+            <mat-nav-list>
+                <h3 mat-subheader>Getting Started</h3>
+                <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">Home</a>
+            </mat-nav-list>
+        </mat-sidenav>
         <div class="app-body">
             <router-outlet></router-outlet>
         </div>
-    </md-sidenav-container>
+    </mat-sidenav-container>
 </div>
