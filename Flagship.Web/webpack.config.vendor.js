@@ -28,12 +28,12 @@ module.exports = (env) => {
                 '@angular/router',
                 '@angular/material',
                 '@angular/cdk',
-                '@angular/material/prebuilt-themes/deeppurple-amber.css',
                 'hammerjs',
                 'es6-shim',
                 'es6-promise',
                 'event-source-polyfill',
                 'zone.js',
+                './ClientApp/style/material-theme.scss'
             ]
         },
         output: {
@@ -49,10 +49,22 @@ module.exports = (env) => {
     };
 
     const clientBundleConfig = merge(sharedConfig, {
-        output: { path: path.join(__dirname, 'wwwroot', 'dist') },
+        output: {
+            path: path.join(__dirname, 'wwwroot', 'dist')
+        },
         module: {
-            rules: [
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
+            rules: [{
+                test: /\.css(\?|$)/,
+                use: extractCSS.extract({
+                    use: isDevBuild ? 'css-loader' : 'css-loader?minimize'
+                })
+            },
+            {
+                test: /\.scss(\?|$)/,
+                use: extractCSS.extract({
+                    use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
+                })
+            }
             ]
         },
         plugins: [

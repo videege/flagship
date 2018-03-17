@@ -61,5 +61,8 @@
     "webpack-merge": "4.1.0",
     "zone.js": "^0.8.20"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7"
+  }
 }
