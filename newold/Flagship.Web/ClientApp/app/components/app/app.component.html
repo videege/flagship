@@ -1,0 +1,57 @@
+<div class="app-frame">
+    <mat-sidenav-container class="mat-typography">
+        <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'">
+            <mat-toolbar color="primary">
+                <span>ASP.NET Core Angular Material</span>
+            </mat-toolbar>
+            <mat-nav-list>
+                <h3 mat-subheader>Getting Started</h3>
+                <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">Home</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <div>
+            <mat-toolbar color="primary" class="fixed-toolbar">
+                <button mat-button (click)="sidenav.open()" [ngStyle]="{'display' : (screenWidth > 840) ? 'none' : 'block'}"><mat-icon>menu</mat-icon></button>
+                <span class="toolbar-header">ASP.NET Core Angular Material</span>
+                <span class="example-spacer"></span>
+                <a mat-button href="https://github.com/JaimeStill/AspNetCoreMaterial" target="_blank">GitHub</a>
+            </mat-toolbar>
+            <main class="app-body">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+      
+    </mat-sidenav-container>
+    <!--<mat-sidenav-container class="all-wrap" fullscreen>
+        <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'">
+            <mat-toolbar color="primary">
+                <span>ASP.NET Core Angular Material</span>
+            </mat-toolbar>
+            <mat-nav-list>
+                <h3 mat-subheader>Getting Started</h3>
+                <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">Home</a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <div class="page-wrap">
+            <header role="banner">
+                <mat-toolbar color="primary" class="fixed-toolbar">
+                    <button type="button"
+                            mat-icon-button
+                            (click)="sidenav.open()"
+                            title="Open sidenav"
+                            [ngStyle]="{'display' : (screenWidth > 840) ? 'none' : 'block'}">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    Your Toolbar
+                </mat-toolbar>
+            </header>
+            <main class="app-body">
+                <router-outlet></router-outlet>
+            </main>
+            <footer>
+                Your sticky footer with a variable height.
+            </footer>
+        </div>
+    </mat-sidenav-container>-->
+</div>
