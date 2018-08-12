@@ -8,13 +8,17 @@ export class Upgrade {
 
     }
 
+    onEquip(ship: Ship): void {
+
+    }
   
-  //canEquipToShip(ship: Ship): boolean {
-  //  if (this.faction !== Faction.Any && this.faction !== ship.faction)
-  //    return false;
+  canEquipToShip(ship: Ship): boolean {
+    if (this.faction !== Faction.Any && this.faction !== ship.faction) {
+      return false;
+    }
 
   //  //check upgrade slot
 
-  //  return true;
-  //}
+    return true;
+  }
 }

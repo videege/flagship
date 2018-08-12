@@ -15,4 +15,9 @@ export class UpgradeSlot {
       this.isEnabled = true;
       this.upgrade = null;
     }
+
+    equipUpgrade(upgrade: Upgrade, ship: Ship): void {
+      this.upgrade = upgrade;
+      this.upgrade.onEquip(ship);
+    }
 }

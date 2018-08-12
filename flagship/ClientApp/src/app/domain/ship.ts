@@ -91,4 +91,14 @@ export class Ship {
     
     return true;
   }
+
+  equipUpgrade(upgrade: Upgrade): void {
+    if (!this.canEquipUpgrade(upgrade)) {
+      console.log('Cannot equip upgrade.');
+      return;
+    }
+
+    const availableSlot = this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === upgrade.type && !u.isFilled());
+    availableSlot.equipUpgrade(upgrade, this);
+  }
 }
