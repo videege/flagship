@@ -53,20 +53,4 @@ export class Fleet {
     return true;
   }
 
-  onUpgradeEquipped(ship: Ship, upgrade: Upgrade): void {
-
-    // TODO: move this logic to a commander-type upgrade subclass
-    // If the upgrade was a commander, disable the commander slot on all other ships
-    if (upgrade.type === UpgradeType.Commander) {
-      for (const shipInFleet of this.ships) {
-        if (shipInFleet !== ship) {
-          let commanderSlot = shipInFleet.upgradeSlots.find((u: UpgradeSlot) => u.type === UpgradeType.Commander);
-          if (commanderSlot !== null) {
-            commanderSlot.isEnabled = false;
-          }
-        }
-      }
-    }
-  }
-
 }

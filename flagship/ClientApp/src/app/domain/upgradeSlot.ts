@@ -18,6 +18,12 @@ export class UpgradeSlot {
 
     equipUpgrade(upgrade: Upgrade, ship: Ship): void {
       this.upgrade = upgrade;
-      this.upgrade.onEquip(ship);
+      this.upgrade.onUpgradeEquipped(ship);
+    }
+
+    unequipUpgrade(ship: Ship): void {
+      let upgrade = this.upgrade;
+      this.upgrade = null;
+      upgrade.onUpgradeUnequipped(ship);
     }
 }

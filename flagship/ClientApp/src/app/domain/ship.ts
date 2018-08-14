@@ -74,28 +74,6 @@ export class Ship {
   }
 
   canEquipUpgrade(upgrade: Upgrade): boolean {
-    // Can't equip if wrong faction
-    if (upgrade.faction !== this.faction && upgrade.faction !== Faction.Any) {
-      return false;
-    }
-
-    // Can't equip if there is no available slot of the correct type
-    const availableSlot = this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === upgrade.type && !u.isFilled());
-    if (!availableSlot) {
-      return false;
-    }
-
-    // Can't equip if this card (same name) is already equipped
-    const matchingUpgrade = this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.isFilled() && u.upgrade.name === upgrade.name);
-    if (matchingUpgrade) {
-      return false;
-    }
-
-    // Can't equip commander if this ship is a flotilla
-    if (upgrade.type === UpgradeType.Commander && this.size === Size.SmallFlotilla) {
-      return false;
-    }
-
     // Can't equip if upgrade doesn't agree
     if (!upgrade.canEquipToShip(this)) {
       return false;
@@ -117,5 +95,7 @@ export class Ship {
 
     const availableSlot = this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === upgrade.type && !u.isFilled());
     availableSlot.equipUpgrade(upgrade, this);
+
+    
   }
 }
