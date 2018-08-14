@@ -1,28 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { UIRouterModule } from '@uirouter/angular';
-import { HomeComponent } from './home/home.component';
+import { UIRouterModule, UIRouter } from '@uirouter/angular';
+import { AppNavComponent } from './app-nav/app-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
+  MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
+import { FleetsComponent } from './fleets/fleets.component';
 
 const STATES = [
-  { name: 'home', url: '/home', component: HomeComponent }
-  // { name: 'home', url: '/', component: HelloComponent },
-  // { name: 'world', url: '/world', component: WorldComponent },
-  // { name: 'world.nest', url: '/nest', component: NestComponent },
+  //{ name: '', url: '/', component: AppNavComponent },
+  { name: 'fleets', url: '/fleets', component: FleetsComponent }
 ];
+
+export function uiRouterConfig(router: UIRouter, injector: Injector) {
+  router.urlService.rules.otherwise({ state: 'fleets' });
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    AppNavComponent,
+    FleetsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    UIRouterModule.forRoot({ states: STATES })
+    UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
