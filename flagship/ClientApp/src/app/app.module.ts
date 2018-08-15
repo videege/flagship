@@ -3,6 +3,8 @@ import { NgModule, Injector } from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {FlexLayoutModule} from '@angular/flex-layout';
+
 import { AppComponent } from './app.component';
 import { UIRouterModule, UIRouter } from '@uirouter/angular';
 import { AppNavComponent } from './app-nav/app-nav.component';
@@ -31,6 +33,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     BrowserAnimationsModule,
     UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     LayoutModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

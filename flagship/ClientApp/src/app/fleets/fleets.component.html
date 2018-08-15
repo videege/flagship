@@ -4,22 +4,32 @@
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
+          <div mat-card-avatar>
+
+              <i class="ffi ffi-rebel" style="font-size:36px;"></i>
+          </div>
           <mat-card-title>
             {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
               <button mat-menu-item>Expand</button>
               <button mat-menu-item>Remove</button>
-            </mat-menu>
+            </mat-menu> -->
           </mat-card-title>
+          <mat-card-subtitle>
+            Grand Admiral Thrawn
+          </mat-card-subtitle>
+          <div fxFlex></div>
+          <div><span>396 / 400</span></div>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <div>
             <p>
               Here's an icon: <i class="ffi ffi-swa-accuracy"></i>
-              <i class="ffi ffi-d8" style="font-size:18px;"></i>
+              <i class="ffi ffi-imperial" style="font-size:18px;"></i>
+
             </p>
           </div>
         </mat-card-content>
