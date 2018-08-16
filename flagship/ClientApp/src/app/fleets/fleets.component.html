@@ -5,11 +5,11 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <div mat-card-avatar>
-
-              <i class="ffi ffi-rebel" style="font-size:36px;"></i>
+            <i class="ffi" [ngClass]="{'ffi-imperial': card.fleet.faction == faction.Empire, 'ffi-rebel': card.fleet.faction == faction.Rebels}" 
+              style="font-size:36px;"></i>
           </div>
           <mat-card-title>
-            {{card.title}}
+            {{card.fleet.name}}
             <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -19,10 +19,10 @@
             </mat-menu> -->
           </mat-card-title>
           <mat-card-subtitle>
-            Grand Admiral Thrawn
+            {{card.fleet.author}}
           </mat-card-subtitle>
           <div fxFlex></div>
-          <div><span>396 / 400</span></div>
+          <div><span>{{ card.fleet.currentPoints() }} / {{ card.fleet.pointLimit }}</span></div>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <div>

@@ -6,14 +6,14 @@ import { UpgradeSlot } from "./upgradeSlot";
 import { UpgradeType } from "./upgradeType";
 
 export class Fleet {
-  id: number;
-  name: string;
-  author: string;
-  faction: Faction;
-  pointLimit: number;
+  public ships: Ship[];
+  public squadrons: Squadron[];
 
-  ships: Ship[];
-  squadrons: Squadron[];
+  constructor(public id: string, public name: string,
+    public author: string, public faction: Faction, public pointLimit: number) {
+      this.ships = [];
+      this.squadrons = [];
+  }
 
   squadronPointLimit(): number {
     return Math.ceil(this.pointLimit / 3);
