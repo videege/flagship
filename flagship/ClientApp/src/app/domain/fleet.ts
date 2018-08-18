@@ -31,6 +31,20 @@ export class Fleet {
     return points;
   }
 
+  getCommanderName(): string {
+    let commander = "None";
+    for (const ship of this.ships) {
+      let commanderSlot = ship.upgradeSlots.find((u: UpgradeSlot) => {
+        return u.isEnabled && u.isFilled() && u.type === UpgradeType.Commander;
+      });
+      if (commanderSlot != null) {
+        commander = commanderSlot.upgrade.name;
+        break;
+      }
+    }
+    return commander;
+  }
+
   canEquipUpgrade(ship: Ship, upgrade: Upgrade): boolean {
     // Can't equip if unique and there is already a upgrade/squadron with
     // the same name

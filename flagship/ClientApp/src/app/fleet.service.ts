@@ -17,6 +17,8 @@ export class FleetService {
     ];
   }
 
-  
+  getFleet(id: string) {
+    return this.fleets.find((f: Fleet) => f.id === id);
+  }
 
 }

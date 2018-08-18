@@ -1,35 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { FleetService } from '../fleet.service';
 import { Fleet } from '../domain/fleet';
 import { Faction } from '../domain/faction';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'flagship-fleets',
   templateUrl: './fleets.component.html',
   styleUrls: ['./fleets.component.css']
 })
-export class FleetsComponent {
+export class FleetsComponent implements OnInit {
   faction = Faction;
 
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return this.fleets.map((f: Fleet) => { return { fleet: f, cols: 2, rows: 1}; });
-      }
-      return this.fleets.map((f: Fleet) => { return { fleet: f, cols: 1, rows: 1}; });
-      
-    })
-  );
+  displayedColumns = ['faction', 'name', 'commander', 'points'];
 
   constructor(private breakpointObserver: BreakpointObserver,
     private fleetService: FleetService) {}
 
   public fleets: Fleet[];
+  dataSource = new MatTableDataSource<Fleet>(this.fleets);
 
   ngOnInit() {
     this.fleets = this.fleetService.fleets;
+    this.dataSource.data = this.fleets;
+    //this.dataSource.
   }
 }
