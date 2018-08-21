@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -14,9 +14,13 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { FleetsComponent } from './fleets/fleets.component';
 import { FleetComponent } from './fleet/fleet.component';
 import { FleetService } from './fleet.service';
+import { ShipsModule } from './ships/ships.module';
+import { NotfoundComponent } from './notfound/notfound.component';
+import {trace} from "@uirouter/angular";
+trace.enable();
 
 const STATES = [
-  //{ name: '', url: '/', component: AppNavComponent },
+  { name: 'notfound', url: '/404', component: NotfoundComponent },
   { name: 'fleets', url: '/fleets', component: FleetsComponent },
   { name: 'fleet', url: '/fleets/:id', component: FleetComponent,
     resolve: [
@@ -28,11 +32,13 @@ const STATES = [
         }
       }
     ]
-  }
+  },
+  { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
 ];
 
 export function uiRouterConfig(router: UIRouter, injector: Injector) {
-  router.urlService.rules.otherwise({ state: 'fleets' });
+  router.urlService.rules.initial({ state: 'fleets' });
+  router.urlService.rules.otherwise({ state: 'notfound' });
 }
 
 @NgModule({
@@ -40,7 +46,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     AppComponent,
     AppNavComponent,
     FleetsComponent,
-    FleetComponent
+    FleetComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatMenuModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [
+    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
