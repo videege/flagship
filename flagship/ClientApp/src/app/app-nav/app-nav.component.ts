@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TransitionService } from '@uirouter/angular';
 
 @Component({
   selector: 'flagship-app-nav',
@@ -14,7 +15,13 @@ export class AppNavComponent {
     .pipe(
       map(result => result.matches)
     );
-    
-  constructor(private breakpointObserver: BreakpointObserver) {}
   
+  currentState = "";
+
+  constructor(private breakpointObserver: BreakpointObserver, private transitionService: TransitionService) {
+    this.transitionService.onSuccess({}, (transition) => {
+      this.currentState = transition.targetState().state().data['title'];
+    });
+  }
+   
   }

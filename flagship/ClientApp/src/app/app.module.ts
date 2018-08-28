@@ -20,18 +20,43 @@ import {trace} from "@uirouter/angular";
 trace.enable();
 
 const STATES = [
-  { name: 'notfound', url: '/404', component: NotfoundComponent },
-  { name: 'fleets', url: '/fleets', component: FleetsComponent },
-  { name: 'fleet', url: '/fleets/:id', component: FleetComponent,
-    resolve: [
-      {
-        token: 'fleet',
-        deps: [Transition, FleetService],
-        resolveFn: (trans, fleetService) => {
-          fleetService.getFleet(trans.params().id);
-        }
+  { name: 'notfound',
+    url: '/404',
+    views: {
+      'content': { component: NotfoundComponent }
+    },
+    data: {
+      title: 'Page Not Found'
+    }
+  },
+  { name: 'fleets',
+    url: '/fleets',
+    views: {
+      'content': { component: FleetsComponent }
+    },
+    data: {
+      title: 'My Fleets'
+    }
+  },
+  { name: 'fleets.fleet',
+    url: '/:id',
+    views: {
+      'content@': {
+        component: FleetComponent,
+        resolve: [
+          {
+            token: 'fleet',
+            deps: [Transition, FleetService],
+            resolveFn: (trans, fleetService) => {
+              fleetService.getFleet(trans.params().id);
+            }
+          }
+        ]
       }
-    ]
+    },
+    data: {
+      title: (fleet: Fleet) => fleet.name
+    }
   },
   { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
 ];
