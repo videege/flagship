@@ -19,16 +19,24 @@ export class Fleet {
     return Math.ceil(this.pointLimit / 3);
   }
 
-  currentPoints(): number {
+  currentPointsFromShips(): number {
     let points = 0;
     for (let i = 0; i < this.ships.length; i++) {
       points += this.ships[i].currentPoints();
     }
+    return points;
+  }
+
+  currentPointsFromSquadrons(): number {
+    let points = 0;
     for (let i = 0; i < this.squadrons.length; i++) {
       points += this.squadrons[i].points;
     }
-
     return points;
+  }
+
+  currentPoints(): number {
+    return this.currentPointsFromShips() + this.currentPointsFromSquadrons();
   }
 
   getCommanderName(): string {

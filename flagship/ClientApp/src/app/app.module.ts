@@ -8,15 +8,18 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
 import { AppNavComponent } from './app-nav/app-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
+
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
-  MatGridListModule, MatCardModule, MatMenuModule, MatTableModule } from '@angular/material';
+  MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule } from '@angular/material';
+
 import { FleetsComponent } from './fleets/fleets.component';
 import { FleetComponent } from './fleet/fleet.component';
 import { FleetService } from './fleet.service';
 import { ShipsModule } from './ships/ships.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import {trace} from "@uirouter/angular";
+import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
+import { ShipDetailComponent } from './ship-detail/ship-detail.component';
 trace.enable();
 
 const STATES = [
@@ -40,22 +43,21 @@ const STATES = [
   },
   { name: 'fleets.fleet',
     url: '/:id',
-    views: {
-      'content@': {
-        component: FleetComponent,
-        resolve: [
-          {
-            token: 'fleet',
-            deps: [Transition, FleetService],
-            resolveFn: (trans, fleetService) => {
-              fleetService.getFleet(trans.params().id);
-            }
-          }
-        ]
+    resolve: [
+      {
+        token: 'fleet',
+        deps: [Transition, FleetService],
+        resolveFn: (trans, fleetService) => {
+          return fleetService.getFleet(trans.params().id).toPromise();
+        }
       }
+    ],
+    views: {
+      'content@': { component: FleetComponent },
+      'toolbar@': { component: FleetToolbarComponent }
     },
     data: {
-      title: (fleet: Fleet) => fleet.name
+      title: null
     }
   },
   { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
@@ -72,13 +74,14 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     AppNavComponent,
     FleetsComponent,
     FleetComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    FleetToolbarComponent,
+    ShipDetailComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
-    LayoutModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -88,7 +91,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
