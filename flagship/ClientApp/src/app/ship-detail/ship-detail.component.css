@@ -1,0 +1,20 @@
+:host {
+    width: 100%;
+}
+
+.mat-card-avatar {
+    margin-top: 4px;
+}
+
+.mat-card-avatar > i {
+    font-size: 40px;
+}
+
+.stat > i {
+    font-size: 20px;;
+}
+
+.stat > span {
+    font-size: 24px;
+    vertical-align: top;
+}

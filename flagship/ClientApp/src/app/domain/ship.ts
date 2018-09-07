@@ -62,13 +62,19 @@ export class Ship {
       this.rearArmament = rearArmament;
   }
 
-  currentPoints(): number {
-    let points = this.points;
+  currentPointsFromUpgrades(): number {
+    let points = 0;
     for (const upgradeSlot of this.upgradeSlots) {
       if (upgradeSlot.isEnabled && upgradeSlot.upgrade) {
         points += upgradeSlot.upgrade.points;
       }
     }
+    return points;
+  }
+
+  currentPoints(): number {
+    let points = this.points;
+    points = points + this.currentPointsFromUpgrades();
 
     return points;
   }
