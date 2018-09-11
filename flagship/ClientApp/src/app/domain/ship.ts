@@ -7,6 +7,7 @@ import { Armament } from "./armament";
 import { ShipClass } from "./shipClass";
 import { Upgrade } from "./upgrade";
 import { Fleet } from "./fleet";
+import { NavigationChart } from "./navigationChart";
 
 export class Ship {
   name: string;
@@ -21,6 +22,8 @@ export class Ship {
   points: number;
 
   frontShields: number;
+  leftAuxShields: number;
+  rightAuxShields: number;
   leftShields: number;
   rightShields: number;
   rearShields: number;
@@ -32,14 +35,20 @@ export class Ship {
 
   antiSquadronArmament: Armament;
   frontArmament: Armament;
+  leftAuxArmament: Armament;
+  rightAuxArmament: Armament;
   leftArmament: Armament;
   rightArmament: Armament;
   rearArmament: Armament;
 
+  navigationChart: NavigationChart;
+
   constructor(name: string, faction: Faction, size: Size, shipClass: ShipClass, hull: number, command: number, 
     squadron: number, engineering: number, points: number, defenseTokens: DefenseToken[], 
-    frontShields: number, leftShields: number, rightShields: number, rearShields: number,
-    antiSquadronArmament: Armament, frontArmament: Armament, leftArmament: Armament, rightArmament: Armament, rearArmament: Armament,
+    frontShields: number, leftAuxShields: number, rightAuxShields: number, leftShields: number, rightShields: number, rearShields: number,
+    antiSquadronArmament: Armament, frontArmament: Armament, leftAuxArmament: Armament, 
+    rightAuxArmament: Armament, leftArmament: Armament, rightArmament: Armament, rearArmament: Armament,
+    navigationChart: NavigationChart,
     upgradeSlots: UpgradeSlot[]) {
       this.name = name;
       this.faction = faction;
@@ -52,14 +61,19 @@ export class Ship {
       this.defenseTokens = defenseTokens;
       this.upgradeSlots = upgradeSlots;
       this.frontShields = frontShields;
+      this.leftAuxShields = leftAuxShields;
+      this.rightAuxShields = rightAuxShields;
       this.leftShields = leftShields;
       this.rightShields = rightShields;
       this.rearShields = rearShields;
       this.antiSquadronArmament = antiSquadronArmament;
       this.frontArmament = frontArmament;
+      this.leftAuxArmament = leftAuxArmament;
+      this.rightAuxArmament = rightAuxArmament;
       this.leftArmament = leftArmament;
       this.rightArmament = rightArmament;
       this.rearArmament = rearArmament;
+      this.navigationChart = navigationChart;
   }
 
   currentPointsFromUpgrades(): number {
@@ -103,5 +117,10 @@ export class Ship {
     availableSlot.equipUpgrade(upgrade, this);
 
     
+  }
+
+  isFlagship(): boolean {
+    return this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && 
+      u.type === UpgradeType.Commander && u.isFilled()) != null;
   }
 }

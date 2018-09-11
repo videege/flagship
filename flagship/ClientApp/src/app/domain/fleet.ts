@@ -75,4 +75,11 @@ export class Fleet {
     return true;
   }
 
+  deleteShip(ship: Ship): void {
+    let idx = this.ships.indexOf(ship);
+    if (idx >= 0) {
+      this.ships.splice(idx, 1);
+      
+    }
+  }
 }

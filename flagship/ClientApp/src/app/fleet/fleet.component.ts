@@ -21,7 +21,7 @@ export class FleetComponent implements OnInit {
   }
 
   addShip() {
-    let newShip = this.shipFactory.instantiateShip('Imperial I-Class Star Destroyer');
+    let newShip = this.shipFactory.instantiateShip('Imperial I-Class Star Destroyer', this.fleet);;
     this.fleet.ships.push(newShip);
   }
 }

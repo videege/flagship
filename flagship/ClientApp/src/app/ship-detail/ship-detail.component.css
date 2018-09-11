@@ -10,6 +10,10 @@
     font-size: 40px;
 }
 
+.mat-card-avatar > i.flagship {
+    color: red;
+}
+
 .stat > i {
     font-size: 20px;;
 }
@@ -17,4 +21,9 @@
 .stat > span {
     font-size: 24px;
     vertical-align: top;
+}
+
+i.speedbox {
+    border: 1px solid #8e8f8f;
+    padding: 2px;
 }

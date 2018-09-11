@@ -15,4 +15,7 @@ export class ShipDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteShip() {
+    this.ship.fleet.deleteShip(this.ship);
+  }
 }
