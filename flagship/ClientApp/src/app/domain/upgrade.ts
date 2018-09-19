@@ -4,7 +4,8 @@ import { Ship } from './ship';
 import { UpgradeSlot } from './upgradeSlot';
 
 export class Upgrade {
-  constructor(public name: string, public type: UpgradeType, public faction: Faction, public text: string, public modification: boolean,
+  constructor(public id: number, public name: string, public type: UpgradeType, 
+    public faction: Faction, public text: string, public modification: boolean,
     public points: number, public unique: boolean) {
 
     }

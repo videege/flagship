@@ -20,6 +20,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import {trace} from "@uirouter/angular";
 import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { ShipDetailComponent } from './ship-detail/ship-detail.component';
+import { BatteryComponent } from './battery/battery.component';
+import { UpgradeSummaryComponent } from './upgrade-summary/upgrade-summary.component';
 trace.enable();
 
 const STATES = [
@@ -76,7 +78,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     FleetComponent,
     NotfoundComponent,
     FleetToolbarComponent,
-    ShipDetailComponent
+    ShipDetailComponent,
+    BatteryComponent,
+    UpgradeSummaryComponent
   ],
   imports: [
     BrowserModule,

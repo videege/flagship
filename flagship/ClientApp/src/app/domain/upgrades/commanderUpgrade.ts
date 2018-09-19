@@ -6,9 +6,9 @@ import { UpgradeSlot } from "../upgradeSlot";
 import { Size } from "../size";
 
 export class CommanderUpgrade extends Upgrade {
-    constructor(name: string, faction: Faction, text: string, modification: boolean,
+    constructor(id: number, name: string, faction: Faction, text: string, modification: boolean,
         points: number) {
-        super(name, UpgradeType.Commander, faction, text, modification, points, true);
+        super(id, name, UpgradeType.Commander, faction, text, modification, points, true);
     }
 
     canEquipToShip(ship: Ship): boolean {

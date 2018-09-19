@@ -61,17 +61,15 @@ export class Fleet {
         let matchingUpgrade = s.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.isFilled() && u.upgrade.name === upgrade.name);
         return matchingUpgrade !== null;
       });
-      if (shipWithMatchingUpgrade !== null) {
+      if (shipWithMatchingUpgrade) {
         return false;
       }
 
       let matchingSquadron = this.squadrons.find((s: Squadron) => s.name === upgrade.name);
-      if (matchingSquadron !== null) {
+      if (matchingSquadron) {
         return false;
       }
     }
-
-    
     return true;
   }
 

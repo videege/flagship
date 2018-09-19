@@ -14,14 +14,15 @@ export class ISDI extends Ship {
         super('Imperial I-Class Star Destroyer', Faction.Empire,Size.Large, ShipClass.Imperial,
         11, 3, 4, 4, 110,
         [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect, DefenseToken.Contain],
-        4, null, null, 3, 3, 2, new Armament(0, 1, 1), null, null, 
-        new Armament(3, 2, 3),  new Armament(2, 0, 2),  
+        4, null, null, 3, 3, 2, new Armament(0, 1, 1),
+        new Armament(3, 2, 3), null, null,  new Armament(2, 0, 2),  
         new Armament(2, 0, 2), new Armament(1, 2, 0), 
         new NavigationChart(2, [1, 1], [0, 1, 1], null),
         [ new UpgradeSlot(UpgradeType.Commander), new UpgradeSlot(UpgradeType.Title),
             new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.BoardingTeam),
             new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
             new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
-            new UpgradeSlot(UpgradeType.Turbolaser) ]);
+            new UpgradeSlot(UpgradeType.Turbolaser) ],
+        [ 2000, 2001, 2002, 2003, 2004 ]);
     }
 }

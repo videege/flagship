@@ -1,7 +1,7 @@
 import { Faction } from "./faction";
 import { Size } from "./size";
 import { DefenseToken } from "./defenseToken";
-import { UpgradeType } from "./upgradeType";
+import { UpgradeType, sortUpgradeTypes } from "./upgradeType";
 import { UpgradeSlot } from "./upgradeSlot";
 import { Armament } from "./armament";
 import { ShipClass } from "./shipClass";
@@ -29,8 +29,7 @@ export class Ship {
   rearShields: number;
   defenseTokens: DefenseToken[];
 
-  //upgradeSlots: UpgradeType[];
-  //upgrades: {[type in UpgradeType]: Upgrade[]};
+  allowedTitles: number[];
   upgradeSlots: UpgradeSlot[];
 
   antiSquadronArmament: Armament;
@@ -49,7 +48,7 @@ export class Ship {
     antiSquadronArmament: Armament, frontArmament: Armament, leftAuxArmament: Armament, 
     rightAuxArmament: Armament, leftArmament: Armament, rightArmament: Armament, rearArmament: Armament,
     navigationChart: NavigationChart,
-    upgradeSlots: UpgradeSlot[]) {
+    upgradeSlots: UpgradeSlot[], allowedTitles: number[]) {
       this.name = name;
       this.faction = faction;
       this.command = command;
@@ -74,6 +73,7 @@ export class Ship {
       this.rightArmament = rightArmament;
       this.rearArmament = rearArmament;
       this.navigationChart = navigationChart;
+      this.allowedTitles = allowedTitles;
   }
 
   currentPointsFromUpgrades(): number {
@@ -99,6 +99,13 @@ export class Ship {
       return false;
     }
     
+    if (upgrade.type === UpgradeType.Title) {
+      const matchingTitle = this.allowedTitles.find((t) => t === upgrade.id);
+      if (!matchingTitle) {
+        return false;
+      }
+    }
+
     // Can't equip if fleet doesn't agree
     if (this.fleet != null && !this.fleet.canEquipUpgrade(this, upgrade)) {
       return false;
@@ -122,5 +129,11 @@ export class Ship {
   isFlagship(): boolean {
     return this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && 
       u.type === UpgradeType.Commander && u.isFilled()) != null;
+  }
+
+  sortedUpgrades(): Upgrade[] {
+    return this.upgradeSlots.filter((u: UpgradeSlot) => u.isEnabled && u.isFilled())
+      .map(u => u.upgrade)
+      .sort((a, b) => sortUpgradeTypes(a.type, b.type));
   }
 }

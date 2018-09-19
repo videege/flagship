@@ -5,9 +5,9 @@ import { Ship } from "../ship";
 import { UpgradeSlot } from "../upgradeSlot";
 
 export class SlotGrantingUpgrade extends Upgrade {
-    constructor(name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,
+    constructor(id: number, name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,
         points: number, unique: boolean, public grantedType: UpgradeType) {
-        super(name, type, faction, text, modification, points, unique);
+        super(id, name, type, faction, text, modification, points, unique);
     }
 
     canEquipToShip(ship: Ship): boolean {
