@@ -67,10 +67,8 @@
     </mat-card-content>
     <mat-action-list dense>
       <h3 matSubheader style="margin-left: -16px;">Upgrades</h3>
-      <mat-list-item *ngFor="let slot of enabledUpgradeSlots(); last as last" style="margin-left: -28px;">
-        <div matListIcon fxLayout="row" style="width: 56px;height:28px;padding:0;">
-
-          <i class="upgrade"></i>
+      <mat-list-item *ngFor="let slot of enabledUpgradeSlots(); last as last">
+        <div matListIcon fxLayout="row" style="width: 28px;height:28px;padding:0;">
           <i class="upgrade defensiveretrofit"></i>
         </div>
         <h3 matLine *ngIf="!slot.upgrade">{{ upgradeTypeName(slot.type) }}</h3>

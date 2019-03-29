@@ -14,7 +14,7 @@ import { AppNavComponent } from './app-nav/app-nav.component';
 
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
   MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule,
-  MatDialogModule, MatActionListModule
+  MatDialogModule
  } from '@angular/material';
 
 import { FleetsComponent } from './fleets/fleets.component';
@@ -122,7 +122,6 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatActionListModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
