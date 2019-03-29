@@ -17,3 +17,54 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 .mat-card-header-text {
     width: 100%;
 }
+
+:host {
+    width: 100%;
+}
+
+.mat-card-avatar {
+    margin-top: 4px;
+}
+
+.mat-card-avatar > i {
+    font-size: 40px;
+}
+
+.mat-card-avatar > i.flagship {
+    color: red;
+}
+
+.stat > i {
+    font-size: 20px;;
+}
+
+.stat > span {
+    font-size: 24px;
+    vertical-align: top;
+}
+
+i.speedbox {
+    border: 1px solid #8e8f8f;
+    padding: 2px;
+}
+
+i.upgrade{
+    width:28px !important;
+    display:block;
+    height:28px !important;
+    color:white;
+    text-decoration:none;
+}
+i.upgrade:before{
+    content: '';
+    background-size:cover;
+        position:absolute;
+    width:28px;
+    height:28px;
+}
+i.commander:before {
+    background: url('/assets/img/commander.png');
+}
+i.defensiveretrofit:before {
+    background: url('/assets/img/defensiveretrofit.png');
+}

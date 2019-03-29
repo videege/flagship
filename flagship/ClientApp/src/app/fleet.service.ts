@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Fleet } from './domain/fleet';
 import { Faction } from './domain/faction';
 import { Observable, of } from 'rxjs';
+import { Ship } from './domain/ship';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +25,10 @@ export class FleetService {
     return of(this.fleets.find((f: Fleet) => f.id == id));
   }
 
+  getShip(fleetId: string, shipId: string): Observable<Ship> {
+    let fleet = this.fleets.find((f: Fleet) => f.id == fleetId);
+    let ship = fleet.ships.find((s: Ship) => s.id == shipId);
+    return of(ship);
+    
+  }
 }

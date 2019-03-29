@@ -73,6 +73,16 @@ export class Fleet {
     return true;
   }
 
+  getAvailableShipId(): string {
+    while (true) {
+      const id = Math.floor(Math.random() * 1000).toString();
+      let matchingId = this.ships.find(s => s.id === id);
+      if (!matchingId) {
+        return id;
+      }
+    }
+  }
+
   deleteShip(ship: Ship): void {
     let idx = this.ships.indexOf(ship);
     if (idx >= 0) {

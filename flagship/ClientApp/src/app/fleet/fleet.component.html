@@ -7,9 +7,9 @@
     <button mat-button color="primary" (click)="addShip()">Add Ship</button>
   </div>
   <mat-divider></mat-divider>
-    <mat-grid-list cols="2" rowHeight="350px" gutterSize="16px">
-      <mat-grid-tile *ngFor="let ship of fleet.ships" [colspan]="colSpan">
-        <flagship-ship-detail [ship]="ship"></flagship-ship-detail>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="400px" gutterSize="16px">
+    <mat-grid-tile *ngFor="let ship of fleet.ships" [colspan]="colSpan">
+      <flagship-ship-detail [ship]="ship"></flagship-ship-detail>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

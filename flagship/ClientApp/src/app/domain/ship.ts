@@ -10,6 +10,7 @@ import { Fleet } from "./fleet";
 import { NavigationChart } from "./navigationChart";
 
 export class Ship {
+  public id: string;
   name: string;
   faction: Faction;
   size: Size;

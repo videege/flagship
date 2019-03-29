@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 
+import { of } from 'rxjs';
+import { map, first } from 'rxjs/operators';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -10,7 +13,9 @@ import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
 import { AppNavComponent } from './app-nav/app-nav.component';
 
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
-  MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule } from '@angular/material';
+  MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule,
+  MatDialogModule, MatActionListModule
+ } from '@angular/material';
 
 import { FleetsComponent } from './fleets/fleets.component';
 import { FleetComponent } from './fleet/fleet.component';
@@ -22,7 +27,12 @@ import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { ShipDetailComponent } from './ship-detail/ship-detail.component';
 import { BatteryComponent } from './battery/battery.component';
 import { UpgradeSummaryComponent } from './upgrade-summary/upgrade-summary.component';
-trace.enable();
+import { ShipEditorComponent } from './ship-editor/ship-editor.component';
+import { ShipCardComponent } from './ship-card/ship-card.component';
+
+
+
+//trace.enable();
 
 const STATES = [
   { name: 'notfound',
@@ -62,6 +72,24 @@ const STATES = [
       title: null
     }
   },
+  { name: 'fleets.fleet.ship',
+    url: '/:shipId',
+    resolve: [
+      {
+        token: 'ship',
+        deps: [Transition, FleetService],
+        resolveFn: (trans, fleetService: FleetService) => {
+          return fleetService.getShip(trans.params().id, trans.params().shipId).toPromise();//.toPromise();
+        }
+      }
+    ],
+    views: {
+      'content@': { component: ShipEditorComponent }
+    },
+    data: {
+      title: null
+    }
+  },
   { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
 ];
 
@@ -80,7 +108,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     FleetToolbarComponent,
     ShipDetailComponent,
     BatteryComponent,
-    UpgradeSummaryComponent
+    UpgradeSummaryComponent,
+    ShipEditorComponent,
+    ShipCardComponent
   ],
   imports: [
     BrowserModule,
@@ -92,15 +122,18 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatActionListModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
+  entryComponents: [ShipCardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

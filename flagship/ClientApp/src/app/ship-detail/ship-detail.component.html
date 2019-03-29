@@ -50,7 +50,7 @@
     </div>
   </mat-card-content>
  <mat-card-actions>
-    <button mat-button (click)="editShip()">Edit Ship</button>
+    <button mat-button uiSref="fleets.fleet.ship" [uiParams]="{ id: ship.fleet.id, shipId: ship.id }">Edit Ship</button>
     <span fxFlex></span>
     <button mat-button (click)="deleteShip()"
             color="warn">Delete Ship</button>
