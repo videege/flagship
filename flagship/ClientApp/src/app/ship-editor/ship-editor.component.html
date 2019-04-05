@@ -14,7 +14,8 @@
       </mat-card-title>
       <mat-card-subtitle>
         <span>
-          Hull: {{ ship.hull }} | Command: {{ ship.command }} | Engineering: {{ ship.engineering }} | Squadron {{ ship.squadron }}
+          Hull: {{ ship.hull }} | Command: {{ ship.command }} | Engineering: {{ ship.engineering }} | Squadron {{
+              ship.squadron }}
         </span>
         <span fxFlex></span>
         <button mat-icon-button color="accent" (click)="viewShipCard()" style="margin-top: -12px;">
@@ -42,7 +43,8 @@
           <div>
             <span *ngFor="let speed of ship.navigationChart.getSpeeds(); index as i">
               {{ i + 1 }}:
-              <i class="ffi speedbox" *ngFor="let box of speed" [ngClass]="{'ffi-swa-turn-0': box === 0, 'ffi-swa-turn-1': box === 1, 'ffi-swa-turn-2': box === 2}"></i>
+              <i class="ffi speedbox" *ngFor="let box of speed"
+                [ngClass]="{'ffi-swa-turn-0': box === 0, 'ffi-swa-turn-1': box === 1, 'ffi-swa-turn-2': box === 2}"></i>
             </span>
           </div>
         </div>
@@ -65,18 +67,22 @@
 
 
     </mat-card-content>
-    <mat-action-list dense>
+    <mat-action-list class="upgrade-list">
       <h3 matSubheader style="margin-left: -16px;">Upgrades</h3>
-      <mat-list-item *ngFor="let slot of enabledUpgradeSlots(); last as last">
+      <!-- [ngStyle]="{'min-height': (slot.upgrade ? '72': '56') + 'px', 'height': (slot.upgrade ? 'auto' : '56px')}"-->
+      <mat-list-item *ngFor="let slot of enabledUpgradeSlots(); last as last" (click)="selectUpgrade(slot)">
         <div matListIcon fxLayout="row" style="width: 28px;height:28px;padding:0;">
-          <i class="upgrade defensiveretrofit"></i>
+          <i flagshipUpgradeIcon [upgradeType]="slot.type"></i>
         </div>
-        <h3 matLine *ngIf="!slot.upgrade">{{ upgradeTypeName(slot.type) }}</h3>
+        <h3 matLine *ngIf="!slot.upgrade" class="text-muted">{{ upgradeTypeName(slot.type) }}</h3>
         <h3 matLine *ngIf="slot.upgrade">{{ slot.upgrade.name }}</h3>
-        <p matLine *ngIf="slot.upgrade">
+        <p matLine *ngIf="slot.upgrade" style="white-space: normal; font-size: .8em;">
           <span>{{ slot.upgrade.text }}</span>
         </p>
-      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+        
+        <span style="margin-left: 8px;" *ngIf="slot.upgrade">{{ slot.upgrade.points }}</span>
+        
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
       </mat-list-item>
     </mat-action-list>
 

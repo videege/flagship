@@ -53,14 +53,19 @@ export class Fleet {
     return commander;
   }
 
+  getShipWithMatchingUpgradeName(name: string): Ship {
+    let shipWithMatchingUpgrade = this.ships.find((s: Ship) => {
+      let matchingUpgrade = s.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.isFilled() && u.upgrade.name === name);
+      return matchingUpgrade ? true : false;
+    });
+    return shipWithMatchingUpgrade;
+  }
+
   canEquipUpgrade(ship: Ship, upgrade: Upgrade): boolean {
     // Can't equip if unique and there is already a upgrade/squadron with
     // the same name
     if (upgrade.unique) {
-      let shipWithMatchingUpgrade = this.ships.find((s: Ship) => {
-        let matchingUpgrade = s.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.isFilled() && u.upgrade.name === upgrade.name);
-        return matchingUpgrade !== null;
-      });
+      let shipWithMatchingUpgrade = this.getShipWithMatchingUpgradeName(upgrade.name);
       if (shipWithMatchingUpgrade) {
         return false;
       }

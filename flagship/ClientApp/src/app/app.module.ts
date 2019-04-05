@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { of } from 'rxjs';
 import { map, first } from 'rxjs/operators';
@@ -29,6 +30,8 @@ import { BatteryComponent } from './battery/battery.component';
 import { UpgradeSummaryComponent } from './upgrade-summary/upgrade-summary.component';
 import { ShipEditorComponent } from './ship-editor/ship-editor.component';
 import { ShipCardComponent } from './ship-card/ship-card.component';
+import { UpgradeSelectorComponent } from './upgrade-selector/upgrade-selector.component';
+import { UpgradeIconDirective } from './upgrade-icon.directive';
 
 
 
@@ -110,13 +113,16 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     BatteryComponent,
     UpgradeSummaryComponent,
     ShipEditorComponent,
-    ShipCardComponent
+    ShipCardComponent,
+    UpgradeSelectorComponent,
+    UpgradeIconDirective
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     FlexLayoutModule,
+    HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -132,7 +138,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
-  entryComponents: [ShipCardComponent],
+  entryComponents: [ShipCardComponent, UpgradeSelectorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

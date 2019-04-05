@@ -1,15 +1,15 @@
-import { Upgrade } from "../upgrade";
+import { Upgrade, SlotGrantingUpgradeData } from "../upgrade";
 import { UpgradeType } from "../upgradeType";
 import { Faction } from "../faction";
 import { Ship } from "../ship";
 import { UpgradeSlot } from "../upgradeSlot";
 
-export class SlotGrantingUpgrade extends Upgrade {
+export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeData {
     constructor(id: number, name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,
         points: number, unique: boolean, public grantedType: UpgradeType) {
         super(id, name, type, faction, text, modification, points, unique);
     }
-
+ 
     canEquipToShip(ship: Ship): boolean {
         if (!super.canEquipToShip(ship)) {
             return false;

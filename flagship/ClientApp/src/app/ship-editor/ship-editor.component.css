@@ -1,0 +1,8 @@
+::ng-deep .upgrade-list.mat-list .mat-list-item .mat-line {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  ::ng-deep  .upgrade-list.mat-list .mat-list-item{
+    height:initial!important;
+  }

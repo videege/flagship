@@ -4,6 +4,8 @@ import { UpgradeType } from '../domain/upgradeType';
 import { Upgrade } from '../domain/upgrade';
 import { MatDialog } from '@angular/material';
 import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.component';
+import { UpgradeSlot } from '../domain/upgradeSlot';
+import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
 
 @Component({
   selector: 'flagship-ship-editor',
@@ -22,9 +24,29 @@ export class ShipEditorComponent implements OnInit {
   viewShipCard() {
     this.dialog.open(ShipCardComponent, {
       width: '250px',
-      data: <ShipCardData> { shipId: this.ship.id }
+      data: <ShipCardData>{ shipId: this.ship.id }
     });
   }
+
+  selectUpgrade(slot: UpgradeSlot) {
+    let ref = this.dialog.open(UpgradeSelectorComponent, {
+      width: '650px',
+      data: <UpgradeSelectorData>{ slot: slot, ship: this.ship }
+    });
+    ref.afterClosed().subscribe((upgrade: Upgrade) => {
+      if (<any>upgrade === "rm" && slot.isFilled()) {
+        this.ship.unequipUpgrade(slot);
+      }
+      if (upgrade) {
+        if (slot.isFilled()) {
+          this.ship.unequipUpgrade(slot);
+        }
+        this.ship.equipUpgrade(upgrade, slot);
+      }
+    });
+  }
+
+
 
   enabledUpgradeSlots() {
     return this.ship.upgradeSlots.filter(x => x.isEnabled);

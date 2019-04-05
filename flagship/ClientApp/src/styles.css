@@ -14,6 +14,10 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
     padding: 16px;
 }
 
+.text-muted {
+    color: hsla(0, 0%, 47%, 0.75)
+}
+
 .mat-card-header-text {
     width: 100%;
 }
@@ -67,4 +71,40 @@ i.commander:before {
 }
 i.defensiveretrofit:before {
     background: url('/assets/img/defensiveretrofit.png');
+}
+i.experimentalretrofit:before {
+    background: url('/assets/img/experimentalretrofit.png');
+}
+i.fleetcommand:before {
+    background: url('/assets/img/fleetcommand.png');
+}
+i.fleetsupport:before {
+    background: url('/assets/img/fleetsupport.png');
+}
+i.ioncannons:before {
+    background: url('/assets/img/ioncannons.png');
+}
+i.offensiveretrofit:before {
+    background: url('/assets/img/offensiveretrofit.png');
+}
+i.officer:before {
+    background: url('/assets/img/officer.png');
+}
+i.ordnance:before {
+    background: url('/assets/img/ordnance.png');
+}
+i.supportteam:before {
+    background: url('/assets/img/supportteam.png');
+}
+i.title:before {
+    background: url('/assets/img/title.png');
+}
+i.turbolasers:before {
+    background: url('/assets/img/turbolasers.png');
+}
+i.weaponsteam:before {
+    background: url('/assets/img/weaponsteam.png');
+}
+i.boardingteam:before {
+    background: url('/assets/img/boardingteam.png');
 }

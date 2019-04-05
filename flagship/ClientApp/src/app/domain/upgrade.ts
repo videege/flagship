@@ -3,7 +3,31 @@ import { UpgradeType } from './upgradeType';
 import { Ship } from './ship';
 import { UpgradeSlot } from './upgradeSlot';
 
-export class Upgrade {
+export enum UpgradeClass {
+  Normal,
+  Commander,
+  SlotGranting
+}
+
+export interface UpgradeData {
+  id: number;
+  name: string;
+  type: UpgradeType;
+  faction: Faction;
+  text: string;
+  modification: boolean;
+  points: number;
+  unique: boolean;
+  upgradeClass: UpgradeClass
+}
+
+export interface SlotGrantingUpgradeData extends UpgradeData {
+  grantedType: UpgradeType;
+}
+
+export class Upgrade implements UpgradeData {
+  upgradeClass: UpgradeClass;
+
   constructor(public id: number, public name: string, public type: UpgradeType, 
     public faction: Faction, public text: string, public modification: boolean,
     public points: number, public unique: boolean) {
