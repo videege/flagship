@@ -1,5 +1,7 @@
 <span>{{ fleet.name }}</span>
 <span fxFlex></span>
+<button mat-button (click)="addShip()" class="toolbar-button">Add Ship</button>
+<button mat-button (click)="addSquadron()" class="toolbar-button">Add Squadron</button>
 <span>{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</span>
 
 

@@ -10,3 +10,8 @@
   position: sticky;
   top: 0;
 }
+
+.logo {
+  font-family: 'distantgalaxy';
+  font-size: 36px;
+}

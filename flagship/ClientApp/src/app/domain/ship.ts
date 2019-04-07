@@ -4,25 +4,26 @@ import { DefenseToken } from "./defenseToken";
 import { UpgradeType, sortUpgradeTypes } from "./upgradeType";
 import { UpgradeSlot } from "./upgradeSlot";
 import { Armament } from "./armament";
-import { ShipClass } from "./shipClass";
 import { Upgrade } from "./upgrade";
 import { Fleet } from "./fleet";
 import { NavigationChart } from "./navigationChart";
 import { Squadron } from './squadron';
 
-export class Ship {
-  public id: string;
+export enum ShipClass {
+  Normal
+}
+
+export interface ShipData {
+  id: number;
   name: string;
+  shipClass: ShipClass;
   faction: Faction;
   size: Size;
-  public fleet: Fleet;
-
   hull: number;
   command: number;
   squadron: number;
   engineering: number;
   points: number;
-
   frontShields: number;
   leftAuxShields: number;
   rightAuxShields: number;
@@ -30,10 +31,8 @@ export class Ship {
   rightShields: number;
   rearShields: number;
   defenseTokens: DefenseToken[];
-
   allowedTitles: number[];
   upgradeSlots: UpgradeSlot[];
-
   antiSquadronArmament: Armament;
   frontArmament: Armament;
   leftAuxArmament: Armament;
@@ -41,41 +40,26 @@ export class Ship {
   leftArmament: Armament;
   rightArmament: Armament;
   rearArmament: Armament;
-
   navigationChart: NavigationChart;
+}
 
-  constructor(name: string, faction: Faction, size: Size, shipClass: ShipClass, hull: number, command: number,
-    squadron: number, engineering: number, points: number, defenseTokens: DefenseToken[],
-    frontShields: number, leftAuxShields: number, rightAuxShields: number, leftShields: number, rightShields: number, rearShields: number,
-    antiSquadronArmament: Armament, frontArmament: Armament, leftAuxArmament: Armament,
-    rightAuxArmament: Armament, leftArmament: Armament, rightArmament: Armament, rearArmament: Armament,
-    navigationChart: NavigationChart,
-    upgradeSlots: UpgradeSlot[], allowedTitles: number[]) {
-    this.name = name;
-    this.faction = faction;
-    this.command = command;
-    this.squadron = squadron;
-    this.engineering = engineering;
-    this.hull = hull;
-    this.size = size;
-    this.points = points;
-    this.defenseTokens = defenseTokens;
-    this.upgradeSlots = upgradeSlots;
-    this.frontShields = frontShields;
-    this.leftAuxShields = leftAuxShields;
-    this.rightAuxShields = rightAuxShields;
-    this.leftShields = leftShields;
-    this.rightShields = rightShields;
-    this.rearShields = rearShields;
-    this.antiSquadronArmament = antiSquadronArmament;
-    this.frontArmament = frontArmament;
-    this.leftAuxArmament = leftAuxArmament;
-    this.rightAuxArmament = rightAuxArmament;
-    this.leftArmament = leftArmament;
-    this.rightArmament = rightArmament;
-    this.rearArmament = rearArmament;
-    this.navigationChart = navigationChart;
-    this.allowedTitles = allowedTitles;
+export class Ship implements ShipData {
+  public fleet: Fleet;
+
+  constructor(public id: number, public name: string, public shipClass: ShipClass,
+    public faction: Faction, public size: Size, 
+    public hull: number, public command: number,
+    public squadron: number, public engineering: number, public points: number, 
+    public defenseTokens: DefenseToken[], public frontShields: number, 
+    public leftAuxShields: number, public rightAuxShields: number, 
+    public leftShields: number, public rightShields: number, 
+    public rearShields: number,
+    public antiSquadronArmament: Armament, public frontArmament: Armament,
+    public leftAuxArmament: Armament, public rightAuxArmament: Armament, 
+    public leftArmament: Armament, public rightArmament: Armament, 
+    public rearArmament: Armament, public navigationChart: NavigationChart,
+    public upgradeSlots: UpgradeSlot[], public allowedTitles: number[]) {
+   
   }
 
   currentPointsFromUpgrades(): number {

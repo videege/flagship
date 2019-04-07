@@ -10,6 +10,18 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
 
+@font-face {
+    font-family: 'distantgalaxy';
+    src: url('assets/fonts/distantgalaxy.woff') format('woff');
+    /* src: url('DISTGRG_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('DISTGRG_-webfont.woff2') format('woff2'),
+         url('DISTGRG_-webfont.woff') format('woff'),
+         url('DISTGRG_-webfont.ttf') format('truetype'),
+         url('DISTGRG_-webfont.svg#distant_galaxyregular') format('svg'); */
+    font-weight: normal;
+    font-style: normal;
+}
+
 .content {
     padding: 16px;
 }

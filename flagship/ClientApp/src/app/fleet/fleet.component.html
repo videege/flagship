@@ -1,15 +1,13 @@
-<div class="content mat-typography">
+<div class="content mat-typography" ngStyle.gt-md="max-width: 75%;">
   <div fxLayout="row" fxLayoutGap="8px">
     <span class="mat-headline" style="margin-bottom: 4px;">Ships</span>
     <span class="mat-subtitle" style="line-height: 32px;">
-      {{ fleet.ships.length }} ship(s), {{ fleet.currentPointsFromShips() }} points {{ colSpan }}</span>
+      {{ fleet.ships.length }} ship(s), {{ fleet.currentPointsFromShips() }} points</span>
     <span fxFlex></span>
     <button mat-button color="primary" (click)="addShip()">Add Ship</button>
   </div>
   <mat-divider></mat-divider>
-  <mat-grid-list cols="2" rowHeight="400px" gutterSize="16px">
-    <mat-grid-tile *ngFor="let ship of fleet.ships" [colspan]="colSpan">
-      <flagship-ship-detail [ship]="ship"></flagship-ship-detail>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <div class="ship-list" fxLayout="column" fxLayoutGap="4px">
+    <flagship-ship-detail [ship]="ship" *ngFor="let ship of fleet.ships"></flagship-ship-detail>
+  </div>
 </div>

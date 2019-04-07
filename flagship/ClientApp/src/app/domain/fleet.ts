@@ -4,6 +4,7 @@ import { Squadron } from "./squadron";
 import { Upgrade } from "./upgrade";
 import { UpgradeSlot } from "./upgradeSlot";
 import { UpgradeType } from "./upgradeType";
+import { ShipsModule } from '../ships/ships.module';
 
 export class Fleet {
   public ships: Ship[];
@@ -11,8 +12,8 @@ export class Fleet {
 
   constructor(public id: string, public name: string,
     public author: string, public faction: Faction, public pointLimit: number) {
-      this.ships = [];
-      this.squadrons = [];
+    this.ships = [];
+    this.squadrons = [];
   }
 
   squadronPointLimit(): number {
@@ -78,21 +79,25 @@ export class Fleet {
     return true;
   }
 
-  getAvailableShipId(): string {
-    while (true) {
-      const id = Math.floor(Math.random() * 1000).toString();
-      let matchingId = this.ships.find(s => s.id === id);
-      if (!matchingId) {
-        return id;
+  addShip(ship: Ship): void {
+    if (this.faction !== ship.faction)
+      return;
+
+    ship.fleet = this;
+    if (this.getCommanderName() !== "None") {
+      let commanderSlot = ship.upgradeSlots.find(x => x.type === UpgradeType.Commander);
+      if (commanderSlot) {
+        commanderSlot.isEnabled = false;
       }
     }
+    this.ships.push(ship);
   }
 
   deleteShip(ship: Ship): void {
     let idx = this.ships.indexOf(ship);
     if (idx >= 0) {
       this.ships.splice(idx, 1);
-      
+
     }
   }
 }

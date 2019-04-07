@@ -25,10 +25,4 @@ export class FleetService {
     return of(this.fleets.find((f: Fleet) => f.id == id));
   }
 
-  getShip(fleetId: string, shipId: string): Observable<Ship> {
-    let fleet = this.fleets.find((f: Fleet) => f.id == fleetId);
-    let ship = fleet.ships.find((s: Ship) => s.id == shipId);
-    return of(ship);
-    
-  }
 }

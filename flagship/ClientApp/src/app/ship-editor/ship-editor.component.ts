@@ -23,7 +23,7 @@ export class ShipEditorComponent implements OnInit {
 
   viewShipCard() {
     this.dialog.open(ShipCardComponent, {
-      width: '250px',
+      width: '300px',
       data: <ShipCardData>{ shipId: this.ship.id }
     });
   }

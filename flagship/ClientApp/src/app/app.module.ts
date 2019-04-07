@@ -32,6 +32,8 @@ import { ShipEditorComponent } from './ship-editor/ship-editor.component';
 import { ShipCardComponent } from './ship-card/ship-card.component';
 import { UpgradeSelectorComponent } from './upgrade-selector/upgrade-selector.component';
 import { UpgradeIconDirective } from './upgrade-icon.directive';
+import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
+import { Fleet } from './domain/fleet';
 
 
 
@@ -80,9 +82,9 @@ const STATES = [
     resolve: [
       {
         token: 'ship',
-        deps: [Transition, FleetService],
-        resolveFn: (trans, fleetService: FleetService) => {
-          return fleetService.getShip(trans.params().id, trans.params().shipId).toPromise();//.toPromise();
+        deps: [Transition, 'fleet'],
+        resolveFn: (trans, fleet: Fleet) => {
+          return fleet.ships[trans.params().shipId];
         }
       }
     ],
@@ -115,7 +117,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     ShipEditorComponent,
     ShipCardComponent,
     UpgradeSelectorComponent,
-    UpgradeIconDirective
+    UpgradeIconDirective,
+    ShipSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +141,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
-  entryComponents: [ShipCardComponent, UpgradeSelectorComponent],
+  entryComponents: [ShipCardComponent, ShipSelectorComponent, UpgradeSelectorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
