@@ -9,15 +9,15 @@ import { ShipsModule } from '../ships/ships.module';
 export class Fleet {
   public ships: Ship[];
   public squadrons: Squadron[];
-
+  
   constructor(public id: string, public name: string,
-    public author: string, public faction: Faction, public pointLimit: number) {
+    public author: string, public faction: Faction, public pointLimit: number,
+    public squadronPointLimit: number) {
     this.ships = [];
     this.squadrons = [];
-  }
-
-  squadronPointLimit(): number {
-    return Math.ceil(this.pointLimit / 3);
+    if (this.squadronPointLimit < this.pointLimit) {
+      this.squadronPointLimit = this.pointLimit;
+    }
   }
 
   currentPointsFromShips(): number {
@@ -98,6 +98,21 @@ export class Fleet {
     if (idx >= 0) {
       this.ships.splice(idx, 1);
 
+    }
+  }
+
+  addSquadron(squadron: Squadron): void {
+    if (this.faction !== squadron.faction)
+      return;
+
+    squadron.fleet = this;
+    this.squadrons.push(squadron);
+  }
+
+  removeSquadron(id: number): void {
+    let idx = this.squadrons.findIndex(s => s.id === id);
+    if (idx >= 0) {
+      this.squadrons.splice(idx, 1);
     }
   }
 }

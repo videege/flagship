@@ -15,7 +15,12 @@ import { AppNavComponent } from './app-nav/app-nav.component';
 
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
   MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule,
-  MatDialogModule
+  MatDialogModule,
+  MatFormField,
+  MatRadioModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule
  } from '@angular/material';
 
 import { FleetsComponent } from './fleets/fleets.component';
@@ -34,6 +39,8 @@ import { UpgradeSelectorComponent } from './upgrade-selector/upgrade-selector.co
 import { UpgradeIconDirective } from './upgrade-icon.directive';
 import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
 import { Fleet } from './domain/fleet';
+import { FleetEditorComponent } from './fleet-editor/fleet-editor.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -118,7 +125,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     ShipCardComponent,
     UpgradeSelectorComponent,
     UpgradeIconDirective,
-    ShipSelectorComponent
+    ShipSelectorComponent,
+    FleetEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -126,6 +134,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     FlexLayoutModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -136,12 +145,21 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatMenuModule,
     MatTableModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
-  entryComponents: [ShipCardComponent, ShipSelectorComponent, UpgradeSelectorComponent],
+  entryComponents: [
+    ShipCardComponent, 
+    ShipSelectorComponent, 
+    UpgradeSelectorComponent,
+    FleetEditorComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

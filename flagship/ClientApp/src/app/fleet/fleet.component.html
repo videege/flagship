@@ -7,7 +7,22 @@
     <button mat-button color="primary" (click)="addShip()">Add Ship</button>
   </div>
   <mat-divider></mat-divider>
+  <p *ngIf="!fleet.ships.length">You haven't added any ships. Click the 'Add Ship' button
+    above to add a ship.
+  </p>
   <div class="ship-list" fxLayout="column" fxLayoutGap="4px">
     <flagship-ship-detail [ship]="ship" *ngFor="let ship of fleet.ships"></flagship-ship-detail>
   </div>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <span class="mat-headline" style="margin-bottom: 4px;">Squadrons</span>
+    <span class="mat-subtitle" style="line-height: 32px;">
+      {{ fleet.squadrons.length }} squadron(s), {{ fleet.currentPointsFromSquadrons() }} points</span>
+    <span fxFlex></span>
+    <button mat-button color="primary" (click)="addSquadron()">Add Squadron</button>
+  </div>
+  <mat-divider></mat-divider>
+  <p *ngIf="!fleet.squadrons.length">
+      You haven't added any squadrons. Click the 'Add Squadron' button
+      above to add a squadron.
+  </p>
 </div>

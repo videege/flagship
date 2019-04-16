@@ -16,6 +16,16 @@ export enum KeywordType {
 }
 
 export class Keyword {
-  type: KeywordType;
-  value: number;
+  constructor(public type: KeywordType, public value: number) {
+
+  }
+
+  displayText(): string {
+    if (this.value) {
+      return `${this.type.toString()} ${this.value}`;
+    }
+    return this.type.toString();
+  }
+
+  
 }

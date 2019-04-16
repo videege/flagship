@@ -2,7 +2,8 @@
   <ng-container matColumnDef="faction">
     <th mat-header-cell *matHeaderCellDef>Faction</th>
     <td mat-cell *matCellDef="let fleet">
-        <i class="ffi" [ngClass]="{'ffi-imperial': fleet.faction == faction.Empire, 'ffi-rebel': fleet.faction == faction.Rebels}" 
+      <i class="ffi"
+        [ngClass]="{'ffi-imperial': fleet.faction == faction.Empire, 'ffi-rebel': fleet.faction == faction.Rebels}"
         style="font-size:36px;"></i>
     </td>
   </ng-container>
@@ -19,47 +20,17 @@
     <th mat-header-cell *matHeaderCellDef>Points</th>
     <td mat-cell *matCellDef="let fleet">{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</td>
   </ng-container>
-
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let fleet">
+      <button mat-icon-button (click)="editFleet(fleet)">
+        <mat-icon aria-label="Edit Fleet Info">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<!-- <div class="grid-container">
-  <h1 class="mat-h1">My Fleets</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <div mat-card-avatar>
-            <i class="ffi" [ngClass]="{'ffi-imperial': card.fleet.faction == faction.Empire, 'ffi-rebel': card.fleet.faction == faction.Rebels}" 
-              style="font-size:36px;"></i>
-          </div>
-          <mat-card-title>
-            {{card.fleet.name}}
-             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-          <mat-card-subtitle>
-            {{card.fleet.author}}
-          </mat-card-subtitle>
-          <div fxFlex></div>
-          <div><span>{{ card.fleet.currentPoints() }} / {{ card.fleet.pointLimit }}</span></div>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            <p>
-              Here's an icon: <i class="ffi ffi-swa-accuracy"></i>
-              <i class="ffi ffi-imperial" style="font-size:18px;"></i>
-
-            </p>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div> -->
+<button mat-fab (click)="addFleet()" color="primary" class="fab-lower-right">
+  <mat-icon aria-label="Create New Fleet">add</mat-icon>
+</button>

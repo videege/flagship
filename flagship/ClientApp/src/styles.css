@@ -38,6 +38,12 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
     width: 100%;
 }
 
+button.fab-lower-right {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
 .mat-card-avatar {
     margin-top: 4px;
 }
