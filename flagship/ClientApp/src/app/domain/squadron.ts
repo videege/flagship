@@ -36,7 +36,7 @@ export class Squadron implements SquadronData {
   }
 
   private _displayName: string = null;
-  displayName(): string {
+  public displayName(): string {
     if (this._displayName)
       return this._displayName;
 

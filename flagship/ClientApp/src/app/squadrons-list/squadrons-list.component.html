@@ -1,0 +1,50 @@
+<mat-accordion class="squadron-list">
+  <mat-expansion-panel *ngFor="let id of squadronIds">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ distinctSquadrons[id].unique ? "&#9679;&nbsp;" : "&nbsp;"}}{{distinctSquadrons[id].displayName()}}
+        <span *ngIf="distinctSquadrons[id].defenseTokens.length">
+          <i class="ffi squadron-icon" *ngFor="let token of distinctSquadrons[id].defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
+                           'ffi-swa-evade': token === 1,
+                           'ffi-swa-redirect': token === 2,
+                           'ffi-swa-contain': token === 3,
+                           'ffi-swa-scatter': token === 4
+                          }"></i>
+        </span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span fxFlex="80">
+            <span fxFlex>
+                <i class="ffi ffi-swa-speed squadron-icon"></i>{{ distinctSquadrons[id].speed }}
+              </span>
+              <span fxFlex>
+                <i class="ffi ffi-swa-hull squadron-icon"></i>{{ distinctSquadrons[id].hull }}
+              </span>
+              <span fxFlex>
+                <i class="ffi ffi-swa-anti-squadron squadron-icon"></i>
+                <flagship-battery [armament]="distinctSquadrons[id].antiSquadronArmament"></flagship-battery>
+              </span>
+              <span fxFlex>
+                <i class="ffi ffi-swa-anti-ship squadron-icon"></i>
+                <flagship-battery [armament]="distinctSquadrons[id].batteryArmament"></flagship-battery>
+              </span>
+        </span>
+        
+        <span fxFlex></span>
+        <span>
+            {{ distinctSquadrons[id].points }}
+            <span
+              *ngIf="squadronCounts[id] > 1">&times;{{squadronCounts[id]}}={{ distinctSquadrons[id].points * squadronCounts[id] }}</span>
+        </span>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul class="keyword-list">
+      <li *ngFor="let keyword of distinctSquadrons[id].keywords">{{ keyword.displayText() }}</li>
+    </ul>
+    <p *ngIf="distinctSquadrons[id].text.length">{{ distinctSquadrons[id].text }}</p>
+    <mat-action-row>
+      <button mat-button color="warn">Remove Squadron</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

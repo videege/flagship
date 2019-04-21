@@ -9,7 +9,7 @@ import { ShipsModule } from '../ships/ships.module';
 export class Fleet {
   public ships: Ship[];
   public squadrons: Squadron[];
-  
+
   constructor(public id: string, public name: string,
     public author: string, public faction: Faction, public pointLimit: number,
     public squadronPointLimit: number) {
@@ -65,16 +65,8 @@ export class Fleet {
   canEquipUpgrade(ship: Ship, upgrade: Upgrade): boolean {
     // Can't equip if unique and there is already a upgrade/squadron with
     // the same name
-    if (upgrade.unique) {
-      let shipWithMatchingUpgrade = this.getShipWithMatchingUpgradeName(upgrade.name);
-      if (shipWithMatchingUpgrade) {
-        return false;
-      }
-
-      let matchingSquadron = this.squadrons.find((s: Squadron) => s.name === upgrade.name);
-      if (matchingSquadron) {
-        return false;
-      }
+    if (upgrade.unique && this.hasUniqueNameEquipped(upgrade.name)) {
+      return false;
     }
     return true;
   }
@@ -114,5 +106,28 @@ export class Fleet {
     if (idx >= 0) {
       this.squadrons.splice(idx, 1);
     }
+  }
+
+  getEquippedUniqueNames(): string[] {
+    let upgradeUniques = this.ships.map(s => s.upgradeSlots).flat()
+      .filter(u => u.isEnabled && u.isFilled() && u.upgrade.unique).map(u => u.upgrade.name);
+
+    let squadronUniques = this.squadrons.filter(s => s.unique).map(u => u.name);
+
+    return upgradeUniques.concat(squadronUniques);
+  }
+
+  hasUniqueNameEquipped(name: string): boolean {
+    let shipWithMatchingUpgrade = this.getShipWithMatchingUpgradeName(name);
+    if (shipWithMatchingUpgrade) {
+      return true;
+    }
+
+    let matchingSquadron = this.squadrons.find((s: Squadron) => s.name === name);
+    if (matchingSquadron) {
+      return true;
+    }
+
+    return false;
   }
 }

@@ -5,30 +5,34 @@ import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
 import { AppNavComponent } from './app-nav/app-nav.component';
 
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
+import {
+  MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
   MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule,
   MatDialogModule,
-  MatFormField,
   MatRadioModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule
- } from '@angular/material';
+  MatSelectModule,
+  MatExpansionModule,
+  MatTooltipModule
+} from '@angular/material';
+
+import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 
 import { FleetsComponent } from './fleets/fleets.component';
 import { FleetComponent } from './fleet/fleet.component';
 import { FleetService } from './fleet.service';
 import { ShipsModule } from './ships/ships.module';
 import { NotfoundComponent } from './notfound/notfound.component';
-import {trace} from "@uirouter/angular";
+import { trace } from "@uirouter/angular";
 import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { ShipDetailComponent } from './ship-detail/ship-detail.component';
 import { BatteryComponent } from './battery/battery.component';
@@ -41,13 +45,17 @@ import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
 import { Fleet } from './domain/fleet';
 import { FleetEditorComponent } from './fleet-editor/fleet-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SquadronSelectorComponent } from './squadron-selector/squadron-selector.component';
+import { SquadronDetailComponent } from './squadron-detail/squadron-detail.component';
+import { SquadronsListComponent } from './squadrons-list/squadrons-list.component';
 
 
 
 //trace.enable();
 
 const STATES = [
-  { name: 'notfound',
+  {
+    name: 'notfound',
     url: '/404',
     views: {
       'content': { component: NotfoundComponent }
@@ -56,7 +64,8 @@ const STATES = [
       title: 'Page Not Found'
     }
   },
-  { name: 'fleets',
+  {
+    name: 'fleets',
     url: '/fleets',
     views: {
       'content': { component: FleetsComponent }
@@ -65,7 +74,8 @@ const STATES = [
       title: 'My Fleets'
     }
   },
-  { name: 'fleets.fleet',
+  {
+    name: 'fleets.fleet',
     url: '/:id',
     resolve: [
       {
@@ -84,7 +94,8 @@ const STATES = [
       title: null
     }
   },
-  { name: 'fleets.fleet.ship',
+  {
+    name: 'fleets.fleet.ship',
     url: '/:shipId',
     resolve: [
       {
@@ -126,7 +137,10 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     UpgradeSelectorComponent,
     UpgradeIconDirective,
     ShipSelectorComponent,
-    FleetEditorComponent
+    FleetEditorComponent,
+    SquadronSelectorComponent,
+    SquadronDetailComponent,
+    SquadronsListComponent
   ],
   imports: [
     BrowserModule,
@@ -149,14 +163,18 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatFormFieldModule,
     MatRadioModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    EcoFabSpeedDialModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
   entryComponents: [
-    ShipCardComponent, 
-    ShipSelectorComponent, 
+    ShipCardComponent,
+    ShipSelectorComponent,
+    SquadronSelectorComponent,
     UpgradeSelectorComponent,
     FleetEditorComponent
   ],

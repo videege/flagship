@@ -8,6 +8,7 @@ import { UpgradeFactory } from '../domain/factories/upgradeFactory';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
 import { MatDialog } from '@angular/material';
 import { Squadron } from '../domain/squadron';
+import { SquadronSelectorComponent, SquadronSelectorData } from '../squadron-selector/squadron-selector.component';
 
 @Component({
   selector: 'flagship-fleet',
@@ -53,7 +54,7 @@ export class FleetComponent implements OnInit {
 
   addSquadron() {
     let ref = this.dialog.open(SquadronSelectorComponent, {
-      width: '350px',
+      width: '500px',
       data: <SquadronSelectorData>{ fleet: this.fleet }
     });
     ref.afterClosed().subscribe((squadron: Squadron) => {

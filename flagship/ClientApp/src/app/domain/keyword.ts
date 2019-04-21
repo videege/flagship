@@ -21,10 +21,11 @@ export class Keyword {
   }
 
   displayText(): string {
+    let name = KeywordType[this.type];
     if (this.value) {
-      return `${this.type.toString()} ${this.value}`;
+      return `${name} ${this.value}`;
     }
-    return this.type.toString();
+    return name;
   }
 
   

@@ -2,6 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~sw-rpg-icons/css/sw-rpg-icons.css";
 @import "~sw-rpg-icons/css/sw-rpg-colors.css";
+@import "assets/css/starwars-glyphicons.css";
 
 body {
     padding: 0;
@@ -39,6 +40,12 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 }
 
 button.fab-lower-right {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+eco-fab-speed-dial.fab-lower-right {
     position: fixed;
     right: 20px;
     bottom: 20px;

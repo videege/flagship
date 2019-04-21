@@ -21,26 +21,7 @@ export class ShipDetailComponent implements OnInit {
   }
 
   editShip() {
-    // const dialogRef = this.dialog.open(ShipEditorComponent, {
-    //   width: '75%',
-    //   height: '75%',
-    //   maxWidth: '100vw',
-    //   maxHeight: '100vh',
-    //   data: this.ship
-    // });
-
-
-    // const smallDialogSubscription = this.isExtraSmall.subscribe(size => {
-    //   if (size.matches) {
-    //     dialogRef.updateSize('100%', '100%');
-    //   } else {
-    //     dialogRef.updateSize('75%', '75%');
-    //   }
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   smallDialogSubscription.unsubscribe();
-    // });
+   
   }
 
   deleteShip() {
