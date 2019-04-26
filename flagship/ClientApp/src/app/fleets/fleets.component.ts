@@ -21,12 +21,18 @@ export class FleetsComponent implements OnInit {
     private fleetService: FleetService, private dialog: MatDialog) {}
 
   public fleets: Fleet[];
-  dataSource = new MatTableDataSource<Fleet>(this.fleets);
+  dataSource: MatTableDataSource<Fleet>;
 
   ngOnInit() {
-    this.fleets = this.fleetService.fleets;
-    this.dataSource.data = this.fleets;
-    //this.dataSource.
+    this.fleets = [];
+    this.fleetService.fleets$.subscribe((fleets: Fleet[]) => {
+      this.fleets = fleets;
+      this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+    });
+    this.fleetService.getFleets().subscribe((fleets: Fleet[]) => {
+      this.fleets = fleets;
+      this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+    });
   }
 
   editFleet(fleet: Fleet) {

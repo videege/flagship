@@ -8,6 +8,12 @@ import { Upgrade } from "./upgrade";
 import { Fleet } from "./fleet";
 import { NavigationChart } from "./navigationChart";
 import { Squadron } from './squadron';
+import { Subject } from 'rxjs';
+
+export interface ISerializedShip {
+  id: number;
+  upgrades: number[];
+}
 
 export enum ShipClass {
   Normal
@@ -44,22 +50,33 @@ export interface ShipData {
 }
 
 export class Ship implements ShipData {
+  public subject: Subject<number>;
+
   public fleet: Fleet;
 
   constructor(public id: number, public name: string, public shipClass: ShipClass,
-    public faction: Faction, public size: Size, 
+    public faction: Faction, public size: Size,
     public hull: number, public command: number,
-    public squadron: number, public engineering: number, public points: number, 
-    public defenseTokens: DefenseToken[], public frontShields: number, 
-    public leftAuxShields: number, public rightAuxShields: number, 
-    public leftShields: number, public rightShields: number, 
+    public squadron: number, public engineering: number, public points: number,
+    public defenseTokens: DefenseToken[], public frontShields: number,
+    public leftAuxShields: number, public rightAuxShields: number,
+    public leftShields: number, public rightShields: number,
     public rearShields: number,
     public antiSquadronArmament: Armament, public frontArmament: Armament,
-    public leftAuxArmament: Armament, public rightAuxArmament: Armament, 
-    public leftArmament: Armament, public rightArmament: Armament, 
+    public leftAuxArmament: Armament, public rightAuxArmament: Armament,
+    public leftArmament: Armament, public rightArmament: Armament,
     public rearArmament: Armament, public navigationChart: NavigationChart,
     public upgradeSlots: UpgradeSlot[], public allowedTitles: number[]) {
-   
+    this.subject = new Subject<number>();
+  }
+
+  serialize(): ISerializedShip {
+    let upgradeIds = this.upgradeSlots.filter(u => u.isEnabled && u.isFilled())
+      .map(u => u.upgrade.id);
+    return {
+      id: this.id,
+      upgrades: upgradeIds
+    };
   }
 
   currentPointsFromUpgrades(): number {
@@ -167,6 +184,7 @@ export class Ship implements ShipData {
         }
       }
     }
+    this.subject.next(this.id);
   }
 
   unequipUpgrade(slot: UpgradeSlot) {
@@ -196,6 +214,7 @@ export class Ship implements ShipData {
         }
       }
     }
+    this.subject.next(this.id);
   }
 
   isFlagship(): boolean {

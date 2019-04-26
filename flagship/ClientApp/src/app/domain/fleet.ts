@@ -1,12 +1,28 @@
 import { Faction } from "./faction";
-import { Ship } from "./ship";
+import { Ship, ISerializedShip } from "./ship";
 import { Squadron } from "./squadron";
 import { Upgrade } from "./upgrade";
 import { UpgradeSlot } from "./upgradeSlot";
 import { UpgradeType } from "./upgradeType";
 import { ShipsModule } from '../ships/ships.module';
 
+import { Subject } from 'rxjs';
+
+export interface ISerializedFleet {
+  id: string;
+  name: string;
+  author: string;
+  faction: Faction;
+  pointLimit: number;
+  squadronPointLimit: number;
+
+  ships: ISerializedShip[];
+  squadrons: number[];
+}
+
 export class Fleet {
+  public subject: Subject<string>;
+
   public ships: Ship[];
   public squadrons: Squadron[];
 
@@ -18,6 +34,24 @@ export class Fleet {
     if (this.squadronPointLimit < this.pointLimit) {
       this.squadronPointLimit = this.pointLimit;
     }
+
+    this.subject = new Subject<string>();
+  }
+
+  serialize(): ISerializedFleet {
+    let ships = this.ships.map(s => s.serialize());
+    let squadrons = this.squadrons.map(s => s.id);
+
+    return {
+      id: this.id,
+      name: this.name,
+      author: this.author,
+      faction: this.faction,
+      pointLimit: this.pointLimit,
+      squadronPointLimit: this.squadronPointLimit,
+      ships: ships,
+      squadrons: squadrons
+    };
   }
 
   currentPointsFromShips(): number {
@@ -83,13 +117,18 @@ export class Fleet {
       }
     }
     this.ships.push(ship);
+    ship.subject.subscribe((id: number) => {
+      this.subject.next(this.id);
+    })
+    this.subject.next(this.id);
   }
 
   deleteShip(ship: Ship): void {
     let idx = this.ships.indexOf(ship);
     if (idx >= 0) {
+      this.ships[idx].subject.unsubscribe();
       this.ships.splice(idx, 1);
-
+      this.subject.next(this.id);
     }
   }
 
@@ -99,12 +138,14 @@ export class Fleet {
 
     squadron.fleet = this;
     this.squadrons.push(squadron);
+    this.subject.next(this.id);
   }
 
   removeSquadron(id: number): void {
     let idx = this.squadrons.findIndex(s => s.id === id);
     if (idx >= 0) {
       this.squadrons.splice(idx, 1);
+      this.subject.next(this.id);
     }
   }
 

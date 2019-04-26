@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^7.2.11",
     "@angular/router": "^7.2.11",
     "@ecodev/fab-speed-dial": "^3.1.0",
+    "@ngx-pwa/local-storage": "^7.4.2",
     "@uirouter/angular": "^3.0.0",
     "core-js": "^2.5.4",
     "guid-typescript": "^1.0.9",

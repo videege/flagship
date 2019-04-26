@@ -1,5 +1,5 @@
 <div class="content mat-typography">
-  <mat-card fxFlex.gt-md="60">
+  <mat-card fxFlex.gt-sm="60">
     <mat-card-header>
       <div mat-card-avatar>
         <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
@@ -26,8 +26,8 @@
     </mat-card-header>
 
     <mat-card-content>
-      <div fxLayout="column" fxLayout.gt-md="row">
-        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-md fxLayout="column">
+      <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
           <div>
             <strong>Shields</strong>
           </div>
@@ -47,8 +47,21 @@
                 [ngClass]="{'ffi-swa-turn-0': box === 0, 'ffi-swa-turn-1': box === 1, 'ffi-swa-turn-2': box === 2}"></i>
             </span>
           </div>
+          <div>
+            <strong>Defense Tokens</strong>
+          </div>
+          <div>
+            <span>
+              <i class="ffi defense-token" *ngFor="let token of ship.defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
+                                     'ffi-swa-evade': token === 1,
+                                     'ffi-swa-redirect': token === 2,
+                                     'ffi-swa-contain': token === 3,
+                                     'ffi-swa-scatter': token === 4
+                                    }"></i>
+            </span>
+          </div>
         </div>
-        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-md fxLayout="column">
+        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
           <strong>Armament</strong>
           <div>Front:
             <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
@@ -79,9 +92,9 @@
         <p matLine *ngIf="slot.upgrade" style="white-space: normal; font-size: .8em;">
           <span>{{ slot.upgrade.text }}</span>
         </p>
-        
+
         <span style="margin-left: 8px;" *ngIf="slot.upgrade">{{ slot.upgrade.points }}</span>
-        
+
         <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
       </mat-list-item>
     </mat-action-list>
