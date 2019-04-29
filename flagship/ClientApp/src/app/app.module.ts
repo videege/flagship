@@ -48,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SquadronSelectorComponent } from './squadron-selector/squadron-selector.component';
 import { SquadronDetailComponent } from './squadron-detail/squadron-detail.component';
 import { SquadronsListComponent } from './squadrons-list/squadrons-list.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -140,7 +141,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     FleetEditorComponent,
     SquadronSelectorComponent,
     SquadronDetailComponent,
-    SquadronsListComponent
+    SquadronsListComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

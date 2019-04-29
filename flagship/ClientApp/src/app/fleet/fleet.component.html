@@ -1,30 +1,32 @@
 <div class="content mat-typography" ngStyle.gt-md="max-width: 75%;" style="padding-bottom: 100px;">
+  <flagship-alert [(isOpen)]="fleetAlertOpen" [type]="alertType.WARN">
+    <strong>Heads up!</strong> You have more points added than your fleet maximum allows.
+  </flagship-alert>
   <div fxLayout="row" fxLayoutGap="8px">
     <span class="mat-headline" style="margin-bottom: 4px;">Ships</span>
-    <span class="mat-subtitle" style="line-height: 32px;">
-      {{ fleet.ships.length }} ship(s), {{ fleet.currentPointsFromShips() }} points</span>
     <span fxFlex></span>
-    <button mat-button color="primary" (click)="addShip()">Add Ship</button>
+    <span class="mat-subtitle" style="line-height: 40px;">
+        {{ fleet.ships.length }} ship(s), {{ fleet.currentPointsFromShips() }} points</span>
+    <!-- <button mat-button color="primary" (click)="addShip()">Add Ship</button> -->
   </div>
   <mat-divider></mat-divider>
-  <p *ngIf="!fleet.ships.length">You haven't added any ships. Click the 'Add Ship' button
-    above to add a ship.
-  </p>
-  <div class="ship-list" fxLayout="column" fxLayoutGap="4px">
+  <p *ngIf="!fleet.ships.length" style="margin-top: 8px;">You haven't added any ships.</p>
+  <div class="ship-list" fxLayout="column" fxLayoutGap="4px" style="margin-top: 8px;">
     <flagship-ship-detail [ship]="ship" *ngFor="let ship of fleet.ships"></flagship-ship-detail>
   </div>
-  <div fxLayout="row" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutGap="8px" style="margin-top: 16px;">
     <span class="mat-headline" style="margin-bottom: 4px;">Squadrons</span>
-    <span class="mat-subtitle" style="line-height: 32px;">
-      {{ fleet.squadrons.length }} squadron(s), {{ fleet.currentPointsFromSquadrons() }} points</span>
     <span fxFlex></span>
-    <button mat-button color="primary" (click)="addSquadron()">Add Squadron</button>
+    <span class="mat-subtitle" style="line-height: 40px;">
+        {{ fleet.squadrons.length }} squadron(s), 
+        {{ fleet.currentPointsFromSquadrons() }} / {{ fleet.squadronPointLimit }} points</span>
+    <!-- <button mat-button color="primary" (click)="addSquadron()">Add Squadron</button> -->
   </div>
   <mat-divider></mat-divider>
-  <p *ngIf="!fleet.squadrons.length">
-    You haven't added any squadrons. Click the 'Add Squadron' button
-    above to add a squadron.
-  </p>
+  <flagship-alert [(isOpen)]="squadronAlertOpen" [type]="alertType.WARN">
+      <strong>Heads up!</strong> You have more squadron points added than your fleet maximum allows.
+    </flagship-alert>
+  <p *ngIf="!fleet.squadrons.length" style="margin-top: 8px;">You haven't added any squadrons.</p>
   <div class="squadron-list" fxLayout="column" fxLayoutGap="4px" style="margin-top: 8px;">
     <flagship-squadrons-list [fleet]="fleet"
       [squadrons]="{trackBy: fleet.squadrons.length, squadrons: fleet.squadrons}"></flagship-squadrons-list>

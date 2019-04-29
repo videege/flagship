@@ -6,7 +6,7 @@ import { Ship } from './domain/ship';
 import { Guid } from 'guid-typescript';
 
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { tap, switchMap, mergeMap, map, concatMap, find } from 'rxjs/operators';
+import { tap, switchMap, mergeMap, map, concatMap, find, share } from 'rxjs/operators';
 import { ShipFactory } from './domain/factories/shipFactory';
 import { UpgradeFactory } from './domain/factories/upgradeFactory';
 import { SquadronFactory } from './domain/factories/squadronFactory';
@@ -27,10 +27,11 @@ export class FleetService {
   private loadedFleets = false;
   private fleetLoad$: Observable<Fleet[]>;
   constructor(protected localStorage: LocalStorage) {
-    //this.fleetLoad$ = this.loadFleetsFromStorage();
     this.fleetLoad$ = this.loadFleets();
     this.fleetLoad$.subscribe((fleets) => {
-      this.fleets = fleets;
+      for (const fleet of fleets) {
+        this.addFleet(fleet);
+      }
     }, (error) => { }, () => {
       this.loadedFleets = true;
     })
@@ -46,7 +47,8 @@ export class FleetService {
         map((serializedFleets: ISerializedFleet[]) => {
           let fleets = serializedFleets.map(f => this.hydrateFleet(f));
           return fleets;
-        })
+        }),
+        share()
       );
   }
 
@@ -73,7 +75,7 @@ export class FleetService {
     let fleet = this.fleets.find((f: Fleet) => f.id == id);
     if (fleet) return of(fleet);
 
-    return this.loadFleets().pipe(
+    return this.fleetLoad$.pipe(
       map((fleets: Fleet[]) => fleets.find(f => f.id === id))
     );
   }
@@ -82,7 +84,7 @@ export class FleetService {
     if (this.loadedFleets)
       return of(this.fleets);
     
-    return this.loadFleets();
+    return this.fleetLoad$;
   }
 
   private addFleet(fleet: Fleet): void {

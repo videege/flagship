@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Squadron } from '../domain/squadron';
 import { Fleet } from '../domain/fleet';
+import { SquadronFactory } from '../domain/factories/squadronFactory';
 
 @Component({
   selector: 'flagship-squadrons-list',
@@ -11,7 +12,7 @@ export class SquadronsListComponent implements OnInit {
   @Input() fleet: Fleet;
 
   private _squadrons: Squadron[];
-
+  private squadronFactory = new SquadronFactory();
   @Input() set squadrons(value: any) {
     this._squadrons = value.squadrons;
     this.initialize();
@@ -40,6 +41,24 @@ export class SquadronsListComponent implements OnInit {
           this.squadronCounts[squadron.id] += 1;
         }
       });
+    }
+  }
+
+  removeDistinctSquadron(id: number) {
+    let _count = this.squadronCounts[id];
+    for (let i = 0; i < _count; i++) {
+      this.fleet.removeSquadron(id);
+    }
+  }
+
+  increaseSquadronCount(id: number) {
+    let squadron = this.squadronFactory.instantiateSquadron(id);
+    this.fleet.addSquadron(squadron);
+  }
+
+  decreaseSquadronCount(id: number) {
+    if (this.squadronCounts[id] > 1) {
+      this.fleet.removeSquadron(id);
     }
   }
 }

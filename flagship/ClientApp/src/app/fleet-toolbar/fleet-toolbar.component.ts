@@ -3,6 +3,7 @@ import { Fleet } from '../domain/fleet';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
 import { MatDialog } from '@angular/material';
 import { Ship } from '../domain/ship';
+import { TransitionService, StateService } from '@uirouter/core';
 
 @Component({
   selector: 'flagship-fleet-toolbar',
@@ -12,9 +13,22 @@ import { Ship } from '../domain/ship';
 export class FleetToolbarComponent implements OnInit {
 
   @Input() fleet: Fleet;
-  constructor(private dialog: MatDialog) { }
+
+  showEditButtons = true;
+
+  constructor(private dialog: MatDialog,
+    private transitionService: TransitionService,
+    private stateService: StateService) {
+    this.transitionService.onEnter({ entering: 'fleets.fleet.ship' },
+      (t, s) => { this.showEditButtons = false; });
+    this.transitionService.onExit({ exiting: 'fleets.fleet.ship' },
+      (t, s) => { this.showEditButtons = true; });
+  }
 
   ngOnInit() {
+    if (this.stateService.current.name === 'fleets.fleet.ship') {
+      this.showEditButtons = false;
+    }
   }
 
   addShip() {
