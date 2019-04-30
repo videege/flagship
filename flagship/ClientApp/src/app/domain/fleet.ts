@@ -31,7 +31,7 @@ export class Fleet {
     public squadronPointLimit: number) {
     this.ships = [];
     this.squadrons = [];
-    if (this.squadronPointLimit < this.pointLimit) {
+    if (this.squadronPointLimit > this.pointLimit) {
       this.squadronPointLimit = this.pointLimit;
     }
 
