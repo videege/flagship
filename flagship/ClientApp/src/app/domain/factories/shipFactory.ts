@@ -269,22 +269,138 @@ export class ShipFactory {
       allowedTitles: ShipFactory.titles.raider
     },
     {
-      //todo
       id: 16, name: 'Raider II-Class Corvette', shipClass: ShipClass.Normal, faction: Faction.Empire,
-      points: 44, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      points: 48, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
       defenseTokens: [DefenseToken.Evade, DefenseToken.Evade, DefenseToken.Brace],
       leftShields: 2, rightShields: 2, frontShields: 2, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
-      frontArmament: new Armament(0, 2, 2), rearArmament: new Armament(0, 1, 0),
+      frontArmament: new Armament(0, 3, 1), rearArmament: new Armament(0, 1, 0),
       leftArmament: new Armament(0, 1, 1), rightArmament: new Armament(0, 1, 1),
       leftAuxArmament: null, rightAuxArmament: null,
-      antiSquadronArmament: new Armament(0, 0, 2),
+      antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(2, [2, 2], [0, 1, 1], [0, 1, 1, 1]),
       upgradeSlots: [
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
-        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
       ],
       allowedTitles: ShipFactory.titles.raider
+    },
+    {
+      id: 17, name: 'Victory I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 73, hull: 8, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 3, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 0, 3), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [0, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.vsd
+    },
+    {
+      id: 18, name: 'Victory II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 85, hull: 8, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 3, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 3, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(2, 1, 0), rightArmament: new Armament(2, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [0, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.vsd
+    },
+    {
+      id: 19, name: 'Star Dreadnought Command Prototype', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 220, hull: 22, command: 4, squadron: 5, engineering: 4, size: Size.Huge,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
+        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 3, rightShields: 3, frontShields: 6, rearShields: 2, leftAuxShields: 3, rightAuxShields: 3,
+      frontArmament: new Armament(4, 4, 0), rearArmament: new Armament(1, 1, 1),
+      leftArmament: new Armament(3, 1, 1), rightArmament: new Armament(3, 1, 1),
+      leftAuxArmament: new Armament(2, 1, 1), rightAuxArmament: new Armament(2, 1, 1),
+      antiSquadronArmament: new Armament(0, 2, 0),
+      navigationChart: new NavigationChart(0, [0, 0], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.FleetCommand),
+        new UpgradeSlot(UpgradeType.FleetCommand)
+      ],
+      allowedTitles: ShipFactory.titles.ssd
+    },
+    {
+      id: 20, name: 'Star Dreadnought Assault Prototype', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 250, hull: 22, command: 4, squadron: 5, engineering: 4, size: Size.Huge,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
+        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 3, rightShields: 3, frontShields: 6, rearShields: 2, leftAuxShields: 3, rightAuxShields: 3,
+      frontArmament: new Armament(5, 4, 0), rearArmament: new Armament(1, 1, 1),
+      leftArmament: new Armament(3, 2, 1), rightArmament: new Armament(3, 2, 1),
+      leftAuxArmament: new Armament(2, 2, 1), rightAuxArmament: new Armament(2, 2, 1),
+      antiSquadronArmament: new Armament(1, 1, 0),
+      navigationChart: new NavigationChart(0, [0, 0], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.ssd
+    },
+    {
+      id: 21, name: 'Executor I-Class Star Dreadnought', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 381, hull: 33, command: 4, squadron: 6, engineering: 5, size: Size.Huge,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
+        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 5, rightShields: 5, frontShields: 6, rearShields: 3, leftAuxShields: 5, rightAuxShields: 5,
+      frontArmament: new Armament(5, 4, 0), rearArmament: new Armament(2, 1, 1),
+      leftArmament: new Armament(3, 3, 1), rightArmament: new Armament(3, 3, 1),
+      leftAuxArmament: new Armament(2, 3, 1), rightAuxArmament: new Armament(2, 3, 1),
+      antiSquadronArmament: new Armament(0, 2, 1),
+      navigationChart: new NavigationChart(0, [0, 0], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
+        new UpgradeSlot(UpgradeType.FleetCommand), new UpgradeSlot(UpgradeType.FleetCommand),
+        new UpgradeSlot(UpgradeType.FleetCommand), new UpgradeSlot(UpgradeType.FleetCommand)
+      ],
+      allowedTitles: ShipFactory.titles.ssd
+    },
+    {
+      id: 22, name: 'Executor II-Class Star Dreadnought', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 411, hull: 33, command: 4, squadron: 6, engineering: 5, size: Size.Huge,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
+        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 5, rightShields: 5, frontShields: 6, rearShields: 3, leftAuxShields: 5, rightAuxShields: 5,
+      frontArmament: new Armament(5, 5, 0), rearArmament: new Armament(2, 1, 1),
+      leftArmament: new Armament(4, 3, 1), rightArmament: new Armament(4, 3, 1),
+      leftAuxArmament: new Armament(3, 3, 1), rightAuxArmament: new Armament(3, 3, 1),
+      antiSquadronArmament: new Armament(1, 1, 1),
+      navigationChart: new NavigationChart(0, [0, 0], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
+        new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.FleetCommand)
+      ],
+      allowedTitles: ShipFactory.titles.ssd
     }
+    // Rebel (Scum) 
   ];
 
   constructor() {
