@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Ship } from '../domain/ship';
-import { UpgradeType } from '../domain/upgradeType';
+import { UpgradeType, sortUpgradeTypes } from '../domain/upgradeType';
 import { Upgrade } from '../domain/upgrade';
 import { MatDialog } from '@angular/material';
 import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.component';
@@ -49,7 +49,9 @@ export class ShipEditorComponent implements OnInit {
 
 
   enabledUpgradeSlots() {
-    return this.ship.upgradeSlots.filter(x => x.isEnabled);
+    return this.ship.upgradeSlots.filter(x => x.isEnabled).sort((a, b) => {
+      return sortUpgradeTypes(a.type, b.type);
+    });
   }
 
   upgradeTypeName(type: UpgradeType): string {
