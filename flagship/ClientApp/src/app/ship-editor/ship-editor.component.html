@@ -33,8 +33,8 @@
           </div>
           <div>
             <span>F: {{ ship.frontShields }}&nbsp;</span>
-            <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
             <span>L/R: {{ ship.leftShields }}&nbsp;</span>
+            <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
             <span>R: {{ ship.rearShields }}&nbsp;</span>
           </div>
           <div>
@@ -69,6 +69,9 @@
           <div>Left / Right:
             <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
           </div>
+          <div *ngIf="ship.leftAuxArmament">Left Aux / Right Aux:
+              <flagship-battery [armament]="ship.leftAuxArmament"></flagship-battery>
+            </div>
           <div>Rear:
             <flagship-battery [armament]="ship.rearArmament"></flagship-battery>
           </div>

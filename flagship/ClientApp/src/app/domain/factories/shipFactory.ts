@@ -18,7 +18,18 @@ export class ShipFactory {
     raider: [],
     quasar: [],
     vsd: [],
-    interdictor: []
+    interdictor: [],
+    // rebels
+    assaultFrigate: [],
+    cr90: [],
+    gr75: [],
+    mc30c: [],
+    mc80lib: [],
+    mc80ho: [],
+    nebulon: [],
+    pelta: [],
+    hammerhead: [],
+    mc75: []
   };
 
   static shipData: ShipData[] = [
@@ -399,8 +410,339 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.FleetCommand)
       ],
       allowedTitles: ShipFactory.titles.ssd
-    }
+    },
     // Rebel (Scum) 
+    {
+      id: 101, name: 'Assault Frigate Mark II A', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 81, hull: 6, command: 3, squadron: 2, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(2, 1, 0),
+      leftArmament: new Armament(3, 1, 0), rightArmament: new Armament(3, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 2, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.assaultFrigate
+    },
+    {
+      id: 102, name: 'Assault Frigate Mark II B', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 72, hull: 6, command: 3, squadron: 2, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 0, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(3, 1, 0), rightArmament: new Armament(3, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.assaultFrigate
+    },
+    {
+      id: 103, name: 'CR90A Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 44, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Evade, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 2, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(1, 0, 0),
+      leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(2, [1, 2], [0, 1, 2], [0, 1, 1, 2]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.cr90
+    },
+    {
+      id: 104, name: 'CR90B Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 39, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Evade, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 2, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 3, 0), rearArmament: new Armament(0, 1, 0),
+      leftArmament: new Armament(0, 2, 0), rightArmament: new Armament(0, 2, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(2, [1, 2], [0, 1, 2], [0, 1, 1, 2]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons)
+      ],
+      allowedTitles: ShipFactory.titles.cr90
+    },
+    {
+      id: 105, name: 'GR-75 Combat Retrofits', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 24, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.SmallFlotilla,
+      defenseTokens: [DefenseToken.Scatter, DefenseToken.Evade],
+      leftShields: 1, rightShields: 1, frontShields: 1, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 1, 0), rearArmament: new Armament(0, 1, 0),
+      leftArmament: new Armament(0, 0, 0), rightArmament: new Armament(0, 0, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(2, [1, 2], [0, 1, 2], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.FleetSupport)
+      ],
+      allowedTitles: ShipFactory.titles.gr75
+    },
+    {
+      id: 106, name: 'GR-75 Medium Transports', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 18, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.SmallFlotilla,
+      defenseTokens: [DefenseToken.Scatter, DefenseToken.Evade],
+      leftShields: 1, rightShields: 1, frontShields: 1, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 0, 0), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(0, 0, 0), rightArmament: new Armament(0, 0, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(2, [1, 2], [0, 1, 2], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.FleetSupport)
+      ],
+      allowedTitles: ShipFactory.titles.gr75
+    },
+    {
+      id: 107, name: 'Hammerhead Scout Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 41, hull: 5, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 1, rightShields: 1, frontShields: 2, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(0, 1, 0), rightArmament: new Armament(0, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(2, [2, 1], [1, 1, 0], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.hammerhead
+    },
+    {
+      id: 108, name: 'Hammerhead Torpedo Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 36, hull: 5, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 1, rightShields: 1, frontShields: 2, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(1, 1, 1), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(0, 0, 1), rightArmament: new Armament(0, 0, 1),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(2, [2, 1], [1, 1, 0], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
+      ],
+      allowedTitles: ShipFactory.titles.hammerhead
+    },
+    {
+      id: 109, name: 'MC30c Scout Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 69, hull: 4, command: 2, squadron: 1, engineering: 3, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 3, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(1, 0, 2), rearArmament: new Armament(1, 0, 1),
+      leftArmament: new Armament(2, 0, 3), rightArmament: new Armament(2, 0, 3),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 2], [0, 1, 1, 0]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc30c
+    },
+    {
+      id: 110, name: 'MC30c Torpedo Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 63, hull: 4, command: 2, squadron: 1, engineering: 3, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Redirect],
+      leftShields: 3, rightShields: 3, frontShields: 3, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 1, 2), rearArmament: new Armament(0, 1, 1),
+      leftArmament: new Armament(0, 2, 3), rightArmament: new Armament(0, 2, 3),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 2], [0, 1, 1, 0]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc30c
+    },
+    {
+      id: 111, name: 'MC75 Armored Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 104, hull: 9, command: 3, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 3, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 2, 3), rearArmament: new Armament(0, 1, 1),
+      leftArmament: new Armament(3, 2, 0), rightArmament: new Armament(3, 2, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(2, [1, 1], [0, 1, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc75
+    },
+    {
+      id: 112, name: 'MC75 Ordnance Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 100, hull: 9, command: 3, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 3, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(0, 2, 3), rearArmament: new Armament(0, 0, 2),
+      leftArmament: new Armament(3, 0, 2), rightArmament: new Armament(3, 0, 2),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(2, [1, 1], [0, 1, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Ordnance)
+      ],
+      allowedTitles: ShipFactory.titles.mc75
+    },
+    {
+      id: 113, name: 'MC80 Assault Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 114, hull: 8, command: 3, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 4, rightShields: 4, frontShields: 4, rearShields: 3, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(2, 1, 0),
+      leftArmament: new Armament(4, 2, 0), rightArmament: new Armament(4, 2, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 2, 0),
+      navigationChart: new NavigationChart(1, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc80ho
+    },
+    {
+      id: 114, name: 'MC80 Command Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 106, hull: 8, command: 3, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 4, rightShields: 4, frontShields: 4, rearShields: 3, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(1, 2, 0), rearArmament: new Armament(1, 2, 0),
+      leftArmament: new Armament(3, 3, 0), rightArmament: new Armament(3, 3, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(1, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc80ho
+    },
+    {
+      id: 115, name: 'MC80 Battle Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 103, hull: 8, command: 3, squadron: 2, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 5, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(4, 3, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 1, 0), rightArmament: new Armament(2, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 0, 2),
+      navigationChart: new NavigationChart(1, [1, 0], [1, 0, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc80lib
+    },
+    {
+      id: 116, name: 'MC80 Star Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 96, hull: 8, command: 3, squadron: 2, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 5, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 4, 0), rearArmament: new Armament(0, 2, 0),
+      leftArmament: new Armament(2, 1, 0), rightArmament: new Armament(2, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(1, [1, 0], [1, 0, 1], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.mc80lib
+    },
+    {
+      id: 117, name: 'Modified Pelta-Class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 56, hull: 5, command: 2, squadron: 1, engineering: 4, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 3, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 0, 2), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(1, 0, 1), rightArmament: new Armament(1, 0, 1),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(2, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.FleetCommand)
+      ],
+      allowedTitles: ShipFactory.titles.pelta
+    },
+    {
+      id: 118, name: 'Modified Pelta-Class Command Ship', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 60, hull: 5, command: 2, squadron: 1, engineering: 4, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 2, rightShields: 2, frontShields: 3, rearShields: 1, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(1, 1, 0),
+      navigationChart: new NavigationChart(2, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.FleetCommand)
+      ],
+      allowedTitles: ShipFactory.titles.pelta
+    },
+    {
+      id: 119, name: 'Nebulon-B Escort Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 57, hull: 5, command: 2, squadron: 2, engineering: 3, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Brace],
+      leftShields: 1, rightShields: 1, frontShields: 3, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 0, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 2, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 2], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.nebulon
+    },
+    {
+      id: 120, name: 'Nebulon-B Support Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 57, hull: 5, command: 2, squadron: 2, engineering: 3, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Brace],
+      leftShields: 1, rightShields: 1, frontShields: 3, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 0, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 2], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.nebulon
+    }
   ];
 
   constructor() {

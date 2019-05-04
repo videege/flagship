@@ -27,6 +27,10 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
     padding: 16px;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .text-muted {
     color: hsla(0, 0%, 47%, 0.75)
 }

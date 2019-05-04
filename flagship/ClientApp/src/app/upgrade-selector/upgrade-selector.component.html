@@ -1,4 +1,7 @@
 <div mat-dialog-content>
+  <p *ngIf="!upgrades.length">
+    There are no available upgrades to select from.
+  </p>
   <mat-action-list dense>
     <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)">
       <h3 matLine>

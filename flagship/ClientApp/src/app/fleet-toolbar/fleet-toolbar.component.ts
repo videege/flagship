@@ -20,15 +20,23 @@ export class FleetToolbarComponent implements OnInit {
     private transitionService: TransitionService,
     private stateService: StateService) {
     this.transitionService.onEnter({ entering: 'fleets.fleet.ship' },
-      (t, s) => { this.showEditButtons = false; });
+      (t, s) => {
+        this.showEditButtons = false;
+      });
     this.transitionService.onExit({ exiting: 'fleets.fleet.ship' },
-      (t, s) => { this.showEditButtons = true; });
+      (t, s) => {
+        this.showEditButtons = true;
+      });
   }
 
   ngOnInit() {
     if (this.stateService.current.name === 'fleets.fleet.ship') {
       this.showEditButtons = false;
     }
+  }
+
+  navToFleet() {
+    this.stateService.go('fleets.fleet', { id: this.fleet.id });
   }
 
   addShip() {

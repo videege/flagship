@@ -25,8 +25,8 @@
       <div>
         <strong>Shields&nbsp;</strong>
         <span>F: {{ ship.frontShields }}&nbsp;</span>
-        <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
         <span>L/R: {{ ship.leftShields }}&nbsp;</span>
+        <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
         <span>R: {{ ship.rearShields }}&nbsp;</span>
       </div>
       <div fxFlex ngStyle.gt-sm="text-align: right;">
@@ -42,6 +42,10 @@
       <div>F: <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
       </div>
       <div>L/R: <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
+      </div>
+      <div *ngIf="ship.leftAuxArmament">
+        LA/RA: <flagship-battery [armament]="ship.leftAuxArmament">
+        </flagship-battery>
       </div>
       <div>R: <flagship-battery [armament]="ship.rearArmament"></flagship-battery>
       </div>

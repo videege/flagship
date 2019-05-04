@@ -1,5 +1,5 @@
-<span>
-    <a uiSref="fleets.fleet" [uiParams]="{ id: fleet.id }">{{ fleet.name }}</a>
+<span class="clickable" (click)="navToFleet()">
+    {{ fleet.name }}
 </span>
 <span fxFlex></span>
 <button mat-button (click)="addShip()" class="toolbar-button"
