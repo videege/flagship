@@ -49,6 +49,8 @@ import { SquadronSelectorComponent } from './squadron-selector/squadron-selector
 import { SquadronDetailComponent } from './squadron-detail/squadron-detail.component';
 import { SquadronsListComponent } from './squadrons-list/squadrons-list.component';
 import { AlertComponent } from './alert/alert.component';
+import { ObjectiveSelectorComponent } from './objective-selector/objective-selector.component';
+import { ObjectiveComponent } from './objective/objective.component';
 
 
 
@@ -142,7 +144,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     SquadronSelectorComponent,
     SquadronDetailComponent,
     SquadronsListComponent,
-    AlertComponent
+    AlertComponent,
+    ObjectiveSelectorComponent,
+    ObjectiveComponent
   ],
   imports: [
     BrowserModule,
@@ -178,7 +182,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     ShipSelectorComponent,
     SquadronSelectorComponent,
     UpgradeSelectorComponent,
-    FleetEditorComponent
+    FleetEditorComponent,
+    ObjectiveSelectorComponent
   ],
   bootstrap: [AppComponent]
 })

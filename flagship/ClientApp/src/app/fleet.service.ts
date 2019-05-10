@@ -10,6 +10,7 @@ import { tap, switchMap, mergeMap, map, concatMap, find, share } from 'rxjs/oper
 import { ShipFactory } from './domain/factories/shipFactory';
 import { UpgradeFactory } from './domain/factories/upgradeFactory';
 import { SquadronFactory } from './domain/factories/squadronFactory';
+import { ObjectiveFactory } from './domain/factories/objectiveFactory';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class FleetService {
   private shipFactory = new ShipFactory();
   private upgradeFactory = new UpgradeFactory();
   private squadronFactory = new SquadronFactory();
+  private objectiveFactory = new ObjectiveFactory();
 
   private loadedFleets = false;
   private fleetLoad$: Observable<Fleet[]>;
@@ -67,6 +69,10 @@ export class FleetService {
     for (const squadronId of serializedFleet.squadrons) {
       let squadron = this.squadronFactory.instantiateSquadron(squadronId);
       fleet.addSquadron(squadron);
+    }
+    for (const objectiveId of (serializedFleet.objectives || [])) {
+      let objective = this.objectiveFactory.getObjective(objectiveId);
+      fleet.setObjective(objective);
     }
     return fleet;
   }

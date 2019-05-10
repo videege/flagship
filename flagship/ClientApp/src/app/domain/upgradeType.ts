@@ -20,9 +20,9 @@ export enum UpgradeType {
 export function sortUpgradeTypes(a: UpgradeType, b: UpgradeType): number {
   const mapping = (t: UpgradeType) => {
     if (t === UpgradeType.Title) {
-      return -2;
-    } else if (t === UpgradeType.Commander) {
       return -1;
+    } else if (t === UpgradeType.Commander) {
+      return -2;
     } else {
       return 0;
     }

@@ -1,0 +1,23 @@
+.objective-header {
+    padding: 8px;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.objective-header.assault {
+    background-color: red;
+    color: white;
+}
+
+.objective-header.defense {
+    background-color: yellow;
+}
+
+.objective-header.navigation {
+    background-color: royalblue;
+}
+
+.objective-body {
+    padding: 8px;
+    background-color: white;
+}

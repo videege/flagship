@@ -46,8 +46,6 @@ export class ShipEditorComponent implements OnInit {
     });
   }
 
-
-
   enabledUpgradeSlots() {
     return this.ship.upgradeSlots.filter(x => x.isEnabled).sort((a, b) => {
       return sortUpgradeTypes(a.type, b.type);

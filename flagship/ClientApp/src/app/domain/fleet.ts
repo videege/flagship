@@ -7,6 +7,7 @@ import { UpgradeType } from "./upgradeType";
 import { ShipsModule } from '../ships/ships.module';
 
 import { Subject } from 'rxjs';
+import { Objective } from './objective';
 
 export interface ISerializedFleet {
   id: string;
@@ -18,6 +19,7 @@ export interface ISerializedFleet {
 
   ships: ISerializedShip[];
   squadrons: number[];
+  objectives: number[];
 }
 
 export class Fleet {
@@ -25,12 +27,14 @@ export class Fleet {
 
   public ships: Ship[];
   public squadrons: Squadron[];
+  public objectives: Objective[];
 
   constructor(public id: string, public name: string,
     public author: string, public faction: Faction, public pointLimit: number,
     public squadronPointLimit: number) {
     this.ships = [];
     this.squadrons = [];
+    this.objectives = [];
     if (this.squadronPointLimit > this.pointLimit) {
       this.squadronPointLimit = this.pointLimit;
     }
@@ -41,6 +45,7 @@ export class Fleet {
   serialize(): ISerializedFleet {
     let ships = this.ships.map(s => s.serialize());
     let squadrons = this.squadrons.map(s => s.id);
+    let objectives = this.objectives.map(o => o.id);
 
     return {
       id: this.id,
@@ -50,7 +55,8 @@ export class Fleet {
       pointLimit: this.pointLimit,
       squadronPointLimit: this.squadronPointLimit,
       ships: ships,
-      squadrons: squadrons
+      squadrons: squadrons,
+      objectives: objectives
     };
   }
 
@@ -103,6 +109,22 @@ export class Fleet {
       return false;
     }
     return true;
+  }
+
+  setObjective(objective: Objective) {
+    // if there is already an objective of this type, remove it.
+    let existingObjective = this.objectives.find(o => o.type === objective.type);
+    if (existingObjective) {
+      this.removeObjective(existingObjective);
+    }
+    this.objectives.push(objective);
+    this.subject.next(this.id);
+  }
+
+  removeObjective(objective: Objective) {
+    let idx = this.objectives.indexOf(objective);
+    this.objectives.splice(idx, 1);
+    this.subject.next(this.id);
   }
 
   addShip(ship: Ship): void {

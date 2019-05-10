@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material';
 import { Squadron } from '../domain/squadron';
 import { SquadronSelectorComponent, SquadronSelectorData } from '../squadron-selector/squadron-selector.component';
 import { AlertType } from '../alert/alert.component';
+import { ObjectiveType, Objective } from '../domain/objective';
+import { ObjectiveSelectorComponent } from '../objective-selector/objective-selector.component';
 
 @Component({
   selector: 'flagship-fleet',
@@ -20,14 +22,16 @@ export class FleetComponent implements OnInit {
 
   @Input() fleet: Fleet;
 
-  private shipFactory: ShipFactory = new ShipFactory();
-  private upgradeFactory: UpgradeFactory = new UpgradeFactory();
-
   public colSpan = 1;
   public fleetAlertOpen = false;
   public squadronAlertOpen = false;
   public alertType = AlertType;
   
+  public assaultObjective: Objective = null;
+  public defenseObjective: Objective = null;
+  public navigationObjective: Objective = null;
+  public objType = ObjectiveType;
+
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog) {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
@@ -45,7 +49,16 @@ export class FleetComponent implements OnInit {
     this.fleet.subject.subscribe(f => {
       this.fleetAlertOpen = this.fleet.currentPoints() > this.fleet.pointLimit;
       this.squadronAlertOpen = this.fleet.currentPointsFromSquadrons() > this.fleet.squadronPointLimit;
+
+      this.setObjectives();
     });
+    this.setObjectives();
+  }
+
+  setObjectives() {
+    this.assaultObjective = this.fleet.objectives.find(o => o.type === ObjectiveType.Assault);
+    this.defenseObjective = this.fleet.objectives.find(o => o.type === ObjectiveType.Defense);
+    this.navigationObjective = this.fleet.objectives.find(o => o.type === ObjectiveType.Navigation);
   }
 
   addShip() {
@@ -69,4 +82,6 @@ export class FleetComponent implements OnInit {
         this.fleet.addSquadron(squadron);
     });
   }
+
+  
 }
