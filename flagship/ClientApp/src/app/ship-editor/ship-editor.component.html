@@ -70,8 +70,8 @@
             <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
           </div>
           <div *ngIf="ship.leftAuxArmament">Left Aux / Right Aux:
-              <flagship-battery [armament]="ship.leftAuxArmament"></flagship-battery>
-            </div>
+            <flagship-battery [armament]="ship.leftAuxArmament"></flagship-battery>
+          </div>
           <div>Rear:
             <flagship-battery [armament]="ship.rearArmament"></flagship-battery>
           </div>
@@ -104,7 +104,9 @@
 
     <mat-card-actions>
       <span fxFlex></span>
-      <button mat-button mat-dialog-close color="primary">OK</button>
+      <button mat-button color="primary" uiSref="fleets.fleet" [uiParams]="{ id: ship.fleet.id }">
+        OK
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
