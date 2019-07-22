@@ -1,5 +1,7 @@
-import { AttackPool } from './attackPool';
+import { AttackPool, IAttackPool } from './attackPool';
 
 export interface IDieModification {
-    modify(pool: AttackPool): AttackPool;
+    name: string;
+    apply(pool: AttackPool): IAttackPool;
+    canBeApplied(pool: AttackPool): boolean;
 }

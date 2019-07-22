@@ -51,6 +51,7 @@ import { SquadronsListComponent } from './squadrons-list/squadrons-list.componen
 import { AlertComponent } from './alert/alert.component';
 import { ObjectiveSelectorComponent } from './objective-selector/objective-selector.component';
 import { ObjectiveComponent } from './objective/objective.component';
+import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.component';
 
 
 
@@ -146,7 +147,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     SquadronsListComponent,
     AlertComponent,
     ObjectiveSelectorComponent,
-    ObjectiveComponent
+    ObjectiveComponent,
+    ShipStatisticsComponent
   ],
   imports: [
     BrowserModule,

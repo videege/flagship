@@ -35,6 +35,20 @@ export class DieRoll implements IDieRoll {
         };
     }
 
+    clone(): DieRoll {
+        let roll = new DieRoll(this.type, this.baseProbability.pHit,
+            this.baseProbability.pDoubleHit, this.baseProbability.pHitCrit,
+            this.baseProbability.pCrit, this.baseProbability.pAccuracy,
+            this.baseProbability.pBlank);
+        roll.pHit = this.pHit;
+        roll.pDoubleHit = this.pDoubleHit;
+        roll.pCrit = this.pCrit;
+        roll.pHitCrit = this.pHitCrit;
+        roll.pAccuracy = this.pAccuracy;
+        roll.pBlank = this.pBlank;
+        return roll;
+    }
+
     validate() {
         let totalProbability = this.pBlank + this.pAccuracy +
             this.pCrit + this.pDoubleHit + this.pHit + this.pHitCrit;
@@ -42,6 +56,18 @@ export class DieRoll implements IDieRoll {
         if (totalProbability !== 1) {
             console.log(`Die validation error! ${this.type} die got P = ${totalProbability}`);
         }
+    }
+
+    expectedDamage(): number {
+        return this.pHit + this.pCrit + (this.pHitCrit * 2) + (this.pDoubleHit * 2);
+    }
+
+    expectedAccuracies(): number {
+        return this.pAccuracy;
+    }
+
+    expectedCriticals(): number {
+        return this.pCrit + this.pHitCrit;
     }
 
     static RedDieRoll(): DieRoll {

@@ -1,30 +1,23 @@
 import { Armament } from '../armament';
-import { IRerollEffect } from './rerollEffect';
-import { AttackPool } from './attackPool';
+import { AttackPool, IAttackPool } from './attackPool';
 import { IDieModification } from './dieModification';
 
-
-export interface IDiceProbabilities {
-    averageDamage: number;
-    averageAccuracies: number;
-    averageCriticals: number;
-    averageBlanks: number;
-}
-
-export enum RerollStrategy {
-    BlanksOnly,
-    BlanksAndAccuracies,
-    Greedy
-}
-
 export class Calculator {
-    constructor() {
+    public closeRangePool: IAttackPool;
+    public mediumRangePool: IAttackPool;
+    public longRangePool: IAttackPool;
 
+    constructor(private armament: Armament, private modifications: IDieModification[]) {
+        this.closeRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, armament.blackDice);
+        this.mediumRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, 0);
+        this.longRangePool = AttackPool.FromNumberOfDice(armament.redDice, 0, 0);
     }
 
-    applyModifications(pool: AttackPool, modifications: IDieModification[]) {
-        for (const modification of modifications) {
-            modification.modify(pool);
+    applyModifications() {
+        for (const modification of this.modifications) {
+            this.closeRangePool.modify(modification);
+            this.mediumRangePool.modify(modification);
+            this.longRangePool.modify(modification);
         }
     }
 }

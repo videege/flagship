@@ -1,47 +1,23 @@
-import { IDieModification } from './dieModification';
-import { AttackPool } from './attackPool';
-import { DieType, DieRoll } from './dieRoll';
+import { DieRoll } from '../dieRoll';
+import { RerollStrategy } from './rerollStrategy';
 
-export enum RerollStrategy {
-    Blanks = 0,
-    Accuracies = 1 << 0,
-    Hits = 1 << 1
-}
+export abstract class RerollModification {
 
-export class RerollModification implements IDieModification {
-
-    constructor(public dieType: DieType, public quantity: number,
-        public strategy: RerollStrategy) {
+    constructor(public strategy: RerollStrategy) {
 
     }
-
-    modify(pool: AttackPool): AttackPool {
-        // Get the set of dice we are allowed to reroll
-        let dice = pool.diceOfType(this.dieType);
-
-        if (this.quantity) {
-            // If we can only reroll a certain number of dice,
-            // prefer rerolling in order of dice quality (Blk/Blue/Red)
-            let rerolledDice = dice.filter(r => r.type === DieType.Black);
-            if (rerolledDice.length < this.quantity) {
-                rerolledDice.push(...dice.filter(r => r.type === DieType.Blue));
-                if (rerolledDice.length < this.quantity) {
-                    rerolledDice.push(...dice.filter(r => r.type === DieType.Red));
-                }
-            }
-            dice = rerolledDice.splice(0, this.quantity);
-        }
-
-        for (const die of dice) {
+    
+    rerollDice(dieRolls: DieRoll[]): void {
+        for (const die of dieRolls) {
             // Modify probability according to the strategy
-            this.adjustProbability(die, this.strategy);
+            this.adjustProbability(die);
             die.validate();
         }
-        return pool;
     }
 
-    adjustProbability(die: DieRoll, strategy: RerollStrategy) {
+    adjustProbability(die: DieRoll) {
         let probability = 0;
+        let strategy = this.strategy;
         if (strategy & RerollStrategy.Blanks) {
             probability += die.baseProbability.pBlank;
         }

@@ -59,6 +59,11 @@ export class UpgradeFactory {
                 text: "Something something something."
             },
             {
+                id: 3001, name: 'Leading Shots', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal, 
+                text: 'While attacking, you may spend 1 blue die to reroll any number of dice in your attack pool.'
+            },
+            {
                 id: 4000, name: 'Gunnery Team', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
                 text: "You can attack from the same hull zone more than once per activation. That hull zone cannot target the same ship or squadron more than once during that activation."
