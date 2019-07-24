@@ -22,8 +22,11 @@ import {
   MatInputModule,
   MatSelectModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatButtonToggleModule
 } from '@angular/material';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 
@@ -52,8 +55,6 @@ import { AlertComponent } from './alert/alert.component';
 import { ObjectiveSelectorComponent } from './objective-selector/objective-selector.component';
 import { ObjectiveComponent } from './objective/objective.component';
 import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.component';
-
-
 
 //trace.enable();
 
@@ -117,6 +118,16 @@ const STATES = [
       title: null
     }
   },
+  {
+    name: 'fleets.fleet.ship.statistics',
+    url: '/statistics',
+    views: {
+      'content@': { component: ShipStatisticsComponent }
+    },
+    data: {
+      title: 'Statistics'
+    }
+  },
   { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
 ];
 
@@ -174,7 +185,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatSelectModule,
     MatExpansionModule,
     MatTooltipModule,
-    EcoFabSpeedDialModule
+    MatButtonToggleModule,
+    EcoFabSpeedDialModule,
+    NgxChartsModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }

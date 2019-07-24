@@ -1,20 +1,70 @@
-<mat-card fxFlex>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon>bar_chart</mat-icon>
-    </div>
-    <mat-card-title>
-      Statistics
-    </mat-card-title>
-    <mat-card-subtitle>
-      View expected damage, accuracies, and critical hits at all ranges.
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    
-  </mat-card-content>
-  <mat-card-actions>
-    <span fxFlex></span>
-    <button mat-button (click)="deleteShip()" color="warn">Delete Ship</button>
-  </mat-card-actions>
-</mat-card>
+<div class="content mat-typography" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutGap="8px" fxFlex.gt-sm="40">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>signal_wifi_4_bar</mat-icon>
+        </div>
+        <mat-card-title>
+          Firing Arc
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column" fxLayoutGap="4px">
+        <mat-button-toggle-group value="FRONT" style="width:100%;">
+          <mat-button-toggle style="width:100%;" value="FRONT" (change)="selectArc(ship.frontArmament)">Front
+          </mat-button-toggle>
+          <mat-button-toggle style="width:100%;" value="SIDE" (change)="selectArc(ship.leftArmament)">Side
+          </mat-button-toggle>
+          <mat-button-toggle style="width:100%;" value="AUX" (change)="selectArc(ship.frontArmament)"
+            *ngIf="ship.leftAuxArmament">Aux</mat-button-toggle>
+          <mat-button-toggle style="width:100%;" value="REAR" (change)="selectArc(ship.rearArmament)">Rear
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <div>
+          <span class="mat-body-strong">Selected Battery:&nbsp;</span>
+          <flagship-battery [armament]="armament"></flagship-battery>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>signal_wifi_4_bar</mat-icon>
+        </div>
+        <mat-card-title>
+          Attack Strategies
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column" fxLayoutGap="4px">
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-card fxFlex.gt-sm="60">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>bar_chart</mat-icon>
+      </div>
+      <mat-card-title>
+        Statistics
+      </mat-card-title>
+      <mat-card-subtitle>
+        View expected damage, accuracies, and critical hits at all ranges.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="chart-wrapper" id="expectedDamage">
+        <ngx-charts-bar-vertical [scheme]="damage.colorScheme" [results]="damage.data" [gradient]="damage.gradient"
+           [xAxis]="damage.showXAxis" [yAxis]="damage.showYAxis" [legend]="damage.showLegend" 
+           [showXAxisLabel]="damage.showXAxisLabel" [showYAxisLabel]="damage.showYAxisLabel"
+          [xAxisLabel]="damage.xAxisLabel" [yAxisLabel]="damage.yAxisLabel" (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <span fxFlex></span>
+      <button mat-button (click)="deleteShip()" color="warn">Delete Ship</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

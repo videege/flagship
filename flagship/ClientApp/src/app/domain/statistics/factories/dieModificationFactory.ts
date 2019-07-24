@@ -1,6 +1,6 @@
 import { IDieModification } from '../dieModification';
 import { LeadingShotsModification } from '../rerolls/leadingShots';
-import { RerollStrategy } from '../rerolls/RerollStrategy';
+import { RerollStrategy } from '../rerolls/rerollStrategy';
 import { Ship } from '../../ship';
 
 export enum ModificationClass {
@@ -33,7 +33,7 @@ export class DieModificationFactory {
         // Find all upgrades attached to this ship 
         let mods = ship.upgradeSlots.filter(x => x.isEnabled && x.isFilled()).map(x => x.upgrade.id)
             .filter(x => this.hasDieModification(x)).map(x => this.instantiateDieModification(x));
-
+        return mods;
         //todo: search fleet for upgrades that affect multiple ships (e.g., Darth Vader)
     }
 
