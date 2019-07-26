@@ -59,6 +59,10 @@ eco-fab-speed-dial.fab-lower-right {
     margin-top: 4px;
 }
 
+.mat-card-avatar > .mat-icon {
+    font-size: 40px;
+}
+
 .mat-card-avatar > i {
     font-size: 40px;
 }

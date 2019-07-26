@@ -6,21 +6,32 @@ import { DieModificationFactory } from '../domain/statistics/factories/dieModifi
 import { IDieModification } from '../domain/statistics/dieModification';
 import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
+import { IAttackPool } from '../domain/statistics/attackPool';
 
 class ChartData {
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: [
+      '#946988',
+      '#7819d1',
+      '#e30b0b',
+      '#AAAAAA']
   };
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
   showYAxisLabel = true;
-
+  yScaleMax = 10;
+  yScaleMin = 0;
   constructor(public xAxisLabel: string, public yAxisLabel: string,
     public data: any) {
 
+  }
+
+  updateStatistic(yLabel: string, yMax: number) {
+    this.yAxisLabel = yLabel;
+    this.yScaleMax = yMax;
   }
 }
 
@@ -35,8 +46,9 @@ export class ShipStatisticsComponent implements OnInit {
   private modificationFactory: DieModificationFactory = new DieModificationFactory();
   public modifications: IDieModification[] = [];
   public armament: Armament;
+  public selectedStat: string = "DMG";
 
-  public damage = new ChartData("Range", "Damage", []);
+  public chart = new ChartData("Range", "Damage", []);
 
   private calculator: Calculator;
 
@@ -53,51 +65,50 @@ export class ShipStatisticsComponent implements OnInit {
     this.armament = armament;
     this.calculator = new Calculator(this.armament, this.modifications);
     this.calculator.applyModifications();
-    this.updateDamage();
+    this.updateStatistics();
   }
 
-  private updateDamage() {
-    this.damage.data = [
-      {
-        "name": "Close",
-        "value": this.calculator.closeRangePool.expectedDamage()
-      },
-      {
-        "name": "Medium",
-        "value": this.calculator.mediumRangePool.expectedDamage()
-      },
-      {
-        "name": "Long",
-        "value": this.calculator.longRangePool.expectedDamage()
-      }
-    ]
+  selectStat(stat: string) {
+    this.selectedStat = stat;
+    if (this.selectedStat === 'DMG')
+      this.chart.updateStatistic('Damage', 10);
+    else if (this.selectedStat === 'ACC')
+      this.chart.updateStatistic('Accuracies', 5);
+    else if (this.selectedStat === 'CRT')
+      this.chart.updateStatistic('Criticals', 5);
+
+    this.updateStatistics();
   }
 
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  private updateStatistics() {
+    let fn = null;
+    if (this.selectedStat === 'DMG')
+      fn = (p: IAttackPool) => p.expectedDamage();
+    else if (this.selectedStat === 'ACC')
+      fn = (p: IAttackPool) => p.expectedAccuracies();
+    else if (this.selectedStat === 'CRT')
+      fn = (p: IAttackPool) => p.expectedCriticals();
 
-  data = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
+    let stats = [
+      { name: 'Close', stats: fn(this.calculator.closeRangePool) },
+      { name: 'Medium', stats: fn(this.calculator.mediumRangePool) },
+      { name: 'Long', stats: fn(this.calculator.longRangePool) }
+    ];
+
+    this.chart.data = stats.map(x => {
+      let series = x.stats.distribution.map((val, idx) => {
+        let name = "μ";
+        if (idx === 0) name = 'μ - σ';
+        else if (idx === 2) name = 'μ + σ';
+
+        return { "name": name, "value": val };
+      });
+      return {
+        "name": x.name,
+        "series": series
+      };
+    });
+  }
+
+
 }

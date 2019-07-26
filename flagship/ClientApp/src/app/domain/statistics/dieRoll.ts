@@ -62,12 +62,31 @@ export class DieRoll implements IDieRoll {
         return this.pHit + this.pCrit + (this.pHitCrit * 2) + (this.pDoubleHit * 2);
     }
 
+    damageVariance(): number {
+        let mean = this.expectedDamage();
+        let single = Math.pow(1 - mean, 2);
+        let double = Math.pow(2 - mean, 2);
+        return (this.pHit * single) +
+               (this.pCrit * single) +
+               (this.pHitCrit * double) +
+               (this.pDoubleHit * double); 
+    }
+
     expectedAccuracies(): number {
         return this.pAccuracy;
     }
 
+    accuracyVariance(): number {
+        return this.pAccuracy * Math.pow(1 - this.expectedAccuracies(), 2);
+    }
+
     expectedCriticals(): number {
         return this.pCrit + this.pHitCrit;
+    }
+
+    criticalVariance(): number {
+        let single = Math.pow(1 - this.expectedCriticals(), 2);
+        return (this.pCrit * single) + (this.pHitCrit * single);
     }
 
     static RedDieRoll(): DieRoll {

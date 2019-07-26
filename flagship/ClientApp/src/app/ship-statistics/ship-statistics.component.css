@@ -3,4 +3,9 @@
     overflow: hidden;
     max-width: 100%;
     width: 100%;
+    min-height: 400px;
+}
+
+.chart-wrapper > .stat-selector {
+    margin-bottom: 8px;
 }

@@ -8,16 +8,19 @@
         <mat-card-title>
           Firing Arc
         </mat-card-title>
+        <mat-card-subtitle>
+          Select the firing arc you wish to view statistics for.
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content fxLayout="column" fxLayoutGap="4px">
-        <mat-button-toggle-group value="FRONT" style="width:100%;">
-          <mat-button-toggle style="width:100%;" value="FRONT" (change)="selectArc(ship.frontArmament)">Front
+        <mat-button-toggle-group value="FRONT" fxLayout="row" style="width:100%;">
+          <mat-button-toggle fxFlex value="FRONT" (change)="selectArc(ship.frontArmament)">Front
           </mat-button-toggle>
-          <mat-button-toggle style="width:100%;" value="SIDE" (change)="selectArc(ship.leftArmament)">Side
+          <mat-button-toggle fxFlex value="SIDE" (change)="selectArc(ship.leftArmament)">Side
           </mat-button-toggle>
-          <mat-button-toggle style="width:100%;" value="AUX" (change)="selectArc(ship.frontArmament)"
-            *ngIf="ship.leftAuxArmament">Aux</mat-button-toggle>
-          <mat-button-toggle style="width:100%;" value="REAR" (change)="selectArc(ship.rearArmament)">Rear
+          <mat-button-toggle fxFlex value="AUX" (change)="selectArc(ship.frontArmament)" *ngIf="ship.leftAuxArmament">
+            Aux</mat-button-toggle>
+          <mat-button-toggle fxFlex value="REAR" (change)="selectArc(ship.rearArmament)">Rear
           </mat-button-toggle>
         </mat-button-toggle-group>
         <div>
@@ -34,9 +37,12 @@
         <mat-card-title>
           Attack Strategies
         </mat-card-title>
+        <mat-card-subtitle>
+          Reroll, modification, and replacement preferences.
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content fxLayout="column" fxLayoutGap="4px">
-        
+
       </mat-card-content>
     </mat-card>
   </div>
@@ -53,12 +59,25 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div class="chart-wrapper" id="expectedDamage">
-        <ngx-charts-bar-vertical [scheme]="damage.colorScheme" [results]="damage.data" [gradient]="damage.gradient"
-           [xAxis]="damage.showXAxis" [yAxis]="damage.showYAxis" [legend]="damage.showLegend" 
-           [showXAxisLabel]="damage.showXAxisLabel" [showYAxisLabel]="damage.showYAxisLabel"
-          [xAxisLabel]="damage.xAxisLabel" [yAxisLabel]="damage.yAxisLabel" (select)="onSelect($event)">
-        </ngx-charts-bar-vertical>
+      <p>Charts display the expected value at all ranges +- one standard deviation.</p>
+      <div class="chart-wrapper">
+        <mat-button-toggle-group value="DMG" fxLayout="row" class="stat-selector">
+          <mat-button-toggle fxFlex value="DMG" (change)="selectStat('DMG')">Damage
+          </mat-button-toggle>
+          <mat-button-toggle fxFlex value="ACC" (change)="selectStat('ACC')">Accuracies
+          </mat-button-toggle>
+          <mat-button-toggle fxFlex value="CRT" (change)="selectStat('CRT')">Criticals
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <div style="max-height: 80vh;">
+          <ngx-charts-bar-vertical-2d [scheme]="chart.colorScheme" [results]="chart.data" [gradient]="chart.gradient"
+            [xAxis]="chart.showXAxis" [yAxis]="chart.showYAxis" [legend]="chart.showLegend"
+            [showXAxisLabel]="chart.showXAxisLabel" [showYAxisLabel]="chart.showYAxisLabel"
+            [xAxisLabel]="chart.xAxisLabel" [yAxisLabel]="chart.yAxisLabel" (select)="onSelect($event)"
+            [yScaleMax]="chart.yScaleMax" [noBarWhenZero]="false">
+          </ngx-charts-bar-vertical-2d>
+        </div>
+
       </div>
 
     </mat-card-content>
