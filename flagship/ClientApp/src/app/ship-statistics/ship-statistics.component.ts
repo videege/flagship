@@ -8,7 +8,16 @@ import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
 import { IAttackPool } from '../domain/statistics/attackPool';
 
-class ChartData {
+class GaugeData {
+  public units = "% CV";
+  public bigSegments = 5;
+  public smallSegments = 1;
+  constructor(public data: any[]) {
+
+  }
+}
+
+class BarChartData {
   colorScheme = {
     domain: [
       '#946988',
@@ -47,9 +56,10 @@ export class ShipStatisticsComponent implements OnInit {
   public modifications: IDieModification[] = [];
   public armament: Armament;
   public selectedStat: string = "DMG";
-
-  public chart = new ChartData("Range", "Damage", []);
-
+  public showCV = false;
+  
+  public chart = new BarChartData("Range", "Damage", []);
+  public gauge = new GaugeData([]);
   private calculator: Calculator;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
@@ -70,12 +80,15 @@ export class ShipStatisticsComponent implements OnInit {
 
   selectStat(stat: string) {
     this.selectedStat = stat;
-    if (this.selectedStat === 'DMG')
+    if (this.selectedStat === 'DMG') {
       this.chart.updateStatistic('Damage', 10);
-    else if (this.selectedStat === 'ACC')
+    }
+    else if (this.selectedStat === 'ACC') {
       this.chart.updateStatistic('Accuracies', 5);
-    else if (this.selectedStat === 'CRT')
+    }
+    else if (this.selectedStat === 'CRT') {
       this.chart.updateStatistic('Criticals', 5);
+    }
 
     this.updateStatistics();
   }
@@ -94,6 +107,13 @@ export class ShipStatisticsComponent implements OnInit {
       { name: 'Medium', stats: fn(this.calculator.mediumRangePool) },
       { name: 'Long', stats: fn(this.calculator.longRangePool) }
     ];
+
+    this.gauge.data = stats.map(x => {
+      return {
+        "name": x.name,
+        "value": x.stats.cv
+      };
+    })
 
     this.chart.data = stats.map(x => {
       let series = x.stats.distribution.map((val, idx) => {

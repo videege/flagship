@@ -77,7 +77,13 @@
             [yScaleMax]="chart.yScaleMax" [noBarWhenZero]="false">
           </ngx-charts-bar-vertical-2d>
         </div>
-
+        <div style="max-height: 80vh" *ngIf="showCV">
+          <ngx-charts-gauge [results]="gauge.data" [units]="gauge.units" [bigSegments]="gauge.bigSegments"
+            [smallSegments]="gauge.smallSegments" [showText]="false"
+            [view]="[350,350]">
+          </ngx-charts-gauge>
+          <h3>Coefficient of Variation</h3>
+        </div>
       </div>
 
     </mat-card-content>

@@ -10,10 +10,13 @@ export enum Range {
 
 export class PoolStatistics {
     public deviation: number;
+    // coefficient of variance
+    public cv: number;
     public distribution: number[];
 
     constructor(public mean: number, variance: number) {
         this.deviation = Math.sqrt(variance);
+        this.cv = (this.deviation / this.mean) * 100;
         this.distribution = [
             //Math.min(0, this.mean - (2 * this.deviation)),
             Math.max(0, this.mean - this.deviation),
