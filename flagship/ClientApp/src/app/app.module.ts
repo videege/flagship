@@ -23,7 +23,10 @@ import {
   MatSelectModule,
   MatExpansionModule,
   MatTooltipModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatSlideToggle,
+  MatSlideToggleModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -47,7 +50,7 @@ import { UpgradeIconDirective } from './upgrade-icon.directive';
 import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
 import { Fleet } from './domain/fleet';
 import { FleetEditorComponent } from './fleet-editor/fleet-editor.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SquadronSelectorComponent } from './squadron-selector/squadron-selector.component';
 import { SquadronDetailComponent } from './squadron-detail/squadron-detail.component';
 import { SquadronsListComponent } from './squadrons-list/squadrons-list.component';
@@ -166,6 +169,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     BrowserAnimationsModule,
     UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     FlexLayoutModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -186,6 +190,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatExpansionModule,
     MatTooltipModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
     EcoFabSpeedDialModule,
     NgxChartsModule
   ],

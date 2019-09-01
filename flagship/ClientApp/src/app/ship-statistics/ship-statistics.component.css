@@ -3,9 +3,30 @@
     overflow: hidden;
     max-width: 100%;
     width: 100%;
-    min-height: 400px;
+    min-height: 100px;
+}
+
+.chart-wrapper > h3 {
+    text-align: center;
 }
 
 .chart-wrapper > .stat-selector {
     margin-bottom: 8px;
 }
+
+.stats-sidenav {
+    min-width: 300px;
+}
+
+.stats-container {
+    min-height: 100%;
+}
+
+.stat-selector {
+    min-width: 200px;
+}
+/* 
+.stats-toolbar {
+    position: sticky;
+    top: 64px;
+} */

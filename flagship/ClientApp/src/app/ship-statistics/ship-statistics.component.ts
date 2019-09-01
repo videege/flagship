@@ -6,7 +6,7 @@ import { DieModificationFactory } from '../domain/statistics/factories/dieModifi
 import { IDieModification } from '../domain/statistics/dieModification';
 import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
-import { IAttackPool } from '../domain/statistics/attackPool';
+import { IAttackPool, PoolStatistics, AttackPool } from '../domain/statistics/attackPool';
 
 class GaugeData {
   public units = "% CV";
@@ -18,13 +18,19 @@ class GaugeData {
 }
 
 class BarChartData {
+  // colorScheme = {
+  //   domain: [
+  //     '#946988',
+  //     '#7819d1',
+  //     '#e30b0b',
+  //     '#AAAAAA']
+  // };
   colorScheme = {
-    domain: [
-      '#946988',
-      '#7819d1',
-      '#e30b0b',
-      '#AAAAAA']
+    domain: ['black', 'green', 'red']
   };
+  customColors = (fn, v) => {
+    return '#e30b0b';
+  }
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -33,6 +39,7 @@ class BarChartData {
   showYAxisLabel = true;
   yScaleMax = 10;
   yScaleMin = 0;
+  areaData = [];
   constructor(public xAxisLabel: string, public yAxisLabel: string,
     public data: any) {
 
@@ -42,6 +49,11 @@ class BarChartData {
     this.yAxisLabel = yLabel;
     this.yScaleMax = yMax;
   }
+}
+
+interface TableData {
+  range: string;
+  pool: IAttackPool;
 }
 
 @Component({
@@ -56,9 +68,13 @@ export class ShipStatisticsComponent implements OnInit {
   public modifications: IDieModification[] = [];
   public armament: Armament;
   public selectedStat: string = "DMG";
-  public showCV = false;
   
-  public chart = new BarChartData("Range", "Damage", []);
+  //public chart = new BarChartData("Range", "Damage", []);
+
+  public longRange = new BarChartData("Long Range", "Damage", []);
+  public mediumRange = new BarChartData("Medium Range", "Damage", []);
+  public closeRange = new BarChartData("Close Range", "Damage", []);
+  public tableData: TableData[] = [];
   public gauge = new GaugeData([]);
   private calculator: Calculator;
 
@@ -78,23 +94,29 @@ export class ShipStatisticsComponent implements OnInit {
     this.updateStatistics();
   }
 
+  setChartStatistic(label: string, maxScale: number) {
+    this.longRange.updateStatistic(label, maxScale);
+    this.mediumRange.updateStatistic(label, maxScale);
+    this.closeRange.updateStatistic(label, maxScale);
+  }
+
   selectStat(stat: string) {
     this.selectedStat = stat;
     if (this.selectedStat === 'DMG') {
-      this.chart.updateStatistic('Damage', 10);
+      this.setChartStatistic('Damage', 10);
     }
     else if (this.selectedStat === 'ACC') {
-      this.chart.updateStatistic('Accuracies', 5);
+      this.setChartStatistic('Accuracies', 5);
     }
     else if (this.selectedStat === 'CRT') {
-      this.chart.updateStatistic('Criticals', 5);
+      this.setChartStatistic('Criticals', 5);
     }
 
     this.updateStatistics();
   }
 
   private updateStatistics() {
-    let fn = null;
+    let fn: (p: IAttackPool) => PoolStatistics = null;
     if (this.selectedStat === 'DMG')
       fn = (p: IAttackPool) => p.expectedDamage();
     else if (this.selectedStat === 'ACC')
@@ -103,10 +125,16 @@ export class ShipStatisticsComponent implements OnInit {
       fn = (p: IAttackPool) => p.expectedCriticals();
 
     let stats = [
-      { name: 'Close', stats: fn(this.calculator.closeRangePool) },
+      { name: 'Long', stats: fn(this.calculator.longRangePool) },
       { name: 'Medium', stats: fn(this.calculator.mediumRangePool) },
-      { name: 'Long', stats: fn(this.calculator.longRangePool) }
+      { name: 'Close', stats: fn(this.calculator.closeRangePool) }
     ];
+
+    this.tableData = [
+      { range: 'Long', pool: this.calculator.longRangePool },
+      { range: 'Medium', pool: this.calculator.mediumRangePool },
+      { range: 'Close', pool: this.calculator.closeRangePool }
+    ]
 
     this.gauge.data = stats.map(x => {
       return {
@@ -115,19 +143,19 @@ export class ShipStatisticsComponent implements OnInit {
       };
     })
 
-    this.chart.data = stats.map(x => {
-      let series = x.stats.distribution.map((val, idx) => {
+    let mapping = (p: PoolStatistics) => {
+      return p.distribution.map((val, idx) => {
         let name = "μ";
         if (idx === 0) name = 'μ - σ';
         else if (idx === 2) name = 'μ + σ';
 
         return { "name": name, "value": val };
       });
-      return {
-        "name": x.name,
-        "series": series
-      };
-    });
+    };
+   
+    this.longRange.data = mapping(stats[0].stats);
+    this.mediumRange.data = mapping(stats[1].stats);
+    this.closeRange.data = mapping(stats[2].stats);
   }
 
 

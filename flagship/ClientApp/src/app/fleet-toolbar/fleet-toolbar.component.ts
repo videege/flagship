@@ -27,10 +27,18 @@ export class FleetToolbarComponent implements OnInit {
       (t, s) => {
         this.showEditButtons = true;
       });
+    this.transitionService.onEnter({ entering: 'fleets.fleet.ship.statistics' },
+      (t, s) => {
+        this.showEditButtons = false;
+      });
+    this.transitionService.onExit({ exiting: 'fleets.fleet.ship.statistics' },
+      (t, s) => {
+        this.showEditButtons = true;
+      });
   }
 
   ngOnInit() {
-    if (this.stateService.current.name === 'fleets.fleet.ship') {
+    if (this.stateService.current.name!.includes('fleets.fleet.ship')) {
       this.showEditButtons = false;
     }
   }
