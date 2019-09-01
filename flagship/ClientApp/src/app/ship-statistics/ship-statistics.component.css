@@ -23,8 +23,15 @@
 }
 
 .stat-selector {
-    min-width: 200px;
+    margin-bottom: 16px;
 }
+
+th.header-grouping {
+    text-align: center;
+    font-weight: bold;
+    border-bottom-style: none;
+}
+
 /* 
 .stats-toolbar {
     position: sticky;

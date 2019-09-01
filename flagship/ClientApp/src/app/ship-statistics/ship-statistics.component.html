@@ -7,7 +7,7 @@
   </mat-select>
   <flagship-battery [armament]="armament"></flagship-battery>
   <span fxFlex></span>
-  
+
 </mat-toolbar>
 <mat-drawer-container class="stats-container">
   <mat-drawer mode="side" position="end" opened>
@@ -29,20 +29,22 @@
           <mat-card-subtitle>
             View expected damage, accuracies, and critical hits at all ranges.
           </mat-card-subtitle>
-          <mat-button-toggle-group value="DMG" fxLayout="row" class="stat-selector">
-              <mat-button-toggle fxFlex value="DMG" (change)="selectStat('DMG')" matTooltip="Damage">
-                <i class="ffi ffi-swa-hit"></i>
-              </mat-button-toggle>
-              <mat-button-toggle fxFlex value="ACC" (change)="selectStat('ACC')" matTooltip="Accuracies">
-                <i class="ffi ffi-swa-accuracy"></i>
-              </mat-button-toggle>
-              <mat-button-toggle fxFlex value="CRT" (change)="selectStat('CRT')" matTooltip="Criticals">
-                <i class="ffi ffi-swa-crit"></i>
-              </mat-button-toggle>
-            </mat-button-toggle-group>
+
         </mat-card-header>
         <mat-card-content>
           <p>Charts display the expected value at all ranges ± one standard deviation.</p>
+          <mat-button-toggle-group value="DMG" fxLayout="row" class="stat-selector">
+            <mat-button-toggle fxFlex value="DMG" (change)="selectStat('DMG')" matTooltip="Damage">
+              <i class="ffi ffi-swa-hit" style="font-size: 32px;"></i>
+            </mat-button-toggle>
+            <mat-button-toggle fxFlex value="ACC" (change)="selectStat('ACC')" matTooltip="Accuracies">
+              <i class="ffi ffi-swa-accuracy" style="font-size: 32px;"></i>
+            </mat-button-toggle>
+            <mat-button-toggle fxFlex value="CRT" (change)="selectStat('CRT')" matTooltip="Criticals">
+              <i class="ffi ffi-swa-crit" style="font-size: 32px;"></i>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+
           <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-between">
             <div fxFlex.gt-sm="33" class="chart-wrapper" style="min-height: 250px;">
               <div class="chart-wrapper">
@@ -93,37 +95,71 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>Statistics are expected values (means). Standard deviation is listed in parenthesis.</p>
+          <p>The table below shows μ (mean), σ (standard deviation), and CV (the coefficient of variation, defined as σ / μ).</p>
         </mat-card-content>
-          <table mat-table [dataSource]="tableData" style="width: 100%">
-            <ng-container matColumnDef="range">
-              <th mat-header-cell *matHeaderCellDef>Range</th>
-              <td mat-cell *matCellDef="let row"> {{row.range}} </td>
+        <table mat-table [dataSource]="tableData" style="width: 100%">
+          <ng-container matColumnDef="range">
+            <th mat-header-cell *matHeaderCellDef>Range</th>
+            <td mat-cell *matCellDef="let row"> {{row.range}} </td>
+          </ng-container>
+          <ng-container matColumnDef="dmg-mean">
+            <th mat-header-cell *matHeaderCellDef>μ</th>
+            <td mat-cell *matCellDef="let row">{{ row.damageMean }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dmg-dev">
+            <th mat-header-cell *matHeaderCellDef>σ</th>
+            <td mat-cell *matCellDef="let row">{{ row.damageDeviation | number }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dmg-cv">
+            <th mat-header-cell *matHeaderCellDef>CV</th>
+            <td mat-cell *matCellDef="let row">{{ row.damageCV | number:'1.0-1' }}%</td>
+          </ng-container>
+          <ng-container matColumnDef="acc-mean">
+            <th mat-header-cell *matHeaderCellDef>μ</th>
+            <td mat-cell *matCellDef="let row">{{ row.accuraciesMean }}</td>
+          </ng-container>
+          <ng-container matColumnDef="acc-dev">
+            <th mat-header-cell *matHeaderCellDef>σ</th>
+            <td mat-cell *matCellDef="let row">{{ row.accuraciesDeviation | number }}</td>
+          </ng-container>
+          <ng-container matColumnDef="acc-cv">
+            <th mat-header-cell *matHeaderCellDef>CV</th>
+            <td mat-cell *matCellDef="let row">{{ row.accuraciesCV | number:'1.0-1' }}%</td>
+          </ng-container>
+          <ng-container matColumnDef="crit-mean">
+            <th mat-header-cell *matHeaderCellDef>μ</th>
+            <td mat-cell *matCellDef="let row">{{ row.criticalsMean }}</td>
+          </ng-container>
+          <ng-container matColumnDef="crit-dev">
+            <th mat-header-cell *matHeaderCellDef>σ</th>
+            <td mat-cell *matCellDef="let row">{{ row.criticalsDeviation | number }}</td>
+          </ng-container>
+          <ng-container matColumnDef="crit-cv">
+            <th mat-header-cell *matHeaderCellDef>CV</th>
+            <td mat-cell *matCellDef="let row">{{ row.criticalsCV | number:'1.0-1' }}%</td>
+          </ng-container>
+          <ng-container matColumnDef="hr-skip">
+              <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" class="header-grouping"></th>
             </ng-container>
-            <ng-container matColumnDef="dmg">
-              <th mat-header-cell *matHeaderCellDef>Damage</th>
-              <td mat-cell *matCellDef="let row">
-                {{row.pool.expectedDamage().mean}}
-                ({{ row.pool.expectedDamage().deviation | number }})
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="acc">
-              <th mat-header-cell *matHeaderCellDef>Accuracies</th>
-              <td mat-cell *matCellDef="let row">
-                {{row.pool.expectedAccuracies().mean}}
-                ({{ row.pool.expectedAccuracies().deviation | number }})
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="crit">
-              <th mat-header-cell *matHeaderCellDef>Criticals</th>
-              <td mat-cell *matCellDef="let row">
-                {{row.pool.expectedCriticals().mean}}
-                ({{ row.pool.expectedCriticals().deviation | number }})
-              </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="['range', 'dmg', 'acc', 'crit']"></tr>
-            <tr mat-row *matRowDef="let tableData; columns: ['range', 'dmg', 'acc', 'crit']"></tr>
-          </table>
+          <ng-container matColumnDef="hr-damage">
+            <th mat-header-cell *matHeaderCellDef  [attr.colspan]="3" class="header-grouping">
+              Damage
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="hr-accuracies">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" class="header-grouping">
+              Accuracies
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="hr-criticals">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" class="header-grouping">
+              Criticals
+            </th>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['hr-skip','hr-damage','hr-accuracies','hr-criticals']"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let tableData; columns: displayedColumns"></tr>
+        </table>
       </mat-card>
     </div>
   </mat-drawer-content>

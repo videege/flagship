@@ -53,7 +53,15 @@ class BarChartData {
 
 interface TableData {
   range: string;
-  pool: IAttackPool;
+  damageMean: number;
+  damageDeviation: number;
+  damageCV: number;
+  accuraciesMean: number;
+  accuraciesDeviation: number;
+  accuraciesCV: number;
+  criticalsMean: number;
+  criticalsDeviation: number;
+  criticalsCV: number;
 }
 
 @Component({
@@ -68,8 +76,11 @@ export class ShipStatisticsComponent implements OnInit {
   public modifications: IDieModification[] = [];
   public armament: Armament;
   public selectedStat: string = "DMG";
-  
-  //public chart = new BarChartData("Range", "Damage", []);
+  public displayedColumns = [ 'range',
+    'dmg-mean', 'dmg-dev', 'dmg-cv',
+    'acc-mean', 'acc-dev', 'acc-cv',
+    'crit-mean', 'crit-dev', 'crit-cv'
+  ];
 
   public longRange = new BarChartData("Long Range", "Damage", []);
   public mediumRange = new BarChartData("Medium Range", "Damage", []);
@@ -115,6 +126,24 @@ export class ShipStatisticsComponent implements OnInit {
     this.updateStatistics();
   }
 
+  private createTableData(range: string, pool: IAttackPool): TableData{
+    const dmg = pool.expectedDamage();
+    const acc = pool.expectedAccuracies();
+    const crit = pool.expectedCriticals();
+    return {
+      range: range,
+      damageMean: dmg.mean,
+      damageDeviation: dmg.deviation,
+      damageCV: dmg.cv,
+      accuraciesMean: acc.mean,
+      accuraciesDeviation: acc.deviation,
+      accuraciesCV: acc.cv,
+      criticalsMean: crit.mean,
+      criticalsDeviation: crit.deviation,
+      criticalsCV: crit.cv
+    };
+  }
+
   private updateStatistics() {
     let fn: (p: IAttackPool) => PoolStatistics = null;
     if (this.selectedStat === 'DMG')
@@ -131,9 +160,9 @@ export class ShipStatisticsComponent implements OnInit {
     ];
 
     this.tableData = [
-      { range: 'Long', pool: this.calculator.longRangePool },
-      { range: 'Medium', pool: this.calculator.mediumRangePool },
-      { range: 'Close', pool: this.calculator.closeRangePool }
+      this.createTableData('Long', this.calculator.longRangePool),
+      this.createTableData('Medium', this.calculator.mediumRangePool),
+      this.createTableData('Close', this.calculator.closeRangePool)
     ]
 
     this.gauge.data = stats.map(x => {
