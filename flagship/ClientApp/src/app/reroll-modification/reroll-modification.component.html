@@ -1,3 +1,18 @@
-<mat-slide-toggle color="primary" [checked]="modification.enabled">
-  Slide me!
-</mat-slide-toggle>
+<div fxLayout="row">
+  <div fxFlex="15">
+    <div fxLayout="column">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+  </div>
+  <div fxFlex="85">
+    <div fxLayout="row">
+      <h3>{{ modification.name }}</h3>
+      <span fxFlex></span>
+      <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)">
+        Enabled
+      </mat-slide-toggle>
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>

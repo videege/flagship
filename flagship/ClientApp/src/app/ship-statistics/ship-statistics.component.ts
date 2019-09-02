@@ -85,6 +85,13 @@ export class ShipStatisticsComponent implements OnInit {
     this.selectArc(this.ship.frontArmament);
   }
 
+  modificationChanged(event) {
+    this.calculator = new Calculator(this.armament, this.modifications);
+    this.calculator.applyModifications();
+    this.updateStatistics();
+    console.log('applied');
+  }
+
   selectArc(armament: Armament) {
     this.armament = armament;
     this.calculator = new Calculator(this.armament, this.modifications);

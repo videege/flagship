@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RerollModification } from '../domain/statistics/rerolls/rerollModification';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'flagship-reroll-modification',
@@ -13,6 +14,11 @@ export class RerollModificationComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  enabledToggled(event: MatSlideToggleChange) {
+    this.modification.enabled = event.checked;
+    this.change.emit(this.modification);
   }
 
 }
