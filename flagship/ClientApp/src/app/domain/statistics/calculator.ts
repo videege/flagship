@@ -15,9 +15,9 @@ export class Calculator {
 
     applyModifications() {
         for (const modification of this.modifications) {
-            this.closeRangePool.modify(modification);
-            this.mediumRangePool.modify(modification);
-            this.longRangePool.modify(modification);
+            this.closeRangePool = this.closeRangePool.modify(modification);
+            this.mediumRangePool = this.mediumRangePool.modify(modification);
+            this.longRangePool = this.longRangePool.modify(modification);
         }
     }
 }

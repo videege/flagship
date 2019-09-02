@@ -8,15 +8,6 @@ import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
 import { IAttackPool, PoolStatistics, AttackPool } from '../domain/statistics/attackPool';
 
-class GaugeData {
-  public units = "% CV";
-  public bigSegments = 5;
-  public smallSegments = 1;
-  constructor(public data: any[]) {
-
-  }
-}
-
 class BarChartData {
   // colorScheme = {
   //   domain: [
@@ -28,9 +19,6 @@ class BarChartData {
   colorScheme = {
     domain: ['black', 'green', 'red']
   };
-  customColors = (fn, v) => {
-    return '#e30b0b';
-  }
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -86,7 +74,6 @@ export class ShipStatisticsComponent implements OnInit {
   public mediumRange = new BarChartData("Medium Range", "Damage", []);
   public closeRange = new BarChartData("Close Range", "Damage", []);
   public tableData: TableData[] = [];
-  public gauge = new GaugeData([]);
   private calculator: Calculator;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
@@ -164,13 +151,6 @@ export class ShipStatisticsComponent implements OnInit {
       this.createTableData('Medium', this.calculator.mediumRangePool),
       this.createTableData('Close', this.calculator.closeRangePool)
     ]
-
-    this.gauge.data = stats.map(x => {
-      return {
-        "name": x.name,
-        "value": x.stats.cv
-      };
-    })
 
     let mapping = (p: PoolStatistics) => {
       return p.distribution.map((val, idx) => {

@@ -24,7 +24,10 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-
+        <div *ngFor="let modification of modifications">
+          <p>{{ modification | json }}</p>
+          <flagship-reroll-modification [modification]="modification"></flagship-reroll-modification>
+        </div>
       </mat-card-content>
     </div>
   </mat-drawer>
@@ -118,7 +121,7 @@
           </ng-container>
           <ng-container matColumnDef="dmg-mean">
             <th mat-header-cell *matHeaderCellDef>μ</th>
-            <td mat-cell *matCellDef="let row">{{ row.damageMean }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.damageMean | number }}</td>
           </ng-container>
           <ng-container matColumnDef="dmg-dev">
             <th mat-header-cell *matHeaderCellDef>σ</th>
@@ -130,7 +133,7 @@
           </ng-container>
           <ng-container matColumnDef="acc-mean">
             <th mat-header-cell *matHeaderCellDef>μ</th>
-            <td mat-cell *matCellDef="let row">{{ row.accuraciesMean }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.accuraciesMean | number }}</td>
           </ng-container>
           <ng-container matColumnDef="acc-dev">
             <th mat-header-cell *matHeaderCellDef>σ</th>
@@ -142,7 +145,7 @@
           </ng-container>
           <ng-container matColumnDef="crit-mean">
             <th mat-header-cell *matHeaderCellDef>μ</th>
-            <td mat-cell *matCellDef="let row">{{ row.criticalsMean }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.criticalsMean | number }}</td>
           </ng-container>
           <ng-container matColumnDef="crit-dev">
             <th mat-header-cell *matHeaderCellDef>σ</th>

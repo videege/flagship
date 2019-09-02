@@ -18,7 +18,7 @@ export class LeadingShotsModification extends RerollModification implements IDie
     }
 
     canBeApplied(pool: AttackPool): boolean {
-        return pool.diceOfType(DieType.Black).length > 0;
+        return this.enabled && pool.diceOfType(DieType.Blue).length > 0;
     }
 
     apply(pool: AttackPool): IAttackPool {
@@ -36,7 +36,7 @@ export class LeadingShotsModification extends RerollModification implements IDie
         let newPool = pool.clone();
         newPool.dieRolls.splice(newPool.dieRolls.findIndex(x => x.type === DieType.Blue), 1);
         // Now that the blue die is removed, reroll the remaining dice
-        this.rerollDice(newPool.dieRolls);
+        newPool.dieRolls = this.rerollDice(newPool.dieRolls);
         let yesPool = new WeightedAttackPool(newPool, pEffect);
 
         let conditionalPool = new ConditionalAttackPool([noPool, yesPool]);

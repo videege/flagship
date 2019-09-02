@@ -3,19 +3,23 @@ import { RerollStrategy } from './rerollStrategy';
 
 export abstract class RerollModification {
 
+    public enabled = true;
     constructor(public strategy: RerollStrategy) {
 
     }
     
-    rerollDice(dieRolls: DieRoll[]): void {
+    rerollDice(dieRolls: DieRoll[]): DieRoll[] {
+        let newRolls = [];
         for (const die of dieRolls) {
             // Modify probability according to the strategy
-            this.adjustProbability(die);
-            die.validate();
+            let d = this.adjustProbability(die);
+            d.validate();
+            newRolls.push(d);
         }
+        return newRolls;
     }
 
-    adjustProbability(die: DieRoll) {
+    adjustProbability(die: DieRoll): DieRoll {
         let probability = 0;
         let strategy = this.strategy;
         if (strategy & RerollStrategy.Blanks) {
@@ -28,29 +32,32 @@ export abstract class RerollModification {
             probability += die.baseProbability.pHit;
         }
 
+        let d = die.clone();
         if (probability === 0)
-            return;
+            return d;
 
         if (strategy & RerollStrategy.Blanks) {
-            die.pBlank = die.pBlank * die.baseProbability.pBlank;
+            d.pBlank = die.pBlank * die.baseProbability.pBlank;
         } else {
-            die.pBlank = die.pBlank + (probability * die.baseProbability.pBlank)
+            d.pBlank = die.pBlank + (probability * die.baseProbability.pBlank)
         }
         if (strategy & RerollStrategy.Accuracies) {
-            die.pAccuracy = die.pAccuracy * die.baseProbability.pAccuracy;
+            d.pAccuracy = die.pAccuracy * die.baseProbability.pAccuracy;
         } else {
-            die.pAccuracy = die.pAccuracy + (probability * die.baseProbability.pAccuracy);
+            d.pAccuracy = die.pAccuracy + (probability * die.baseProbability.pAccuracy);
         }
 
         if (strategy & RerollStrategy.Hits) {
-            die.pHit = die.pHit * die.baseProbability.pHit
+            d.pHit = die.pHit * die.baseProbability.pHit
         } else {
-            die.pHit = die.pHit + (probability * die.baseProbability.pHit);
+            d.pHit = die.pHit + (probability * die.baseProbability.pHit);
         }
 
         // Other events not accounted for by reroll strategy (i.e., you wouldn't reroll these dice)
-        die.pCrit = die.pCrit + (probability * die.baseProbability.pCrit);
-        die.pDoubleHit = die.pDoubleHit + (probability * die.baseProbability.pDoubleHit);
-        die.pHitCrit = die.pHitCrit + (probability * die.baseProbability.pHitCrit);
+        d.pCrit = die.pCrit + (probability * die.baseProbability.pCrit);
+        d.pDoubleHit = die.pDoubleHit + (probability * die.baseProbability.pDoubleHit);
+        d.pHitCrit = die.pHitCrit + (probability * die.baseProbability.pHitCrit);
+
+        return d;
     }
 }

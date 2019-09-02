@@ -13,7 +13,7 @@ export class GenericRerollModification extends RerollModification implements IDi
     canBeApplied(pool: AttackPool): boolean {
         // In general these effects are assumed to be always able to be used
         // if they are included in the calculation.
-        return true;
+        return this.enabled;
     }
 
     apply(pool: AttackPool): IAttackPool {
