@@ -1,9 +1,9 @@
 <mat-toolbar class="stats-toolbar">
-  <mat-select (selectionChange)="selectArc(armament)" [(value)]="armament" style="width: 150px;">
-    <mat-option [value]="ship.frontArmament">Front Arc</mat-option>
-    <mat-option [value]="ship.leftArmament">Side Arc</mat-option>
-    <mat-option [value]="ship.leftAuxArmament" *ngIf="ship.leftAuxArmament">Auxiliary Arc</mat-option>
-    <mat-option [value]="ship.rearArmament">Rear Arc</mat-option>
+  <mat-select (selectionChange)="selectArc(selectedArc)" [(value)]="selectedArc" style="width: 150px;">
+    <mat-option [value]="arcs.Front">Front Arc</mat-option>
+    <mat-option [value]="arcs.Left">Side Arc</mat-option>
+    <mat-option [value]="arcs.LeftAux" *ngIf="ship.leftAuxArmament">Auxiliary Arc</mat-option>
+    <mat-option [value]="arcs.Rear">Rear Arc</mat-option>
   </mat-select>
   <flagship-battery [armament]="armament"></flagship-battery>
   <span fxFlex></span>
@@ -24,9 +24,30 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <div *ngFor="let modification of modifications">
-          <p>{{ modification | json }}</p>
-          <flagship-reroll-modification [modification]="modification" (change)="modificationChanged($event)"></flagship-reroll-modification>
+        <div *ngFor="let modification of modifications; first as isFirst; last as isLast;">
+          <div fxLayout="row">
+            <div fxFlex="15">
+              <div fxLayout="column">
+                <button mat-icon-button aria-label="Move Up" (click)="reorderModificationUp(modification)"
+                  [disabled]="isFirst">
+                  <mat-icon>keyboard_arrow_up</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Move Down" (click)="reorderModificationDown(modification)"
+                  [disabled]="isLast">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div fxFlex="85" fxLayout="column">
+              <flagship-reroll-modification *ngIf="modification.type === modTypes.Reroll"
+                [modification]="modification" (change)="modificationChanged($event)">
+              </flagship-reroll-modification>
+              <flagship-addition-modification *ngIf="modification.type === modTypes.Addition"
+                [modification]="modification" (change)="modificationChanged($event)">
+              </flagship-addition-modification>
+            </div>
+          </div>
+          <mat-divider *ngIf="!isLast"></mat-divider>
         </div>
       </mat-card-content>
     </div>

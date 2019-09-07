@@ -1,18 +1,13 @@
 <div fxLayout="row">
-  <div fxFlex="15">
-    <div fxLayout="column">
-      <mat-icon>keyboard_arrow_up</mat-icon>
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </div>
-  </div>
-  <div fxFlex="85">
-    <div fxLayout="row">
-      <h3>{{ modification.name }}</h3>
-      <span fxFlex></span>
-      <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)">
-        Enabled
-      </mat-slide-toggle>
-    </div>
-  </div>
+  <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+  <span fxFlex></span>
+  <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)">
+    Enabled
+  </mat-slide-toggle>
 </div>
-<mat-divider></mat-divider>
+<div fxLayout="row" fxLayoutGap="4px">
+  <span fxFlex style="line-height: 24px;">Reroll:&nbsp;</span>
+  <mat-checkbox fxFlex [(ngModel)]="blanks" (change)="strategyChanged()">Blanks</mat-checkbox>
+  <mat-checkbox fxFlex [(ngModel)]="accuracies" (change)="strategyChanged()">Accuracies</mat-checkbox>
+  <mat-checkbox fxFlex [(ngModel)]="hits" (change)="strategyChanged()">Hits</mat-checkbox>
+</div>

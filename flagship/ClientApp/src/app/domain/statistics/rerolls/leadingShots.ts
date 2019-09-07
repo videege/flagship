@@ -1,20 +1,20 @@
-import { IDieModification } from '../dieModification';
-import { AttackPool, IAttackPool, WeightedAttackPool, ConditionalAttackPool } from '../attackPool';
+import { IDieModification, ModificationType } from '../dieModification';
+import { AttackPool, IAttackPool, WeightedAttackPool, ConditionalAttackPool, AttackPoolResultType } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
 import { RerollModification } from './rerollModification';
 import { RerollStrategy } from "./rerollStrategy";
 
-export class LeadingShotsModification extends RerollModification implements IDieModification {
+export class LeadingShotsModification extends RerollModification {
     name: string = "Leading Shots";   
 
-    constructor(strategy: RerollStrategy) {
-        super(strategy);
+    constructor(strategy: RerollStrategy, public type: ModificationType = ModificationType.Reroll) {
+        super(strategy, type);
     }
     
     probabilityOfEffect(pool: AttackPool): number {
-        // Based on the reroll strategy, determine the 
-        // probability of using this effect.
-        return 0.6;
+        // probability of leading shots is P(more than two blank any die)
+        // could get more sophisticated but this is probably a good baseline
+        return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, 2);
     }
 
     canBeApplied(pool: AttackPool): boolean {
@@ -25,8 +25,6 @@ export class LeadingShotsModification extends RerollModification implements IDie
         // Leading shots is a conditional effect, so this method 
         // returns a conditional probability pool based on the 
         // branching probability of using the effect or not
-        if (!this.canBeApplied(pool))
-            return pool;
 
         let pEffect = this.probabilityOfEffect(pool);
         let pNoEffect = 1 - pEffect;

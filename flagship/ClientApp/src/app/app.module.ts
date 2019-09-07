@@ -59,6 +59,7 @@ import { ObjectiveSelectorComponent } from './objective-selector/objective-selec
 import { ObjectiveComponent } from './objective/objective.component';
 import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.component';
 import { RerollModificationComponent } from './reroll-modification/reroll-modification.component';
+import { AdditionModificationComponent } from './addition-modification/addition-modification.component';
 
 //trace.enable();
 
@@ -164,7 +165,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     ObjectiveSelectorComponent,
     ObjectiveComponent,
     ShipStatisticsComponent,
-    RerollModificationComponent
+    RerollModificationComponent,
+    AdditionModificationComponent
   ],
   imports: [
     BrowserModule,

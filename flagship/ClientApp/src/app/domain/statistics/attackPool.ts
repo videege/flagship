@@ -1,6 +1,9 @@
 import { DieRoll, DieType } from './dieRoll';
 import { Armament } from '../armament';
 import { IDieModification } from './dieModification';
+import { PoolStatistics } from './poolStatistics';
+import { FiringArc } from './firingArc';
+import { ResultCalculator } from './resultCalculator';
 
 export enum Range {
     Long = 1,
@@ -8,40 +11,11 @@ export enum Range {
     Close = 3
 }
 
-export class PoolStatistics {
-    public deviation: number;
-    // coefficient of variance
-    public cv: number;
-    public distribution: number[];
-
-
-    constructor(public mean: number, variance: number) {
-        this.deviation = Math.sqrt(variance);
-        this.cv = (this.deviation / this.mean) * 100;
-        this.distribution = [
-            //Math.min(0, this.mean - (2 * this.deviation)),
-            Math.max(0, this.mean - this.deviation),
-            this.mean,
-            this.mean + this.deviation,
-            //this.mean + (2 * this.deviation)
-        ];
-    }
-
-    applyProbability(p: number): PoolStatistics {
-        this.mean = this.mean * p;
-        this.deviation = this.deviation * p;
-        this.distribution = this.distribution.map(x => x * p);
-        return this;
-    }
-
-    sum(other: PoolStatistics): PoolStatistics {
-        this.mean = this.mean + other.mean;
-        this.deviation = this.deviation + other.deviation;
-        for (let i = 0; i < this.distribution.length; i++) {
-            this.distribution[i] = this.distribution[i] + other.distribution[i];
-        }
-        return this;
-    }
+export enum AttackPoolResultType {
+    Critical,
+    Accuracy,
+    Blank,
+    NonBlank
 }
 
 export interface IAttackPool {
@@ -49,6 +23,7 @@ export interface IAttackPool {
     expectedAccuracies(): PoolStatistics;
     expectedCriticals(): PoolStatistics;
 
+    probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number;
     modify(modification: IDieModification): IAttackPool;
 }
 
@@ -79,6 +54,11 @@ export class ConditionalAttackPool implements IAttackPool {
         return this.pools.map(x => x.expectedCriticals())
             .reduce((sum, current) => sum.sum(current));
     }
+
+    probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number {
+        return this.pools.map(x => x.probabilityOfResult(dieType, result, minSuccesses))
+            .reduce((sum, current) => sum + current);
+    }
 }
 
 export class WeightedAttackPool implements IAttackPool {
@@ -103,6 +83,10 @@ export class WeightedAttackPool implements IAttackPool {
         return this.pool.expectedCriticals().applyProbability(this.probability);
     }
 
+    probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number {
+        return this.pool.probabilityOfResult(dieType, result, minSuccesses) * this.probability;
+    }
+
     constructor(public pool: IAttackPool, public probability: number) {
 
     }
@@ -113,6 +97,9 @@ export class AttackPool implements IAttackPool {
     modify(modification: IDieModification): IAttackPool {
         // This pool is concrete, so apply the modifiation
         // and potentially replace this pool
+        if (!modification.canBeApplied(this))
+            return this;
+
         let pool = modification.apply(this);
         return pool;
     }
@@ -141,6 +128,27 @@ export class AttackPool implements IAttackPool {
         return new PoolStatistics(mean, variance);
     }
 
+    // the probability of obtaining at least K results
+    probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number {
+        let dice = this.diceOfType(dieType);
+
+        let probabilities: number[];
+        if (result == AttackPoolResultType.Accuracy) {
+            probabilities = dice.map(d => d.pAccuracy);
+        } else if (result == AttackPoolResultType.Critical) {
+            probabilities = dice.map(d => d.pHitCrit + d.pCrit);
+        } else if (result == AttackPoolResultType.Blank) {
+            probabilities = dice.map(d => d.pBlank);
+        } else if (result == AttackPoolResultType.NonBlank) {
+            probabilities = dice.map(d => 1 - d.pBlank);
+        } else {
+            return 0;
+        }
+
+        let resultCalc = new ResultCalculator();
+        return resultCalc.probabilityOfAtLeastNSuccesses(probabilities, minSuccesses);
+    }
+
     diceOfType(type: DieType): DieRoll[] {
         if (type === DieType.Any)
             return this.dieRolls;
@@ -148,7 +156,7 @@ export class AttackPool implements IAttackPool {
         return this.dieRolls.filter(r => r.type === type);
     }
 
-    constructor(public dieRolls: DieRoll[]) {
+    constructor(public dieRolls: DieRoll[], public firingArc: FiringArc) {
         if (!dieRolls) {
             this.dieRolls = [];
         }
@@ -156,10 +164,11 @@ export class AttackPool implements IAttackPool {
 
     clone(): AttackPool {
         let rolls = this.dieRolls.map(x => x.clone());
-        return new AttackPool(rolls);
+        return new AttackPool(rolls, this.firingArc);
     }
 
-    static FromNumberOfDice(redDice: number, blueDice: number, blackDice: number): AttackPool {
+    static FromNumberOfDice(redDice: number, blueDice: number, blackDice: number,
+        firingArc: FiringArc): AttackPool {
         let rolls = [];
         for (let i = 0; i < redDice; i++) {
             rolls.push(DieRoll.RedDieRoll());
@@ -170,7 +179,7 @@ export class AttackPool implements IAttackPool {
         for (let i = 0; i < blackDice; i++) {
             rolls.push(DieRoll.BlackDieRoll());
         }
-        return new AttackPool(rolls);
+        return new AttackPool(rolls, firingArc);
     }
 
 

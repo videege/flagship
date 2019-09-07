@@ -1,11 +1,20 @@
 import { DieRoll } from '../dieRoll';
 import { RerollStrategy } from './rerollStrategy';
+import { IDieModification, ModificationType } from '../dieModification';
+import { AttackPool, IAttackPool } from '../attackPool';
 
-export abstract class RerollModification {
+export abstract class RerollModification implements IDieModification {
+    abstract name: string;
+    abstract apply(pool: AttackPool): IAttackPool;
+    abstract canBeApplied(pool: AttackPool): boolean;
 
     public enabled = true;
-    constructor(public strategy: RerollStrategy) {
+    constructor(public strategy: RerollStrategy, public type: ModificationType = ModificationType.Reroll) {
 
+    }
+
+    private isRerollingResult(result: RerollStrategy) {
+        return (this.strategy & result) === result;
     }
     
     rerollDice(dieRolls: DieRoll[]): DieRoll[] {
@@ -21,14 +30,14 @@ export abstract class RerollModification {
 
     adjustProbability(die: DieRoll): DieRoll {
         let probability = 0;
-        let strategy = this.strategy;
-        if (strategy & RerollStrategy.Blanks) {
+
+        if (this.isRerollingResult(RerollStrategy.Blanks)) {
             probability += die.baseProbability.pBlank;
         }
-        if (strategy & RerollStrategy.Accuracies) {
+        if (this.isRerollingResult(RerollStrategy.Accuracies)) {
             probability += die.baseProbability.pAccuracy;
         }
-        if (strategy & RerollStrategy.Hits) {
+        if (this.isRerollingResult(RerollStrategy.Hits)) {
             probability += die.baseProbability.pHit;
         }
 
@@ -36,18 +45,18 @@ export abstract class RerollModification {
         if (probability === 0)
             return d;
 
-        if (strategy & RerollStrategy.Blanks) {
+        if (this.isRerollingResult(RerollStrategy.Blanks)) {
             d.pBlank = die.pBlank * die.baseProbability.pBlank;
         } else {
             d.pBlank = die.pBlank + (probability * die.baseProbability.pBlank)
         }
-        if (strategy & RerollStrategy.Accuracies) {
+        if (this.isRerollingResult(RerollStrategy.Accuracies)) {
             d.pAccuracy = die.pAccuracy * die.baseProbability.pAccuracy;
         } else {
             d.pAccuracy = die.pAccuracy + (probability * die.baseProbability.pAccuracy);
         }
 
-        if (strategy & RerollStrategy.Hits) {
+        if (this.isRerollingResult(RerollStrategy.Hits)) {
             d.pHit = die.pHit * die.baseProbability.pHit
         } else {
             d.pHit = die.pHit + (probability * die.baseProbability.pHit);

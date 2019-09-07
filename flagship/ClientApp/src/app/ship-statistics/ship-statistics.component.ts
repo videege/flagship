@@ -3,19 +3,21 @@ import { Ship } from '../domain/ship';
 import { MatDialog } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DieModificationFactory } from '../domain/statistics/factories/dieModificationFactory';
-import { IDieModification } from '../domain/statistics/dieModification';
+import { IDieModification, ModificationType } from '../domain/statistics/dieModification';
 import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
-import { IAttackPool, PoolStatistics, AttackPool } from '../domain/statistics/attackPool';
+import { IAttackPool, AttackPool } from '../domain/statistics/attackPool';
+import { PoolStatistics } from "../domain/statistics/poolStatistics";
+import { FiringArc } from '../domain/statistics/firingArc';
+import { AdditionModification } from '../domain/statistics/additions/additionModification';
+import { RerollModification } from '../domain/statistics/rerolls/rerollModification';
+
+export interface IModificationReorderEvent {
+  modification: IDieModification;
+  directionIsUp: boolean;
+}
 
 class BarChartData {
-  // colorScheme = {
-  //   domain: [
-  //     '#946988',
-  //     '#7819d1',
-  //     '#e30b0b',
-  //     '#AAAAAA']
-  // };
   colorScheme = {
     domain: ['black', 'green', 'red']
   };
@@ -29,8 +31,11 @@ class BarChartData {
   yScaleMin = 0;
   areaData = [];
   constructor(public xAxisLabel: string, public yAxisLabel: string,
+    colors: string[],
     public data: any) {
-
+      if (colors) {
+        this.colorScheme['domain'] = colors;
+      }
   }
 
   updateStatistic(yLabel: string, yMax: number) {
@@ -60,6 +65,10 @@ interface TableData {
 export class ShipStatisticsComponent implements OnInit {
   @Input() ship: Ship;
 
+
+  public arcs = FiringArc;
+  public modTypes = ModificationType;
+
   private modificationFactory: DieModificationFactory = new DieModificationFactory();
   public modifications: IDieModification[] = [];
   public armament: Armament;
@@ -70,11 +79,13 @@ export class ShipStatisticsComponent implements OnInit {
     'crit-mean', 'crit-dev', 'crit-cv'
   ];
 
-  public longRange = new BarChartData("Long Range", "Damage", []);
-  public mediumRange = new BarChartData("Medium Range", "Damage", []);
-  public closeRange = new BarChartData("Close Range", "Damage", []);
+  public longRange = new BarChartData("Long Range", "Damage", ['#ba0000', '#ff0000', '#ff3700'], []);
+  public mediumRange = new BarChartData("Medium Range", "Damage", ['#0000a6', '#0000ff', '#009dff'], []);
+  public closeRange = new BarChartData("Close Range", "Damage", ['#008a00', '#00c400', '#00ff00'], []);
   public tableData: TableData[] = [];
   private calculator: Calculator;
+
+  public selectedArc: FiringArc;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
 
@@ -82,19 +93,47 @@ export class ShipStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.modifications = this.modificationFactory.getModificationsForShip(this.ship);
-    this.selectArc(this.ship.frontArmament);
+    this.selectArc(FiringArc.Front);
   }
 
   modificationChanged(event) {
-    this.calculator = new Calculator(this.armament, this.modifications);
+    this.calculator = new Calculator(this.armament, this.modifications, this.selectedArc);
     this.calculator.applyModifications();
     this.updateStatistics();
     console.log('applied');
   }
 
-  selectArc(armament: Armament) {
-    this.armament = armament;
-    this.calculator = new Calculator(this.armament, this.modifications);
+  reorderModificationDown(modification: IDieModification) {
+    this.reorderModification(modification, 1);
+  }
+
+  reorderModificationUp(modification: IDieModification) {
+    this.reorderModification(modification, -1);
+  }
+
+  reorderModification(modification: IDieModification, direction: number) {
+    let from = this.modifications.indexOf(modification);
+    let to = from + direction;
+    this.modifications.splice(to, 0, this.modifications.splice(from, 1)[0]);
+    this.modificationChanged(null);
+  }
+
+  private setArmamentFromArc(arc: FiringArc) {
+    if (arc === FiringArc.Front) {
+      this.armament = this.ship.frontArmament;
+    } else if (arc === FiringArc.Left) {
+      this.armament = this.ship.leftArmament;
+    } else if (arc === FiringArc.LeftAux) {
+      this.armament = this.ship.leftAuxArmament;
+    } else if (arc === FiringArc.Rear) {
+      this.armament = this.ship.rearArmament;
+    }
+  }
+
+  selectArc(arc: FiringArc) {
+    this.selectedArc = arc;
+    this.setArmamentFromArc(arc);
+    this.calculator = new Calculator(this.armament, this.modifications, arc);
     this.calculator.applyModifications();
     this.updateStatistics();
   }
@@ -173,6 +212,5 @@ export class ShipStatisticsComponent implements OnInit {
     this.mediumRange.data = mapping(stats[1].stats);
     this.closeRange.data = mapping(stats[2].stats);
   }
-
 
 }

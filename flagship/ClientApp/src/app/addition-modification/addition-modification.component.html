@@ -1,0 +1,11 @@
+<div fxLayout="row">
+    <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+    <span fxFlex></span>
+    <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)">
+      Enabled
+    </mat-slide-toggle>
+  </div>
+  <div fxLayout="row" fxLayoutGap="4px">
+    <span fxFlex style="line-height: 24px;">Die Preference:&nbsp;</span>
+  </div>
+  

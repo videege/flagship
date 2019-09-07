@@ -1,13 +1,15 @@
-import { IDieModification } from '../dieModification';
+import { IDieModification, ModificationType } from '../dieModification';
 import { AttackPool, IAttackPool } from '../attackPool';
 import { DieType } from '../dieRoll';
 import { RerollStrategy } from './rerollStrategy';
 import { RerollModification } from './rerollModification';
 
 
-export class GenericRerollModification extends RerollModification implements IDieModification {
-    constructor(strategy: RerollStrategy, public name: string, private numberOfDice: number, private dieType: DieType) {
-        super(strategy);
+export class GenericRerollModification extends RerollModification {
+
+    constructor(strategy: RerollStrategy, public name: string, private numberOfDice: number, private dieType: DieType,
+        public type: ModificationType = ModificationType.Reroll) {
+        super(strategy, type);
     }
 
     canBeApplied(pool: AttackPool): boolean {
