@@ -14,12 +14,13 @@ export interface IDieRoll {
     pAccuracy: number;
     pBlank: number;
     type: DieType;
+    modifications: number;
 }
 
 export class DieRoll implements IDieRoll {
 
     public baseProbability: IDieRoll;
-
+    public modifications = 0;
     constructor(public type: DieType, public pHit: number,
         public pDoubleHit: number, public pHitCrit: number,
         public pCrit: number, public pAccuracy: number,
@@ -31,7 +32,8 @@ export class DieRoll implements IDieRoll {
             pHitCrit: this.pHitCrit,
             pCrit: this.pCrit,
             pAccuracy: this.pAccuracy,
-            pBlank: this.pBlank
+            pBlank: this.pBlank,
+            modifications: 0
         };
     }
 
@@ -46,6 +48,7 @@ export class DieRoll implements IDieRoll {
         roll.pHitCrit = this.pHitCrit;
         roll.pAccuracy = this.pAccuracy;
         roll.pBlank = this.pBlank;
+        roll.modifications = this.modifications;
         return roll;
     }
 
@@ -56,6 +59,10 @@ export class DieRoll implements IDieRoll {
         if (totalProbability !== 1) {
             console.log(`Die validation error! ${this.type} die got P = ${totalProbability}`);
         }
+    }
+
+    recordModification() {
+        this.modifications += 1;
     }
 
     expectedDamage(): number {

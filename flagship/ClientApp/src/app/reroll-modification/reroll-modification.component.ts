@@ -16,12 +16,14 @@ export class RerollModificationComponent implements OnInit {
   public blanks: boolean;
   public accuracies: boolean;
   public hits: boolean;
+  public blackHits: boolean;
   constructor() { }
 
   ngOnInit() {
     this.blanks = (this.modification.strategy & RerollStrategy.Blanks) === RerollStrategy.Blanks;
     this.accuracies = (this.modification.strategy & RerollStrategy.Accuracies) === RerollStrategy.Accuracies;
     this.hits = (this.modification.strategy & RerollStrategy.Hits) === RerollStrategy.Hits;
+    this.blackHits = (this.modification.strategy & RerollStrategy.BlackHits) === RerollStrategy.BlackHits;
   }
 
   enabledToggled(event: MatSlideToggleChange) {
@@ -32,7 +34,8 @@ export class RerollModificationComponent implements OnInit {
   strategyChanged() {
     this.modification.strategy = (this.blanks ? RerollStrategy.Blanks : 0) |
       (this.accuracies ? RerollStrategy.Accuracies : 0) |
-      (this.hits ? RerollStrategy.Hits : 0);
+      (this.hits ? RerollStrategy.Hits : 0) |
+      (this.blackHits ? RerollStrategy.BlackHits : 0);
     this.change.emit(this.modification);
   }
 }

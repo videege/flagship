@@ -3,7 +3,7 @@ import { Armament } from '../armament';
 import { IDieModification } from './dieModification';
 import { PoolStatistics } from './poolStatistics';
 import { FiringArc } from './firingArc';
-import { ResultCalculator } from './resultCalculator';
+import { PoissonBinomialCalculator } from './poissonBinomialCalculator';
 
 export enum Range {
     Long = 1,
@@ -25,11 +25,16 @@ export interface IAttackPool {
 
     probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number;
     modify(modification: IDieModification): IAttackPool;
+    poolSize(): number;
 }
 
 export class ConditionalAttackPool implements IAttackPool {
     constructor(public pools: IAttackPool[]) {
 
+    }
+
+    poolSize(): number {
+        return Math.max(...this.pools.map(d => d.poolSize()));
     }
 
     modify(modification: IDieModification): IAttackPool {
@@ -62,6 +67,9 @@ export class ConditionalAttackPool implements IAttackPool {
 }
 
 export class WeightedAttackPool implements IAttackPool {
+    poolSize(): number {
+        return this.pool.poolSize();
+    }
 
     modify(modification: IDieModification): IAttackPool {
         //This weighted pool is not concrete, so just pass the 
@@ -94,6 +102,10 @@ export class WeightedAttackPool implements IAttackPool {
 
 export class AttackPool implements IAttackPool {
 
+    poolSize(): number {
+        return this.dieRolls.length;
+    }
+    
     modify(modification: IDieModification): IAttackPool {
         // This pool is concrete, so apply the modifiation
         // and potentially replace this pool
@@ -145,7 +157,7 @@ export class AttackPool implements IAttackPool {
             return 0;
         }
 
-        let resultCalc = new ResultCalculator();
+        let resultCalc = new PoissonBinomialCalculator();
         return resultCalc.probabilityOfAtLeastNSuccesses(probabilities, minSuccesses);
     }
 

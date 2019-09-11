@@ -7,8 +7,8 @@ import { RerollStrategy } from "./rerollStrategy";
 export class LeadingShotsModification extends RerollModification {
     name: string = "Leading Shots";   
 
-    constructor(strategy: RerollStrategy, public type: ModificationType = ModificationType.Reroll) {
-        super(strategy, type);
+    constructor(strategy: RerollStrategy, public order: number, public type: ModificationType = ModificationType.Reroll) {
+        super(strategy, order, type);
     }
     
     probabilityOfEffect(pool: AttackPool): number {
@@ -19,6 +19,27 @@ export class LeadingShotsModification extends RerollModification {
 
     canBeApplied(pool: AttackPool): boolean {
         return this.enabled && pool.diceOfType(DieType.Blue).length > 0;
+    }
+
+    getBlueDieToBeRemoved(pool: AttackPool): DieRoll {
+        // In general, we want to remove the least modified blue die
+        // that has the set of probabilities closest to the base blue probabilities
+        let blues = pool.diceOfType(DieType.Blue);
+        let minModified = Math.min(...blues.map(x => x.modifications));
+        let minModifiedBlues = blues.filter(d => d.modifications === minModified);
+
+        let candidate = minModifiedBlues[0];
+        let candidateScore = null;
+        for (const die of minModifiedBlues) {
+            let probabilityDifference = Math.abs(die.pAccuracy - die.baseProbability.pAccuracy) +
+                Math.abs(die.pHit - die.baseProbability.pHit) + 
+                Math.abs(die.pCrit - die.baseProbability.pCrit);
+            if (candidateScore == null || probabilityDifference < candidateScore) {
+                candidate = die;
+                candidateScore = probabilityDifference;
+            }
+        }
+        return candidate;
     }
 
     apply(pool: AttackPool): IAttackPool {
@@ -32,7 +53,8 @@ export class LeadingShotsModification extends RerollModification {
         let noPool = new WeightedAttackPool(pool.clone(), pNoEffect);
         
         let newPool = pool.clone();
-        newPool.dieRolls.splice(newPool.dieRolls.findIndex(x => x.type === DieType.Blue), 1);
+        let dieToBeRemoved = this.getBlueDieToBeRemoved(newPool);
+        newPool.dieRolls.splice(newPool.dieRolls.indexOf(dieToBeRemoved), 1);
         // Now that the blue die is removed, reroll the remaining dice
         newPool.dieRolls = this.rerollDice(newPool.dieRolls);
         let yesPool = new WeightedAttackPool(newPool, pEffect);

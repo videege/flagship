@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>show_chart</mat-icon>
+    </div>
+    <mat-card-title>
+      Probabilty Calculator
+    </mat-card-title>
+    <mat-card-subtitle>
+      Calculate the chance of obtaining a desired result.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Select the type of result and, optionally, a die type below to view the probability
+      of obtaining the desired result.  Each data point in the graph reflects the probability
+      of obtaining <i>at least</i> (not exactly) that many results.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
+      <mat-form-field fxFlex>
+        <mat-label>Die Type</mat-label>
+        <mat-select [(value)]="dieType" (selectionChange)="calculate()">
+          <mat-option [value]="dieTypes.Any">Any</mat-option>
+          <mat-option [value]="dieTypes.Black">Black</mat-option>
+          <mat-option [value]="dieTypes.Blue">Blue</mat-option>
+          <mat-option [value]="dieTypes.Red">Red</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>Result</mat-label>
+        <mat-select [(value)]="result" (selectionChange)="calculate()">
+            <mat-option [value]="resultTypes.Critical">Critical</mat-option>
+            <mat-option [value]="resultTypes.Accuracy">Accuracy</mat-option>
+            <!-- <mat-option [value]="resultTypes.NonBlank">Non-Blank</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="chart-wrapper" style="min-height: 250px;">
+        <ngx-charts-line-chart [scheme]="chart.colorScheme" [results]="chart.data"
+        [gradient]="chart.gradient" [xAxis]="chart.showXAxis" [yAxis]="chart.showYAxis"
+        [legend]="chart.showLegend" [showXAxisLabel]="chart.showXAxisLabel"
+        [showYAxisLabel]="chart.showYAxisLabel" [xAxisLabel]="chart.xAxisLabel"
+        [yAxisLabel]="chart.yAxisLabel" [yScaleMax]="chart.yScaleMax">
+        </ngx-charts-line-chart>
+    </div>
+
+  </mat-card-content>
+</mat-card>

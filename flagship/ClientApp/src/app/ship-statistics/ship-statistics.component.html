@@ -1,17 +1,6 @@
-<mat-toolbar class="stats-toolbar">
-  <mat-select (selectionChange)="selectArc(selectedArc)" [(value)]="selectedArc" style="width: 150px;">
-    <mat-option [value]="arcs.Front">Front Arc</mat-option>
-    <mat-option [value]="arcs.Left">Side Arc</mat-option>
-    <mat-option [value]="arcs.LeftAux" *ngIf="ship.leftAuxArmament">Auxiliary Arc</mat-option>
-    <mat-option [value]="arcs.Rear">Rear Arc</mat-option>
-  </mat-select>
-  <flagship-battery [armament]="armament"></flagship-battery>
-  <span fxFlex></span>
-  <button matButton>Show Attack Effects</button>
-</mat-toolbar>
-<mat-drawer-container class="stats-container">
-  <mat-drawer mode="side" position="end" opened>
-    <div fxLayout="column" style="margin-top: 8px;" class="content mat-typography stats-sidenav">
+<mat-sidenav-container class="stats-container">
+  <mat-sidenav [mode]="sidenavMode" position="end" [(opened)]="showingEffects" fixedInViewport="true">
+    <div fxLayout="column" class="content mat-typography stats-sidenav">
       <mat-card-header>
         <div mat-card-avatar>
           <mat-icon>casino</mat-icon>
@@ -24,12 +13,12 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <div *ngFor="let modification of modifications; first as isFirst; last as isLast;">
+        <div *ngFor="let modification of modifications; first as isFirst; last as isLast; index as idx;">
           <div fxLayout="row">
             <div fxFlex="15">
-              <div fxLayout="column">
+              <div fxLayout="column" *ngIf="modification.orderable">
                 <button mat-icon-button aria-label="Move Up" (click)="reorderModificationUp(modification)"
-                  [disabled]="isFirst">
+                  [disabled]="isFirst || (idx > 0 && !modifications[idx-1].orderable)">
                   <mat-icon>keyboard_arrow_up</mat-icon>
                 </button>
                 <button mat-icon-button aria-label="Move Down" (click)="reorderModificationDown(modification)"
@@ -39,8 +28,8 @@
               </div>
             </div>
             <div fxFlex="85" fxLayout="column">
-              <flagship-reroll-modification *ngIf="modification.type === modTypes.Reroll"
-                [modification]="modification" (change)="modificationChanged($event)">
+              <flagship-reroll-modification *ngIf="modification.type === modTypes.Reroll" [modification]="modification"
+                (change)="modificationChanged($event)">
               </flagship-reroll-modification>
               <flagship-addition-modification *ngIf="modification.type === modTypes.Addition"
                 [modification]="modification" (change)="modificationChanged($event)">
@@ -51,8 +40,25 @@
         </div>
       </mat-card-content>
     </div>
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="stats-toolbar">
+      <mat-select (selectionChange)="selectArc(selectedArc)" [(value)]="selectedArc" 
+        ngStyle.gt-xs="width: 150px;" style="width: 100px;">
+        <mat-option [value]="arcs.Front">Front Arc</mat-option>
+        <mat-option [value]="arcs.Left">Side Arc</mat-option>
+        <mat-option [value]="arcs.LeftAux" *ngIf="ship.leftAuxArmament">Auxiliary Arc</mat-option>
+        <mat-option [value]="arcs.Rear">Rear Arc</mat-option>
+      </mat-select>
+      <flagship-battery [armament]="armament"></flagship-battery>
+      <span fxFlex></span>
+      <button mat-button (click)="toggleAttackEffects()" *ngIf="sidenavMode === 'side'">
+        {{ showingEffects ? "Hide" : "Show"}} Effects
+      </button>
+      <button mat-icon-button (click)="toggleAttackEffects()" *ngIf="sidenavMode === 'over'">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
     <div class="content mat-typography" fxLayout="column" fxLayoutGap="16px">
 
       <mat-card>
@@ -199,6 +205,11 @@
           <tr mat-row *matRowDef="let tableData; columns: displayedColumns"></tr>
         </table>
       </mat-card>
+      <flagship-fishing-calculator [longRange]="this.calculator.longRangePool"
+        [mediumRange]="this.calculator.mediumRangePool" [closeRange]="this.calculator.closeRangePool">
+      </flagship-fishing-calculator>
+      <flagship-methodology [modifications]="this.modifications">
+      </flagship-methodology>
     </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

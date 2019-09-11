@@ -1,21 +1,7 @@
-.chart-wrapper {
-    display: grid;
-    overflow: hidden;
-    max-width: 100%;
-    width: 100%;
-    min-height: 100px;
-}
-
-.chart-wrapper > h3 {
-    text-align: center;
-}
-
-.chart-wrapper > .stat-selector {
-    margin-bottom: 8px;
-}
 
 .stats-sidenav {
     min-width: 300px;
+    margin-top: 64px;
 }
 
 .stats-container {

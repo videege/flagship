@@ -11,4 +11,6 @@ export interface IDieModification {
     apply(pool: AttackPool): IAttackPool;
     canBeApplied(pool: AttackPool): boolean;
     enabled: boolean;
+    orderable: boolean;
+    order: number;
 }

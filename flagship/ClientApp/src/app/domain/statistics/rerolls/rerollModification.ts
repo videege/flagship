@@ -9,7 +9,8 @@ export abstract class RerollModification implements IDieModification {
     abstract canBeApplied(pool: AttackPool): boolean;
 
     public enabled = true;
-    constructor(public strategy: RerollStrategy, public type: ModificationType = ModificationType.Reroll) {
+    public orderable = true;
+    constructor(public strategy: RerollStrategy, public order: number, public type: ModificationType = ModificationType.Reroll) {
 
     }
 
@@ -22,6 +23,7 @@ export abstract class RerollModification implements IDieModification {
         for (const die of dieRolls) {
             // Modify probability according to the strategy
             let d = this.adjustProbability(die);
+            d.recordModification();
             d.validate();
             newRolls.push(d);
         }
@@ -31,13 +33,20 @@ export abstract class RerollModification implements IDieModification {
     adjustProbability(die: DieRoll): DieRoll {
         let probability = 0;
 
-        if (this.isRerollingResult(RerollStrategy.Blanks)) {
+        let rerolling = {
+            blanks: this.isRerollingResult(RerollStrategy.Blanks),
+            accuracies: this.isRerollingResult(RerollStrategy.Accuracies),
+            hits: this.isRerollingResult(RerollStrategy.Hits) || 
+                (this.isRerollingResult(RerollStrategy.BlackHits) && die.pHitCrit > 0)
+        };
+        
+        if (rerolling.blanks) {
             probability += die.baseProbability.pBlank;
         }
-        if (this.isRerollingResult(RerollStrategy.Accuracies)) {
+        if (rerolling.accuracies) {
             probability += die.baseProbability.pAccuracy;
         }
-        if (this.isRerollingResult(RerollStrategy.Hits)) {
+        if (rerolling.hits) {
             probability += die.baseProbability.pHit;
         }
 
@@ -45,18 +54,18 @@ export abstract class RerollModification implements IDieModification {
         if (probability === 0)
             return d;
 
-        if (this.isRerollingResult(RerollStrategy.Blanks)) {
+        if (rerolling.blanks) {
             d.pBlank = die.pBlank * die.baseProbability.pBlank;
         } else {
             d.pBlank = die.pBlank + (probability * die.baseProbability.pBlank)
         }
-        if (this.isRerollingResult(RerollStrategy.Accuracies)) {
+        if (rerolling.accuracies) {
             d.pAccuracy = die.pAccuracy * die.baseProbability.pAccuracy;
         } else {
             d.pAccuracy = die.pAccuracy + (probability * die.baseProbability.pAccuracy);
         }
 
-        if (this.isRerollingResult(RerollStrategy.Hits)) {
+        if (rerolling.hits) {
             d.pHit = die.pHit * die.baseProbability.pHit
         } else {
             d.pHit = die.pHit + (probability * die.baseProbability.pHit);

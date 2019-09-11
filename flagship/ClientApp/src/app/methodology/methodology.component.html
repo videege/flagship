@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>table</mat-icon>
+    </div>
+    <mat-card-title>
+      Methodology
+    </mat-card-title>
+    <mat-card-subtitle>
+      Explanation of how results are achieved.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      In general, all statistics are derived by modeling the probabilities of each die in the
+      attack pool, applying enabled attack effects (in order), and then using the final probabilities
+      of each die in the pool to calculate statistics like mean, standard deviation, the coefficient of
+      variance, and the probability of obtaining at least X results (for example, at least one critical).
+      Flagship uses a branching attack pool model to simulate the probability of conditional effects. For example,
+      if the probability of using a reroll effect is 60%, the model will split into two probability pools - one
+      with the reroll applied (at P = 60%) and one unchanged pool (at P = 40%). This means that applying more
+      than one conditional effect creates a tree of probabilities and that the order of effects can be significant.
+    </p>
+    <p>
+      Flagship applies a default effect ordering that makes sense for most scenarios:
+    </p>
+    <ol>
+      <li>Armament Changes (for example, Spinal Armament)</li>
+      <li>Unconditional Dice Additions (for example, External Racks)</li>
+      <li>Dice Replacement Effects (for example, Commander Sato)</li>
+      <li>Conditional Dice Additions (for example, a Concentrate Fire Dial)</li>
+      <li>Unconditional<sup>*</sup> Rerolls (for example, Darth Vader)</li>
+      <li>Conditional Rerolls (for example, Leading Shots)</li>
+      <li>Die Modifications (for example, H9 Turbolasers)</li>
+    </ol>
+    <p>You are free (with the exception of armament changing effects) to re-order and enable/disable the effects.</p>
+    <p class="text-muted footnote"><sup>*</sup>Unconditional from the perspective of affecting the attack pool in a
+      negative way. For example,
+      the cost of Darth Vader spending a defense token for a reroll is not modeled as part of these calculations.</p>
+    <div *ngIf="hasAdditionalNotes()">
+      <h3>Specific Effect Methodologies</h3>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            This is the expansion 1 title
+          </mat-expansion-panel-header>
+          This the expansion 1 content
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            This is the expansion 2 title
+          </mat-expansion-panel-header>
+          content
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+  </mat-card-content>
+</mat-card>

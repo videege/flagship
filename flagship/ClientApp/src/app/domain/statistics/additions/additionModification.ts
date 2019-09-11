@@ -30,8 +30,11 @@ export enum AdditionRestriction {
 export class AdditionModification implements IDieModification {
     public enabled = true;
 
-    private defaultPreferences: DieType[] = [DieType.Black, DieType.Blue, DieType.Black];
-    constructor(public name: string, public dieCount: number, public restriction: AdditionRestriction,
+    private defaultPreferences: DieType[] = [DieType.Black, DieType.Blue, DieType.Red];
+    constructor(public name: string, public dieCount: number, 
+        public orderable: boolean,
+        public order: number,
+        public restriction: AdditionRestriction,
         public firingArcRestriction: FiringArc = null,
         public preferredTypes: DieType[] = null,
         public type: ModificationType = ModificationType.Addition) {

@@ -1,0 +1,8 @@
+.footnote {
+    font-style: italic;
+    font-size: 10px;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+    box-shadow: none;
+}

@@ -5,9 +5,9 @@
     Enabled
   </mat-slide-toggle>
 </div>
-<div fxLayout="row" fxLayoutGap="4px">
-  <span fxFlex style="line-height: 24px;">Reroll:&nbsp;</span>
-  <mat-checkbox fxFlex [(ngModel)]="blanks" (change)="strategyChanged()">Blanks</mat-checkbox>
-  <mat-checkbox fxFlex [(ngModel)]="accuracies" (change)="strategyChanged()">Accuracies</mat-checkbox>
-  <mat-checkbox fxFlex [(ngModel)]="hits" (change)="strategyChanged()">Hits</mat-checkbox>
+<h5 class="no-margin text-muted">Reroll Strategy</h5>
+<div fxLayout="row" fxLayoutGap="8px">
+  <mat-checkbox  [(ngModel)]="accuracies" (change)="strategyChanged()">Accuracies</mat-checkbox>
+  <mat-checkbox  [(ngModel)]="hits" (change)="strategyChanged()">Hits</mat-checkbox>
+  <mat-checkbox  [(ngModel)]="blackHits" (change)="strategyChanged()">Black Hits</mat-checkbox>
 </div>

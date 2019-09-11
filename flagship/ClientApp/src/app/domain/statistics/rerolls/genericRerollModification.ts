@@ -7,9 +7,10 @@ import { RerollModification } from './rerollModification';
 
 export class GenericRerollModification extends RerollModification {
 
-    constructor(strategy: RerollStrategy, public name: string, private numberOfDice: number, private dieType: DieType,
+    constructor(strategy: RerollStrategy, public name: string, public order: number,
+        private numberOfDice: number, private dieType: DieType,
         public type: ModificationType = ModificationType.Reroll) {
-        super(strategy, type);
+        super(strategy, order, type);
     }
 
     canBeApplied(pool: AttackPool): boolean {

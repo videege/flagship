@@ -1,16 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Ship } from '../domain/ship';
 import { MatDialog } from '@angular/material';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DieModificationFactory } from '../domain/statistics/factories/dieModificationFactory';
 import { IDieModification, ModificationType } from '../domain/statistics/dieModification';
 import { Armament } from '../domain/armament';
 import { Calculator } from '../domain/statistics/calculator';
-import { IAttackPool, AttackPool } from '../domain/statistics/attackPool';
+import { IAttackPool } from '../domain/statistics/attackPool';
 import { PoolStatistics } from "../domain/statistics/poolStatistics";
 import { FiringArc } from '../domain/statistics/firingArc';
-import { AdditionModification } from '../domain/statistics/additions/additionModification';
-import { RerollModification } from '../domain/statistics/rerolls/rerollModification';
+
 
 export interface IModificationReorderEvent {
   modification: IDieModification;
@@ -65,7 +64,8 @@ interface TableData {
 export class ShipStatisticsComponent implements OnInit {
   @Input() ship: Ship;
 
-
+  public showingEffects = true;
+  public sidenavMode = 'side';
   public arcs = FiringArc;
   public modTypes = ModificationType;
 
@@ -88,10 +88,29 @@ export class ShipStatisticsComponent implements OnInit {
   public selectedArc: FiringArc;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]).subscribe(result => {
+      let wasOver = this.sidenavMode == 'over';
+      this.sidenavMode = result.matches ? 'over': 'side';
+      if (this.sidenavMode == 'side' && wasOver) {
+        this.showingEffects = true;
+      } else if (this.sidenavMode == 'over' && !wasOver) {
+        this.showingEffects = false;
+      }
+    });
+  }
 
+  toggleAttackEffects() {
+    this.showingEffects = !this.showingEffects;
   }
 
   ngOnInit() {
+    this.showingEffects = !this.breakpointObserver.isMatched([
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]);
     this.modifications = this.modificationFactory.getModificationsForShip(this.ship);
     this.selectArc(FiringArc.Front);
   }
@@ -108,6 +127,9 @@ export class ShipStatisticsComponent implements OnInit {
   }
 
   reorderModificationUp(modification: IDieModification) {
+    // let idx = this.modifications.indexOf(modification);
+    // if (idx > 0 && !this.modifications[idx-1].orderable)
+    //   return;
     this.reorderModification(modification, -1);
   }
 

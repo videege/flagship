@@ -31,6 +31,10 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
     cursor: pointer;
 }
 
+.no-margin {
+    margin: 0 !important;
+}
+
 .text-muted {
     color: hsla(0, 0%, 47%, 0.75)
 }
@@ -140,4 +144,32 @@ i.weaponsteam:before {
 }
 i.boardingteam:before {
     background: url('/assets/img/boardingteam.png');
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.black {
+    color: black;
+}
+
+.chart-wrapper {
+    display: grid;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100px;
+}
+
+.chart-wrapper > h3 {
+    text-align: center;
+}
+
+.chart-wrapper > .stat-selector {
+    margin-bottom: 8px;
 }

@@ -60,6 +60,8 @@ import { ObjectiveComponent } from './objective/objective.component';
 import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.component';
 import { RerollModificationComponent } from './reroll-modification/reroll-modification.component';
 import { AdditionModificationComponent } from './addition-modification/addition-modification.component';
+import { FishingCalculatorComponent } from './fishing-calculator/fishing-calculator.component';
+import { MethodologyComponent } from './methodology/methodology.component';
 
 //trace.enable();
 
@@ -166,7 +168,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     ObjectiveComponent,
     ShipStatisticsComponent,
     RerollModificationComponent,
-    AdditionModificationComponent
+    AdditionModificationComponent,
+    FishingCalculatorComponent,
+    MethodologyComponent
   ],
   imports: [
     BrowserModule,

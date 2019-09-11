@@ -21,6 +21,7 @@ export class PoolStatistics {
         this.distribution = this.distribution.map(x => x * p);
         return this;
     }
+    
     sum(other: PoolStatistics): PoolStatistics {
         this.mean = this.mean + other.mean;
         this.deviation = this.deviation + other.deviation;
