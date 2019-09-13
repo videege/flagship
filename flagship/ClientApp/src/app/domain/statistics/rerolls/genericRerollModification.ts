@@ -19,6 +19,11 @@ export class GenericRerollModification extends RerollModification {
         return this.enabled;
     }
 
+
+    probabilityOfEffect(pool: IAttackPool): number {
+        return 1; // reroll assumed to be without cost so 100%
+    } 
+
     apply(pool: AttackPool): IAttackPool {
         // Determine the subset of dice we can reroll as part of this effect
         let rerollableRolls = this.dieType === DieType.Any 

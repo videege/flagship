@@ -12,9 +12,16 @@ export class MethodologyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  hasEffect(name: string): boolean {
+    return this.modifications.find(m => m.name === name) != null;
   }
 
   hasAdditionalNotes(): boolean {
-    return true; 
+    return this.modifications.filter(m => {
+      return m.name === "Leading Shots";
+    }).length > 0; 
   }
 }

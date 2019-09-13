@@ -1,12 +1,13 @@
 import { DieRoll } from '../dieRoll';
 import { RerollStrategy } from './rerollStrategy';
-import { IDieModification, ModificationType } from '../dieModification';
+import { IDieModification, ModificationType, ICalculatedProbabilities } from '../dieModification';
 import { AttackPool, IAttackPool } from '../attackPool';
 
 export abstract class RerollModification implements IDieModification {
     abstract name: string;
     abstract apply(pool: AttackPool): IAttackPool;
     abstract canBeApplied(pool: AttackPool): boolean;
+    abstract probabilityOfEffect(pool: IAttackPool): number;
 
     public enabled = true;
     public orderable = true;
@@ -28,6 +29,11 @@ export abstract class RerollModification implements IDieModification {
             newRolls.push(d);
         }
         return newRolls;
+    }
+
+    public calculatedProbabilities: ICalculatedProbabilities;
+    setCalculatedProbabilities(probabilities: ICalculatedProbabilities) {
+        this.calculatedProbabilities = probabilities;
     }
 
     adjustProbability(die: DieRoll): DieRoll {

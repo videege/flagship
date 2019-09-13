@@ -1,4 +1,4 @@
-import { IDieModification, ModificationType } from '../dieModification';
+import { IDieModification, ModificationType, ICalculatedProbabilities } from '../dieModification';
 import { AttachSession } from 'protractor/built/driverProviders';
 import { AttackPool, IAttackPool } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
@@ -41,6 +41,15 @@ export class AdditionModification implements IDieModification {
         if (!this.preferredTypes || !this.preferredTypes.length) {
             this.preferredTypes = this.defaultPreferences;
         }
+    }
+
+    public calculatedProbabilities: ICalculatedProbabilities;
+    setCalculatedProbabilities(probabilities: ICalculatedProbabilities) {
+        this.calculatedProbabilities = probabilities;
+    }
+    
+    probabilityOfEffect(pool: IAttackPool): number {
+        return 1;
     }
 
     canBeApplied(pool: AttackPool): boolean {

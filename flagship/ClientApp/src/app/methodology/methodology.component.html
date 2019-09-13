@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar>
-      <mat-icon>table</mat-icon>
+      <mat-icon>account_tree</mat-icon>
     </div>
     <mat-card-title>
       Methodology
@@ -36,15 +36,36 @@
     <p>You are free (with the exception of armament changing effects) to re-order and enable/disable the effects.</p>
     <p class="text-muted footnote"><sup>*</sup>Unconditional from the perspective of affecting the attack pool in a
       negative way. For example,
-      the cost of Darth Vader spending a defense token for a reroll is not modeled as part of these calculations.</p>
+      the cost of Darth Vader spending a defense token for a reroll is not modeled as part of these calculations.
+    </p>
+    <h3>Reroll Strategies</h3>
+    <p>
+      Reroll effects (such as Leading Shots or Darth Vader) allow you to specify a reroll strategy.  Flagship allows you
+      to specify whether or not you would reroll accuracies, single hits, and/or black hits.  Blank dice are always assumed
+      to be rerolled if possible.
+    </p>
     <div *ngIf="hasAdditionalNotes()">
       <h3>Specific Effect Methodologies</h3>
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngIf="hasEffect('Leading Shots')">
           <mat-expansion-panel-header>
-            This is the expansion 1 title
+            Leading Shots
           </mat-expansion-panel-header>
-          This the expansion 1 content
+          <p>
+              This effect is more complicated to model. There are two considerations - 
+              first, what is the probability that the effect should be applied, and second, which blue
+              die should be removed from the pool in which the effect is applied.  Flagship makes a general
+              assumption that Leading Shots will be used when at least two dice in the pool are blank.  This
+              is calculated using the probability of a Poisson Binomial distribution.
+          </p>
+          <p>
+              When choosing which blue die to remove from the attack pool, Flagship selects the least modified die.  If more than one
+              die has been modified an equal number of times, the die with the probability distribution closest
+              to the natural distribution of a blue die is selected.  The rationale here is that you are more likely
+              to sacrifice a die that has not been steered towards specific results through preceding effects.  This
+              is, of course, not a perfect assumption; keep in mind that this simulation of Leading Shots is a general
+              use case rather than a comprehensive one.
+          </p>
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>

@@ -1,6 +1,6 @@
 import { Armament } from '../armament';
 import { AttackPool, IAttackPool } from './attackPool';
-import { IDieModification } from './dieModification';
+import { IDieModification, ICalculatedProbabilities } from './dieModification';
 import { FiringArc } from './firingArc';
 
 export class Calculator {
@@ -17,6 +17,12 @@ export class Calculator {
 
     applyModifications() {
         for (const modification of this.modifications) {
+            let probabilities: ICalculatedProbabilities = {
+                long: modification.probabilityOfEffect(this.longRangePool),
+                medium: modification.probabilityOfEffect(this.mediumRangePool),
+                close: modification.probabilityOfEffect(this.closeRangePool)
+            };
+            modification.setCalculatedProbabilities(probabilities);
             this.closeRangePool = this.closeRangePool.modify(modification);
             this.mediumRangePool = this.mediumRangePool.modify(modification);
             this.longRangePool = this.longRangePool.modify(modification);
