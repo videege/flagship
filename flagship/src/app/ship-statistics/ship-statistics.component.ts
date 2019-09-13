@@ -83,7 +83,7 @@ export class ShipStatisticsComponent implements OnInit {
   public mediumRange = new BarChartData("Medium Range", "Damage", ['#0000a6', '#0000ff', '#009dff'], []);
   public closeRange = new BarChartData("Close Range", "Damage", ['#008a00', '#00c400', '#00ff00'], []);
   public tableData: TableData[] = [];
-  private calculator: Calculator;
+  public calculator: Calculator;
 
   public selectedArc: FiringArc;
 

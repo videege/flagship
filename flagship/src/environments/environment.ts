@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyCHmA5kxq4H7zjJU_CpiE_aypE1LvxeRZE",
+    authDomain: "flagship-armada.firebaseapp.com",
+    databaseURL: "https://flagship-armada.firebaseio.com",
+    projectId: "flagship-armada",
+    storageBucket: "",
+    messagingSenderId: "262477298760",
+    appId: "1:262477298760:web:fea968ad2f563eed392c7d"
+  }
 };
 
 /*

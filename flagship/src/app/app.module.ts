@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { of } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -62,81 +63,9 @@ import { RerollModificationComponent } from './reroll-modification/reroll-modifi
 import { AdditionModificationComponent } from './addition-modification/addition-modification.component';
 import { FishingCalculatorComponent } from './fishing-calculator/fishing-calculator.component';
 import { MethodologyComponent } from './methodology/methodology.component';
+import { STATES } from './app.states';
 
 //trace.enable();
-
-const STATES = [
-  {
-    name: 'notfound',
-    url: '/404',
-    views: {
-      'content': { component: NotfoundComponent }
-    },
-    data: {
-      title: 'Page Not Found'
-    }
-  },
-  {
-    name: 'fleets',
-    url: '/fleets',
-    views: {
-      'content': { component: FleetsComponent }
-    },
-    data: {
-      title: 'My Fleets'
-    }
-  },
-  {
-    name: 'fleets.fleet',
-    url: '/:id',
-    resolve: [
-      {
-        token: 'fleet',
-        deps: [Transition, FleetService],
-        resolveFn: (trans, fleetService) => {
-          return fleetService.getFleet(trans.params().id).toPromise();
-        }
-      }
-    ],
-    views: {
-      'content@': { component: FleetComponent },
-      'toolbar@': { component: FleetToolbarComponent }
-    },
-    data: {
-      title: null
-    }
-  },
-  {
-    name: 'fleets.fleet.ship',
-    url: '/:shipId',
-    resolve: [
-      {
-        token: 'ship',
-        deps: [Transition, 'fleet'],
-        resolveFn: (trans, fleet: Fleet) => {
-          return fleet.ships[trans.params().shipId];
-        }
-      }
-    ],
-    views: {
-      'content@': { component: ShipEditorComponent }
-    },
-    data: {
-      title: null
-    }
-  },
-  {
-    name: 'fleets.fleet.ship.statistics',
-    url: '/statistics',
-    views: {
-      'content@': { component: ShipStatisticsComponent }
-    },
-    data: {
-      title: 'Statistics'
-    }
-  },
-  { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
-];
 
 export function uiRouterConfig(router: UIRouter, injector: Injector) {
   router.urlService.rules.initial({ state: 'fleets' });
@@ -201,7 +130,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatSlideToggleModule,
     MatCheckboxModule,
     EcoFabSpeedDialModule,
-    NgxChartsModule
+    NgxChartsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+ 	  AngularFirestoreModule,
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
