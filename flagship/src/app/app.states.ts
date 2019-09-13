@@ -74,7 +74,7 @@ export const STATES = [
             title: 'Statistics'
         }
     },
-    { name: 'ships.**', url: '/ships', loadChildren: './ships/ships.module#ShipsModule' }
+    { name: 'ships.**', url: '/ships', loadChildren: () => import('./ships/ships.module').then(m => m.ShipsModule) }
 ];
 
 export function shipResolver(trans, fleet: Fleet) {
