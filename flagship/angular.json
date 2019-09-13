@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ClientApp": {
+    "flagship": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ClientApp",
+            "outputPath": "dist/flagship",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,18 +53,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ClientApp:build"
+            "browserTarget": "flagship:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ClientApp:build:production"
+              "browserTarget": "flagship:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ClientApp:build"
+            "browserTarget": "flagship:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
         }
       }
     },
-    "ClientApp-e2e": {
+    "flagship-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -109,11 +109,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ClientApp:serve"
+            "devServerTarget": "flagship:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ClientApp:serve:production"
+              "devServerTarget": "flagship:serve:production"
             }
           }
         },
@@ -129,5 +129,5 @@
       }
     }
   },
-  "defaultProject": "ClientApp"
+  "defaultProject": "flagship"
 }
