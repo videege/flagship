@@ -64,6 +64,7 @@ import { AdditionModificationComponent } from './addition-modification/addition-
 import { FishingCalculatorComponent } from './fishing-calculator/fishing-calculator.component';
 import { MethodologyComponent } from './methodology/methodology.component';
 import { STATES } from './app.states';
+import { FooterComponent } from './footer/footer.component';
 
 //trace.enable();
 
@@ -99,7 +100,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     RerollModificationComponent,
     AdditionModificationComponent,
     FishingCalculatorComponent,
-    MethodologyComponent
+    MethodologyComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
