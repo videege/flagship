@@ -65,6 +65,7 @@ import { FishingCalculatorComponent } from './fishing-calculator/fishing-calcula
 import { MethodologyComponent } from './methodology/methodology.component';
 import { STATES } from './app.states';
 import { FooterComponent } from './footer/footer.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 //trace.enable();
 
@@ -135,6 +136,7 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     NgxChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
  	  AngularFirestoreModule,
+ 	  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
