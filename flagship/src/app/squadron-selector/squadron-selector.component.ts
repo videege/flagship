@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Fleet } from '../domain/fleet';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SquadronFactory } from '../domain/factories/squadronFactory';
 import { SquadronData } from '../domain/squadron';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Fleet } from '../domain/fleet';
 import { ObjectiveType, Objective } from '../domain/objective';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ObjectiveFactory } from '../domain/factories/objectiveFactory';
 
 export interface ObjectiveSelectorData {

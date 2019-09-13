@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Faction } from '../domain/faction';
 import { Fleet } from '../domain/fleet';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSelectChange } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export enum FleetEditorMode {

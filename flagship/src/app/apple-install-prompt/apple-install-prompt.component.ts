@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Ship } from '../domain/ship';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 

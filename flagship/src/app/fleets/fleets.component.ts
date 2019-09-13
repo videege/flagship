@@ -4,7 +4,8 @@ import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/l
 import { FleetService } from '../fleet.service';
 import { Fleet } from '../domain/fleet';
 import { Faction } from '../domain/faction';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-editor.component';
 
 @Component({

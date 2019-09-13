@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
 
 @Component({

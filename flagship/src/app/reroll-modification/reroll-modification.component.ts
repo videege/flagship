@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RerollModification } from '../domain/statistics/rerolls/rerollModification';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { RerollStrategy } from '../domain/statistics/rerolls/rerollStrategy';
 
 @Component({

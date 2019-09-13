@@ -6,7 +6,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { map } from 'rxjs/operators';
 import { UpgradeFactory } from '../domain/factories/upgradeFactory';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Squadron } from '../domain/squadron';
 import { SquadronSelectorComponent, SquadronSelectorData } from '../squadron-selector/squadron-selector.component';
 import { AlertType } from '../alert/alert.component';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Fleet } from '../domain/fleet';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Ship } from '../domain/ship';
 import { TransitionService, StateService } from '@uirouter/core';
 

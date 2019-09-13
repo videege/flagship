@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Ship } from '../domain/ship';
 import { UpgradeType, sortUpgradeTypes } from '../domain/upgradeType';
 import { Upgrade } from '../domain/upgrade';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.component';
 import { UpgradeSlot } from '../domain/upgradeSlot';
 import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
