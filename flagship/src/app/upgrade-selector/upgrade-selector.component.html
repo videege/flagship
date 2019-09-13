@@ -1,0 +1,20 @@
+<div mat-dialog-content>
+  <p *ngIf="!upgrades.length">
+    There are no available upgrades to select from.
+  </p>
+  <mat-action-list dense>
+    <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)">
+      <h3 matLine>
+        {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}</h3>
+      <p matLine style="white-space: normal">
+        <span style="font-style: italic; font-size: .8em;">{{ upgrade.text }}</span>
+      </p>
+      <span style="margin-left: 8px;">{{ upgrade.points }}</span>
+      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-action-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="'rm'" color="warn" *ngIf="isFilled">Remove Equipped Upgrade</button>
+</div>

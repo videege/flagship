@@ -1,0 +1,75 @@
+<mat-card fxFlex>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
+    </div>
+    <mat-card-title>
+      {{ ship.name }}
+      <span fxFlex></span>
+      {{ ship.points }}&nbsp;
+      <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
+        (+{{ ship.currentPointsFromUpgrades() }})
+      </span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      Hull: {{ ship.hull }}
+      | Command: {{ ship.command }}
+      | Engineering: {{ ship.engineering }}
+      | Squadron {{ ship.squadron }}
+
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+      <div>
+        <strong>Shields&nbsp;</strong>
+        <span>F: {{ ship.frontShields }}&nbsp;</span>
+        <span>L/R: {{ ship.leftShields }}&nbsp;</span>
+        <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
+        <span>R: {{ ship.rearShields }}&nbsp;</span>
+      </div>
+      <div fxFlex ngStyle.gt-sm="text-align: right;">
+        <strong>Navigation&nbsp;</strong>
+        <span *ngFor="let speed of ship.navigationChart.getSpeeds(); index as i">
+          {{ i + 1 }}:
+          <i class="ffi speedbox" *ngFor="let box of speed"
+            [ngClass]="{'ffi-swa-turn-0': box === 0, 'ffi-swa-turn-1': box === 1, 'ffi-swa-turn-2': box === 2}"></i>
+        </span>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px" style="margin-top:8px;">
+      <div>F: <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
+      </div>
+      <div>L/R: <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
+      </div>
+      <div *ngIf="ship.leftAuxArmament">
+        LA/RA: <flagship-battery [armament]="ship.leftAuxArmament">
+        </flagship-battery>
+      </div>
+      <div>R: <flagship-battery [armament]="ship.rearArmament"></flagship-battery>
+      </div>
+      <div>AS: <flagship-battery [armament]="ship.antiSquadronArmament"></flagship-battery>
+      </div>
+      <span *ngIf="ship.defenseTokens.length" ngStyle.gt-sm="text-align: right;" fxFlex>
+        Defense Tokens:
+        <i class="ffi defense-token" *ngFor="let token of ship.defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
+                           'ffi-swa-evade': token === 1,
+                           'ffi-swa-redirect': token === 2,
+                           'ffi-swa-contain': token === 3,
+                           'ffi-swa-scatter': token === 4
+                          }"></i>
+      </span>
+    </div>
+    <div>
+      <flagship-upgrade-summary *ngFor="let upgrade of ship.sortedUpgrades(); let isLast=last;" [upgrade]="upgrade"
+        [isLast]="isLast"></flagship-upgrade-summary>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button uiSref="fleets.fleet.ship"
+      [uiParams]="{ id: ship.fleet.id, shipId: ship.fleet.ships.indexOf(ship) }">Edit Ship</button>
+    <span fxFlex></span>
+    <button mat-button (click)="deleteShip()" color="warn">Delete Ship</button>
+  </mat-card-actions>
+</mat-card>

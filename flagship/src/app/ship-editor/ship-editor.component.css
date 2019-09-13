@@ -1,0 +1,14 @@
+::ng-deep .upgrade-list.mat-list .mat-list-item .mat-line {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  ::ng-deep  .upgrade-list.mat-list .mat-list-item{
+    height:initial!important;
+  }
+
+  i.defense-token {
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 2em;
+}

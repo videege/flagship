@@ -1,0 +1,14 @@
+<div fxLayout="row">
+  <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+  <span fxFlex></span>
+  <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)">
+    Enabled
+  </mat-slide-toggle>
+</div>
+<h5 class="no-margin text-muted">Reroll Strategy</h5>
+<div fxLayout="row" fxLayoutGap="8px">
+  <mat-checkbox [(ngModel)]="accuracies" (change)="strategyChanged()">Accuracies</mat-checkbox>
+  <mat-checkbox [(ngModel)]="hits" (change)="strategyChanged()">Hits</mat-checkbox>
+  <mat-checkbox [(ngModel)]="blackHits" (change)="strategyChanged()">Black Hits</mat-checkbox>
+</div>
+

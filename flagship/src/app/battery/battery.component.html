@@ -1,0 +1,12 @@
+<span *ngIf="redDice.length === 0 && blueDice.length === 0 && blackDice.length === 0">
+  &mdash;
+</span>
+<span *ngFor="let die of redDice">
+  <i class="ffi ffi-swa-d8 red"></i>
+</span>
+<span *ngFor="let die of blueDice">
+  <i class="ffi ffi-swa-d8 blue"></i>
+</span>
+<span *ngFor="let die of blackDice">
+  <i class="ffi ffi-swa-d8 black"></i>
+</span>

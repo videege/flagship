@@ -1,0 +1,45 @@
+<div mat-dialog-content>
+  <form [formGroup]="fleetForm" fxLayout="column">
+
+    <mat-form-field>
+      <mat-label>Fleet Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="fleetForm.get('name').invalid">You must enter a name for the fleet.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <input matInput formControlName="author" />
+    </mat-form-field>
+    <mat-radio-group aria-label="Faction" formControlName="faction"
+      [disabled]="data.mode !== 0">
+      <mat-radio-button value="0" fxFlex>Galactic Empire</mat-radio-button>
+      <mat-radio-button value="1" fxFlex>Rebel Alliance</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field hintLabel="Select a format or enter point values manually">
+      <mat-select (selectionChange)="formatChange($event)">
+        <mat-option [value]="format.value" *ngFor="let format of formats">
+          {{ format.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="4px" style="margin-top:4px;">
+      <mat-form-field fxFlex>
+        <mat-label>Point Limit</mat-label>
+        <input matInput formControlName="pointLimit" type="number" />
+        <mat-error *ngIf="fleetForm.get('pointLimit').invalid">Enter a number greater than 0.</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>Squadron Point Limit</mat-label>
+        <input matInput formControlName="squadronPointLimit" />
+        <mat-error *ngIf="fleetForm.get('squadronPointLimit').invalid">Enter a number greater than 0.</mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <span fxFlex></span>
+  <button mat-button [mat-dialog-close]="getFleetData()" [disabled]="fleetForm.invalid"
+    color="primary">{{ data.mode === 0 ? "Create Fleet" : "Update Fleet"}}</button>
+</div>

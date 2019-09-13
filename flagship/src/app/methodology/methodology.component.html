@@ -1,0 +1,80 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>account_tree</mat-icon>
+    </div>
+    <mat-card-title>
+      Methodology
+    </mat-card-title>
+    <mat-card-subtitle>
+      Explanation of how results are achieved.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      In general, all statistics are derived by modeling the probabilities of each die in the
+      attack pool, applying enabled attack effects (in order), and then using the final probabilities
+      of each die in the pool to calculate statistics like mean, standard deviation, the coefficient of
+      variance, and the probability of obtaining at least X results (for example, at least one critical).
+      Flagship uses a branching attack pool model to simulate the probability of conditional effects. For example,
+      if the probability of using a reroll effect is 60%, the model will split into two probability pools - one
+      with the reroll applied (at P = 60%) and one unchanged pool (at P = 40%). This means that applying more
+      than one conditional effect creates a tree of probabilities and that the order of effects can be significant.
+    </p>
+    <p>
+      Flagship applies a default effect ordering that makes sense for most scenarios:
+    </p>
+    <ol>
+      <li>Armament Changes (for example, Spinal Armament)</li>
+      <li>Unconditional Dice Additions (for example, External Racks)</li>
+      <li>Dice Replacement Effects (for example, Commander Sato)</li>
+      <li>Conditional Dice Additions (for example, a Concentrate Fire Dial)</li>
+      <li>Unconditional<sup>*</sup> Rerolls (for example, Darth Vader)</li>
+      <li>Conditional Rerolls (for example, Leading Shots)</li>
+      <li>Die Modifications (for example, H9 Turbolasers)</li>
+    </ol>
+    <p>You are free (with the exception of armament changing effects) to re-order and enable/disable the effects.</p>
+    <p class="text-muted footnote"><sup>*</sup>Unconditional from the perspective of affecting the attack pool in a
+      negative way. For example,
+      the cost of Darth Vader spending a defense token for a reroll is not modeled as part of these calculations.
+    </p>
+    <h3>Reroll Strategies</h3>
+    <p>
+      Reroll effects (such as Leading Shots or Darth Vader) allow you to specify a reroll strategy.  Flagship allows you
+      to specify whether or not you would reroll accuracies, single hits, and/or black hits.  Blank dice are always assumed
+      to be rerolled if possible.
+    </p>
+    <div *ngIf="hasAdditionalNotes()">
+      <h3>Specific Effect Methodologies</h3>
+      <mat-accordion>
+        <mat-expansion-panel *ngIf="hasEffect('Leading Shots')">
+          <mat-expansion-panel-header>
+            Leading Shots
+          </mat-expansion-panel-header>
+          <p>
+              This effect is more complicated to model. There are two considerations - 
+              first, what is the probability that the effect should be applied, and second, which blue
+              die should be removed from the pool in which the effect is applied.  Flagship makes a general
+              assumption that Leading Shots will be used when at least two dice in the pool are blank.  This
+              is calculated using the probability of a Poisson Binomial distribution.
+          </p>
+          <p>
+              When choosing which blue die to remove from the attack pool, Flagship selects the least modified die.  If more than one
+              die has been modified an equal number of times, the die with the probability distribution closest
+              to the natural distribution of a blue die is selected.  The rationale here is that you are more likely
+              to sacrifice a die that has not been steered towards specific results through preceding effects.  This
+              is, of course, not a perfect assumption; keep in mind that this simulation of Leading Shots is a general
+              use case rather than a comprehensive one.
+          </p>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            This is the expansion 2 title
+          </mat-expansion-panel-header>
+          content
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+  </mat-card-content>
+</mat-card>

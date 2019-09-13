@@ -1,0 +1,7 @@
+<span *ngIf="upgrade && (upgrade.type === 'Title' || upgrade.type === 'Commander')">
+  <span class="title">{{ upgrade.name }}</span><br>
+  <span class="text">{{ upgrade.text }}</span><br>
+</span>
+<span *ngIf="upgrade && (upgrade.type != 'Commander' && upgrade.type != 'Title')">
+  {{ upgrade.name + (!isLast ? ', ' : '') }}
+</span>

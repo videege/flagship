@@ -1,0 +1,20 @@
+<div fxLayout="row">
+  <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+  <span fxFlex></span>
+  <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)"
+    [disabled]="!modification.orderable">
+    Enabled
+  </mat-slide-toggle>
+</div>
+<div fxLayout="row" fxLayoutGap="4px" *ngIf="modification.orderable">
+  <span fxFlex style="line-height: 24px;">Die Preference:&nbsp;</span>
+
+  <mat-select>
+    <mat-option [value]="1">
+     
+        Black/Blue/Red <i class="ffi ffi-swa-d8 black"></i>,<i class="ffi ffi-swa-d8 blue"></i>,<i class="ffi ffi-swa-d8 red"></i>
+  
+    </mat-option>
+  </mat-select>
+
+</div>
