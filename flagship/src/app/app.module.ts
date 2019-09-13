@@ -73,6 +73,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MomentModule } from 'ngx-moment';
 import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 //trace.enable();
 
@@ -141,9 +143,11 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     MatSlideToggleModule,
     MatCheckboxModule,
     EcoFabSpeedDialModule,
+    MatBottomSheetModule,
     NgxChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MomentModule
   ],
