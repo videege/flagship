@@ -66,6 +66,8 @@ import { MethodologyComponent } from './methodology/methodology.component';
 import { STATES } from './app.states';
 import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MomentModule } from 'ngx-moment';
+import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
 
 //trace.enable();
 
@@ -102,7 +104,8 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     AdditionModificationComponent,
     FishingCalculatorComponent,
     MethodologyComponent,
-    FooterComponent
+    FooterComponent,
+    AppleInstallPromptComponent
   ],
   imports: [
     BrowserModule,
@@ -135,8 +138,9 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     EcoFabSpeedDialModule,
     NgxChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
- 	  AngularFirestoreModule,
- 	  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFirestoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MomentModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
