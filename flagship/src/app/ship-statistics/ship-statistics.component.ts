@@ -9,6 +9,7 @@ import { Calculator } from '../domain/statistics/calculator';
 import { IAttackPool } from '../domain/statistics/attackPool';
 import { PoolStatistics } from "../domain/statistics/poolStatistics";
 import { FiringArc } from '../domain/statistics/firingArc';
+import { ActivatedRoute } from '@angular/router';
 
 
 export interface IModificationReorderEvent {
@@ -62,7 +63,7 @@ interface TableData {
   styleUrls: ['./ship-statistics.component.css']
 })
 export class ShipStatisticsComponent implements OnInit {
-  @Input() ship: Ship;
+  public ship: Ship;
 
   public showingEffects = true;
   public sidenavMode = 'side';
@@ -87,7 +88,8 @@ export class ShipStatisticsComponent implements OnInit {
 
   public selectedArc: FiringArc;
 
-  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
+  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver,
+    private route: ActivatedRoute) {
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait
@@ -107,6 +109,7 @@ export class ShipStatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ship = this.route.snapshot.data.ship;
     this.showingEffects = !this.breakpointObserver.isMatched([
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait

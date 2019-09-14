@@ -7,6 +7,7 @@ import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { Fleet } from './domain/fleet';
 import { ShipEditorComponent } from './ship-editor/ship-editor.component';
 import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.component';
+import { LoginComponent } from './login/login.component';
 
 export const STATES = [
     {
@@ -17,6 +18,16 @@ export const STATES = [
         },
         data: {
             title: 'Page Not Found'
+        }
+    },
+    {
+        name: 'fleets.login',
+        url: '/login',
+        views: {
+            'content@': { component: LoginComponent }
+        },
+        data: {
+            title: 'Login'
         }
     },
     {

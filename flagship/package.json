@@ -28,7 +28,6 @@
     "@ecodev/fab-speed-dial": "^4.0.0",
     "@ngx-pwa/local-storage": "^7.4.2",
     "@swimlane/ngx-charts": "^12.0.1",
-    "@uirouter/angular": "^4.0.0",
     "core-js": "^2.5.4",
     "firebase": "^6.6.1",
     "guid-typescript": "^1.0.9",

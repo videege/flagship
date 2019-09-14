@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TransitionService } from '@uirouter/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
@@ -20,11 +19,11 @@ export class AppNavComponent {
   
   currentState = "";
 
-  constructor(private breakpointObserver: BreakpointObserver, private transitionService: TransitionService,
+  constructor(private breakpointObserver: BreakpointObserver,
     public afAuth: AngularFireAuth) {
-    this.transitionService.onSuccess({}, (transition) => {
-      this.currentState = transition.targetState().state().data['title'];
-    });
+    // this.transitionService.onSuccess({}, (transition) => {
+    //   this.currentState = transition.targetState().state().data['title'];
+    // });
   }
    
   }

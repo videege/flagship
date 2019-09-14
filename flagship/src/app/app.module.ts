@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
+//import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
+import { RouterModule, Routes } from '@angular/router';
 import { AppNavComponent } from './app-nav/app-nav.component';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -75,13 +76,15 @@ import { MomentModule } from 'ngx-moment';
 import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { LoginComponent } from './login/login.component';
+import { APP_ROUTES, FleetResolver, ShipResolver } from './app.routes';
 //trace.enable();
 
-export function uiRouterConfig(router: UIRouter, injector: Injector) {
-  router.urlService.rules.initial({ state: 'fleets' });
-  router.urlService.rules.otherwise({ state: 'notfound' });
-}
+// export function uiRouterConfig(router: UIRouter, injector: Injector) {
+//   router.urlService.rules.initial({ state: 'fleets' });
+//   router.urlService.rules.otherwise({ state: 'notfound' });
+// }
 
 @NgModule({
   declarations: [
@@ -112,12 +115,14 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     FishingCalculatorComponent,
     MethodologyComponent,
     FooterComponent,
-    AppleInstallPromptComponent
+    AppleInstallPromptComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
+    //UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
+    RouterModule.forRoot(APP_ROUTES, { enableTracing: true }),
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
@@ -148,11 +153,14 @@ export function uiRouterConfig(router: UIRouter, injector: Injector) {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MomentModule
   ],
   providers: [
-    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
+    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader },
+    FleetResolver,
+    ShipResolver
   ],
   entryComponents: [
     ShipCardComponent,

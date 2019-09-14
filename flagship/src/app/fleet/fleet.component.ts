@@ -12,6 +12,7 @@ import { SquadronSelectorComponent, SquadronSelectorData } from '../squadron-sel
 import { AlertType } from '../alert/alert.component';
 import { ObjectiveType, Objective } from '../domain/objective';
 import { ObjectiveSelectorComponent } from '../objective-selector/objective-selector.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'flagship-fleet',
@@ -19,9 +20,7 @@ import { ObjectiveSelectorComponent } from '../objective-selector/objective-sele
   styleUrls: ['./fleet.component.css']
 })
 export class FleetComponent implements OnInit {
-
-  @Input() fleet: Fleet;
-
+  public fleet: Fleet;
   public colSpan = 1;
   public fleetAlertOpen = false;
   public squadronAlertOpen = false;
@@ -32,7 +31,8 @@ export class FleetComponent implements OnInit {
   public navigationObjective: Objective = null;
   public objType = ObjectiveType;
 
-  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog) {
+  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
+    private route: ActivatedRoute) {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
@@ -46,6 +46,7 @@ export class FleetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fleet = this.route.snapshot.data.fleet;
     this.fleet.subject.subscribe(f => {
       this.fleetAlertOpen = this.fleet.currentPoints() > this.fleet.pointLimit;
       this.squadronAlertOpen = this.fleet.currentPointsFromSquadrons() > this.fleet.squadronPointLimit;

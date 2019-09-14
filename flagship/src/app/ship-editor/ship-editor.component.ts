@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.component';
 import { UpgradeSlot } from '../domain/upgradeSlot';
 import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'flagship-ship-editor',
@@ -13,12 +14,11 @@ import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-select
   styleUrls: ['./ship-editor.component.css']
 })
 export class ShipEditorComponent implements OnInit {
-
-  @Input() ship: Ship;
-
-  constructor(private dialog: MatDialog) { }
+  public ship: Ship;
+  constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.ship = this.route.snapshot.data.ship;
   }
 
   viewShipCard() {
