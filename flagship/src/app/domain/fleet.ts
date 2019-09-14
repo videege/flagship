@@ -4,7 +4,6 @@ import { Squadron } from "./squadron";
 import { Upgrade } from "./upgrade";
 import { UpgradeSlot } from "./upgradeSlot";
 import { UpgradeType } from "./upgradeType";
-import { ShipsModule } from '../ships/ships.module';
 
 import { Subject } from 'rxjs';
 import { Objective } from './objective';
