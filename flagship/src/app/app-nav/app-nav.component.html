@@ -25,7 +25,6 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span style="padding-right: 16px" *ngIf="currentState">{{ currentState }}</span>
-      <!-- <ui-view name="toolbar" fxFlex></ui-view> -->
       <div fxFlex>
         <router-outlet name="toolbar"></router-outlet>
       </div>
@@ -34,7 +33,6 @@
       </div>
 
     </mat-toolbar>
-    <!-- <ui-view name="content"></ui-view> -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
