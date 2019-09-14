@@ -42,10 +42,7 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 
 import { FleetsComponent } from './fleets/fleets.component';
 import { FleetComponent } from './fleet/fleet.component';
-import { FleetService } from './fleet.service';
-import { ShipsModule } from './ships/ships.module';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { trace } from "@uirouter/angular";
 import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { ShipDetailComponent } from './ship-detail/ship-detail.component';
 import { BatteryComponent } from './battery/battery.component';
@@ -69,7 +66,6 @@ import { RerollModificationComponent } from './reroll-modification/reroll-modifi
 import { AdditionModificationComponent } from './addition-modification/addition-modification.component';
 import { FishingCalculatorComponent } from './fishing-calculator/fishing-calculator.component';
 import { MethodologyComponent } from './methodology/methodology.component';
-import { STATES } from './app.states';
 import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MomentModule } from 'ngx-moment';
@@ -79,6 +75,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { LoginComponent } from './login/login.component';
 import { APP_ROUTES, FleetResolver, ShipResolver } from './app.routes';
+import { DefaultToolbarComponent } from './default-toolbar/default-toolbar.component';
 //trace.enable();
 
 // export function uiRouterConfig(router: UIRouter, injector: Injector) {
@@ -116,7 +113,8 @@ import { APP_ROUTES, FleetResolver, ShipResolver } from './app.routes';
     MethodologyComponent,
     FooterComponent,
     AppleInstallPromptComponent,
-    LoginComponent
+    LoginComponent,
+    DefaultToolbarComponent
   ],
   imports: [
     BrowserModule,

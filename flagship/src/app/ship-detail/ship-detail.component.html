@@ -68,7 +68,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button 
-      [routerLink]="['/fleets', ship.fleet.id, 'ships', ship.fleet.ships.indexOf(ship)]" >
+      [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]" >
       Edit Ship
     </button>
     <span fxFlex></span>

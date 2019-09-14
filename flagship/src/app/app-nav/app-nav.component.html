@@ -8,7 +8,9 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary"><span class="logo">FLagsHip</span></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="fleets">Fleets</a>
+      <a mat-list-item [routerLink]="['fleets']">
+        Fleets
+      </a>
       <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -24,7 +26,13 @@
       </button>
       <span style="padding-right: 16px" *ngIf="currentState">{{ currentState }}</span>
       <!-- <ui-view name="toolbar" fxFlex></ui-view> -->
-      <router-outlet name="toolbar" fxFlex></router-outlet>
+      <div fxFlex>
+        <router-outlet name="toolbar"></router-outlet>
+      </div>
+      <div class="avatar">
+        <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+      </div>
+
     </mat-toolbar>
     <!-- <ui-view name="content"></ui-view> -->
     <router-outlet></router-outlet>
