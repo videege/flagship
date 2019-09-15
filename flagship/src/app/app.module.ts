@@ -43,7 +43,22 @@ import { AppMaterialModule } from './app-material/app-material.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    NgxAuthFirebaseUIModule.forRoot(environment.firebase),
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase, () => 'flagship-armada',
+      {
+        enableFirestoreSync: true, // enable/disable autosync users with firestore
+        toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
+        toastMessageOnAuthError: true, // whether to open/show a snackbar message on auth error - default : true
+        authGuardFallbackURL: '/login', // url for unauthenticated users - to use in combination with canActivate feature on a route
+        authGuardLoggedInURL: '/loggedin', // url for authenticated users - to use in combination with canActivate feature on a route
+        passwordMaxLength: 60, // `min/max` input parameters in components should be within this range.
+        passwordMinLength: 8, // Password length min/max in forms independently of each componenet min/max.
+        // Same as password but for the name
+        nameMaxLength: 50,
+        nameMinLength: 2,
+        // If set, sign-in/up form is not available until email has been verified.
+        // Plus protected routes are still protected even though user is connected.
+        guardProtectedRoutesUntilEmailIsVerified: false
+      }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MomentModule,
     SharedModule
@@ -52,7 +67,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader },
     Title
   ],
-  
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
