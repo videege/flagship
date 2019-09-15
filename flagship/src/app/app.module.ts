@@ -24,6 +24,9 @@ import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { AppMaterialModule } from './app-material/app-material.module';
 
+export function appNameFactory() {
+  return 'flagship-armada';
+}
 
 @NgModule({
   declarations: [
@@ -43,7 +46,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    NgxAuthFirebaseUIModule.forRoot(environment.firebase, () => 'flagship-armada',
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase, appNameFactory,
       {
         enableFirestoreSync: true, // enable/disable autosync users with firestore
         toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
