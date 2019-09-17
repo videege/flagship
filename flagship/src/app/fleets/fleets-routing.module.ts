@@ -8,7 +8,7 @@ import { Resolve } from '@angular/router';
 import { Injectable, NgModule } from '@angular/core';
 import { Fleet } from '../domain/fleet';
 import { Observable } from 'rxjs';
-import { FleetService } from '../fleet.service';
+import { FleetService } from '../core/services/fleet.service';
 import { Ship } from '../domain/ship';
 import { map } from 'rxjs/operators';
 import { DefaultToolbarComponent } from '../shared/default-toolbar/default-toolbar.component';
@@ -21,7 +21,7 @@ export class FleetResolver implements Resolve<Fleet> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Fleet | Observable<Fleet> {
-        return this.fleetService.getFleet(route.params.id);
+        return this.fleetService.getFleetForUser(route.params.id);
     }
 }
 
@@ -31,7 +31,7 @@ export class ShipResolver implements Resolve<Ship> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Ship | Observable<Ship> {
-        return this.fleetService.getFleet(route.params.id)
+        return this.fleetService.getFleetForUser(route.params.id)
             .pipe(
                 map(f => f.ships[route.params.shipId])
             );

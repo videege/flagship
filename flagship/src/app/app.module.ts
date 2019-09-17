@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { AppMaterialModule } from './app-material/app-material.module';
+import { CoreModule } from './core/core.module';
 
 export function appNameFactory() {
   return 'flagship-armada';
@@ -44,7 +45,7 @@ export function appNameFactory() {
     //UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     RouterModule.forRoot(APP_ROUTES, { enableTracing: true }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase, appNameFactory,
       {
@@ -64,6 +65,7 @@ export function appNameFactory() {
       }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MomentModule,
+    CoreModule,
     SharedModule
   ],
   providers: [

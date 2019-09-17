@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
-import { FleetService } from '../../fleet.service';
+import { FleetService } from '../../core/services/fleet.service';
 import { Fleet } from '../../domain/fleet';
 import { Faction } from '../../domain/faction';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,19 +16,14 @@ export class FleetListComponent implements OnInit {
 
   displayedColumns = ['faction', 'name', 'commander', 'points', 'actions'];
 
-  constructor(private breakpointObserver: BreakpointObserver,
-    private fleetService: FleetService, private dialog: MatDialog) {}
+  constructor(private fleetService: FleetService, private dialog: MatDialog) {}
 
   public fleets: Fleet[];
   dataSource: MatTableDataSource<Fleet>;
 
   ngOnInit() {
     this.fleets = [];
-    this.fleetService.fleets$.subscribe((fleets: Fleet[]) => {
-      this.fleets = fleets;
-      this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
-    });
-    this.fleetService.getFleets().subscribe((fleets: Fleet[]) => {
+    this.fleetService.getFleetsForUser().subscribe((fleets: Fleet[]) => {
       this.fleets = fleets;
       this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
     });
@@ -61,8 +54,8 @@ export class FleetListComponent implements OnInit {
       if (data) {
         this.fleetService.createFleet(data.name, data.author,
           data.faction, data.pointLimit, data.squadronPointLimit)
-          .subscribe((f: Fleet) => {
-            this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+          .then(() => {
+            //this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
             
           });
       }

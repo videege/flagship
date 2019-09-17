@@ -19,10 +19,14 @@ export interface ISerializedFleet {
   ships: ISerializedShip[];
   squadrons: number[];
   objectives: number[];
+
+  ownerUid: string;
 }
 
 export class Fleet {
   public subject: Subject<string>;
+
+  public ownerUid: string;
 
   public ships: Ship[];
   public squadrons: Squadron[];
@@ -40,6 +44,14 @@ export class Fleet {
 
     this.subject = new Subject<string>();
   }
+  
+  public setId(id: string) {
+    this.id = id;
+  }
+
+  public setOwnerUid(uid: string) {
+    this.ownerUid = uid;
+  }
 
   serialize(): ISerializedFleet {
     let ships = this.ships.map(s => s.serialize());
@@ -55,7 +67,8 @@ export class Fleet {
       squadronPointLimit: this.squadronPointLimit,
       ships: ships,
       squadrons: squadrons,
-      objectives: objectives
+      objectives: objectives,
+      ownerUid: this.ownerUid
     };
   }
 
