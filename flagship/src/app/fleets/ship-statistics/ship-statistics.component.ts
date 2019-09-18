@@ -33,9 +33,9 @@ class BarChartData {
   constructor(public xAxisLabel: string, public yAxisLabel: string,
     colors: string[],
     public data: any) {
-      if (colors) {
-        this.colorScheme['domain'] = colors;
-      }
+    if (colors) {
+      this.colorScheme['domain'] = colors;
+    }
   }
 
   updateStatistic(yLabel: string, yMax: number) {
@@ -74,11 +74,29 @@ export class ShipStatisticsComponent implements OnInit {
   public modifications: IDieModification[] = [];
   public armament: Armament;
   public selectedStat: string = "DMG";
-  public displayedColumns = [ 'range',
+
+  public fullColumns = ['range',
     'dmg-mean', 'dmg-dev', 'dmg-cv',
     'acc-mean', 'acc-dev', 'acc-cv',
     'crit-mean', 'crit-dev', 'crit-cv'
   ];
+
+  public mobileColumns = (stat: string): string[] => {
+    return [
+      'range', `${stat}-mean`, `${stat}-dev`, `${stat}-cv`
+    ];
+  };
+
+  public displayedColumns = this.fullColumns;
+
+
+  public fullGroupHeaders = ['hr-skip', 'hr-dmg', 'hr-acc', 'hr-crit'];
+  public mobileGroupHeaders = (stat: string): string[] => {
+    return [
+      'hr-skip', `hr-${stat}`
+    ];
+  };
+  public displayedGroupHeaders = this.fullGroupHeaders;
 
   public longRange = new BarChartData("Long Range", "Damage", ['#ba0000', '#ff0000', '#ff3700'], []);
   public mediumRange = new BarChartData("Medium Range", "Damage", ['#0000a6', '#0000ff', '#009dff'], []);
@@ -95,13 +113,28 @@ export class ShipStatisticsComponent implements OnInit {
       Breakpoints.HandsetPortrait
     ]).subscribe(result => {
       let wasOver = this.sidenavMode == 'over';
-      this.sidenavMode = result.matches ? 'over': 'side';
+      this.sidenavMode = result.matches ? 'over' : 'side';
       if (this.sidenavMode == 'side' && wasOver) {
         this.showingEffects = true;
       } else if (this.sidenavMode == 'over' && !wasOver) {
         this.showingEffects = false;
       }
     });
+
+    breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
+      .subscribe(result => {
+        if (!result.matches) {
+          this.displayedColumns = this.fullColumns;
+          this.displayedGroupHeaders = this.fullGroupHeaders;
+        } else {
+          this.setTableMobileOptions();
+        }
+      });
+  }
+
+  private setTableMobileOptions() {
+    this.displayedColumns = this.mobileColumns(this.selectedStat.toLowerCase());
+    this.displayedGroupHeaders = this.mobileGroupHeaders(this.selectedStat.toLowerCase());
   }
 
   toggleAttackEffects() {
@@ -180,11 +213,13 @@ export class ShipStatisticsComponent implements OnInit {
     else if (this.selectedStat === 'CRT') {
       this.setChartStatistic('Criticals', 5);
     }
-
+    if (this.breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])) {
+      this.setTableMobileOptions();
+    }
     this.updateStatistics();
   }
 
-  private createTableData(range: string, pool: IAttackPool): TableData{
+  private createTableData(range: string, pool: IAttackPool): TableData {
     const dmg = pool.expectedDamage();
     const acc = pool.expectedAccuracies();
     const crit = pool.expectedCriticals();
@@ -232,7 +267,7 @@ export class ShipStatisticsComponent implements OnInit {
         return { "name": name, "value": val };
       });
     };
-   
+
     this.longRange.data = mapping(stats[0].stats);
     this.mediumRange.data = mapping(stats[1].stats);
     this.closeRange.data = mapping(stats[2].stats);

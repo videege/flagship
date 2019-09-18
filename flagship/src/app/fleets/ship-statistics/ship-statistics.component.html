@@ -1,7 +1,7 @@
 <mat-sidenav-container class="stats-container">
   <mat-sidenav [mode]="sidenavMode" position="end" [(opened)]="showingEffects" fixedInViewport="true">
-    <div fxLayout="column" class="content mat-typography stats-sidenav">
-      <mat-card-header>
+    <div fxLayout="column" class="mat-typography stats-sidenav">
+      <mat-card-header class="content">
         <div mat-card-avatar>
           <mat-icon>casino</mat-icon>
         </div>
@@ -13,9 +13,10 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <div *ngFor="let modification of modifications; first as isFirst; last as isLast; index as idx;">
-          <div fxLayout="row">
-            <div fxFlex="15">
+        <div *ngFor="let modification of modifications; first as isFirst; last as isLast; index as idx;"
+          style="margin-right: 8px;">
+          <div fxLayout="row" fxLayoutGap="4px">
+            <div style="width: 30px;">
               <div fxLayout="column" *ngIf="modification.orderable">
                 <button mat-icon-button aria-label="Move Up" (click)="reorderModificationUp(modification)"
                   [disabled]="isFirst || (idx > 0 && !modifications[idx-1].orderable)">
@@ -27,7 +28,7 @@
                 </button>
               </div>
             </div>
-            <div fxFlex="85" fxLayout="column">
+            <div fxFlex fxLayout="column" >
               <flagship-reroll-modification *ngIf="modification.type === modTypes.Reroll" [modification]="modification"
                 (change)="modificationChanged($event)">
               </flagship-reroll-modification>
@@ -185,22 +186,22 @@
           <ng-container matColumnDef="hr-skip">
             <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" class="header-grouping"></th>
           </ng-container>
-          <ng-container matColumnDef="hr-damage">
+          <ng-container matColumnDef="hr-dmg">
             <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" class="header-grouping">
               Damage
             </th>
           </ng-container>
-          <ng-container matColumnDef="hr-accuracies">
+          <ng-container matColumnDef="hr-acc">
             <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" class="header-grouping">
               Accuracies
             </th>
           </ng-container>
-          <ng-container matColumnDef="hr-criticals">
+          <ng-container matColumnDef="hr-crit">
             <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" class="header-grouping">
               Criticals
             </th>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="['hr-skip','hr-damage','hr-accuracies','hr-criticals']"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedGroupHeaders"></tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let tableData; columns: displayedColumns"></tr>
         </table>

@@ -1,6 +1,7 @@
 
 .stats-sidenav {
-    min-width: 300px;
+    width: 250px;
+    max-width: 250px;
     margin-top: 64px;
 }
 

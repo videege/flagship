@@ -2,18 +2,26 @@
   <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
   <span fxFlex></span>
   <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)"
-    [disabled]="!modification.orderable">
-    Enabled
+    [disabled]="!modification.orderable" matTooltip="Enabled">
   </mat-slide-toggle>
 </div>
 <div fxLayout="row" fxLayoutGap="4px" *ngIf="modification.orderable">
-  <span fxFlex style="line-height: 24px;">Die Preference:&nbsp;</span>
+  <span fxFlex style="line-height: 24px;">Prefer:&nbsp;</span>
+  <mat-select [(value)]="selectedPreference" (selectionChange)="preferenceChanged($event)">
+    <mat-select-trigger>
+      <span *ngFor="let dieType of selectedPreference; last as isLast">
+        <i class="ffi ffi-swa-d8"
+          [ngClass]="{ 'black': dieType === types.Black, 'blue': dieType === types.Blue, 'red': dieType === types.Red }"></i>
+        <span *ngIf="!isLast">/</span>
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let preference of preferences" [value]="preference">
+      <span *ngFor="let dieType of preference; last as isLast">
+        <i class="ffi ffi-swa-d8"
+          [ngClass]="{ 'black': dieType === types.Black, 'blue': dieType === types.Blue, 'red': dieType === types.Red }"></i>
+        <span *ngIf="!isLast">/</span>
+      </span>
 
-  <mat-select>
-    <mat-option [value]="1">
-     
-        Black/Blue/Red <i class="ffi ffi-swa-d8 black"></i>,<i class="ffi ffi-swa-d8 blue"></i>,<i class="ffi ffi-swa-d8 red"></i>
-  
     </mat-option>
   </mat-select>
 
