@@ -1,4 +1,4 @@
-import { Routes, ActivatedRouteSnapshot } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DefaultToolbarComponent } from './shared/default-toolbar/default-toolbar.component';
 import { NotfoundComponent } from './notfound/notfound.component';

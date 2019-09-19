@@ -19,3 +19,17 @@
 .avatar {
   margin-left: 8px;
 }
+
+a.parent-link {
+  text-decoration: none;
+  color: white;
+}
+
+.title {
+  padding-right: 16px;
+}
+
+.title-mobile {
+  text-align: center;
+  flex: 1 1 0%;
+}

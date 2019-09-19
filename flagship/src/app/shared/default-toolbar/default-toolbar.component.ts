@@ -26,23 +26,23 @@ export class DefaultToolbarComponent implements OnInit {
     //   this.titleService.setTitle(startRouteData['title'])
     //   this.title = startRouteData['title'];
     // }
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.router.routerState.root),
-        map(route => this.getChildRoute(route)),
-        filter(route => route.outlet === 'primary'),
-        mergeMap(route => route.data)
-      ).subscribe(event => {
-        console.log(event);
-        if (event['title']) {
-          this.titleService.setTitle(event['title'])
-          this.title = event['title'];
-          //todo: fix this - thee destroyed component screws with angulars
-          //mechanisms.  Probably should just make this the parent toolbar to 
-          //child toolbar outlets
-        }
-      })
+    // this.router.events
+    //   .pipe(
+    //     filter(event => event instanceof NavigationEnd),
+    //     map(() => this.router.routerState.root),
+    //     map(route => this.getChildRoute(route)),
+    //     filter(route => route.outlet === 'primary'),
+    //     mergeMap(route => route.data)
+    //   ).subscribe(event => {
+    //     console.log(event);
+    //     if (event['title']) {
+    //       this.titleService.setTitle(event['title'])
+    //       this.title = event['title'];
+    //       //todo: fix this - thee destroyed component screws with angulars
+    //       //mechanisms.  Probably should just make this the parent toolbar to 
+    //       //child toolbar outlets
+    //     }
+    //   })
   }
 
 }

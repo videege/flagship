@@ -38,6 +38,9 @@ export function appNameFactory() {
     AppleInstallPromptComponent,
     LoginComponent
   ],
+  entryComponents: [
+    AppleInstallPromptComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
