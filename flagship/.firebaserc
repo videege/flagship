@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "flagship-armada"
+  },
+  "targets": {
+    "flagship-armada": {
+      "hosting": {
+        "prod": [
+          "flagship-armada"
+        ],
+        "dev": [
+          "flagship-armada-dev"
+        ]
+      }
+    }
+  }
+}

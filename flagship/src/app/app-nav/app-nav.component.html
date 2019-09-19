@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">
+      <!-- <span class="logo">FLagsHip</span></mat-toolbar> -->
+      <img src="assets/img/logo.png" class="logo" alt="Flagship" />
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['fleets']">
+        Fleets
+      </a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" style="z-index: 100000;">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="(isHandset$ | async) && !parentLink">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div style="padding-right: 4px" *ngIf="parentLabel && !(isHandset$ | async)">
+        <a class="parent-link" [routerLink]="parentLink">{{ parentLabel }}</a>
+        &gt;
+      </div>
+      <div style="padding-right: 4px" *ngIf="parentLabel && (isHandset$ | async)">
+        <a class="parent-link" [routerLink]="parentLink">&lt;</a>
+      </div>
+      <div [ngClass]="{'title': !(isHandset$ | async), 'title-mobile': (isHandset$ | async)}" *ngIf="title">{{ title }}
+      </div>
+      <span fxFlex="auto" *ngIf="!(isHandset$ | async)"></span>
+      <router-outlet name="toolbar"></router-outlet>
+      <div class="avatar">
+        <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+      </div>
+
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

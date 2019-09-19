@@ -1,0 +1,115 @@
+<div class="content mat-typography" fxLayout="column" fxLayout.gt-sm="row" 
+  fxLayoutGap="16px">
+  <mat-card fxFlex.gt-sm="50">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
+      </div>
+      <mat-card-title>
+        {{ ship.name }}
+        <span fxFlex></span>
+        {{ ship.points }}&nbsp;
+        <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
+          (+{{ ship.currentPointsFromUpgrades() }})
+        </span>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span>
+          Hull: {{ ship.hull }} | Command: {{ ship.command }} | Engineering: {{ ship.engineering }} | Squadron {{
+              ship.squadron }}
+        </span>
+        <span fxFlex></span>
+        <button mat-icon-button color="accent" (click)="viewShipCard()" style="margin-top: -12px;">
+          <mat-icon aria-label="View ship card">image</mat-icon>
+        </button>
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
+          <div>
+            <strong>Shields</strong>
+          </div>
+          <div>
+            <span>F: {{ ship.frontShields }}&nbsp;</span>
+            <span>L/R: {{ ship.leftShields }}&nbsp;</span>
+            <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
+            <span>R: {{ ship.rearShields }}&nbsp;</span>
+          </div>
+          <div>
+            <strong>Navigation</strong>
+          </div>
+          <div>
+            <span *ngFor="let speed of ship.navigationChart.getSpeeds(); index as i">
+              {{ i + 1 }}:
+              <i class="ffi speedbox" *ngFor="let box of speed"
+                [ngClass]="{'ffi-swa-turn-0': box === 0, 'ffi-swa-turn-1': box === 1, 'ffi-swa-turn-2': box === 2}"></i>
+            </span>
+          </div>
+          <div>
+            <strong>Defense Tokens</strong>
+          </div>
+          <div>
+            <span>
+              <i class="ffi defense-token" *ngFor="let token of ship.defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
+                                     'ffi-swa-evade': token === 1,
+                                     'ffi-swa-redirect': token === 2,
+                                     'ffi-swa-contain': token === 3,
+                                     'ffi-swa-scatter': token === 4
+                                    }"></i>
+            </span>
+          </div>
+        </div>
+        <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
+          <strong>Armament</strong>
+          <div>Front:
+            <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
+          </div>
+          <div>Left / Right:
+            <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
+          </div>
+          <div *ngIf="ship.leftAuxArmament">Left Aux / Right Aux:
+            <flagship-battery [armament]="ship.leftAuxArmament"></flagship-battery>
+          </div>
+          <div>Rear:
+            <flagship-battery [armament]="ship.rearArmament"></flagship-battery>
+          </div>
+          <div>Anti-Squadron:
+            <flagship-battery [armament]="ship.antiSquadronArmament"></flagship-battery>
+          </div>
+        </div>
+      </div>
+
+
+    </mat-card-content>
+    <mat-action-list class="upgrade-list">
+      <h3 matSubheader style="margin-left: -16px;">Upgrades</h3>
+      <!-- [ngStyle]="{'min-height': (slot.upgrade ? '72': '56') + 'px', 'height': (slot.upgrade ? 'auto' : '56px')}"-->
+      <mat-list-item *ngFor="let slot of enabledUpgradeSlots(); last as last" (click)="selectUpgrade(slot)">
+        <div matListIcon fxLayout="row" style="width: 28px;height:28px;padding:0;">
+          <i flagshipUpgradeIcon [upgradeType]="slot.type"></i>
+        </div>
+        <h3 matLine *ngIf="!slot.upgrade" class="text-muted">{{ upgradeTypeName(slot.type) }}</h3>
+        <h3 matLine *ngIf="slot.upgrade">{{ slot.upgrade.name }}</h3>
+        <p matLine *ngIf="slot.upgrade" style="white-space: normal; font-size: .8em;">
+          <span>{{ slot.upgrade.text }}</span>
+        </p>
+
+        <span style="margin-left: 8px;" *ngIf="slot.upgrade">{{ slot.upgrade.points }}</span>
+
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-action-list>
+
+    <mat-card-actions>
+      <button mat-button routerLink="statistics">View Statistics</button>
+      <span fxFlex></span>
+      <button mat-button color="primary" 
+        [routerLink]="['/fleets', ship.fleet.id]">
+        OK
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
