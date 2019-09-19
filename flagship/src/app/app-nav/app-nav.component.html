@@ -28,8 +28,8 @@
       </div>
       <div [ngClass]="{'title': !(isHandset$ | async), 'title-mobile': (isHandset$ | async)}" *ngIf="title">{{ title }}
       </div>
+      <span fxFlex="auto" *ngIf="!(isHandset$ | async)"></span>
       <router-outlet name="toolbar"></router-outlet>
-
       <div class="avatar">
         <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
       </div>
