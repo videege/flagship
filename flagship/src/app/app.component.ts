@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,24 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     if (this.isIos() && !this.isInStandaloneMode()) {
-      this.bottomSheet.open(AppleInstallPromptComponent);
+      this.localStorage.getItem<Date>('lastIosPromptDate')
+        .subscribe((d: Date) => {
+          let diffDays = 0;
+          if (d) {
+            let now = new Date();
+            let diff = Math.abs(now.getTime() - d.getTime());
+            diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+          }
+          if (!d || diffDays >= 7) {
+            this.bottomSheet.open(AppleInstallPromptComponent);
+            this.localStorage.setItemSubscribe('lastIosPromptDate', new Date());
+          }
+        });
+      
     }
   }
-  title = 'flagship';
 
-  constructor(private bottomSheet: MatBottomSheet) {
+  constructor(private bottomSheet: MatBottomSheet, private localStorage: LocalStorage) {
     
   }
 
