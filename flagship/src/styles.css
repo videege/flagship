@@ -8,20 +8,22 @@ body {
     padding: 0;
     margin: 0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
-/* 
-@font-face {
-    font-family: 'distantgalaxy';
-    src: url('assets/fonts/distantgalaxy.woff') format('woff');
-    /* src: url('DISTGRG_-webfont.eot?#iefix') format('embedded-opentype'),
-         url('DISTGRG_-webfont.woff2') format('woff2'),
-         url('DISTGRG_-webfont.woff') format('woff'),
-         url('DISTGRG_-webfont.ttf') format('truetype'),
-         url('DISTGRG_-webfont.svg#distant_galaxyregular') format('svg'); */
-    /* font-weight: normal;
-    font-style: normal;
-} */ 
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
 
 .content {
     padding: 16px;
@@ -63,23 +65,24 @@ eco-fab-speed-dial.fab-lower-right {
     margin-top: 4px;
 }
 
-.mat-card-avatar > .mat-icon {
+.mat-card-avatar>.mat-icon {
     font-size: 40px;
 }
 
-.mat-card-avatar > i {
+.mat-card-avatar>i {
     font-size: 40px;
 }
 
-.mat-card-avatar > i.flagship {
+.mat-card-avatar>i.flagship {
     color: red;
 }
 
-.stat > i {
-    font-size: 20px;;
+.stat>i {
+    font-size: 20px;
+    ;
 }
 
-.stat > span {
+.stat>span {
     font-size: 24px;
     vertical-align: top;
 }
@@ -89,59 +92,74 @@ i.speedbox {
     padding: 2px;
 }
 
-i.upgrade{
-    width:28px !important;
-    display:block;
-    height:28px !important;
-    color:white;
-    text-decoration:none;
+i.upgrade {
+    width: 28px !important;
+    display: block;
+    height: 28px !important;
+    color: white;
+    text-decoration: none;
 }
-i.upgrade:before{
+
+i.upgrade:before {
     content: '';
-    background-size:cover;
-        position:absolute;
-    width:28px;
-    height:28px;
+    background-size: cover;
+    position: absolute;
+    width: 28px;
+    height: 28px;
 }
+
 i.commander:before {
     background: url('/assets/img/commander.png');
 }
+
 i.defensiveretrofit:before {
     background: url('/assets/img/defensiveretrofit.png');
 }
+
 i.experimentalretrofit:before {
     background: url('/assets/img/experimentalretrofit.png');
 }
+
 i.fleetcommand:before {
     background: url('/assets/img/fleetcommand.png');
 }
+
 i.fleetsupport:before {
     background: url('/assets/img/fleetsupport.png');
 }
+
 i.ioncannons:before {
     background: url('/assets/img/ioncannons.png');
 }
+
 i.offensiveretrofit:before {
     background: url('/assets/img/offensiveretrofit.png');
 }
+
 i.officer:before {
     background: url('/assets/img/officer.png');
 }
+
 i.ordnance:before {
     background: url('/assets/img/ordnance.png');
 }
+
 i.supportteam:before {
     background: url('/assets/img/supportteam.png');
 }
+
 i.title:before {
     background: url('/assets/img/title.png');
 }
+
 i.turbolasers:before {
     background: url('/assets/img/turbolasers.png');
 }
+
 i.weaponsteam:before {
     background: url('/assets/img/weaponsteam.png');
 }
+
 i.boardingteam:before {
     background: url('/assets/img/boardingteam.png');
 }
@@ -166,11 +184,10 @@ i.boardingteam:before {
     min-height: 100px;
 }
 
-.chart-wrapper > h3 {
+.chart-wrapper>h3 {
     text-align: center;
 }
 
-.chart-wrapper > .stat-selector {
+.chart-wrapper>.stat-selector {
     margin-bottom: 8px;
 }
-

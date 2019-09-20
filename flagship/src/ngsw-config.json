@@ -1,5 +1,9 @@
 {
   "index": "/index.html",
+  "appData": {
+    "version": "0.1.0",
+    "changelog": "Preliminary work"
+  },
   "assetGroups": [
     {
       "name": "app",

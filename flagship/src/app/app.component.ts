@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppleInstallPromptComponent } from './apple-install-prompt/apple-install-prompt.component';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { SwUpdate } from '@angular/service-worker';
+import { UpdatePromptComponent } from './update-prompt/update-prompt.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,12 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 export class AppComponent implements OnInit {
   
   ngOnInit(): void {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        // New update available
+        this.bottomSheet.open(UpdatePromptComponent);
+      });
+    }
     if (this.isIos() && !this.isInStandaloneMode()) {
       this.localStorage.getItem<Date>('lastIosPromptDate')
         .subscribe((d: Date) => {
@@ -28,7 +36,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private bottomSheet: MatBottomSheet, private localStorage: LocalStorage) {
+  constructor(private bottomSheet: MatBottomSheet, private localStorage: LocalStorage,
+    private swUpdate: SwUpdate) {
     
   }
 

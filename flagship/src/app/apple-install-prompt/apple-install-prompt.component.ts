@@ -9,13 +9,10 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppleInstallPromptComponent implements OnInit {
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<AppleInstallPromptComponent>,
-    private swUpdate: SwUpdate) {}
+  constructor(private bottomSheetRef: MatBottomSheetRef<AppleInstallPromptComponent>) {}
 
   ngOnInit() {
-    this.swUpdate.available.subscribe(() => {
-      alert('update available');
-    })
+    
   }
 
 }

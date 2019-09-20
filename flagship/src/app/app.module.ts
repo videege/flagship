@@ -24,6 +24,7 @@ import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { CoreModule } from './core/core.module';
+import { UpdatePromptComponent } from './update-prompt/update-prompt.component';
 
 export function appNameFactory() {
   return 'flagship-armada';
@@ -36,10 +37,12 @@ export function appNameFactory() {
     NotfoundComponent,
     FooterComponent,
     AppleInstallPromptComponent,
-    LoginComponent
+    LoginComponent,
+    UpdatePromptComponent
   ],
   entryComponents: [
-    AppleInstallPromptComponent
+    AppleInstallPromptComponent,
+    UpdatePromptComponent
   ],
   imports: [
     BrowserModule,
