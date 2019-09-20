@@ -1,7 +1,7 @@
 <mat-accordion class="squadron-list">
   <mat-expansion-panel *ngFor="let id of squadronIds">
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title fxFlex="auto" class="squadron-title">
         {{ distinctSquadrons[id].unique ? "&#9679;&nbsp;" + distinctSquadrons[id].displayName() : distinctSquadrons[id].displayName() }}
         <span *ngIf="distinctSquadrons[id].defenseTokens.length">
           <i class="ffi squadron-icon" *ngFor="let token of distinctSquadrons[id].defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
@@ -12,45 +12,45 @@
                           }"></i>
         </span>
       </mat-panel-title>
-      <mat-panel-description>
-        <span fxFlex="80">
-          <span fxFlex>
-            <i class="ffi ffi-swa-speed squadron-icon"></i>{{ distinctSquadrons[id].speed }}
-          </span>
-          <span fxFlex>
-            <i class="ffi ffi-swa-hull squadron-icon"></i>{{ distinctSquadrons[id].hull }}
-          </span>
-          <span fxFlex>
-            <i class="ffi ffi-swa-anti-squadron squadron-icon"></i>
-            <flagship-battery [armament]="distinctSquadrons[id].antiSquadronArmament"></flagship-battery>
-          </span>
-          <span fxFlex>
-            <i class="ffi ffi-swa-anti-ship squadron-icon"></i>
-            <flagship-battery [armament]="distinctSquadrons[id].batteryArmament"></flagship-battery>
-          </span>
-        </span>
-
+      <mat-panel-description ngClass.xs="points-small">
         <span fxFlex></span>
-        <span>
+        <span *ngIf="!(isHandset$ | async)">
           {{ distinctSquadrons[id].points }}
-          <span
-            *ngIf="squadronCounts[id] > 1">&times;{{squadronCounts[id]}}={{ distinctSquadrons[id].points * squadronCounts[id] }}</span>
+          <span *ngIf="squadronCounts[id] > 1">
+            &times; {{squadronCounts[id]}} = {{ distinctSquadrons[id].points * squadronCounts[id] }}
+          </span>
         </span>
-
+        <span matTooltip="{{ distinctSquadrons[id].points + ' &times; ' + squadronCounts[id] }}" 
+          *ngIf="(isHandset$ | async)">
+          {{ squadronCounts[id] * distinctSquadrons[id].points }}
+        </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutGap="4px">
+      <span fxFlex>
+        <i class="ffi ffi-swa-speed squadron-icon"></i>{{ distinctSquadrons[id].speed }}
+      </span>
+      <span fxFlex>
+        <i class="ffi ffi-swa-hull squadron-icon"></i>{{ distinctSquadrons[id].hull }}
+      </span>
+      <span fxFlex>
+        <i class="ffi ffi-swa-anti-squadron squadron-icon"></i>
+        <flagship-battery [armament]="distinctSquadrons[id].antiSquadronArmament"></flagship-battery>
+      </span>
+      <span fxFlex>
+        <i class="ffi ffi-swa-anti-ship squadron-icon"></i>
+        <flagship-battery [armament]="distinctSquadrons[id].batteryArmament"></flagship-battery>
+      </span>
+    </div>
     <ul class="keyword-list">
       <li *ngFor="let keyword of distinctSquadrons[id].keywords">{{ keyword.displayText() }}</li>
     </ul>
     <p *ngIf="distinctSquadrons[id].text.length">{{ distinctSquadrons[id].text }}</p>
     <mat-action-row>
-      <div *ngIf="!distinctSquadrons[id].unique">
-        <span>Number of Squadrons:&nbsp;</span>
-        <button mat-icon-button [disabled]="squadronCounts[id] === 1" 
-          (click)="decreaseSquadronCount(id)">
+      <div *ngIf="!distinctSquadrons[id].unique" fxLayout="row">
+        <button mat-icon-button [disabled]="squadronCounts[id] === 1" (click)="decreaseSquadronCount(id)">
           <mat-icon aria-label="Remove One Squadron">remove</mat-icon>
         </button>
-        <span>{{ squadronCounts[id] }}</span>
         <button mat-icon-button (click)="increaseSquadronCount(id)">
           <mat-icon aria-label="Add One Squadron">add</mat-icon>
         </button>

@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
             this.localStorage.setItemSubscribe('lastIosPromptDate', new Date());
           }
         });
-      
     }
   }
 

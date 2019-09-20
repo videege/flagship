@@ -1,11 +1,29 @@
 .squadron-list .mat-expansion-panel-header-title,
 .squadron-list .mat-expansion-panel-header-description {
-  flex-basis: 0;
+    flex-basis: 0;
 }
 
 .squadron-list .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.squadron-title {
+    max-width: 175px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-height: 20px;
+    /* fallback */
+    max-height: 40px;
+    /* fallback */
+}
+
+.points-small {
+    font-size: 0.5em;
 }
 
 .squadron-icon {

@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Squadron } from '../../domain/squadron';
 import { Fleet } from '../../domain/fleet';
 import { SquadronFactory } from '../../domain/factories/squadronFactory';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'flagship-squadrons-list',
@@ -10,6 +13,11 @@ import { SquadronFactory } from '../../domain/factories/squadronFactory';
 })
 export class SquadronsListComponent implements OnInit {
   @Input() fleet: Fleet;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
 
   private _squadrons: Squadron[];
   private squadronFactory = new SquadronFactory();
@@ -21,7 +29,7 @@ export class SquadronsListComponent implements OnInit {
   public squadronCounts: { [id: number]: number } = {}
   public distinctSquadrons: { [id: number]: Squadron } = {}
   public squadronIds: number[] = [];
-  constructor() { }
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
     this.initialize()
