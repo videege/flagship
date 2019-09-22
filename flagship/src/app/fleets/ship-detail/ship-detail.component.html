@@ -1,10 +1,13 @@
 <mat-card fxFlex>
   <mat-card-header>
-    <div mat-card-avatar>
+    <!-- <div mat-card-avatar>
       <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
-    </div>
+    </div> -->
+    <flagship-ship-icon [ship]="ship" mat-card-avatar></flagship-ship-icon>
+    <!-- <img mat-card-avatar src="https://vignette.wikia.nocookie.net/starwars-armada/images/2/2e/ISDTitle-icon.png/revision/latest?cb=20171107173206&format=original" /> -->
     <mat-card-title>
       {{ ship.name }}
+      <mat-icon *ngIf="ship.isFlagship()">flag</mat-icon>
       <span fxFlex></span>
       {{ ship.points }}&nbsp;
       <span *ngIf="ship.currentPointsFromUpgrades() >= 0">

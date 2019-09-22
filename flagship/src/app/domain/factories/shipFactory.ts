@@ -768,9 +768,10 @@ export class ShipFactory {
     }
 
     // All ships currently have titles
-    upgradeSlots.push(new UpgradeSlot(UpgradeType.Title));
+    if (!upgradeSlots.find(u => u.type === UpgradeType.Title))
+      upgradeSlots.push(new UpgradeSlot(UpgradeType.Title));
     // If the ship is not a flotilla, add a commander slot
-    if (data.size !== Size.SmallFlotilla) {
+    if (data.size !== Size.SmallFlotilla && !upgradeSlots.find(u => u.type === UpgradeType.Commander)) {
       upgradeSlots.push(new UpgradeSlot(UpgradeType.Commander));
     }
 

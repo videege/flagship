@@ -4,6 +4,7 @@ import { DefaultToolbarComponent } from './default-toolbar/default-toolbar.compo
 import { AlertComponent } from './alert/alert.component';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { BatteryComponent } from './battery/battery.component';
+import { ShipIconComponent } from './ship-icon/ship-icon.component';
 
 
 
@@ -11,7 +12,8 @@ import { BatteryComponent } from './battery/battery.component';
   declarations: [
     DefaultToolbarComponent,
     AlertComponent,
-    BatteryComponent
+    BatteryComponent,
+    ShipIconComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { BatteryComponent } from './battery/battery.component';
   exports: [
     DefaultToolbarComponent,
     AlertComponent,
-    BatteryComponent
+    BatteryComponent,
+    ShipIconComponent
   ]
 })
 export class SharedModule { }
