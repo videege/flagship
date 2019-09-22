@@ -49,6 +49,106 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 32, upgradeClass: UpgradeClass.Commander,
                 text: "After deploying fleets, place 3 facedown command dials on this card. At the start of each Ship Phase, you may reveal and discard 1 of those dials. If you do, until the end of the round, before each friendly ship activates, it gains 1 additional dial matching that discarded dial."
             },
+            {
+                id: 1002, name: 'Admiral Konstantine', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 23, upgradeClass: UpgradeClass.Commander,
+                text: "At the start of each Status Phase, for each enemy ship at distance 1-5 of at least 2 friendly medium or large ships, you may increase or decrease that enemy's ship speed by 1 to a minimum of 1."
+            },
+            {
+                id: 1004, name: 'Admiral Motti', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 24, upgradeClass: UpgradeClass.Commander,
+                text: "The hull value of each friendly ship is increased according to its size class: small ship: 1, medium ship: 2, large ship: 3."
+            },
+            {
+                id: 1005, name: 'Admiral Ozzel', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
+                text: "When a friendly ship resolves a navigate command, it may change its speed by an additional 1."
+            },
+            {
+                id: 1006, name: 'Admiral Piett', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 22, upgradeClass: UpgradeClass.Commander,
+                text: "When a friendly ship spends only a command token to resolve a command, you may exhaust this card. If you do, that ship resolves that command as if it had spent a dial of the same type instead."
+            },
+            {
+                id: 1007, name: 'Admiral Screed', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 26, upgradeClass: UpgradeClass.Commander,
+                text: "Once per activation, when a friendly ship is attacking, it may spend one die to change a die to a face with a critical icon."
+            },
+            {
+                id: 1008, name: 'Admiral Sloane', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 24, upgradeClass: UpgradeClass.Commander,
+                text: "While a friendly squadron without Rogue is attacking, it may spend 1 die with an accuracy icon to choose and spend 1 of the defender's defense tokens. While attacking a ship, it may also reroll 1 die with a critical icon."
+            },
+            {
+                id: 1009, name: 'Darth Vader', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 36, upgradeClass: UpgradeClass.Commander,
+                text: "While a friendly ship is attacking a ship, it may spend 1 defense token to reroll any number of dice in its attack pool."
+            },
+            {
+                id: 1010, name: 'Emperor Palpatine', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 35, upgradeClass: UpgradeClass.Commander,
+                text: "After deploying fleets, place 1 defense token of each type on this card. At the start of each Ship Phase you may discard 1 of those tokens. If you do, until the end of the round, if an enemy ship or squadron spends a matching token during its Spend Defense Token step, discard that token."
+            },
+            {
+                id: 1011, name: 'Moff Jerjerrod', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 23, upgradeClass: UpgradeClass.Commander,
+                text: "During a friendly ship's Determine Course step, it may suffer 1 damage to change the first yaw value of its current speed to \"II\" until the end of its activation."
+            },
+            {
+                id: 1011, name: 'Emperor Palpatine', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 35, upgradeClass: UpgradeClass.Commander,
+                text: "After deploying fleets, place 1 defense token of each type on this card. At the start of each Ship Phase you may discard 1 of those tokens. If you do, until the end of the round, if an enemy ship or squadron spends a matching token during its Spend Defense Token step, discard that token."
+            },
+            {
+                id: 1500, name: 'Admiral Ackbar', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 38, upgradeClass: UpgradeClass.Commander,
+                text: "Before a friendly ship's Attack Step, it may choose to attack from only its left and right hull zones this round. If it does, it may add 2 red dice to its attack pool while attacking a ship."
+            },
+            {
+                id: 1501, name: 'Admiral Raddus', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 26, upgradeClass: UpgradeClass.Commander,
+                text: "Before deploying fleets, you may set aside 1 other friendly ship. At the start of any round, you may deploy that ship at distance 1 of a friendly ship. That ship cannot be deployed overlapping squadrons and cannot be the first ship to activate that round."
+            },
+            {
+                id: 1502, name: 'Commander Sato', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 32, upgradeClass: UpgradeClass.Commander,
+                text: "While a friendly ship is attacking a ship at distance 1 of a friendly squadron, before rolling attack dice, the attacker may replace up to 2 dice in its attack pool with an equal number of dice of any colors or color."
+            },
+            {
+                id: 1503, name: 'Garm Bel Iblis', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
+                text: "At the start of the first round and the fifth round, each friendly ship may gain a number of command tokens equal to its command value."
+            },
+            {
+                id: 1504, name: 'General Cracken', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
+                text: "While a friendly small or medium ship is defending against a ship, if the defender is at speed 3 or higher, the attack is treated as obstructed."
+            },
+            {
+                id: 1505, name: 'General Dodonna', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
+                text: "Before an enemy ship is dealt a faceup damage card, look at the top four cards of the damage deck, place one on top of the deck and discard the others."
+            },
+            {
+                id: 1506, name: 'General Madine', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                text: "When a friendly ship resolves a navigate command, if it spent a navigate dial it may increase 1 additional yaw value by 1. if it spent a navigate token, it may either change its speed or increase 1 yaw value by 1."
+            },
+            {
+                id: 1507, name: 'General Rieekan', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                text: "Once per round, when a friendly ship or friendly unique squadron is destroyed, it remains in the play area and is treated as if it was not destroyed until the end of the Status Phase."
+            },
+            {
+                id: 1508, name: 'Kyrsta Agate', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
+                text: "After you deploy, gain 1 non-scatter defense token. During your \"Spend Defense Tokens\" step, if your speed is not 0, you may discard 1 defense token to resolve the effect of that defense token. You cannot resolve the effect of each type of dense token more than once per attack."
+            },
+            {
+                id: 1509, name: 'Mon Mothma', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                text: "When a friendly ship resolves the evade token effect, it can cancel 1 die at medium range or reroll 1 die at close range or distance 1."
+            },
             // Titles
             {
                 id: 2000, name: 'Avenger', type: UpgradeType.Title, faction: Faction.Empire,
