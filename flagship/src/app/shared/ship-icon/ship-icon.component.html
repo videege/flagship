@@ -1,1 +1,2 @@
-<img [src]="iconUrl" class="ship-icon"/>
+<img [src]="iconUrl" class="ship-icon" 
+    [ngClass]="{'flagship': ship.isFlagship()}"/>

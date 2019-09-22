@@ -1,4 +1,9 @@
 .ship-icon {
-    width: 55px;
+    width: 50px;
     margin-top: 10px;
+}
+
+.flagship {
+    -webkit-filter: invert(16%) sepia(91%) saturate(6864%) hue-rotate(2deg) brightness(107%) contrast(120%);
+    filter: invert(16%) sepia(91%) saturate(6864%) hue-rotate(2deg) brightness(107%) contrast(120%);
 }

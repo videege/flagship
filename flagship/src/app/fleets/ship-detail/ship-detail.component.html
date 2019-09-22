@@ -6,8 +6,8 @@
     <flagship-ship-icon [ship]="ship" mat-card-avatar></flagship-ship-icon>
     <!-- <img mat-card-avatar src="https://vignette.wikia.nocookie.net/starwars-armada/images/2/2e/ISDTitle-icon.png/revision/latest?cb=20171107173206&format=original" /> -->
     <mat-card-title>
-      {{ ship.name }}
-      <mat-icon *ngIf="ship.isFlagship()">flag</mat-icon>
+      <span style="margin-right:4px">{{ ship.name }}</span>
+      <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
       <span fxFlex></span>
       {{ ship.points }}&nbsp;
       <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
@@ -70,8 +70,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button 
-      [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]" >
+    <button mat-button [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]">
       Edit Ship
     </button>
     <span fxFlex></span>

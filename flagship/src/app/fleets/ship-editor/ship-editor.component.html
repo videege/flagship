@@ -2,11 +2,11 @@
   fxLayoutGap="16px">
   <mat-card fxFlex.gt-sm="50">
     <mat-card-header>
-      <div mat-card-avatar>
+      <!-- <div mat-card-avatar>
         <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
-      </div>
+      </div> -->
       <mat-card-title>
-        {{ ship.name }}
+        <span style="margin-right:4px">{{ ship.name }}</span>
         <span fxFlex></span>
         {{ ship.points }}&nbsp;
         <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
