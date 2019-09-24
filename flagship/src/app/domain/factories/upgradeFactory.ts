@@ -460,6 +460,41 @@ export class UpgradeFactory {
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "While attacking, you may reroll any number of your black dice."
             },
+            {
+                id: 4002, name: 'Fire-Control Team', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "During the Resolve Damage Step, you may exhaust this card to resolve 1 additional critical effect. You cannot resolve the same critical effect twice."
+            },
+            {
+                id: 4003, name: 'Flight Controllers', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: The anti-squadron armament of each squadron that you activate is increased by one blue die until the end of its activation."
+            },
+            {
+                id: 4004, name: 'Ruthless Strategists', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "After attacking a squadron, you may deal 1 damage to a friendly squadron engaged with the defender. If you do, the defender suffers 1 damage."
+            },
+            {
+                id: 4005, name: 'Sensor Team', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking, you may exhaust this card and spend one die to change one of your dice to a face with an accuracy icon."
+            },
+            {
+                id: 4006, name: 'Veteran Gunners', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking, you may exhaust this card to reroll all dice in your attack pool.."
+            },
+            {
+                id: 4007, name: 'Weapons Battery Techs', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a ship, you may change 1 die face with an accuracy icon to a face with a critical icon."
+            },
+            {
+                id: 4008, name: 'Caitken and Shollan', type: UpgradeType.WeaponsTeam, faction: Faction.Rebels,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking, you may exhaust this card to reroll any number of dice of 1 color."
+            },
             // Offensive Retrofit - 5
 
             // Boarding Team - 6
