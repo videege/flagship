@@ -5,7 +5,7 @@ import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
 import { SlotGrantingUpgrade } from '../upgrades/slotGrantingUpgrade';
 
 export class UpgradeFactory {
-    upgradeData: UpgradeData[];
+    upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
 
     instantiateUpgrade(id: number): Upgrade {
         let data = this.upgradeData.find(ud => ud.id === id);
@@ -288,6 +288,7 @@ export class UpgradeFactory {
             {
                 id: 2504, name: 'Liberator', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting, 
+                grantedType: UpgradeType.FleetCommand,
                 text: "You gain 1 additional Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. You cannot spend a command token to resolve a Fleet Command card's effect."
             },
             {
@@ -388,6 +389,7 @@ export class UpgradeFactory {
             {
                 id: 2524, name: 'Vanguard', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.WeaponsTeam,
                 text: "You gain one additional Weapons Team icon in your upgrade bar. At the start of the first round, you may replace 1 of your defense tokens with an evade defense token."
             },
             {
@@ -398,6 +400,7 @@ export class UpgradeFactory {
             {
                 id: 2526, name: 'Phoenix Home', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.Officer,
                 text: "You gain 1 additional Officer icon in your upgrade bar. You can be assigned up to 4 command tokens instead of a number of command tokens equal to your command value."
             },
             // Ion Cannons
