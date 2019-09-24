@@ -6,30 +6,29 @@ import { Armament } from '../armament';
 import { NavigationChart } from '../navigationChart';
 import { UpgradeSlot } from '../upgradeSlot';
 import { UpgradeType } from '../upgradeType';
-import { TitleCasePipe } from '@angular/common';
 
 export class ShipFactory {
   private static titles = {
-    isd: [],
-    arquitens: [],
-    gladiator: [],
-    gozanti: [],
-    ssd: [],
-    raider: [],
-    quasar: [],
-    vsd: [],
-    interdictor: [],
+    isd: [2001, 2002, 2003, 2004, 2010, 2011],
+    arquitens: [2004, 2005],
+    gladiator: [2006, 2007, 2010],
+    gozanti: [2008, 2009],
+    ssd: [2019, 2020, 2021, 2022],
+    raider: [2016, 2017, 2018],
+    quasar: [2013, 2014, 2015],
+    vsd: [2010],
+    interdictor: [2012],
     // rebels
-    assaultFrigate: [],
-    cr90: [],
-    gr75: [],
-    mc30c: [],
-    mc80lib: [],
-    mc80ho: [],
-    nebulon: [],
-    pelta: [],
-    hammerhead: [],
-    mc75: []
+    assaultFrigate: [2500, 2501],
+    cr90: [2502, 2503, 2504, 2505],
+    gr75: [2506, 2507],
+    mc30c: [2511, 2512, 2515],
+    mc80lib: [2515, 2519, 2520, 2521],
+    mc80ho: [2515, 2516, 2517, 2518],
+    nebulon: [2522, 2523, 2524, 2525],
+    pelta: [2526],
+    hammerhead: [2508, 2509, 2510],
+    mc75: [2513, 2514, 2515]
   };
 
   static shipData: ShipData[] = [

@@ -153,7 +153,252 @@ export class UpgradeFactory {
             {
                 id: 2000, name: 'Avenger', type: UpgradeType.Title, faction: Faction.Empire,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "Something something something."
+                text: "While attacking, you may exhaust this card. If you do, the defender cannot spend exhausted defense tokens."
+            },
+            {
+                id: 2001, name: 'Chimaera', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "You gain 1 Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. At the start of the Command Phase, you may discard 1 Fleet Command upgrade card you have equipped and replace it with another Fleet Command upgrade card."
+            },
+            {
+                id: 2002, name: 'Devastator', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "Once per round, while attacking from your front hull zone, you may add 1 blue dice to your attack pool for each of your discarded defense tokens."
+            },
+            {
+                id: 2003, name: 'Relentless', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "The total number of command dials that must be assigned to your ship during the Command Phase is reduced by 1."
+            },
+            {
+                id: 2004, name: 'Centicore', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When another friendly ship resolves a Squadron command, up to 2 of the squadrons it activates can be at close-medium range of you."
+            },
+            {
+                id: 2005, name: 'Hand of Justice', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may exhaust this card to choose another friendly ship at distance 1-5 and ready 1 of its defense tokens."
+            },
+            {
+                id: 2006, name: 'Demolisher', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "During your activation, you can perform 1 of your attacks after you execute your first maneuver."
+            },
+            {
+                id: 2007, name: 'Insidious', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "The black dice in your battery armament can be used at medium range. This effect applies only when attacking the rear hull zone of a ship."
+            },
+            {
+                id: 2008, name: 'Vector', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: The speed of each squadron without Heavy you activate is increased by 1, to a maximum of 5, until the end of its activation."
+            },
+            {
+                id: 2009, name: 'Suppressor', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "After an enemy ship ends its activation, if it is at distance 1-3, you may choose and exhaust 1 of his defense tokens."
+            },
+            {
+                id: 2010, name: 'Seventh Fleet Star Destroyer', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "\"Star Destroyer\" only. While defending against an attack that targets your front hull zone, before you suffer damage, you may choose and exhaust a copy of this card on another friendly ship at distance 1-4 to reduce the total damage by 1."
+            },
+            {
+                id: 2011, name: 'Sovereign', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may exhaust this card to discard 1 command token from up to 3 friendly ships at distance 1-5. If you do, each of those ships may gain 1 command token of any type."
+            },
+            {
+                id: 2012, name: 'Interdictor', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When a ship activates, you may exhaust this card to ready 1 other upgrade card equipped to this ship."
+            },
+            {
+                id: 2013, name: 'Pursuant', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command other than a Squadron command, you may discard this card to resolve a Squadron command. Treat this command as if you spent a Squadron dial."
+            },
+            {
+                id: 2014, name: 'Squall', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you activate, you may choose up to 3 unengaged friendly squadrons at close-medium range. Those squadrons may move up to distance 2. If they do, they cannot end their movement engaged."
+            },
+            {
+                id: 2015, name: 'Stronghold', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly squadron with Swarm at distance 1-2 is defending, the attack is treated as obstructed."
+            },
+            {
+                id: 2016, name: 'Corvus', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "After deploying fleets, you may redeploy this ship within your deployment zone."
+            },
+            {
+                id: 2017, name: 'Impetuous', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of your Attack Step, choose 1 of your hull zones. You may perform an attack against 1 enemy squadron from that hull zone, even if you have already attacked from that zone this round."
+            },
+            {
+                id: 2018, name: 'Instigator', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Enemy squadrons at distance 1 are treated as if they are engaged by 2 additional squadrons, even if they are not currently engaged."
+            },
+            {
+                id: 2019, name: 'Annihilator', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a squadron, you may reroll 1 attack die."
+            },
+            {
+                id: 2020, name: 'Eclipse', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When an enemy ship overlaps you, the enemy ship suffers a faceup damage card instead of a facedown damage card."
+            },
+            {
+                id: 2021, name: 'Executor', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "You can be assigned any number of command tokens of any type, instead of a number of command tokens equal to your command value."
+            },
+            {
+                id: 2022, name: 'Ravager', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Concentrate Fire: Your Concentrate Fire tokens can either reroll 1 attack die or add 1 die to the attack pool. If you add a die, that die must be of a color already in the attack pool."
+            },
+            {
+                id: 2500, name: 'Gallant Haven', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Before a friendly squadron at distance 1 suffers damage from an attack, reduce the total damage by one."
+            },
+            {
+                id: 2501, name: 'Paragon', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a ship you have already attacked this round, add 1 black die to your attack pool."
+            },
+            {
+                id: 2502, name: 'Dodonna\'s Pride', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Blue Critical: Cancel all attack dice to deal one faceup damage card to the defender."
+            },
+            {
+                id: 2503, name: 'Jaina\'s Light', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "You can ignore the effects of overlapping obstacles. Your attacks cannot be obstructed."
+            },
+            {
+                id: 2504, name: 'Liberator', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting, 
+                text: "You gain 1 additional Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. You cannot spend a command token to resolve a Fleet Command card's effect."
+            },
+            {
+                id: 2505, name: 'Tantive IV', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Before you gain a command token, 1 friendly ship at distance 1-5 may gain that token instead."
+            },
+            {
+                id: 2506, name: 'Bright Hope', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "While defending against an attack that does not target your rear hull zone, before you suffer damage reduce that total damage by 1."
+            },
+            {
+                id: 2507, name: 'Quantum Storm', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
+                text: "Navigate: After you execute a maneuver, you may exhaust this card to execute a 1-speed maneuver with a yaw of \"-\"."
+            },
+            {
+                id: 2508, name: 'Garel\'s Honor', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "When you overlap an enemy ship, the enemy ship suffers a faceup damage card instead of a facedown damage card."
+            },
+            {
+                id: 2509, name: 'Task Force Antilles', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you suffer damage from an attack, you may choose and exhaust a copy of this card on another friendly ship at distance 1-3. If you do, that ship suffers 1 of your damage instead. While this card is exhausted, you cannot spend engineering points."
+            },
+            {
+                id: 2510, name: 'Task Force Organa', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: false, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking, you may choose and exhaust a copy of this card on another friendly ship at distance 1-3 to reroll up to 2 attack dice. While this card is exhausted, you cannot attack ships."
+            },
+            {
+                id: 2511, name: 'Admonition', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "While defending, during the Spend Defense Tokens Step, you may discard a defense token to cancel 1 attack die."
+            },
+            {
+                id: 2512, name: 'Foresight', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "When you resolve the Evade defense effect, you can affect 1 additional die. When you resolve the Redirect defense effect, you can choose 1 additional adjacent hull zone to suffer damage."
+            },
+            {
+                id: 2513, name: 'Aspiration', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you deploy this ship, you may move shields to up to 2 of your hull zones from your other hull zones. If you do, the number of shields in a zone cannot exceed a maximum of \"6\". You cannot recover shields while any zone is greater than its maximum shield value."
+            },
+            {
+                id: 2514, name: 'Profundity', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "Before deploying fleets, you may set aside 1 small ship with a command value of 1. At the start of any round, you may deploy the set-aside ship at distance 1. You may un-equip up to 1 commander and 1 officer upgrade cards and equip them to it (if able)."
+            },
+            {
+                id: 2515, name: 'Mon Calamari Exodus Fleet', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "\"MC\" only. Engineering: You may choose and exhaust another copy of this card on a friendly ship at distance 1-4. If you do, gain 2 additional engineering points."
+            },
+            {
+                id: 2516, name: 'Defiance', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a ship that has already activated this round, add 1 die of any color to your attack pool."
+            },
+            {
+                id: 2517, name: 'Home One', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While another friendly ship at distance 1-5 is attacking, it may change 1 die to a face with an accuracy icon."
+            },
+            {
+                id: 2518, name: 'Independence', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: Each squadron you activate may increase its speed to 4 until the end of its activation. Squadrons that change speed in this way cannot attack this activation."
+            },
+            {
+                id: 2519, name: 'Endeavor', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the first round, gain 1 contain defense token."
+            },
+            {
+                id: 2520, name: 'Liberty', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: if you spent a squadron token, you may activate 1 additional squadron."
+            },
+            {
+                id: 2521, name: 'Mon Karren', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a ship, the defender cannot spend more than 1 defense token."
+            },
+            {
+                id: 2522, name: 'Redemption', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "When a friendly ship at distance 1-5 resoves an engineering command, it gains one additional engineering point."
+            },
+            {
+                id: 2523, name: 'Salvation', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a ship from your front hull zone, your critical icons count as two damage instead of one."
+            },
+            {
+                id: 2524, name: 'Vanguard', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.SlotGranting,
+                text: "You gain one additional Weapons Team icon in your upgrade bar. At the start of the first round, you may replace 1 of your defense tokens with an evade defense token."
+            },
+            {
+                id: 2525, name: 'Yavaris', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: Each squadron you activate can attack twice if it does not move."
+            },
+            {
+                id: 2526, name: 'Phoenix Home', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.SlotGranting,
+                text: "You gain 1 additional Officer icon in your upgrade bar. You can be assigned up to 4 command tokens instead of a number of command tokens equal to your command value."
             },
             // Ion Cannons
             {
