@@ -407,12 +407,47 @@ export class UpgradeFactory {
             {
                 id: 3000, name: 'Heavy Ion Emplacements', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: false, points: 9, upgradeClass: UpgradeClass.Normal,
-                text: "Something something something."
+                text: "Blue Critical: You may exhaust this card. If you do, the defending hull zone and each adjacent hull zone loses 1 shield."
             },
             {
                 id: 3001, name: 'Leading Shots', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal, 
                 text: 'While attacking, you may spend 1 blue die to reroll any number of dice in your attack pool.'
+            },
+            {
+                id: 3002, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
+                text: 'Modification. The battery armaments for your left and right hull zones are increased by 1 blue die.'
+            },
+            {
+                id: 3003, name: 'Ion Cannon Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal, 
+                text: 'Blue Critical: Choose and discard 1 command token from the defender. If the defender does not have any command tokens, the defending hull zone loses one shield instead.'
+            },
+            {
+                id: 3004, name: 'MS-1 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal, 
+                text: 'Blue Critical: Choose and exhaust 1 of the defender\'s upgrade cards.'
+            },
+            {
+                id: 3005, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
+                text: 'Modification. The battery armaments for your left and right hull zones are increased by 1 blue die.'
+            },
+            {
+                id: 3006, name: 'NK-7 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal, 
+                text: 'Blue Critical: You may exhaust this card to force the defender to choose and discard one of his defense tokens.'
+            },
+            {
+                id: 3007, name: 'Overload Pulse', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal, 
+                text: 'Blue Critical: Exhaust all of the defenders defense tokens.'
+            },
+            {
+                id: 3008, name: 'SW-7 Ion Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal, 
+                text: 'While attacking a ship, each of your unspent blue accuracy icons add 1 damage to the damage total.'
             },
             // Weapons Team
             {
