@@ -561,6 +561,26 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Choose and discard 1 non-commander upgrade card equipped to that ship."
             },
+            {
+                id: 6001, name: 'Cham Syndulla', type: UpgradeType.BoardingTeam, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. If you do you may choose a new command for each command dial assigned to that ship."
+            },
+            {
+                id: 6002, name: 'Jyn Erso', type: UpgradeType.BoardingTeam, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. If that ship has no raid tokens, it gains 2 raid tokens of your choice. If that ship has an objective token, you may also gain 1 victory token."
+            },
+            {
+                id: 6003, name: 'Boarding Engineers', type: UpgradeType.BoardingTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Look at its facedown damage cards and flip a number of them faceup up to your engineering value (one at a time)."
+            },
+            {
+                id: 6004, name: 'Boarding Troopers', type: UpgradeType.BoardingTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Choose and spend a number of its defense tokens up to your squadron value."
+            },
             // Ordnance - 7
             // Fleet Command - 8
             // Fleet Support - 9
