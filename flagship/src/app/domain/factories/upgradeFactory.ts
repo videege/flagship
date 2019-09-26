@@ -582,6 +582,47 @@ export class UpgradeFactory {
                 text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Choose and spend a number of its defense tokens up to your squadron value."
             },
             // Ordnance - 7
+            {
+                id: 7000, name: 'Assault Concussion Missiles', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "Black Critical: Each hull zone adjacent to the defending hull zone suffers 1 damage."
+            },
+            {
+                id: 7001, name: 'Assault Proton Torpedoes', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Black Critical: Deal 1 faceup damage card to the defender."
+            },
+            {
+                id: 7002, name: 'Expanded Launchers', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: true, points: 13, upgradeClass: UpgradeClass.Normal,
+                text: "Modification. The battery armament for your front hull zone is increased by 2 black dice."
+            },
+            {
+                id: 7003, name: 'External Racks', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When attacking at close range, you may discard this card to add 2 black dice to your attack pool."
+            },
+            {
+                id: 7004, name: 'Flechette Torpedoes', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a squadron, you may spend 1 black die with a critical icon to toggle its activation slider to the activated side."
+            },
+            {
+                id: 7005, name: 'Ordnance Pods', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Medium or large ship only. At the end of your Attack Step, you may exhaust this card and choose 1 of your hull zones. Then perform an attack from that hull zone with an anti-squadron armament of 1 black die, even if you have already attacked from that zone this round.",
+                sizeRestriction: [Size.Medium, Size.Large]
+            },
+            {
+                id: 7006, name: 'Rapid Reload', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Modification. The battery armaments for your left and right hull zones are increased by 1 black die."
+            },
+            {
+                id: 7007, name: 'Wide-Area Barrage', type: UpgradeType.Ordnance, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "Black Critical: If the defender is a ship, choose 1 other ship or squadron at close range of the defender. That ship or squadron suffers damage equal to half of the total number of black hit icons in your attack pool, rounded up."
+            },
             // Fleet Command - 8
             // Fleet Support - 9
             // Officer - 10

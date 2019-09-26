@@ -760,7 +760,8 @@ export class ShipFactory {
 
     let upgradeSlots = data.upgradeSlots;
     if (upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
-      upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit)) {
+      upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
+      !upgradeSlots.find(u => u.type === UpgradeType.BoardingTeam)) {
       // add a boarding team slot in
       // currently there are no ships that can fit two boarding teams
       upgradeSlots.push(new UpgradeSlot(UpgradeType.BoardingTeam));
