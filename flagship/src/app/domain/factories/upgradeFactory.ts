@@ -3,6 +3,7 @@ import { UpgradeType } from "../upgradeType";
 import { Faction } from "../faction";
 import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
 import { SlotGrantingUpgrade } from '../upgrades/slotGrantingUpgrade';
+import { Size } from '../size';
 
 export class UpgradeFactory {
     upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
@@ -15,17 +16,18 @@ export class UpgradeFactory {
 
         if (data.upgradeClass === UpgradeClass.Commander)
             return new CommanderUpgrade(data.id, data.name, data.faction,
-                data.text, data.modification, data.points);
+                data.text, data.modification, data.points, data.sizeRestriction);
 
         if (data.upgradeClass === UpgradeClass.SlotGranting) {
             let slotData = <SlotGrantingUpgradeData>data;
             return new SlotGrantingUpgrade(slotData.id, slotData.name, slotData.type,
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
-                slotData.unique, slotData.grantedType);
+                slotData.unique, slotData.grantedType, data.sizeRestriction);
         }
         if (data.upgradeClass === UpgradeClass.Normal)
             return new Upgrade(data.id, data.name, data.type, data.faction,
-                data.text, data.modification, data.points, data.unique);
+                data.text, data.modification, data.points, data.unique,
+                data.sizeRestriction);
 
         return null;
     }
@@ -496,7 +498,63 @@ export class UpgradeFactory {
                 text: "While attacking, you may exhaust this card to reroll any number of dice of 1 color."
             },
             // Offensive Retrofit - 5
-
+            {
+                id: 5000, name: 'Advanced Transponder Net', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Modification. Friendly Heavy squadrons at distance 1-2 prevent engaged squadrons from attacking ships."
+            },
+            {
+                id: 5001, name: 'Boosted Comms', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: You can activate friendly squadrons at close-long range (instead of close-medium)."
+            },
+            {
+                id: 5002, name: 'Disposable Capacitors', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Small or medium ship only. When you activate, you may discard this card. If you do, the blue dice in your battery armament can be used while attacking ships at close-long range until the end of the round.",
+                sizeRestriction: [Size.SmallFlotilla, Size.Small, Size.Medium]
+            },
+            {
+                id: 5003, name: 'Expanded Hangar Bay', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Your squadron value is increased by 1."
+            },
+            {
+                id: 5004, name: 'Hardened Bulkheads', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Large ship only. When you overlap a ship of a smaller size class (or are overlapped by a ship of a smaller class), deal 1 fewer facedown damage card to your ship.",
+                sizeRestriction: [Size.Large]
+            },
+            {
+                id: 5005, name: 'Phylon Q7 Tractor Beams', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: true, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Modification. When you activate, you may exhaust this card to choose 1 enemy ship of your size class or smaller at distance 1-5. That ship must spend a Navigate token or reduce its speed by 1 to a minimum of 1."
+            },
+            {
+                id: 5006, name: 'Point-Defense Rerout', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a squadron at close range, you may reroll your critical icons."
+            },
+            {
+                id: 5007, name: 'Proximity Mines', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Before deploying fleets, you may discard this card to place a number of proximity mine tokens equal to half your engineering value rounded down. You may place these tokens anywhere in the play area beyond distance 5 of enemy ships (and distance 1 of each other)."
+            },
+            {
+                id: 5008, name: 'Quad Laser Turrets', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While defending at distance 1, if the attacker is a squadron, you have Counter 1."
+            },
+            {
+                id: 5009, name: 'Rapid Launch Bays', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Before deploying fleets, you may set aside a number of squadrons up to your squadron value next to your ship card. Squadron: For each squadron you would activate with this command, you may instead place 1 of your set-aside squadrons within distance 1. It cannot move this activation."
+            },
+            {
+                id: 5010, name: 'Reserve Hangar Deck', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "After a non-unique squadron with SWARM at distance 1-5 is destroyed, you may discard this card. If you do, you may set that squadron's hull points to \"2\" and place that squadron at distance 1 with its activation slider toggled to the activated side and not engaged."
+            },
             // Boarding Team - 6
             {
                 id: 6000, name: 'Darth Vader', type: UpgradeType.BoardingTeam, faction: Faction.Empire,

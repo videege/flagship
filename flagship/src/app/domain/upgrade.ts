@@ -2,6 +2,7 @@ import { Faction } from './faction';
 import { UpgradeType } from './upgradeType';
 import { Ship } from './ship';
 import { UpgradeSlot } from './upgradeSlot';
+import { Size } from './size';
 
 export enum UpgradeClass {
   Normal,
@@ -18,7 +19,8 @@ export interface UpgradeData {
   modification: boolean;
   points: number;
   unique: boolean;
-  upgradeClass: UpgradeClass
+  upgradeClass: UpgradeClass,
+  sizeRestriction?: Size[]
 }
 
 export interface SlotGrantingUpgradeData extends UpgradeData {
@@ -30,7 +32,7 @@ export class Upgrade implements UpgradeData {
 
   constructor(public id: number, public name: string, public type: UpgradeType, 
     public faction: Faction, public text: string, public modification: boolean,
-    public points: number, public unique: boolean) {
+    public points: number, public unique: boolean, public sizeRestriction: Size[] = null) {
 
     }
   
@@ -50,6 +52,14 @@ export class Upgrade implements UpgradeData {
     const matchingUpgrade = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.isFilled() && u.upgrade.name === this.name);
     if (matchingUpgrade) {
       return false;
+    }
+
+    // Can't equip if this card has a size restriction and the ship size doesn't match
+    if (this.sizeRestriction) {
+      let matchingSize = this.sizeRestriction.find(x => x === ship.size);
+      if (!matchingSize) {
+        return false;
+      }
     }
     
     return true;
