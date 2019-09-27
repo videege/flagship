@@ -1030,6 +1030,26 @@ export class UpgradeFactory {
                 text: "Critical: The first 2 damage cards dealt to the defender by this attack are dealt faceup."
             },
             // Experimental Retrofit - 13
+            {
+                id: 13000, name: 'G-8 Experimental Projector', type: UpgradeType.ExperimentalRetrofit, faction: Faction.Any,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Before an enemy ship at distance 1-5 resolves the Determine Course step, you may exhaust this card to temporarily reduce its speed by 1 to a minimum of speed 0 until the end of the maneuver."
+            },
+            {
+                id: 13001, name: 'G7-X Grav Well Projector', type: UpgradeType.ExperimentalRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "Before deploying fleets, place 1 grav well token anywhere in the play area. When a ship deploys at distance 1-3 of a grav well token, its speed dial must be set to 0."
+            },
+            {
+                id: 13002, name: 'Grav Shift Reroute', type: UpgradeType.ExperimentalRetrofit, faction: Faction.Any,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "Before deploying fleets, place 1 grav shift token anywhere in the play area. After deploying fleets, you may move each obstacle at distance 1-3 of that token to within distance 2 of that obstacle's current location. Obstacles cannot overlap tokens, obstacles, or ships."
+            },
+            {
+                id: 13003, name: 'Targeting Scrambler', type: UpgradeType.ExperimentalRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly ship at distance 1-3 is defending at close range, during the Spend Defense Tokens step, you may exhaust this card to force the attacker to reroll up to 4 dice of your choice."
+            },
             // Defensive Retrofit - 14
             
         ];
