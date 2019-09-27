@@ -1051,7 +1051,36 @@ export class UpgradeFactory {
                 text: "While a friendly ship at distance 1-3 is defending at close range, during the Spend Defense Tokens step, you may exhaust this card to force the attacker to reroll up to 4 dice of your choice."
             },
             // Defensive Retrofit - 14
-            
+            {
+                id: 14000, name: 'Advanced Projectors', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "When you resolve the redirect token effect, you can choose more than one hull zone to suffer damage, which may include a nonadjacent hull zone."
+            },
+            {
+                id: 14001, name: 'Cluster Bomb s', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "After a squadron performs an attack against you, even if you are destroyed, you may discard this card to roll 4 blue dice. That squadron suffers 1 damage for each hit or critical icon rolled."
+            },
+            {
+                id: 14002, name: 'Early Warning System', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of each Ship Phase, you may choose 1 of your hull zones and mark it with a chaff token. Until the end of the round, while a ship or squadron is attacking that hull, the attack is obstructed. After the Status Phase, remove all chaff tokens."
+            },
+            {
+                id: 14003, name: 'Electronic Countermeasures', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While defending, you may exhaust this card to spend 1 defense token that your opponent targeted with an accuracy result.	"
+            },
+            {
+                id: 14004, name: 'Redundant Shields', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of each Status Phase, you may recover 1 shield."
+            },
+            {
+                id: 14005, name: 'Reinforced Blast Doors', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card to discard up to 3 of your facedown damage cards."
+            },
         ];
     }
 }
