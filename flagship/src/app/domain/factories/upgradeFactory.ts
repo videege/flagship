@@ -676,6 +676,262 @@ export class UpgradeFactory {
                 text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die."
             },
             // Officer - 10
+            {
+                id: 10000, name: 'Chart Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "After you execute a maneuver, if you overlapped an obstacle, you may discard this card instead of resolving the effects of overlapping that obstacle."
+            },
+            {
+                id: 10001, name: 'Damage Control Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "When you resolve the contain defense effect, you can prevent the attacker from resolving any critical effects."
+            },
+            {
+                id: 10002, name: 'Defense Liaison', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may spend one command token to change that command to a navigate or engineering command."
+            },
+            {
+                id: 10003, name: 'Engineering Captain', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may change it to an engineering command."
+            },
+            {
+                id: 10004, name: 'Expert Shield Tech', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While defending, during the Spend Defense Tokens step, when you spend a redirect defense token you may reduce the total damage from the attack by 1 instead of resolving that token's effect."
+            },
+            {
+                id: 10005, name: 'Flight Commander', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "During your activation, you can resolve your squadron command after you execute a maneuver."
+            },
+            {
+                id: 10006, name: 'Hondo Ohnaka', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the ship phase, you may discard this card to choose 2 different command tokens and place them on 2 different ships. Then your opponent chooses 2 different command tokens you did not choose and places them on 2 different ships."
+            },
+            {
+                id: 10007, name: 'Intel Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking, after you roll your attack pool, you may exhaust this card to choose 1 defense token. If that token is spent during this attack, discard that token."
+            },
+            {
+                id: 10008, name: 'Navigation Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may change it to a navigate command."
+            },
+            {
+                id: 10009, name: 'Skilled First Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may discard this card to discard your top command dial."
+            },
+            {
+                id: 10010, name: 'Stategic Advisor', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Large ship only. When it is your turn to activate, you may exhaust this card to pass your turn (your opponent activates a ship instead).",
+                sizeRestriction: [Size.Large]
+            },
+            {
+                id: 10011, name: 'Support Officer', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Command Phase, you may discard this card to discard all of your command dials."
+            },
+            {
+                id: 10012, name: 'Tactical Expert', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may change it to a concentrate fire command."
+            },
+            {
+                id: 10013, name: 'Veteran Captain', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command you may discard this card to gain one command token of your choice."
+            },
+            {
+                id: 10014, name: 'Weapons Liaison', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may spend one command token to change that command to a concentrate fire or squadron command."
+            },
+            {
+                id: 10015, name: 'Wing Commander', type: UpgradeType.Officer, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Before you reveal a command, you may change it to a squadron command."
+            },
+            // Imperial Officers
+            {
+                id: 10200, name: 'Admiral Chiraneau', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: Squadrons that you activate can move even if they are engaged. When an engaged squadron moves in this way, treat it as having a printed speed of \"2\"."
+            },
+            {
+                id: 10201, name: 'Admiral Montferrat', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While defending against a ship, if your speed is 3 or higher, the attack is treated as obstructed. After you execute a maneuver, if you overlapped a ship, discard this card."
+            },
+            {
+                id: 10202, name: 'Admiral Titus', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the first round, you may change 1 enemy ship's speed by 1."
+            },
+            {
+                id: 10203, name: 'Agent Kallus', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a unique squadron, add 1 die of any color to your attack pool."
+            },
+            {
+                id: 10204, name: 'Captain Brunson', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "While defending at distance 1-2 of an obstacle, during the Spend Defense Tokens step, you may exhaust this card to choose and cancel 1 attack die."
+            },
+            {
+                id: 10205, name: 'Captain Needa', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the first round, you may replace 1 of your defense tokens with an evade defense token."
+            },
+            {
+                id: 10206, name: 'Commandant Aresko', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "When another friendly ship at distance 1-3 reveals a command, you may exhaust this card to gain 1 command token of the same type."
+            },
+            {
+                id: 10207, name: 'Commander Beck', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "During your activation, you may resolve a command as if you had spent a command token. If you do, gain 1 raid token of the matching type. You may resolve this effect twice per activation."
+            },
+            {
+                id: 10208, name: 'Commander Gherant', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "While defending, the attacker cannot resolve critical effects. Discard this card after you perform an attack against a ship."
+            },
+            {
+                id: 10209, name: 'Commander Vanto', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "After you resolve the first command during your activation, you may exhaust this card to gain 1 command token of any type."
+            },
+            {
+                id: 10210, name: 'Commander Woldar', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly, non-swarm squadron at distance 1-3 is attacking a squadron, it may reroll 1 die of any color."
+            },
+            {
+                id: 10211, name: 'Director ISard', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may look at all command dials assigned to one enemy ship."
+            },
+            {
+                id: 10212, name: 'Director Krennic', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Concentrate Fire: While attacking at medium-long range, if you spent a concentrate fire dial, you may also reroll any number of red dice in your attack pool. If you spent a concentrate fire token, you may also reroll up to 2 red dice in your attack pool."
+            },
+            {
+                id: 10213, name: 'Governor Price', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "Medium or large ship only. After deploying fleets, you may place 1 round token on this card. If you do, during the round matching that round token, you must activate at the end of the Ship Phase (after all other ships have activated).",
+                sizeRestriction: [Size.Medium, Size.Large]
+            },
+            {
+                id: 10214, name: 'Iden Versio', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "When you resolve the evade defense effect, you can cancel 1 die at close range or distance 1. Squadron: You may discard this card to choose 1 enemy ship at close range. That ship gains 1 raid token of your choice."
+            },
+            {
+                id: 10215, name: 'Instructor Goran', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly non-heavy squadron is at distance 1-2, it has Counter 1 or increases its Counter value by 1."
+            },
+            {
+                id: 10216, name: 'Lira Wessex', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "When you are dealt a faceup damage card, you may spend 1 engineering token to flip that card facedown (without resolving its effect)."
+            },
+            {
+                id: 10217, name: 'Minister Tua', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.DefensiveRetrofit,
+                text: "You gain 1 additional Defensive Retrofit icon in your upgrade bar. You cannot equip this card to a medium or large ship with a Defensive Retrofit in its upgrade bar."
+            },
+            {
+                id: 10218, name: 'Taskmaster Grint', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "After deploying fleets, chhose and place 1 command token on this card. When you reveal a command matching that token, you may gain 1 matching command token without spending the command dial."
+            },
+            {
+                id: 10219, name: 'The Grand Inquisitor', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "When an enemy ship at distance 1-5 changes its speed, you may exhaust this card to increase or decrease your speed by 1."
+            },
+            {
+                id: 10220, name: 'Wulff Yularen', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "When you spend a command token, you may exhaust this card to gain one command token of the same type."
+            },
+            // Rebel Officers
+            {
+                id: 10500, name: 'Adar Tallon', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "After you resolve a squadron command, exhaust this card to toggle the activation slider of one squadron activated with that command."
+            },
+            {
+                id: 10501, name: 'Ahsoka Tano', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "During the activation of a friendly ship at distance 1-5, you may exhaust this card to discard 1 command token from that ship. If you do, that ship may gain 1 command token of any type."
+            },
+            {
+                id: 10502, name: 'Bail Organa', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "Medium or large ship only. After deploying fleets, you may place 1 round token on this card. At the start of the Ship Phase of the round matching that round token, if you are the second player you must activate, if you are the first player, you may gain up to 2 command tokens of your choice.",
+                sizeRestriction: [Size.Medium, Size.Large]
+            },
+            {
+                id: 10503, name: 'Captain Rex', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: You may choose 1 enemy ship at close range. That ship gains 1 raid token of your choice. While you are at distance 1-3 of an enemy ship, that ship can discard only 1 raid token of any type when it discards a command dial."
+            },
+            {
+                id: 10504, name: 'Ezra Bridger', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard this card to move 1 obstacle at distance 1-2 so that it is within distance 1-2 of its current location."
+            },
+            {
+                id: 10505, name: 'General Draven', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a squadron with Counter or Intel, add 1 die of any color to your attack pool."
+            },
+            {
+                id: 10506, name: 'Lando Calrissian', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "While defending, during the Spend Defense Tokens Step, you may discard this card to force the attacker 1 or more dice of your choice."
+            },
+            {
+                id: 10507, name: 'Leia Organa', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may choose another friendly ship at distance 1-5 and change that ship's top command to your revealed command."
+            },
+            {
+                id: 10508, name: 'Major Derlin', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "Before you suffer damage from an attack, you may exhaust this card to reduce the total damage by 1."
+            },
+            {
+                id: 10509, name: 'Raymus Antilles', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may gain one matching command token without spending the command dial."
+            },
+            {
+                id: 10510, name: 'Sabine Wren', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card to place 1 proximity mine token in the play area at distance 1-2 of an obstacle and beyond distance 3 of enemy ships."
+            },
+            {
+                id: 10511, name: 'Toryn Farr', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While another friendly ship or squadron at distance 1-3 is attacking, it may reroll 1 blue die."
+            },
+            {
+                id: 10512, name: 'Walex Blissex', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "When you activate, you may discard this card to recover 1 of your discarded defense tokens."
+            },
             // Support Team - 11
             // Turbolaser - 12
             {

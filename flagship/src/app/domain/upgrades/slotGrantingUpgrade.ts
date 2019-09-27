@@ -16,9 +16,18 @@ export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeD
             return false;
         }
 
+        // Slot granting upgrades can never be equipped to huge ships
+        if (ship.size === Size.Huge) {
+            return false;
+        }
         // Can't equip if the ship already has a slot of the granted type
         const matchingUpgrade = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === this.grantedType);
         if (matchingUpgrade) {
+            // Handle Minister Tua special case here
+            if (this.id === 10217 && (ship.size === Size.SmallFlotilla || ship.size === Size.Small)) {
+                // minister tua can equip to small ships even if they have a defensive retrofit
+                return true;
+            }
             return false;
         }
 
