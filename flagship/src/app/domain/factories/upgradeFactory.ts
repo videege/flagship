@@ -419,7 +419,7 @@ export class UpgradeFactory {
             {
                 id: 3002, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
-                text: 'Modification. The battery armaments for your left and right hull zones are increased by 1 blue die.'
+                text: 'The battery armaments for your left and right hull zones are increased by 1 blue die.'
             },
             {
                 id: 3003, name: 'Ion Cannon Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
@@ -434,7 +434,7 @@ export class UpgradeFactory {
             {
                 id: 3005, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
-                text: 'Modification. The battery armaments for your left and right hull zones are increased by 1 blue die.'
+                text: 'The battery armaments for your left and right hull zones are increased by 1 blue die.'
             },
             {
                 id: 3006, name: 'NK-7 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
@@ -501,7 +501,7 @@ export class UpgradeFactory {
             {
                 id: 5000, name: 'Advanced Transponder Net', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "Modification. Friendly Heavy squadrons at distance 1-2 prevent engaged squadrons from attacking ships."
+                text: "Friendly Heavy squadrons at distance 1-2 prevent engaged squadrons from attacking ships."
             },
             {
                 id: 5001, name: 'Boosted Comms', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
@@ -528,7 +528,7 @@ export class UpgradeFactory {
             {
                 id: 5005, name: 'Phylon Q7 Tractor Beams', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: true, points: 6, upgradeClass: UpgradeClass.Normal,
-                text: "Modification. When you activate, you may exhaust this card to choose 1 enemy ship of your size class or smaller at distance 1-5. That ship must spend a Navigate token or reduce its speed by 1 to a minimum of 1."
+                text: "When you activate, you may exhaust this card to choose 1 enemy ship of your size class or smaller at distance 1-5. That ship must spend a Navigate token or reduce its speed by 1 to a minimum of 1."
             },
             {
                 id: 5006, name: 'Point-Defense Rerout', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
@@ -595,7 +595,7 @@ export class UpgradeFactory {
             {
                 id: 7002, name: 'Expanded Launchers', type: UpgradeType.Ordnance, faction: Faction.Any,
                 unique: false, modification: true, points: 13, upgradeClass: UpgradeClass.Normal,
-                text: "Modification. The battery armament for your front hull zone is increased by 2 black dice."
+                text: "The battery armament for your front hull zone is increased by 2 black dice."
             },
             {
                 id: 7003, name: 'External Racks', type: UpgradeType.Ordnance, faction: Faction.Any,
@@ -616,7 +616,7 @@ export class UpgradeFactory {
             {
                 id: 7006, name: 'Rapid Reload', type: UpgradeType.Ordnance, faction: Faction.Any,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: "Modification. The battery armaments for your left and right hull zones are increased by 1 black die."
+                text: "The battery armaments for your left and right hull zones are increased by 1 black die."
             },
             {
                 id: 7007, name: 'Wide-Area Barrage', type: UpgradeType.Ordnance, faction: Faction.Any,
