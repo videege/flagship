@@ -933,6 +933,41 @@ export class UpgradeFactory {
                 text: "When you activate, you may discard this card to recover 1 of your discarded defense tokens."
             },
             // Support Team - 11
+            {
+                id: 11000, name: 'Auxiliary Shields Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: ": You may treat the maximum shield values of your right and left hull zones as increased by 1 when you recover or move shields to those zones. If you do, the number of shields in those zones cannot exceed a maximum of \"4\"."
+            },
+            {
+                id: 11001, name: 'Engine Techs', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "Navigate: After you execute a maneuver, you may exhaust this card to execute a 1-speed maneuver."
+            },
+            {
+                id: 11002, name: 'Engineering Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Engineering: Gain one additional engineering point."
+            },
+            {
+                id: 11003, name: 'Fighter Coordination Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "After you execute a maneuver, you may select a number of unengaged friendly squadrons up to your squadron value at close-medium range. Those squadrons may move up to distance 1."
+            },
+            {
+                id: 11004, name: 'Medical Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
+                text: "Before you are dealt a faceup damage card with the Crew trait, you may discard this card to discard that damage card."
+            },
+            {
+                id: 11005, name: 'Nav Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Navigate: Your navigate tokens can either change your speed or increase 1 yaw value by 1."
+            },
+            {
+                id: 11006, name: 'Projection Experts', type: UpgradeType.SupportTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Engineering: You may spend up to 2 engineering points to move that many shields from your ship to a friendly ship at distance 1-5."
+            },
             // Turbolaser - 12
             {
                 id: 12000, name: 'Dual Turbolaser Turrets', type: UpgradeType.Turbolaser, faction: Faction.Any,
