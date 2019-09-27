@@ -9,7 +9,7 @@ import { UpgradeType } from '../upgradeType';
 
 export class ShipFactory {
   private static titles = {
-    isd: [2001, 2002, 2003, 2004, 2010, 2011],
+    isd: [2000, 2001, 2002, 2003, 2010, 2011],
     arquitens: [2004, 2005],
     gladiator: [2006, 2007, 2010],
     gozanti: [2008, 2009],

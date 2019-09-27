@@ -624,7 +624,57 @@ export class UpgradeFactory {
                 text: "Black Critical: If the defender is a ship, choose 1 other ship or squadron at close range of the defender. That ship or squadron suffers damage equal to half of the total number of black hit icons in your attack pool, rounded up."
             },
             // Fleet Command - 8
+            {
+                id: 8000, name: 'All Fighters, Follow Me!', type: UpgradeType.FleetCommand, faction: Faction.Any,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card or spend a squadron token. If you do, until the end of the round, the speed of each squadron that a friendly ship activates is increased by 1, to a maximum of 5, until the end of that squadron's activation."
+            },
+            {
+                id: 8001, name: 'Entrapment Formation', type: UpgradeType.FleetCommand, faction: Faction.Any,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card or spend a navigate token. If you do, until the end of the round, each friendly ship may change its speed by 1 during its Determine Course step."
+            },
+            {
+                id: 8002, name: 'Intensify Firepower!', type: UpgradeType.FleetCommand, faction: Faction.Any,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card or spend a concentrate fire token. If you do, until the end of the round, while each friendly ship is attacking a ship, it may change 1 die to a face with 1 hit icon and no other icons."
+            },
+            {
+                id: 8003, name: 'Shields to Maximum!', type: UpgradeType.FleetCommand, faction: Faction.Any,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card or spend an engineering token. If you do, until the end of the round, before a friendly ship reveals a command, it may recover 1 shield."
+            },
+            {
+                id: 8004, name: 'Take Evasive Action!', type: UpgradeType.FleetCommand, faction: Faction.Any,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the Ship Phase, you may discard this card or spend a navigation token. If you do, until the end of the round, each friendly ship may increase the last yaw value of its current speed by 1 during its Determine Course step."
+            },
             // Fleet Support - 9
+            {
+                id: 9000, name: 'Bomber Command Center', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die."
+            },
+            {
+                id: 9001, name: 'Comms Net', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "After the Reveal Command Dial Step, you may remove 1 command token from this ship to assign a matching token to another friendly ship at distance 1-5."
+            },
+            {
+                id: 9002, name: 'Jamming Field', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "While a squadron at distance 1-2 is attacking or defending against a squadron, the attack is treated as obstructed."
+            },
+            {
+                id: 9003, name: 'Repair Crews', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Engineering: Instead of spending engineering points, you may discard 1 damage card from a friendly ship at distance 1-2."
+            },
+            {
+                id: 9004, name: 'Slicer Tools', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die."
+            },
             // Officer - 10
             // Support Team - 11
             // Turbolaser - 12
