@@ -32,14 +32,6 @@ export class SquadronFactory {
             text: 'At the start of Squadron Phase, you may toggle your activation slider to the activated side. If you do, you may perform an anti-squadron attack against each enemy squadron at distance 1. Treat these attacks as obstructed.'
         },
         {
-            id: 4, name: 'Black Squadron', shipName: 'TIE Fighter Squadron',
-            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 9,
-            speed: 4, hull: 3, defenseTokens: [],
-            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 0),
-            keywords: [new Keyword(KeywordType.Counter, 1), new Keyword(KeywordType.Escort, null)],
-            text: ''
-        },
-        {
             id: 4, name: 'Boba Fett', shipName: 'Slave I',
             faction: Faction.Empire, unique: true, shipUnique: true, irregular: true, points: 26,
             speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
@@ -319,7 +311,311 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Grit), new Keyword(KeywordType.Heavy), new Keyword(KeywordType.Rogue)],
             text: ''
         },
+        {
+            id: 39, name: 'Black Squadron', shipName: 'TIE Fighter Squadron',
+            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 9,
+            speed: 4, hull: 3, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Counter, 1), new Keyword(KeywordType.Escort, null)],
+            text: ''
+        },
         // REBELS
+        {
+            id: 100, name: 'Biggs Darklighter', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 19,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Escort)],
+            text: 'Before a friendly squadron with Escort at distance 1 suffers damage during an attack, you may reduce the total damage by 1.  If you do, choose a friendly squadron with Escort at distance 1.  That squadron suffers 1 damage.'
+        },
+        {
+            id: 101, name: 'Corran Horn', shipName: 'E-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 22,
+            speed: 4, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Rogue), new Keyword(KeywordType.Snipe, 4)],
+            text: ''
+        },
+        {
+            id: 102, name: 'Dagger Squadron', shipName: 'E-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 15,
+            speed: 2, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 1), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Swarm)],
+            text: ''
+        },
+        {
+            id: 103, name: 'Dash Rendar', shipName: 'Outrider',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 24,
+            speed: 4, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Rogue)],
+            text: 'While attacking, you may reroll 1 die for each enemy squadron or enemy ship at distance 1.'
+        },
+        {
+            id: 104, name: '"Dutch" Vander', shipName: 'Y-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 16,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: 'When a squadron you attack suffers at least 1 damage, you may toggle its activation slider to the activated slide. If it was already activated, it suffers 1 additional damage instead.'
+        },
+        {
+            id: 105, name: 'Gold Squadron', shipName: 'Y-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 12,
+            speed: 3, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Bomber)],
+            text: ''
+        },
+        {
+            id: 106, name: 'Green Squadron', shipName: 'A-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 12,
+            speed: 3, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Counter, 1)],
+            text: ''
+        },
+        {
+            id: 107, name: 'Han Solo', shipName: 'Millenium Falcon',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 26,
+            speed: 3, hull: 7, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: 'At the start of the Ship Phase, you may activate as if you were activated by a squadron command.'
+        },
+        {
+            id: 108, name: 'Hera Syndulla', shipName: 'Ghost',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 28,
+            speed: 3, hull: 8, defenseTokens: [DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: 'At the start of the Squadron Phase, choose up to two friendly squadrons at distance 1-2.  Those squadrons gain Rogue until the end of the round.'
+        },
+        {
+            id: 109, name: 'Jan Ors', shipName: 'Moldy Crow',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 19,
+            speed: 3, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Intel)],
+            text: 'While a friendly squadron at distance 1-2 is defending, it can spend your defense tokens.'
+        },
+        {
+            id: 110, name: 'Kanan Jarrus', shipName: 'HWK-290',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: true, points: 19,
+            speed: 3, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Assault), new Keyword(KeywordType.Cloak), new Keyword(KeywordType.Rogue)],
+            text: 'While attacking a ship, you may spend one die with a critical icon. If you do, the defender gains 1 raid token of your choice.'
+        },
+        {
+            id: 111, name: 'Ketsu Onyo', shipName: 'Shadow Caster',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 22,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: 'While an enemey squadron is at distance 1, its speed is reduced by 2 to a minimum of 1.'
+        },
+        {
+            id: 112, name: 'Keyan Farlander', shipName: 'B-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 20,
+            speed: 2, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 2),
+            keywords: [new Keyword(KeywordType.Bomber)],
+            text: 'While attacking a ship, if the defending hull zone has no shields, you may reroll any number of dice in your attack pool.'
+        },
+        {
+            id: 113, name: 'Lando Calrissian', shipName: 'Millenium Falcon',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 23,
+            speed: 3, hull: 7, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 2, 1), batteryArmament: new Armament(1, 1, 0),
+            keywords: [new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: 'While attacking, you may discard a defense token to set 1 die to any face.  That die cannot be modified again. While defending, you may spend 1 of your defense tokens to force the defender to re-roll 1 or more dice of your choice.'
+        },
+        {
+            id: 114, name: 'Lieutenant Blount', shipName: 'Z-95 Headhunter Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 14,
+            speed: 3, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(3, 0, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Swarm)],
+            text: 'While another friendly squadron with Swarm at distance 1 is attacking a squadron, it may reroll 1 die (in addition to any dice rerolled from Swarm).'
+        },
+        {
+            id: 115, name: 'Luke Skywalker', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 20,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Escort)],
+            text: 'While attacking a ship, treat the defender as having no shields.'
+        },
+        {
+            id: 116, name: 'Malee Hurra', shipName: 'Scurrg H-6 Bomber',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: true, points: 26,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 1, 0), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit)],
+            text: 'Once per activation, while a friendly ship is attacking a ship at distance 1 of you and you are engaged by 1 or fewer squadrons, the attacker may spend 1 die to change 1 die to a face with a critical icon.'
+        },
+        {
+            id: 117, name: 'Mart Mattin', shipName: 'Sato\'s Hammer',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 22,
+            speed: 4, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: 'At the start of the Squadron Phase, you may toggle your activation slider to the activated slide.  If you do, you may place 1 proximity mine token at distance 1.'
+        },
+        {
+            id: 118, name: 'Norra Wexley', shipName: 'Y-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 17,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber)],
+            text: 'Friendly squadrons with Bomber at distance 1 gain "Critical: the defending hull zone loses 1 shield."'
+        },
+        {
+            id: 119, name: 'Nym', shipName: 'Havoc',
+            faction: Faction.Rebels, unique: true, shipUnique: true, irregular: true, points: 21,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit)],
+            text: 'Blue Critical: If the defender is a ship, you may choose and discard 1 of its defense tokens.'
+        },
+        {
+            id: 120, name: 'Rogue Squadron', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 14,
+            speed: 3, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Rogue)],
+            text: ''
+        },
+        {
+            id: 121, name: 'Shara Bey', shipName: 'A-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 17,
+            speed: 5, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Counter, 3)],
+            text: 'While performing a Counter attack, each critical icon adds 1 damage to the damage total.'
+        },
+        {
+            id: 122, name: 'Ten Numb', shipName: 'B-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 19,
+            speed: 2, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 1), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Bomber)],
+            text: 'While attacking a squadron, you may spend one blue die with a critical icon. If you do, each other enemy squadron at distance 1 of the defender suffers 1 damage.'
+        },
+        {
+            id: 123, name: 'Tycho Celchu', shipName: 'A-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 16,
+            speed: 5, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Counter, 2)],
+            text: 'You are not prevented from moving or attacking ships while you are engaged.'
+        },
+        {
+            id: 124, name: 'Wedge Antilles', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 19,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Escort)],
+            text: 'While attacking an activated squadron, you may add 2 blue dice to your attack pool.'
+        },
+        {
+            id: 125, name: 'A-Wing Squadron', shipName: 'A-Wing Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 11,
+            speed: 5, hull: 4, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Counter, 2)],
+            text: ''
+        },
+        {
+            id: 126, name: 'B-Wing Squadron', shipName: 'B-Wing Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 14,
+            speed: 2, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Bomber)],
+            text: ''
+        },
+        {
+            id: 127, name: 'E-Wing Squadron', shipName: 'E-Wing Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 15,
+            speed: 4, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Snipe, 3)],
+            text: ''
+        },
+        {
+            id: 128, name: 'HWK-290', shipName: 'HWK-290',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 12,
+            speed: 3, hull: 4, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Intel)],
+            text: ''
+        },
+        {
+            id: 129, name: 'Lancer-Class Pursuit Craft', shipName: 'Lancer-Class Pursuit Craft',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 15,
+            speed: 4, hull: 4, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
+            text: ''
+        },
+        {
+            id: 130, name: 'Skurrg H-6 Bomber', shipName: 'Skurrg H-6 Bomber',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 16,
+            speed: 3, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit), new Keyword(KeywordType.Heavy)],
+            text: ''
+        },
+        {
+            id: 131, name: 'VCX-100 Freighter', shipName: 'VCX-100 Freighter',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 16,
+            speed: 3, hull: 8, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Heavy), new Keyword(KeywordType.Relay, 1), new Keyword(KeywordType.Strategic)],
+            text: ''
+        },
+        {
+            id: 132, name: 'X-Wing Squadron', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 13,
+            speed: 3, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Escort)],
+            text: ''
+        },
+        {
+            id: 133, name: 'Y-Wing Squadron', shipName: 'Y-Wing Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 10,
+            speed: 3, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: ''
+        },
+        {
+            id: 134, name: 'YT-1300', shipName: 'YT-1300',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 13,
+            speed: 2, hull: 7, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Counter, 1), new Keyword(KeywordType.Escort)],
+            text: ''
+        },
+        {
+            id: 135, name: 'YT-2400', shipName: 'YT-2400',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 16,
+            speed: 4, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Rogue)],
+            text: ''
+        },
+        {
+            id: 136, name: 'Z-95 Headhunter Squadron', shipName: 'Z-95 Headhunter Squadron',
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: false, points: 7,
+            speed: 3, hull: 3, defenseTokens: [],
+            antiSquadronArmament: new Armament(3, 0, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.Swarm)],
+            text: ''
+        },
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {
