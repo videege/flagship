@@ -16,7 +16,7 @@ export enum KeywordType {
 }
 
 export class Keyword {
-  constructor(public type: KeywordType, public value: number) {
+  constructor(public type: KeywordType, public value: number = null) {
 
   }
 

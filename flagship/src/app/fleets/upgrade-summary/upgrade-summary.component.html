@@ -3,5 +3,6 @@
   <span class="text">{{ upgrade.text }}</span><br>
 </span>
 <span *ngIf="upgrade && (upgrade.type != 'Commander' && upgrade.type != 'Title')">
-  {{ upgrade.name + (!isLast ? ', ' : '') }}
+  {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{ upgrade.modification ? "&nbsp;(M)" : "" }}
+  {{ !isLast ? ', ' : '' }}
 </span>

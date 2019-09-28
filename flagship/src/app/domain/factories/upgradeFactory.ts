@@ -1057,7 +1057,7 @@ export class UpgradeFactory {
                 text: "When you resolve the redirect token effect, you can choose more than one hull zone to suffer damage, which may include a nonadjacent hull zone."
             },
             {
-                id: 14001, name: 'Cluster Bomb s', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
+                id: 14001, name: 'Cluster Bombs', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "After a squadron performs an attack against you, even if you are destroyed, you may discard this card to roll 4 blue dice. That squadron suffers 1 damage for each hit or critical icon rolled."
             },

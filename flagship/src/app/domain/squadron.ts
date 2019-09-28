@@ -10,6 +10,7 @@ export interface SquadronData {
   shipName: string;
   faction: Faction;
   unique: boolean;
+  shipUnique: boolean;
   points: number;
 
   irregular: boolean;
@@ -28,7 +29,7 @@ export class Squadron implements SquadronData {
   public fleet: Fleet;
 
   constructor(public id: number, public name: string, public shipName: string, public faction: Faction,
-    public unique: boolean, public irregular: boolean, public points: number,
+    public unique: boolean, public shipUnique: boolean, public irregular: boolean, public points: number,
     public speed: number, public hull: number, public defenseTokens: DefenseToken[],
     public antiSquadronArmament: Armament, public batteryArmament: Armament,
     public keywords: Keyword[], public text: string) {
