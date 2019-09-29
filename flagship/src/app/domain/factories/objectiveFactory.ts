@@ -200,78 +200,111 @@ export class ObjectiveFactory {
             null, null,
             null),
         // Navigation
-        new Objective(200, ObjectiveType.Navigation, "",
+        new Objective(201, ObjectiveType.Navigation, "Dangerous Territory",
+            `Obstacles must be placed in the setup area beyond distance 5 of both players' edges. After placing obstacles, place 1 objective 
+            token on each obstacle.`,
+            `When a ship overlaps an obstacle, the ship's owner may remove the objective token on that obstacle to gain 1 victory token.
+            When one of the second player's ships overlaps an asteroid field or debris field, that obstacle has no effect.`,
+            null, null,
+            15),
+        new Objective(202, ObjectiveType.Navigation, "Doomed Station",
+            `The second player places the gravity rift in the center of the setup area. Then, starting with the first player, the players 
+            alternate placing the remaining obstacles, excluding the station in the setup area beyond distance 1 of all obstacles and 
+            beyond distance 5 of both player's edges.`,
+            null,
+            `Starting with the second player and alternating, each player chooses 1 obstacle that does not have an objective token on it 
+            and moves it to (sic) within distance 1-2 of its current location toward the gravity rift (which cannot be chosen). Then that 
+            player places an objective token on that obstacle. When an obstacle touches the gravity rift, that obstacle is removed from the play area.
+            After all obstacles are moved, each player sums the command values of their ships at distance 1 of the station. The player with the highest 
+            total gains 1 victory token. Then remove all objectives tokens from the play area.`,
             ``,
-            ``,
-            ``,
-            ``,
+            20),
+        new Objective(203, ObjectiveType.Navigation, "Hyperspace Migration",
+            `Place obstacles as normal, excluding the station. Then, the second player places 1 objective token in the play area at distance 1 of a 
+            3' edge, and then places 1 objective token at distance 1 of the opposite 3' edge.`,
+            `At the start of the Ship Phase of the first and third rounds, the second player places 1 purrgil not in the play area at distance 1 
+            of 1 objective token (the objective token must be the same during both rounds).
+            When a purrgil moves, it must move toward the objective token at the opposite 3' edge. When a purrgil touches that objective token, 
+            that purrgil is removed from the play area.`,
+            `If a ship has 1 objective token on it, remove the token and that ship's owner gains 1 victory token. If a ship is at distance 1 
+            from a purrgil and has no objective tokens on it, place 1 objective token on the ship.`,
+            null,
+            20),
+        new Objective(204, ObjectiveType.Navigation, "Infested Fields",
+            `Place obstacles as normal, excluding the station. After placing obstacles, place 1 objective token on each obstacle. Then the 
+            second player places 2 exogorth obstacles, each touching a different obstacle.`,
+            `When a ship or squadron overlaps an obstacle, that ship or squadron's owner may remove the objective token on the obstacle to gain 1 victory token.
+            After the start of each squadrons phase (after exogorths perform attacks), remove each exogorth from the play area. Then the second 
+            player moves the obstacle each exogorth was touching to within distance 1-2 of its current location.`,
+            `For each exogorth obstacle not in the play area, the second player chooses an obstacle and place 1 exogorth touching that obstacle.`,
+            null,
+            15),
+        new Objective(205, ObjectiveType.Navigation, "Intel Sweep",
+            `After placing obstacles the players alternate placing a total of 5 objective tokens in the setup area, starting with the 
+            second player. Each token must be placed in the play area beyond distance 5 of both players' edges and beyond distance 3 
+            of all other objective tokens. Then each player chooses one of his ships to be an objective ship, starting with the first player.`,
+            `When a player's objective ship reveals a command dial, that player may choose 1 objective token at a distance of 1 of that ship and 
+            remove it from the play area to gain 1 victory token.`,
+            null,
+            `If a player has more victory tokens than his opponent, increase his final score by 75.`,
             null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
+        new Objective(206, ObjectiveType.Navigation, "Minefields",
+            `The second player places all obstacles. He can place them anywhere in the setup area (even in deployment zones) and must place them 
+            beyond distance 5 of each other. Then he places 6 objective tokens. Each objective token must be placed at distance 1 of an obstacle 
+            and beyond distance 1 of all other objective tokens.`,
+            `If a ship ends its movement at distance 1 of an objective token, remove that objective token from the play area and roll 2 blue dice. 
+            That ship is dealt 1 facedown damage card for each hit or critical icon rolled. If there is at least one critical icon, deal the 
+            first damage card faceup.`,
+            null, null,
             null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
+        new Objective(207, ObjectiveType.Navigation, "Navigational Hazards",
+            `Place obstacles as normal, excluding the station. Then the second player places the station in the setup area beyond distance 
+            1 of all obstacles and beyond distance 5 of both players' edges of the play area.`,
+            `When a ship overlaps an obstacle and suffers 1 or more damage or is dealt 1 or more damage cards, the opposing fleet's owner gains 1 victory token.`,
+            `Starting with the second player and alternating, each player chooses 1 asteroid or debris field that does not have an objective token on it, 
+            and moves it to within distance 1-2 of its current location. Then, he places an objective token on that obstacle. An obstacle cannot be moved 
+            so that it overlaps a ship, squadron, or other obstacle. At the start of the next round, remove all objective tokens from the play area.`,
+            null,
+            15),
+        new Objective(208, ObjectiveType.Navigation, "Salvage Run",
+            `The second player places the station in the center of the play area. Then, starting with the second player, the players alternate placing 
+            the remaining obstacles, adding the 2 dust field obstacles, at distance 1-5 of the station. After placing obstacles, the second player places 
+            a total of 4 objective tokens in the setup area. Each token must be at distance 1 of the station and beyond distance 1 of all other objective tokens.
+            After deploying fleets, each of the second player's ships gain a Navigate token.`,
+            `When a player's ship reveals a command dial, that player may chose 1 objective token at distance 1 of that ship and remove it from the 
+            play area to gain 1 victory token.`,
+            null, null,
+            20),
+        new Objective(209, ObjectiveType.Navigation, "Sensor Net",
+            `After placing obstacles, the players alternate placing a total of 4 objective tokens in the setup area, starting with the first player. 
+            Each token must be placed in the setup area beyond distance 5 of both players' edges and beyond distance 3 of all other objective tokens.`,
+            `When a ship reveals a command dial, if it is at distance 1 of at least 1 objective token, its owner gains 1 victory token.
+            Then its owner chooses 1 of those objective tokens. The opposing player must move that token so it is at distance 1-2 of its current 
+            location. If he is the second player, he moves it so it is at distance 1-4 of its current location.`,
+            null, null,
+            15),
+        new Objective(210, ObjectiveType.Navigation, "Solor Corona",
+            `The first player must deploy all of his ships and squadrons before the second player. After the second player deploys ships and 
+            squadrons, the second player must choose 1 of the 3' edges of the play area to be the Corona.`,
+            `While a ship is attacking, before resolving any attack effects, if any portion of the Corona is inside the attacking hull zone's 
+            firing arc, the attacker must discard 1 die with a Accuracy icon from the attack pool, if able.`,
+            null, null,
             null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
-        new Objective(200, ObjectiveType.Navigation, "",
-            ``,
-            ``,
-            ``,
-            ``,
-            null),
+        new Objective(211, ObjectiveType.Navigation, "Superior Positions",
+            `The first player must deploy all of his ships and squadrons before the second player.`,
+            `After a ship or squadron performs an attack against the rear hull zone of another ship, if the defender 
+            suffers at least one damage, the attacker's owner gains 1 victory token.`,
+            null, null,
+            15),
+        new Objective(212, ObjectiveType.Navigation, "Volatile Deposits",
+            `Place obstacles as normal, adding 2 dust fields and excluding the station.`,
+            `While a ship is attacking a ship, the attacker can choose 1 obstacle at distance 1 of the defender, then resolve the following critical effect:
+            Blue Critical: Each ship or squadron at distance 1 of the chosen obstacle suffers damage equal to half of the total number of critical icons 
+            in your attack pool, rounded up. If the defender is one of the first player's ships, the attacker can resolve this effect with any critical icon.`,
+            `For each asteroid field, each player sums the command values of their ships at distance 1. Then for each astroid field, the player 
+            with the highest total gains 1 victory token.`,
+            null,
+            15),
         // Campaign
         // Special
     ]
