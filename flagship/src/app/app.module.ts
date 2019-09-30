@@ -6,7 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MglTimelineModule } from 'angular-mgl-timeline';
 
 import { AppComponent } from './app.component';
 //import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';

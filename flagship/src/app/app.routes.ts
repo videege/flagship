@@ -19,6 +19,11 @@ export const APP_ROUTES: Routes = [
         loadChildren: () => import('./fleets/fleets.module').then(m => m.FleetsModule),
         canActivate: [LoggedInGuard]
     },
+    { 
+        path: 'campaigns', 
+        loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule),
+        canActivate: [LoggedInGuard]
+    },
     // default routes
     { path: "", redirectTo: "/fleets", pathMatch: 'full' },
     { path: '**', children: [

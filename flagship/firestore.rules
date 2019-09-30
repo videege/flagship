@@ -10,6 +10,11 @@ service cloud.firestore {
       allow update, delete: if request.auth.uid == resource.data.ownerUid;
       allow create: if request.auth.uid != null;
     }
+    match /campaigns/{campaignId} {
+      allow read, update: if request.auth.uid in resource.data.playerUids;
+      allow delete: if request.auth.uid == resource.data.ownerUid;
+      allow create: if request.auth.uid != null;
+    }
     match /{document=**} {
       allow read, write: if false;
     }

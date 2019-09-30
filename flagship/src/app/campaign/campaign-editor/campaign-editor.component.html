@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <form [formGroup]="campaignForm" fxLayout="column">
+        <mat-form-field>
+            <mat-label>Campaign Name</mat-label>
+            <input matInput formControlName="name" maxlength="25"/>
+            <mat-error *ngIf="campaignForm.get('name').invalid">You must enter a name (max 25 characters) for the campaign.</mat-error>
+        </mat-form-field>
+        <mat-radio-group aria-label="Campaign Type" formControlName="type">
+            <mat-radio-button value="0" disabled fxFlex>Corellian Conflict</mat-radio-button>
+            <mat-radio-button value="1" fxFlex>Rebellion in the Rim</mat-radio-button>
+        </mat-radio-group>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button [mat-dialog-close]="getData()" [disabled]="campaignForm.invalid"
+        color="primary">Create Campaign</button>
+</div>
