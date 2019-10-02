@@ -15,6 +15,13 @@ export class CampaignState {
     act: number;
     events: CampaignEvent[] = [];
 
+    public actInRomanNumerals(): string {
+        if (this.act === 1) return "I";
+        if (this.act === 2) return "II";
+        if (this.act === 3) return "III";
+        return this.act.toString();
+    }
+
     public serialize(): SerializedCampaignState {
         return {
             turn: this.turn,

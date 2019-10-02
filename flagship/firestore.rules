@@ -11,9 +11,13 @@ service cloud.firestore {
       allow create: if request.auth.uid != null;
     }
     match /campaigns/{campaignId} {
-      allow read, update: if request.auth.uid in resource.data.playerUids;
+      allow read, update: if request.auth.uid in resource.data.playerUids || request.auth.uid == resource.data.ownerUid;
       allow delete: if request.auth.uid == resource.data.ownerUid;
       allow create: if request.auth.uid != null;
+    }
+    match /invites/{inviteToken} {
+      allow read: if true;
+      allow create, update, delete: if request.auth.uid != null;
     }
     match /{document=**} {
       allow read, write: if false;

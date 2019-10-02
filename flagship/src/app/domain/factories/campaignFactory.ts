@@ -10,14 +10,17 @@ export class CampaignFactory {
     public createCampaign(name: string, type: CampaignType, ownerUid: string) {
         let campaign = new Campaign();
         campaign.id = null;
+        campaign.inviteToken = null;
         campaign.name = name;
         campaign.type = type;
         campaign.ownerUid = ownerUid;
         campaign.playerUids = [ownerUid];
         campaign.empire = new Team();
         campaign.empire.faction = Faction.Empire;
+        campaign.empire.name = 'Galactic Empire';
         campaign.rebels = new Team();
         campaign.rebels.faction = Faction.Rebels;
+        campaign.rebels.name = 'Rebel Alliance';
         let now = new Date();
         campaign.startDate = now;
         campaign.statusDate = now;

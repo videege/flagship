@@ -3,11 +3,14 @@ import { CampaignState, SerializedCampaignState } from './campaignState';
 import { Team, SerializedTeam } from './team';
 import { SerializedCampaignLocation } from './campaignLocation';
 import { CampaignLocation } from './campaignLocation';
+import { Invite } from './invite';
+import { CampaignPlayer } from './campaignPlayer';
 
 export interface SerializedCampaign {
     id: string;
     ownerUid: string;
     playerUids: string[];
+    inviteToken: string;
     type: CampaignType;
     name: string;
     startDate: Date;
@@ -22,6 +25,7 @@ export class Campaign {
     public id: string;
     public ownerUid: string;
     public playerUids: string[] = [];
+    public inviteToken: string;
     public type: CampaignType;
     public name: string;
     public startDate: Date;
@@ -39,6 +43,7 @@ export class Campaign {
             name: this.name,
             ownerUid: this.ownerUid,
             playerUids: this.playerUids,
+            inviteToken: this.inviteToken,
             type: this.type,
             startDate: this.startDate,
             statusDate: this.statusDate,
@@ -55,6 +60,7 @@ export class Campaign {
         campaign.name = data.name;
         campaign.ownerUid = data.ownerUid;
         campaign.playerUids = data.playerUids;
+        campaign.inviteToken = data.inviteToken || null;
         campaign.type = data.type;
         campaign.startDate = data.startDate;
         campaign.statusDate = data.statusDate;
@@ -63,6 +69,16 @@ export class Campaign {
         campaign.rebels = Team.hydrate(data.rebels);
         campaign.locations = data.locations.map(x => CampaignLocation.hydrate(x));
         return campaign;
+    }
+
+    public currentState(): CampaignState {
+        if (!this.history || !this.history.length) return null;
+
+        return this.history[this.history.length - 1];
+    }
+
+    public inviteUrl(): string {
+        return `${window.location.origin}/campaigns/${this.id}/invitation?token=${this.inviteToken}`;
     }
 
     public numberOfPlayers(): number {
@@ -84,5 +100,8 @@ export class Campaign {
         return this.empire.numberOfPlayers() === this.rebels.numberOfPlayers();
     }
 
-
+    public getPlayer(playerId: string): CampaignPlayer {
+        return this.empire.players.find(x => x.id === playerId) ||
+            this.rebels.players.find(x => x.id === playerId);
+    }
 }

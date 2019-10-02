@@ -12,6 +12,8 @@ import { Campaign } from '../domain/campaign/campaign';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { CampaignDashboardComponent } from './campaign-dashboard/campaign-dashboard.component';
 import { CampaignService } from '../core/services/campaign.service';
+import { InviteComponent } from './invite/invite.component';
+import { Invite } from '../domain/campaign/invite';
 
 @Injectable()
 export class CampaignResolver implements Resolve<Campaign> {
@@ -21,6 +23,17 @@ export class CampaignResolver implements Resolve<Campaign> {
 
     resolve(route: ActivatedRouteSnapshot): Campaign | Observable<Campaign> {
         return this.campaignService.getCampaignForUser(route.params.id);
+    }
+}
+
+@Injectable()
+export class InviteResolver implements Resolve<Invite> {
+
+    constructor(private campaignService: CampaignService) {
+    }
+
+    resolve(route: ActivatedRouteSnapshot): Invite | Observable<Invite> {
+        return this.campaignService.getCampaignInvite(route.queryParams['token']);
     }
 }
 
@@ -41,6 +54,16 @@ const CAMPAIGN_ROUTES: Routes = [
             { path: '', component: CampaignDashboardComponent, resolve: { campaign: CampaignResolver },
               data: { nav: new FlagshipRouteData((data: Data) => {
                   return (data['campaign'] as Campaign).name;
+              }, 'Campaigns', '/campaigns')}
+            },
+            defaultToolbar
+        ]
+    },
+    {
+        path: ':id/invitation', children: [
+            { path: '', component: InviteComponent, resolve: { invite: InviteResolver },
+              data: { nav: new FlagshipRouteData((data: Data) => {
+                  return 'Invite to ' + (data['invite'] as Invite).campaignName;
               }, 'Campaigns', '/campaigns')}
             },
             defaultToolbar

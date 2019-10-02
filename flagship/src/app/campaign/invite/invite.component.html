@@ -1,0 +1,42 @@
+<div class="content mat-typography" style="padding-bottom: 100px;" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card fxFlex fxFlex.gt-xs="50" fxFlex.gt-md="35">
+        <mat-card-header>
+            <img mat-card-avatar src="assets/icons/manifest-icon-192.png" />
+            <mat-card-title>
+                Campaign Invitation
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ invite.campaignName }}
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <h3>{{ invite.ownerName}} has invited you to join a campaign!</h3>
+            <div *ngIf="inviteValid">
+                <p>
+                    Joining this campaign will allow you to create one or more players for the campaign,
+                    manage your fleet(s) throughout the campaign, and help you perform actions and keep track
+                    of campaign state.
+                </p>
+                <p>
+                    To join this campaign, click "Join Campaign" below. If you don't want to join this campaign,
+                    just leave this page.
+                </p>
+            </div>
+            <div *ngIf="!inviteValid">
+                <p>
+                    You've already joined this campaign. 
+                    <a [routerLink]="['/campaigns', invite.campaignId]">
+                        Go to this campaign now.
+                    </a>
+                </p>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="!inviteValid" fxFlex (click)="acceptInvitation()">Join
+                Campaign</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

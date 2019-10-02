@@ -3,10 +3,11 @@ import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angula
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MglTimelineModule } from 'angular-mgl-timeline';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppComponent } from './app.component';
 //import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
@@ -52,6 +53,7 @@ export function appNameFactory() {
     RouterModule.forRoot(APP_ROUTES, { enableTracing: true }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireFunctionsModule,
     AngularFireAuthModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase, appNameFactory,
       {
@@ -71,6 +73,7 @@ export function appNameFactory() {
       }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MomentModule,
+    ClipboardModule,
     CoreModule,
     SharedModule
   ],

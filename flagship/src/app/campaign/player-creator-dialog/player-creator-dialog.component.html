@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+    <form [formGroup]="playerForm" fxLayout="column">
+        <mat-form-field>
+            <mat-label>Player Name</mat-label>
+            <input matInput formControlName="name" maxlength="25" />
+            <mat-error *ngIf="playerForm.get('name').invalid">
+                You must enter a name (max 25 characters) for this player.
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button [mat-dialog-close]="getData()" [disabled]="playerForm.invalid" color="primary">
+        Create Player
+    </button>
+</div>

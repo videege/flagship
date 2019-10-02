@@ -4,7 +4,9 @@ export interface SerializedCampaignPlayer {
     name: string;
     fleetId: string;
     isLeader: boolean;
-    inviteToken: string;
+    wins: number;
+    losses: number;
+    mov: number;
 }
 
 export class CampaignPlayer {
@@ -13,7 +15,10 @@ export class CampaignPlayer {
     public name: string;
     public fleetId: string;
     public isLeader: boolean;
-    public inviteToken: string;
+
+    public wins: number = 0;
+    public losses: number = 0;
+    public mov: number = 0;
 
     public serialize(): SerializedCampaignPlayer {
         return {
@@ -22,7 +27,9 @@ export class CampaignPlayer {
             name: this.name,
             fleetId: this.fleetId,
             isLeader: this.isLeader,
-            inviteToken: this.inviteToken
+            wins: this.wins,
+            losses: this.losses,
+            mov: this.mov
         };
     }
 
@@ -33,7 +40,9 @@ export class CampaignPlayer {
         player.name = data.name;
         player.fleetId = data.fleetId;
         player.isLeader = data.isLeader;
-        player.inviteToken = data.inviteToken;
+        player.wins = data.wins;
+        player.losses = data.losses;
+        player.mov = data.mov;
         return player;
     }
 }
