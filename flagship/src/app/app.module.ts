@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClipboardModule } from 'ngx-clipboard';
+import { MatProgressButtonsModule } from 'mat-progress-buttons';
 
 import { AppComponent } from './app.component';
 //import { UIRouterModule, UIRouter, Transition } from '@uirouter/angular';
@@ -49,6 +50,7 @@ export function appNameFactory() {
     BrowserModule,
     BrowserAnimationsModule,
     AppMaterialModule,
+    MatProgressButtonsModule.forRoot(),
     //UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
     RouterModule.forRoot(APP_ROUTES, { enableTracing: true }),
     AngularFireModule.initializeApp(environment.firebase),

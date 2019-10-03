@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Invite } from 'src/app/domain/campaign/invite';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CampaignService } from 'src/app/core/services/campaign.service';
+import { indeterminateOptions } from 'src/app/shared/utils/progressButtonConfigs';
 
 @Component({
   selector: 'flagship-invite',
@@ -18,6 +19,7 @@ export class InviteComponent implements OnInit {
   public inviteValid = true;
 
   public saving = false;
+  public submitButtonOptions = indeterminateOptions('Join Campaign');
 
   constructor(private route: ActivatedRoute, private campaignService: CampaignService,
     private snackbar: MatSnackBar, private afAuth: AngularFireAuth,
@@ -34,19 +36,22 @@ export class InviteComponent implements OnInit {
   private initInvite() {
     if (this.invite.acceptedUserUids.indexOf(this.user.uid) >= 0) {
       this.inviteValid = false;
+      this.submitButtonOptions.disabled = true;
     }
   }
 
   public acceptInvitation() {
-    this.saving = true;
+    this.submitButtonOptions.active = true;
     this.campaignService.acceptCampaignInvite(this.invite).then(() => {
-      this.saving = false;
-      this.snackbar.open('Successfully joined campaign!', 'OK', {
-        duration: 1500
-      });
-      this.router.navigate(['campaigns', this.invite.campaignId]);
+      setTimeout(() => {
+        this.submitButtonOptions.active = false;
+        this.snackbar.open('Successfully joined campaign!', 'OK', {
+          duration: 1500
+        });
+        this.router.navigate(['campaigns', this.invite.campaignId]);
+      }, 5000);      
     }, (err) => {
-      this.saving = false;
+      this.submitButtonOptions.active = false;
       this.snackbar.open('Something went wrong - try again later.', 'OK', {
         duration: 1500
       });

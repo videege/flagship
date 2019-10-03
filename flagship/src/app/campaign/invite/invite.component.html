@@ -34,8 +34,14 @@
 
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" [disabled]="!inviteValid" fxFlex (click)="acceptInvitation()">Join
-                Campaign</button>
+            <!-- <button mat-raised-button color="primary" [disabled]="!inviteValid" fxFlex 
+             [disabled]="saving" (click)="acceptInvitation()">
+                Join
+                Campaign
+            </button> -->
+            <span fxFlex></span>
+            <mat-bar-button fxFlex (btnClick)="acceptInvitation()" [options]="submitButtonOptions"></mat-bar-button>
+            <span fxFlex></span>
         </mat-card-actions>
     </mat-card>
 

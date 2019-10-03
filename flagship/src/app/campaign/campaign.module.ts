@@ -10,7 +10,7 @@ import { AppMaterialModule } from '../app-material/app-material.module';
 import { CampaignTeamComponent } from './campaign-team/campaign-team.component';
 import { PlayerCreatorDialogComponent } from './player-creator-dialog/player-creator-dialog.component';
 import { InviteComponent } from './invite/invite.component';
-
+import { MatProgressButtonsModule } from 'mat-progress-buttons';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import { InviteComponent } from './invite/invite.component';
     SharedModule,
     CampaignRoutingModule,
     MglTimelineModule,
-    AppMaterialModule
+    AppMaterialModule,
+    MatProgressButtonsModule
   ],
   providers: [
     CampaignResolver,
