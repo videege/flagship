@@ -6,23 +6,47 @@ const db = admin.firestore();
 
 export const processCampaignInvite = functions.firestore.document('invites/{inviteToken}')
     .onUpdate((change, context) => {
-        if (change && change.after && change.after.data &&
-            change.before && change.before.data &&
-            context && context.auth && context.auth.uid) {
-            const newData = change.after.data();
-            const oldData = change.before.data();
-
-            if (newData && newData.acceptedUserUids &&
-                oldData && oldData.acceptedUserUids && oldData.campaignId &&
-                newData.acceptedUserUids.length !== oldData.acceptedUserUids.length) {
-                //The invite is accepted
-                const campaignId = oldData.campaignId;
-                return db.doc(`campaigns/${campaignId}`).update({
-                    playerUids: admin.firestore.FieldValue.arrayUnion(context.auth.uid)
-                });
+        console.log('Starting comparison.');
+        return new Promise((resolve, reject) => {
+            if (change && change.after && change.after.data &&
+                change.before && change.before.data) {
+                console.log('Preliminary data comparisons pass.')
+                const newData = change.after.data();
+                const oldData = change.before.data();
+                console.log('Preliminary data obtained.')
+                if (newData && newData.acceptedUserUids &&
+                    oldData && oldData.acceptedUserUids && oldData.campaignId &&
+                    newData.acceptedUserUids.length !== oldData.acceptedUserUids.length) {
+                    //Find the new ID
+                    let newUid = null;
+                    for (let i = 0; i < newData.acceptedUserUids.length; i++) {
+                        let uid = newData.acceptedUserUids[i];
+                        if (oldData.acceptedUserUids.indexOf(uid) === -1) {
+                            newUid = uid;
+                            break;
+                        }
+                    }
+                    if (!newUid) {
+                        console.error("Couldn't determine new UID to add to campaign.");
+                        reject("Couldn't find new UID to add to campaign.");
+                        return;
+                    }
+                    //The invite is accepted
+                    const campaignId = oldData.campaignId;
+                    console.log('New data: inserting ' + newUid + ' to campaign ' + campaignId);
+                    db.doc(`campaigns/${campaignId}`).update({
+                        playerUids: admin.firestore.FieldValue.arrayUnion(newUid)
+                    }).then((result) => {
+                        resolve();
+                    }, (err) => {
+                        console.error(err);
+                        reject(err);
+                    });
+                }
             }
-        }
-        return null;
+            resolve();
+        });
+
     });
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
