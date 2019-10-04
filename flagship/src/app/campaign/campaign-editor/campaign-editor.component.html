@@ -6,8 +6,8 @@
             <mat-error *ngIf="campaignForm.get('name').invalid">You must enter a name (max 25 characters) for the campaign.</mat-error>
         </mat-form-field>
         <mat-radio-group aria-label="Campaign Type" formControlName="type">
-            <mat-radio-button value="0" disabled fxFlex>Corellian Conflict</mat-radio-button>
-            <mat-radio-button value="1" fxFlex>Rebellion in the Rim</mat-radio-button>
+            <mat-radio-button value="1" disabled fxFlex>Corellian Conflict</mat-radio-button>
+            <mat-radio-button value="2" fxFlex>Rebellion in the Rim</mat-radio-button>
         </mat-radio-group>
     </form>
 </div>

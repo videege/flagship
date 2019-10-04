@@ -11,10 +11,11 @@ import { CampaignTeamComponent } from './campaign-team/campaign-team.component';
 import { PlayerCreatorDialogComponent } from './player-creator-dialog/player-creator-dialog.component';
 import { InviteComponent } from './invite/invite.component';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
+import { CampaignLocationsComponent } from './campaign-locations/campaign-locations.component';
 
 
 @NgModule({
-  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent],
+  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent],
   imports: [
     CommonModule,
     SharedModule,

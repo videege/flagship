@@ -1,68 +1,88 @@
-<div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
-    fxLayout="column">
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
-        <mat-card fxFlex>
-            <mat-card-header>
-                <mat-card-title>{{ campaign.name }}</mat-card-title>
-                <mat-card-subtitle>{{ campaign.typeName() }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <div *ngIf="currentState.phase === phases.CampaignSetup">
-                    <h3>Campaign Setup Phase</h3>
-                    <p>
-                        Use the roster controls to add players to the campaign. After all players have created
-                        a base (using the Locations card) and created their fleets, the campaign owner can click
-                        'Finish Setup' to begin the first round of the campaign.
-                    </p>
-                    <p>
-                        If the participants in this campaign want to manage their own campaign data, 
-                        send them the invite link below.
-                        This will allow them to join the campaign and create one or more campaign players.
-                    </p>
-                    <p>
-                        <strong>Heads up!</strong> Once the campaign owner clicks 'Finish Setup', the invite link
-                        below will be removed and the roster will be locked.
-                    </p>
-                    <div fxLayout="row">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Invite URL</mat-label>
-                            <input matInput disabled value="{{ campaign.inviteUrl() }}">
-                            <mat-icon matSuffix class="clickable" (click)="copyInviteUrl()">file_copy</mat-icon>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <h3 *ngIf="currentState.phase === phases.Finished">Campaign Finished</h3>
-                <div *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished"
-                    fxLayout="column" fxLayout.gt-sm="row">
-                    <span>Act {{ currentState.actInRomanNumerals() }}</span>
-                    <span>Turn {{ currentState.turn }}</span>
-                    <span>{{ currentState.phase.toString() }} Phase</span>
-                </div>
-                <div fxLayout="row" class="campaign-score">
-                    <div fxLayout="column" fxFlex>
-                        <i class="ffi ffi-imperial" style="font-size:48px;"></i>
-                        <span>{{ campaign.empire.campaignPoints }} points</span>
-                    </div>
-                    <h3 fxFlex>&mdash;</h3>
-                    <!--todo: make this disappear on small-->
-                    <div fxLayout="column" fxFlex>
-                        <i class="ffi ffi-rebel" style="font-size:48px;"></i>
-                        <span>{{ campaign.rebels.campaignPoints }} points</span>
-                    </div>
-                </div>
+<mat-tab-group>
+    <mat-tab label="Home">
+        <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
+            fxLayout="column" fxLayoutGap="8px">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
+                <mat-card fxFlex>
+                    <mat-card-header>
+                        <mat-card-title>{{ campaign.name }}</mat-card-title>
+                        <mat-card-subtitle>{{ campaign.typeName() }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div *ngIf="currentState.phase === phases.CampaignSetup">
+                            <h3>Campaign Setup Phase</h3>
+                            <p>
+                                Use the roster controls to add players to the campaign. After all players have created
+                                a base (using the Locations card) and created their fleets, the campaign owner can click
+                                'Finish Setup' to begin the first round of the campaign.
+                            </p>
+                            <p>
+                                If the participants in this campaign want to manage their own campaign data,
+                                send them the invite link below.
+                                This will allow them to join the campaign and create one or more campaign players.
+                            </p>
+                            <p>
+                                <strong>Heads up!</strong> Once the campaign owner clicks 'Finish Setup', the invite
+                                link
+                                below will be removed and the roster will be locked.
+                            </p>
+                            <div fxLayout="row">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Invite URL</mat-label>
+                                    <input matInput disabled value="{{ campaign.inviteUrl() }}">
+                                    <mat-icon matSuffix class="clickable" (click)="copyInviteUrl()">file_copy</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <h3 *ngIf="currentState.phase === phases.Finished">Campaign Finished</h3>
+                        <div *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished"
+                            fxLayout="column" fxLayout.gt-sm="row">
+                            <span>Act {{ currentState.actInRomanNumerals() }}</span>
+                            <span>Turn {{ currentState.turn }}</span>
+                            <span>{{ currentState.phase.toString() }} Phase</span>
+                        </div>
+                        <div fxLayout="row" class="campaign-score">
+                            <div fxLayout="column" fxFlex>
+                                <i class="ffi ffi-imperial" style="font-size:48px;"></i>
+                                <span>{{ campaign.empire.campaignPoints }} points</span>
+                            </div>
+                            <h3 fxFlex>&mdash;</h3>
+                            <!--todo: make this disappear on small-->
+                            <div fxLayout="column" fxFlex>
+                                <i class="ffi ffi-rebel" style="font-size:48px;"></i>
+                                <span>{{ campaign.rebels.campaignPoints }} points</span>
+                            </div>
+                        </div>
 
-            </mat-card-content>
-            <mat-card-actions *ngIf="currentState.phase === phases.CampaignSetup">
-                <button mat-button>Finish Setup</button>
-            </mat-card-actions>
-        </mat-card>
-        <flagship-campaign-team [team]="campaign.empire" [campaign]="campaign" fxFlex>
-        </flagship-campaign-team>
-        <flagship-campaign-team [team]="campaign.rebels" [campaign]="campaign" fxFlex>
-        </flagship-campaign-team>
-    </div>
+                    </mat-card-content>
+                    <mat-card-actions *ngIf="currentState.phase === phases.CampaignSetup">
+                        <button mat-button>Finish Setup</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Roster">
+        <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
+            fxLayout="column" fxLayoutGap="8px">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
+                <flagship-campaign-team [team]="campaign.empire" [campaign]="campaign" fxFlex>
+                </flagship-campaign-team>
+                <flagship-campaign-team [team]="campaign.rebels" [campaign]="campaign" fxFlex>
+                </flagship-campaign-team>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Locations">
+        <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
+            fxLayout="column" fxLayoutGap="8px">
 
-</div>
+            <flagship-campaign-locations [campaign]="campaign"></flagship-campaign-locations>
+        </div>
+    </mat-tab>
+    <mat-tab label="Timeline">Timeline</mat-tab>
+</mat-tab-group>
+
 <!-- <eco-fab-speed-dial class="fab-lower-right">
   <eco-fab-speed-dial-trigger [spin]="true">
     <button mat-fab color="primary">

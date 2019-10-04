@@ -4,8 +4,20 @@ import { Campaign } from '../campaign/campaign';
 import { CampaignState } from '../campaign/campaignState';
 import { Phase } from '../campaign/phase';
 import { Faction } from '../faction';
+import { CampaignLocation } from '../campaign/campaignLocation';
+import { StrategicEffectType } from '../campaign/strategicEffectType';
 
 export class CampaignFactory {
+
+    public createCampaignLocations(campaign: Campaign): Campaign {
+        switch (campaign.type) {
+            case CampaignType.RITR:
+                return this.createRITRCampaignLocations(campaign);
+            case CampaignType.CC:
+            default:
+                throw new Error("Unsupported campaign type.")
+        }
+    }
 
     public createCampaign(name: string, type: CampaignType, ownerUid: string) {
         let campaign = new Campaign();
@@ -30,7 +42,17 @@ export class CampaignFactory {
         initialState.phase = Phase.CampaignSetup;
         initialState.events = [];
         campaign.history = [initialState];
+        campaign = this.createCampaignLocations(campaign);
+        return campaign;
+    }
 
+    private createRITRCampaignLocations(campaign: Campaign): Campaign {
+        campaign.locations = [
+            CampaignLocation.newLocation('Tatooine', [], [StrategicEffectType.Ally], 2, [1]),
+            CampaignLocation.newLocation('Geonosis', [], [StrategicEffectType.Diplomat], 1, [1]),
+            CampaignLocation.newLocation('Coruscant', [], [StrategicEffectType.RepairYards, StrategicEffectType.Ally], 2, [1, 2]),
+            CampaignLocation.newLocation('Mustafar', [], [], 1, [2])
+        ]
         return campaign;
     }
 }
