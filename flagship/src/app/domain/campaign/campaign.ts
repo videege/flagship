@@ -5,10 +5,12 @@ import { SerializedCampaignLocation } from './campaignLocation';
 import { CampaignLocation } from './campaignLocation';
 import { Invite } from './invite';
 import { CampaignPlayer } from './campaignPlayer';
+import { CampaignUser } from './campaignUser';
 
 export interface SerializedCampaign {
     id: string;
     ownerUid: string;
+    campaignUsers: CampaignUser[];
     playerUids: string[];
     inviteToken: string;
     type: CampaignType;
@@ -24,6 +26,7 @@ export interface SerializedCampaign {
 export class Campaign {
     public id: string;
     public ownerUid: string;
+    public campaignUsers: CampaignUser[] = [];
     public playerUids: string[] = [];
     public inviteToken: string;
     public type: CampaignType;
@@ -42,6 +45,7 @@ export class Campaign {
             id: this.id,
             name: this.name,
             ownerUid: this.ownerUid,
+            campaignUsers: this.campaignUsers,
             playerUids: this.playerUids,
             inviteToken: this.inviteToken,
             type: this.type,
@@ -59,7 +63,8 @@ export class Campaign {
         campaign.id = data.id;
         campaign.name = data.name;
         campaign.ownerUid = data.ownerUid;
-        campaign.playerUids = data.playerUids;
+        campaign.campaignUsers = data.campaignUsers || [];
+        campaign.playerUids = data.playerUids || [];
         campaign.inviteToken = data.inviteToken || null;
         campaign.type = data.type;
         campaign.startDate = data.startDate;
@@ -103,5 +108,13 @@ export class Campaign {
     public getPlayer(playerId: string): CampaignPlayer {
         return this.empire.players.find(x => x.id === playerId) ||
             this.rebels.players.find(x => x.id === playerId);
+    }
+
+    public campaignOwner(): CampaignUser {
+        return this.campaignUsers.find(x => x.uid === this.ownerUid);
+    }
+
+    public invitedUsers(): CampaignUser[] {
+        return this.campaignUsers.filter(x => x.uid !== this.ownerUid);
     }
 }

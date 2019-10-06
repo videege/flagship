@@ -55,7 +55,11 @@ export class CampaignService {
   public acceptCampaignInvite(invite: Invite): Promise<void> {
     if (!this.user) throw new Error("User not logged in.");
 
-    invite.acceptedUserUids.push(this.user.uid);
+    invite.acceptedUsers.push({
+      uid: this.user.uid,
+      displayName: this.user.displayName,
+      photoURL: this.user.photoURL
+    });
     let doc = this.db.doc<Invite>(`invites/${invite.token}`);
     return doc.update(invite);
   }
@@ -63,7 +67,7 @@ export class CampaignService {
   public createCampaign(name: string, type: CampaignType): Promise<Campaign> {
     if (!this.user) throw new Error("User not logged in.");
 
-    let campaign = this.campaignFactory.createCampaign(name, type, this.user.uid);
+    let campaign = this.campaignFactory.createCampaign(name, type, this.user);
     let serializedCampaign = campaign.serialize();
     return new Promise<Campaign>((resolve, reject) => {
       this.db.collection('campaigns')
@@ -95,7 +99,11 @@ export class CampaignService {
       campaignId: campaign.id,
       campaignName: campaign.name,
       ownerName: this.user.displayName,
-      acceptedUserUids: [campaign.ownerUid]
+      acceptedUsers: [{
+        uid: campaign.ownerUid,
+        displayName: this.user.displayName,
+        photoURL: this.user.photoURL
+      }]
     };
     
     return new Promise<Campaign>((resolve, reject) => {

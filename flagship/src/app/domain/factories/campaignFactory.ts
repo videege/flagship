@@ -19,14 +19,19 @@ export class CampaignFactory {
         }
     }
 
-    public createCampaign(name: string, type: CampaignType, ownerUid: string) {
+    public createCampaign(name: string, type: CampaignType, owner: firebase.User) {
         let campaign = new Campaign();
         campaign.id = null;
         campaign.inviteToken = null;
         campaign.name = name;
         campaign.type = type;
-        campaign.ownerUid = ownerUid;
-        campaign.playerUids = [ownerUid];
+        campaign.ownerUid = owner.uid;
+        campaign.campaignUsers = [{
+            uid: campaign.ownerUid,
+            displayName: owner.displayName,
+            photoURL: owner.photoURL
+          }];
+        campaign.playerUids = [owner.uid];
         campaign.empire = new Team();
         campaign.empire.faction = Faction.Empire;
         campaign.empire.name = 'Galactic Empire';

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { ClipboardService } from 'ngx-clipboard';
+import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 
 @Component({
   selector: 'flagship-campaign-dashboard',
@@ -18,6 +19,9 @@ export class CampaignDashboardComponent implements OnInit {
   public currentState: CampaignState;
 
   public phases = Phase;
+
+  public ownerUser: CampaignUser;
+  public invitedUsers: CampaignUser[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute, private clipboardService: ClipboardService,
@@ -37,6 +41,8 @@ export class CampaignDashboardComponent implements OnInit {
   ngOnInit() {
     this.campaign = this.route.snapshot.data.campaign;
     this.currentState = this.campaign.currentState();
+    this.ownerUser = this.campaign.campaignOwner();
+    this.invitedUsers = this.campaign.invitedUsers();
   }
 
   copyInviteUrl() {

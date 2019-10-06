@@ -34,7 +34,7 @@ export class InviteComponent implements OnInit {
   }
 
   private initInvite() {
-    if (this.invite.acceptedUserUids.indexOf(this.user.uid) >= 0) {
+    if (this.invite.acceptedUsers.map(x => x.uid).indexOf(this.user.uid) >= 0) {
       this.inviteValid = false;
       this.submitButtonOptions.disabled = true;
     }

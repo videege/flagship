@@ -3,16 +3,58 @@
         <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
             fxLayout="column" fxLayoutGap="8px">
             <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
-                <mat-card fxFlex>
+                <mat-card fxFlex fxFlex.gt-sm="35">
                     <mat-card-header>
                         <mat-card-title>{{ campaign.name }}</mat-card-title>
                         <mat-card-subtitle>{{ campaign.typeName() }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
-                        <div *ngIf="currentState.phase === phases.CampaignSetup">
-                            <h3>Campaign Setup Phase</h3>
+                        <div fxLayout="row" class="campaign-score">
+                            <div fxLayout="column" fxFlex>
+                                <i class="ffi ffi-imperial" style="font-size:48px;"></i>
+                                <span>{{ campaign.empire.campaignPoints }} points</span>
+                            </div>
+                            <h3 fxFlex>&mdash;</h3>
+                            <!--todo: make this disappear on small-->
+                            <div fxLayout="column" fxFlex>
+                                <i class="ffi ffi-rebel" style="font-size:48px;"></i>
+                                <span>{{ campaign.rebels.campaignPoints }} points</span>
+                            </div>
+                        </div>
+                        <mat-list>
+                            <h3 mat-subheader>Campaign Owner</h3>
+                            <mat-list-item>
+                                <img matListAvatar [src]="ownerUser.photoURL">
+                                <h3 matLine>{{ ownerUser.displayName }}</h3>
+                            </mat-list-item>
+                            <h3 mat-subheader *ngIf="invitedUsers.length">Invited Users</h3>
+                            <mat-list-item *ngFor="let user of invitedUsers">
+                                <img matListAvatar [src]="user.photoURL">
+                                <h3 matLine>{{ user.displayName }}</h3>
+                            </mat-list-item>
+                            <!-- <mat-list-item *ngFor="let message of messages">
+                                <img matListAvatar src="..." alt="...">
+                                <h3 matLine> {{message.from}} </h3>
+                                <p matLine>
+                                    <span> {{message.subject}} </span>
+                                    <span class="demo-2"> -- {{message.content}} </span>
+                                </p>
+                            </mat-list-item> -->
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card fxFlex *ngIf="currentState.phase === phases.CampaignSetup">
+                    <mat-card-header>
+                        <mat-card-title>Campaign Setup Phase</mat-card-title>
+                        <mat-card-subtitle>
+                            Invite other users to this campaign, create team rosters and establish
+                            initial bases.
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>
                             <p>
-                                Use the roster controls to add players to the campaign. After all players have created
+                                Use the roster tab to add players to the campaign. After all players have created
                                 a base (using the Locations card) and created their fleets, the campaign owner can click
                                 'Finish Setup' to begin the first round of the campaign.
                             </p>
@@ -34,30 +76,15 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        <h3 *ngIf="currentState.phase === phases.Finished">Campaign Finished</h3>
-                        <div *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished"
-                            fxLayout="column" fxLayout.gt-sm="row">
-                            <span>Act {{ currentState.actInRomanNumerals() }}</span>
-                            <span>Turn {{ currentState.turn }}</span>
-                            <span>{{ currentState.phase.toString() }} Phase</span>
-                        </div>
-                        <div fxLayout="row" class="campaign-score">
-                            <div fxLayout="column" fxFlex>
-                                <i class="ffi ffi-imperial" style="font-size:48px;"></i>
-                                <span>{{ campaign.empire.campaignPoints }} points</span>
-                            </div>
-                            <h3 fxFlex>&mdash;</h3>
-                            <!--todo: make this disappear on small-->
-                            <div fxLayout="column" fxFlex>
-                                <i class="ffi ffi-rebel" style="font-size:48px;"></i>
-                                <span>{{ campaign.rebels.campaignPoints }} points</span>
-                            </div>
-                        </div>
-
                     </mat-card-content>
                     <mat-card-actions *ngIf="currentState.phase === phases.CampaignSetup">
-                        <button mat-button>Finish Setup</button>
+                        <button mat-button color="primary" (click)="finishSetup()">Finish Setup</button>
                     </mat-card-actions>
+                </mat-card>
+                <mat-card *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished">
+                    <span>Act {{ currentState.actInRomanNumerals() }}</span>
+                    <span>Turn {{ currentState.turn }}</span>
+                    <span>{{ currentState.phase.toString() }} Phase</span>
                 </mat-card>
             </div>
         </div>

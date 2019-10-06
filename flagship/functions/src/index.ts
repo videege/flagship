@@ -14,28 +14,31 @@ export const processCampaignInvite = functions.firestore.document('invites/{invi
                 const newData = change.after.data();
                 const oldData = change.before.data();
                 console.log('Preliminary data obtained.')
-                if (newData && newData.acceptedUserUids &&
-                    oldData && oldData.acceptedUserUids && oldData.campaignId &&
-                    newData.acceptedUserUids.length !== oldData.acceptedUserUids.length) {
+                if (newData && newData.acceptedUsers &&
+                    oldData && oldData.acceptedUsers && oldData.campaignId &&
+                    newData.acceptedUsers.length !== oldData.acceptedUsers.length) {
                     //Find the new ID
-                    let newUid = null;
-                    for (let i = 0; i < newData.acceptedUserUids.length; i++) {
-                        let uid = newData.acceptedUserUids[i];
-                        if (oldData.acceptedUserUids.indexOf(uid) === -1) {
-                            newUid = uid;
+                    let newUser = null;
+                    let oldUserUids = oldData.acceptedUsers.map((x: any) => x.uid);
+
+                    for (let i = 0; i < newData.acceptedUsers.length; i++) {
+                        let user = newData.acceptedUsers[i];
+                        if (oldUserUids.indexOf(user.uid) === -1) {
+                            newUser = user;
                             break;
                         }
                     }
-                    if (!newUid) {
-                        console.error("Couldn't determine new UID to add to campaign.");
-                        reject("Couldn't find new UID to add to campaign.");
+                    if (!newUser) {
+                        console.error("Couldn't determine new user to add to campaign.");
+                        reject("Couldn't find new user to add to campaign.");
                         return;
                     }
                     //The invite is accepted
                     const campaignId = oldData.campaignId;
-                    console.log('New data: inserting ' + newUid + ' to campaign ' + campaignId);
+                    console.log('New data: inserting ' + newUser.uid + ' to campaign ' + campaignId);
                     db.doc(`campaigns/${campaignId}`).update({
-                        playerUids: admin.firestore.FieldValue.arrayUnion(newUid)
+                        campaignPlayers: admin.firestore.FieldValue.arrayUnion(newUser),
+                        playerUids: admin.firestore.FieldValue.arrayUnion(newUser.uid)
                     }).then((result) => {
                         resolve();
                     }, (err) => {
