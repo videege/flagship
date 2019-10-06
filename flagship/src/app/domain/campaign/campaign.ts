@@ -6,6 +6,7 @@ import { CampaignLocation } from './campaignLocation';
 import { Invite } from './invite';
 import { CampaignPlayer } from './campaignPlayer';
 import { CampaignUser } from './campaignUser';
+import { Validator, RITRValidator } from './validator';
 
 export interface SerializedCampaign {
     id: string;
@@ -99,10 +100,6 @@ export class Campaign {
             default:
                 return "Unknown";
         }
-    }
-
-    private areTeamsBalanced(): boolean {
-        return this.empire.numberOfPlayers() === this.rebels.numberOfPlayers();
     }
 
     public getPlayer(playerId: string): CampaignPlayer {

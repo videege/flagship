@@ -32,14 +32,6 @@
                                 <img matListAvatar [src]="user.photoURL">
                                 <h3 matLine>{{ user.displayName }}</h3>
                             </mat-list-item>
-                            <!-- <mat-list-item *ngFor="let message of messages">
-                                <img matListAvatar src="..." alt="...">
-                                <h3 matLine> {{message.from}} </h3>
-                                <p matLine>
-                                    <span> {{message.subject}} </span>
-                                    <span class="demo-2"> -- {{message.content}} </span>
-                                </p>
-                            </mat-list-item> -->
                         </mat-list>
                     </mat-card-content>
                 </mat-card>
@@ -77,7 +69,7 @@
                             </div>
                         </div>
                     </mat-card-content>
-                    <mat-card-actions *ngIf="currentState.phase === phases.CampaignSetup">
+                    <mat-card-actions>
                         <button mat-button color="primary" (click)="finishSetup()">Finish Setup</button>
                     </mat-card-actions>
                 </mat-card>

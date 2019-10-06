@@ -7,6 +7,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { ClipboardService } from 'ngx-clipboard';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
+import { CampaignSetupDialogComponent, CampaignSetupDialogData } from '../campaign-setup-dialog/campaign-setup-dialog.component';
 
 @Component({
   selector: 'flagship-campaign-dashboard',
@@ -49,6 +50,25 @@ export class CampaignDashboardComponent implements OnInit {
     this.clipboardService.copyFromContent(this.campaign.inviteUrl());
     this.snackbar.open('Invite link copied to clipboard!', 'OK', {
       duration: 1500
+    });
+  }
+
+  finishSetup() {
+    let ref = this.dialog.open(CampaignSetupDialogComponent, {
+      width: '450px',
+      data: <CampaignSetupDialogData> {
+        campaign: this.campaign
+      }
+    }); 
+    ref.afterClosed().subscribe((data: CampaignSetupDialogData) => {
+      if (data) {
+        alert('todo');
+        // this.campaignService.createCampaign(data.name, data.type)
+        //   .then(() => {
+        //     //this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+            
+        //   });
+      }
     });
   }
 }

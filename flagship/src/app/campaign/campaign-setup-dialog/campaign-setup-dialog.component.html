@@ -1,0 +1,25 @@
+<div mat-dialog-content>
+    <div *ngIf="issues.length">
+        <p>Flagship has detected the following issues - please review them before finishing setup:</p>
+        <flagship-issues-list [issues]="issues"></flagship-issues-list>
+    </div>
+    <div *ngIf="canFinalize">
+        <p>
+            When you click 'Finish Setup', the campaign will begin its first turn.  After this point,
+            you will not be able to add players or invite any additional users to the campaign.
+        </p>
+    </div>
+    <div *ngIf="!canFinalize">
+        <p>
+            You cannot proceed with finishing setup because of one or more errors listed above.
+            Please correct the problems before proceeding.
+        </p>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button [mat-dialog-close]="finalize()" [disabled]="!canFinalize" color="primary">
+        Finish Setup
+    </button>
+</div>

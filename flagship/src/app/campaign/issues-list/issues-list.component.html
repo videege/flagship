@@ -1,0 +1,6 @@
+<mat-list dense>
+    <mat-list-item *ngFor="let issue of issues">
+        <mat-icon matListIcon>{{ issueIconMap[issue.severity] }}</mat-icon>
+        <p matLine> {{ issue.text }} </p>
+    </mat-list-item>
+</mat-list>
