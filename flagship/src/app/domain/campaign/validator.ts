@@ -4,6 +4,7 @@ import { Team } from './team';
 import { Faction } from '../faction';
 import { CampaignLocation } from './campaignLocation';
 import { LocationControlType } from './locationControlType';
+import { CampaignUser } from './campaignUser';
 
 export interface Validator {
     validateSetupPhase(campaign: Campaign): Issue[];
@@ -16,7 +17,7 @@ export class RITRValidator implements Validator {
 
         // Errors
         if (!this.areTeamsBalanced(campaign)) {
-            issues.push(this.error('Teams are unbalanced. Each team should have the same number of players'));
+            issues.push(this.error('Teams are unbalanced. Each team should have the same number of players.'));
         }
         if (!this.teamHasCorrectNumberOfPlayers(campaign.empire)) {
             issues.push(this.error('The Empire team has an incorrect number of players. Each team should have 2 or 3 players.'))
@@ -30,7 +31,10 @@ export class RITRValidator implements Validator {
         if (!this.teamHasPlacedBases(campaign.rebels, campaign.locations)) {
             issues.push(this.error('The Rebel team has the incorrect number of bases placed.  Each team should have 1 base per player.'))
         }
-        
+        let playersControllingBothSides = this.getPlayersControllingBothSides(campaign);
+        for (const player of playersControllingBothSides) {
+            issues.push(this.warning(`${player.displayName} is controlling players on each team.  This user will be able to see both teams' secret information.`))
+        }
 
         return issues;
     }
@@ -64,7 +68,16 @@ export class RITRValidator implements Validator {
         return teamBases.length === numBases;
     }
 
-    // private eachPlayerHasFleet(team: Team): boolean {
-    //     let unsetFleets = team.players.map(x => x.fleetId)
-    // }
+    private getPlayersControllingBothSides(campaign: Campaign): CampaignUser[] {
+        let players = [];
+        for (const player of campaign.campaignUsers) {
+            let empirePlayer = campaign.empire.players.find(x => x.playerUid === player.uid);
+            let rebelPlayer = campaign.rebels.players.find(x => x.playerUid === player.uid);
+            if (empirePlayer && rebelPlayer) {
+                players.push(player);
+            }
+        }
+        return players;
+    }
+
 }
