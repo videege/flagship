@@ -7,6 +7,7 @@ import { ClipboardService } from 'ngx-clipboard';
 export class PlayerCreatorDialogData {
   campaignId: string;
   name: string;
+  fleetName: string;
 }
 
 @Component({
@@ -21,7 +22,7 @@ export class PlayerCreatorDialogComponent implements OnInit {
  
   playerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(25)]),
-    controller: new FormControl('0', Validators.required)
+    fleetName: new FormControl('', [Validators.required, Validators.maxLength(25)])
   });
 
   constructor(public dialogRef: MatDialogRef<PlayerCreatorDialogComponent>,
@@ -29,17 +30,13 @@ export class PlayerCreatorDialogComponent implements OnInit {
     }
 
   ngOnInit() {
-
-    this.playerForm.patchValue({
-      name: this.data.name,
-      controller: "0"
-    });
   }
 
   getData() : PlayerCreatorDialogData {
     return {
       campaignId: this.data.campaignId,
-      name: this.playerForm.get('name').value
+      name: this.playerForm.get('name').value,
+      fleetName: this.playerForm.get('fleetName').value
     }
   }
 

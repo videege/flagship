@@ -14,6 +14,12 @@ import { ObjectiveFactory } from '../../domain/factories/objectiveFactory';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { CustomCommander } from 'src/app/domain/campaign/customCommander';
+
+export interface FleetCompaignData {
+  campaignId: string;
+  commanderName: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +34,7 @@ export class FleetService {
   private squadronFactory = new SquadronFactory();
   private objectiveFactory = new ObjectiveFactory();
 
-  constructor(protected localStorage: LocalStorage, private db: AngularFirestore, 
+  constructor(protected localStorage: LocalStorage, private db: AngularFirestore,
     public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
@@ -36,11 +42,17 @@ export class FleetService {
   }
 
   public createFleet(name: string, author: string, faction: Faction,
-    points: number, squadronPoints: number): Promise<Fleet> {
+    points: number, squadronPoints: number, campaignData: FleetCompaignData = null): Promise<Fleet> {
     if (!this.user) throw new Error("User not logged in.");
 
     let fleet = new Fleet(null, name, author, faction, points, squadronPoints);
     fleet.setOwnerUid(this.user.uid);
+
+    if (campaignData) {
+      fleet.setCampaignId(campaignData.campaignId);
+      fleet.customCommander = new CustomCommander();
+      fleet.customCommander.name = campaignData.commanderName;
+    }
     let serializedFleet = fleet.serialize();
 
     return new Promise<Fleet>((resolve, reject) => {
@@ -48,7 +60,9 @@ export class FleetService {
         .add(serializedFleet)
         .then(res => {
           fleet.setId(res.id);
-          resolve(fleet)
+          this.updateFleet(fleet).then(() => {
+            resolve(fleet);
+          }, (err) => reject(err))
         }, err => reject(err))
     });
   }
@@ -56,17 +70,14 @@ export class FleetService {
   public getFleetsForUser(): Observable<Fleet[]> {
     if (!this.user) return null;
 
+    //TODO: this is weird and affecting the wrong things.
     return this.db.collection('fleets', ref => ref.where('ownerUid', '==', this.user.uid))
-      .snapshotChanges()
+      .valueChanges()
       .pipe(
-        map(actions => {
-          return actions.map(a => {
-            const data = a.payload.doc.data() as ISerializedFleet;
-            const id = a.payload.doc.id;
-            return this.hydrateFleet(data, id);
-          });
+        map((fleets: ISerializedFleet[]) => {
+          return fleets.map(f => this.hydrateFleet(f, f.id));
         })
-      )
+      );
   }
 
   public getFleetForUser(id: string): Observable<Fleet> {
@@ -108,6 +119,10 @@ export class FleetService {
       serializedFleet.pointLimit, serializedFleet.squadronPointLimit);
     let userUid = this.user ? this.user.uid : null;
     fleet.setOwnerUid(serializedFleet.ownerUid || userUid);
+    fleet.setCampaignId(serializedFleet.campaignId || null);
+    if (serializedFleet.customCommander) {
+      fleet.customCommander = CustomCommander.hydrate(serializedFleet.customCommander);
+    }
     for (const serializedShip of serializedFleet.ships) {
       let ship = this.shipFactory.instantiateShip(serializedShip.id);
       fleet.addShip(ship);

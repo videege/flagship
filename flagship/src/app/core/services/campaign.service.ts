@@ -38,12 +38,10 @@ export class CampaignService {
   }
 
   public getCampaignForUser(id: string): Observable<Campaign> {
-    return this.db.doc<SerializedCampaign>(`campaigns/${id}`).get({
-      
-    }).pipe(
-      map(doc => doc.data() as SerializedCampaign),
-      map(serialized => Campaign.hydrate(serialized))
-    );
+    return this.db.doc<SerializedCampaign>(`campaigns/${id}`).valueChanges()
+      .pipe(
+        map(serialized => Campaign.hydrate(serialized))
+      );
   }
 
   public getCampaignInvite(token: string): Observable<Invite> {
@@ -105,7 +103,7 @@ export class CampaignService {
         photoURL: this.user.photoURL
       }]
     };
-    
+
     return new Promise<Campaign>((resolve, reject) => {
       this.db.collection('invites').add(invite).then(res => {
         invite.token = res.id;

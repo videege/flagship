@@ -51,10 +51,8 @@ const CAMPAIGN_ROUTES: Routes = [
     },
     {
         path: ':id', children: [
-            { path: '', component: CampaignDashboardComponent, resolve: { campaign: CampaignResolver },
-              data: { nav: new FlagshipRouteData((data: Data) => {
-                  return (data['campaign'] as Campaign).name;
-              }, 'Campaigns', '/campaigns')}
+            { path: '', component: CampaignDashboardComponent, //resolve: { campaign: CampaignResolver },
+              data: { nav: new FlagshipRouteData('Campaign', 'Campaigns', '/campaigns')}
             },
             defaultToolbar
         ]

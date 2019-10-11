@@ -2,6 +2,7 @@ import { CompileMetadataResolver } from "../../../node_modules/@angular/compiler
 
 export enum UpgradeType {
   Commander = "Commander",
+  CustomCommander = "CustomCommander",
   Officer = "Officer",
   DefensiveRetrofit = "DefensiveRetrofit",
   ExperimentalRetrofit = "ExperimentalRetrofit",

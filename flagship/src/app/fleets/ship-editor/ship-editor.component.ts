@@ -37,7 +37,7 @@ export class ShipEditorComponent implements OnInit {
       if (<any>upgrade === "rm" && slot.isFilled()) {
         this.ship.unequipUpgrade(slot);
       }
-      if (upgrade) {
+      else if (upgrade) {
         if (slot.isFilled()) {
           this.ship.unequipUpgrade(slot);
         }

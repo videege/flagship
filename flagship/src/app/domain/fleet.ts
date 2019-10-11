@@ -7,6 +7,7 @@ import { UpgradeType } from "./upgradeType";
 
 import { Subject } from 'rxjs';
 import { Objective } from './objective';
+import { CustomCommander, SerializedCustomCommander } from './campaign/customCommander';
 
 export interface ISerializedFleet {
   id: string;
@@ -21,12 +22,16 @@ export interface ISerializedFleet {
   objectives: number[];
 
   ownerUid: string;
+  campaignId: string;
+  customCommander: SerializedCustomCommander;
 }
 
 export class Fleet {
   public subject: Subject<string>;
 
   public ownerUid: string;
+  public campaignId: string;
+  public customCommander: CustomCommander;
 
   public ships: Ship[];
   public squadrons: Squadron[];
@@ -53,6 +58,10 @@ export class Fleet {
     this.ownerUid = uid;
   }
 
+  public setCampaignId(id: string) {
+    this.campaignId = id;
+  }
+
   serialize(): ISerializedFleet {
     let ships = this.ships.map(s => s.serialize());
     let squadrons = this.squadrons.map(s => s.id);
@@ -68,7 +77,9 @@ export class Fleet {
       ships: ships,
       squadrons: squadrons,
       objectives: objectives,
-      ownerUid: this.ownerUid
+      ownerUid: this.ownerUid,
+      campaignId: this.campaignId || null,
+      customCommander: this.customCommander!.serialize() || null
     };
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Team } from 'src/app/domain/campaign/team';
 import { Faction } from 'src/app/domain/faction';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
@@ -8,13 +8,15 @@ import { PlayerCreatorDialogComponent, PlayerCreatorDialogData } from '../player
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { CampaignService } from 'src/app/core/services/campaign.service';
 import { Guid } from 'guid-typescript';
+import { FleetService } from 'src/app/core/services/fleet.service';
 
 @Component({
   selector: 'flagship-campaign-team',
   templateUrl: './campaign-team.component.html',
   styleUrls: ['./campaign-team.component.css']
 })
-export class CampaignTeamComponent implements OnInit {
+export class CampaignTeamComponent implements OnInit, OnChanges {
+  
   @Input() campaign: Campaign;
   @Input() team: Team;
 
@@ -26,13 +28,23 @@ export class CampaignTeamComponent implements OnInit {
   private user: firebase.User;
 
   constructor(private afAuth: AngularFireAuth, private campaignService: CampaignService,
-    private dialog: MatDialog) { 
+    private dialog: MatDialog, private fleetService: FleetService) { 
     this.afAuth.user.subscribe(user => {
       this.user = user;
     });
   }
 
   ngOnInit() {
+    this.setup();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.team.currentValue !== changes.team.previousValue) {
+      this.setup();
+    }
+  }
+
+  private setup(): void {
     this.faction = this.team.faction === Faction.Empire ? "Empire" : "Rebels";
     this.factionIcon = this.team.faction === Faction.Empire ? "ffi-imperial" : "ffi-rebel";
     this.roster = new MatTableDataSource<CampaignPlayer>(this.team.players);
@@ -58,13 +70,21 @@ export class CampaignTeamComponent implements OnInit {
         player.name = data.name;
         if (!this.team.players.length) {
           player.isLeader = true;
+        } else {
+          player.isLeader = false;
         }
         player.fleetId = null;
         player.wins = player.losses = player.mov = 0;
-        this.team.players.push(player);
-        this.campaignService.updateCampaign(this.campaign).then(() => {
         
-        });
+        this.fleetService.createFleet(data.fleetName, null, this.team.faction,
+          200, 200, { campaignId: this.campaign.id, commanderName: data.name }).then((fleet) => {
+            player.fleetId = fleet.id;
+            this.team.players.push(player);
+            this.campaignService.updateCampaign(this.campaign).then(() => {
+          
+            });
+          })
+       
       }
     });
   }

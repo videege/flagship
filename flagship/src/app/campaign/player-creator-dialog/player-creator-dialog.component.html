@@ -1,10 +1,18 @@
 <div mat-dialog-content>
+    <p>Enter the name of the custom commander and the name of the fleet:</p>
     <form [formGroup]="playerForm" fxLayout="column">
         <mat-form-field>
-            <mat-label>Player Name</mat-label>
+            <mat-label>Commander Name</mat-label>
             <input matInput formControlName="name" maxlength="25" />
             <mat-error *ngIf="playerForm.get('name').invalid">
                 You must enter a name (max 25 characters) for this player.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Fleet Name</mat-label>
+            <input matInput formControlName="fleetName" maxlength="25"/>
+            <mat-error *ngIf="playerForm.get('fleetName').invalid">
+                You must enter a name (max 25 characters) for this fleet.
             </mat-error>
         </mat-form-field>
     </form>

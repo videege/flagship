@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { MatTableDataSource } from '@angular/material';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
@@ -14,7 +14,7 @@ import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
   templateUrl: './campaign-locations.component.html',
   styleUrls: ['./campaign-locations.component.css']
 })
-export class CampaignLocationsComponent implements OnInit {
+export class CampaignLocationsComponent implements OnInit, OnChanges {
   @Input() campaign: Campaign;
 
   displayedColumns = ['name', 'faction', 'controlType', 'objectives', 'effects', 'points'];
@@ -28,6 +28,10 @@ export class CampaignLocationsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.setDataSource();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.setDataSource();
   }
 

@@ -8,6 +8,7 @@ import { Phase } from 'src/app/domain/campaign/phase';
 import { ClipboardService } from 'ngx-clipboard';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 import { CampaignSetupDialogComponent, CampaignSetupDialogData } from '../campaign-setup-dialog/campaign-setup-dialog.component';
+import { CampaignService } from 'src/app/core/services/campaign.service';
 
 @Component({
   selector: 'flagship-campaign-dashboard',
@@ -24,9 +25,11 @@ export class CampaignDashboardComponent implements OnInit {
   public ownerUser: CampaignUser;
   public invitedUsers: CampaignUser[] = [];
 
+  public loading = true;
+
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute, private clipboardService: ClipboardService,
-    private snackbar: MatSnackBar) {
+    private snackbar: MatSnackBar, private campaignService: CampaignService) {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
@@ -40,10 +43,15 @@ export class CampaignDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.campaign = this.route.snapshot.data.campaign;
-    this.currentState = this.campaign.currentState();
-    this.ownerUser = this.campaign.campaignOwner();
-    this.invitedUsers = this.campaign.invitedUsers();
+    let campaignId = this.route.snapshot.params.id;
+    this.campaignService.getCampaignForUser(campaignId).subscribe((campaign) => {
+      this.campaign = campaign;
+      this.currentState = this.campaign.currentState();
+      this.ownerUser = this.campaign.campaignOwner();
+      this.invitedUsers = this.campaign.invitedUsers();
+      this.loading = false;
+    });
+ 
   }
 
   copyInviteUrl() {

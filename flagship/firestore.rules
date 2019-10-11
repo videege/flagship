@@ -1,4 +1,10 @@
 rules_version = '2';
+
+// function isUserOnCampaign(database, campaignId) {
+//   return campaignId != null && 
+//   request.auth.uid in get(/databases/$(database)/documents/campaigns/$(campaignId)).data.playerUids;
+// }
+
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {

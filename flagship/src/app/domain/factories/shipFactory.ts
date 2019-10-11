@@ -758,7 +758,10 @@ export class ShipFactory {
     if (!data)
       return null;
 
-    let upgradeSlots = data.upgradeSlots;
+    // make a deep clone of the data
+
+
+    let upgradeSlots = data.upgradeSlots.map(x => new UpgradeSlot(x.type));
     if (upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
       upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
       !upgradeSlots.find(u => u.type === UpgradeType.BoardingTeam)) {
