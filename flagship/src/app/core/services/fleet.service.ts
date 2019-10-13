@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Fleet, ISerializedFleet } from '../../domain/fleet';
 import { Faction } from '../../domain/faction';
-import { Observable, of, Subject, forkJoin } from 'rxjs';
-import { Ship } from '../../domain/ship';
-import { Guid } from 'guid-typescript';
+import { Observable, of } from 'rxjs';
 
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { tap, switchMap, mergeMap, map, concatMap, find, share, take } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { ShipFactory } from '../../domain/factories/shipFactory';
 import { UpgradeFactory } from '../../domain/factories/upgradeFactory';
 import { SquadronFactory } from '../../domain/factories/squadronFactory';
 import { ObjectiveFactory } from '../../domain/factories/objectiveFactory';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
 import { Upgrade } from 'src/app/domain/upgrade';
 

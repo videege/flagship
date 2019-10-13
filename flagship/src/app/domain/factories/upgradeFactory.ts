@@ -5,7 +5,7 @@ import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
 import { SlotGrantingUpgrade } from '../upgrades/slotGrantingUpgrade';
 import { Size } from '../size';
 import { CustomCommander } from '../campaign/customCommander';
-import { CustomCommanderUpgrade } from '../upgrades/CustomCommanderUpgrade';
+import { CustomCommanderUpgrade } from '../upgrades/customCommanderUpgrade';
 
 export class UpgradeFactory {
 
