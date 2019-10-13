@@ -5,6 +5,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { BatteryComponent } from './battery/battery.component';
 import { ShipIconComponent } from './ship-icon/ship-icon.component';
+import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
 
 
 
@@ -13,7 +14,8 @@ import { ShipIconComponent } from './ship-icon/ship-icon.component';
     DefaultToolbarComponent,
     AlertComponent,
     BatteryComponent,
-    ShipIconComponent
+    ShipIconComponent,
+    UpgradeIconDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ShipIconComponent } from './ship-icon/ship-icon.component';
     DefaultToolbarComponent,
     AlertComponent,
     BatteryComponent,
-    ShipIconComponent
+    ShipIconComponent,
+    UpgradeIconDirective
   ]
 })
 export class SharedModule { }

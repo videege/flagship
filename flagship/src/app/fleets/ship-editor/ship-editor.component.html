@@ -96,7 +96,8 @@
           {{ slot.upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ slot.upgrade.name }}{{ slot.upgrade.modification ? "&nbsp;(M)" : "" }}
         </h3>
         <p matLine *ngIf="slot.upgrade" style="white-space: normal; font-size: .8em;">
-          <span>{{ slot.upgrade.text }}</span>
+          <span *ngIf="slot.type !== upgradeTypes.CustomCommander">{{ slot.upgrade.text }}</span>
+          <span *ngIf="slot.type === upgradeTypes.CustomCommander">{{ slot.upgrade.text$ | async }}</span>
         </p>
 
         <span style="margin-left: 8px;" *ngIf="slot.upgrade">{{ slot.upgrade.points }}</span>

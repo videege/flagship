@@ -41,6 +41,10 @@ body {
     color: hsla(0, 0%, 47%, 0.75)
 }
 
+.height-auto {
+    height: auto !important;
+}
+
 .mat-card-header-text {
     width: 100%;
 }

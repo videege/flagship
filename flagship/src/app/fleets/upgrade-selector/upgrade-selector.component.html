@@ -3,11 +3,12 @@
     There are no available upgrades to select from.
   </p>
   <mat-action-list dense>
-    <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)">
+    <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)"
+      class="height-auto">
       <h3 matLine>
         {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}</h3>
       <p matLine style="white-space: normal">
-        <span style="font-style: italic; font-size: .8em;">{{ upgrade.text }}</span>
+        <span style="font-style: italic; font-size: .8em;">{{ upgrade.getText() }}</span>
       </p>
       <span style="margin-left: 8px;">{{ upgrade.points }}</span>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>

@@ -1,8 +1,10 @@
-<span *ngIf="upgrade && (upgrade.type === 'Title' || upgrade.type === 'Commander')">
+<span *ngIf="upgrade && isDetailed">
   <span class="title">{{ upgrade.name }}</span><br>
-  <span class="text">{{ upgrade.text }}</span><br>
+  <span class="text" *ngIf="!isCustomCommander">{{ upgrade.text }}</span>
+  <span class="text" *ngIf="isCustomCommander">{{ upgrade.text$ | async }}</span>
+  <br>
 </span>
-<span *ngIf="upgrade && (upgrade.type != 'Commander' && upgrade.type != 'Title')">
+<span *ngIf="upgrade && !isDetailed">
   {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{ upgrade.modification ? "&nbsp;(M)" : "" }}
   {{ !isLast ? ', ' : '' }}
 </span>

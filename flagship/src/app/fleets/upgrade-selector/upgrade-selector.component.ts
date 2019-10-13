@@ -5,6 +5,7 @@ import { UpgradeFactory } from '../../domain/factories/upgradeFactory';
 import { Faction } from '../../domain/faction';
 import { Ship } from '../../domain/ship';
 import { Upgrade } from '../../domain/upgrade';
+import { UpgradeType } from 'src/app/domain/upgradeType';
 
 export interface UpgradeSelectorData {
   slot: UpgradeSlot;
@@ -26,7 +27,10 @@ export class UpgradeSelectorComponent implements OnInit {
   ngOnInit() {
     let type = this.data.slot.type;
     this.isFilled = this.data.slot.isFilled();
-    let allUpgrades = this.upgradeFactory.getUpgradesOfType(type, Faction.Empire);
+
+    let allUpgrades = type === UpgradeType.CustomCommander 
+      ? [this.upgradeFactory.getCustomCommanderUpgrade(this.data.ship.fleet.customCommander, this.data.ship.faction)]
+      : this.upgradeFactory.getUpgradesOfType(type, this.data.ship.faction);
     this.upgrades = allUpgrades.filter(u => this.data.ship.isUpgradeSelectable(u, this.data.slot));
   } 
 

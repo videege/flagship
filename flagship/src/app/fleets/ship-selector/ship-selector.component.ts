@@ -30,7 +30,7 @@ export class ShipSelectorComponent implements OnInit {
   }
 
   selectShip(ship: ShipData) {
-    let instantiatedShip = this.shipFactory.instantiateShip(ship.id);
+    let instantiatedShip = this.shipFactory.instantiateShip(ship.id, this.data.fleet.hasCustomCommander());
     this.dialogRef.close(instantiatedShip);
   }
 

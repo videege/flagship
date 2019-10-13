@@ -8,6 +8,7 @@ import { UpgradeType } from "./upgradeType";
 import { Subject } from 'rxjs';
 import { Objective } from './objective';
 import { CustomCommander, SerializedCustomCommander } from './campaign/customCommander';
+import { CustomCommanderAbilityCategory } from './campaign/customCommanderAbilityCategory';
 
 export interface ISerializedFleet {
   id: string;
@@ -60,6 +61,17 @@ export class Fleet {
 
   public setCampaignId(id: string) {
     this.campaignId = id;
+  }
+
+  public setCommander(commander: CustomCommander) {
+    this.customCommander = commander;
+    this.customCommander.subject.subscribe(() => {
+      this.subject.next(this.id);
+    })
+  }
+
+  public hasCustomCommander(): boolean {
+    return !!this.customCommander;
   }
 
   serialize(): ISerializedFleet {
@@ -131,6 +143,7 @@ export class Fleet {
     if (upgrade.unique && this.hasUniqueNameEquipped(upgrade.name)) {
       return false;
     }
+    
     return true;
   }
 

@@ -1,5 +1,5 @@
 import { Directive, Input, HostBinding, OnInit } from '@angular/core';
-import { UpgradeType } from './domain/upgradeType';
+import { UpgradeType } from '../../domain/upgradeType';
 
 @Directive({
   selector: '[flagshipUpgradeIcon]'
@@ -22,8 +22,10 @@ export class UpgradeIconDirective implements OnInit {
   ngOnInit() {
 
     this._elementClass.push('upgrade');
-
-    this._elementClass.push(this.upgradeType.toLowerCase());
+    let name = this.upgradeType === UpgradeType.CustomCommander 
+      ? "commander"
+      : this.upgradeType.toLowerCase();
+    this._elementClass.push(name);
   }
 
   constructor() {

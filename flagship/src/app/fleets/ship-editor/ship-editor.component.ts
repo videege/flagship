@@ -15,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShipEditorComponent implements OnInit {
   public ship: Ship;
+
+  public upgradeTypes = UpgradeType;
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -54,6 +56,8 @@ export class ShipEditorComponent implements OnInit {
 
   upgradeTypeName(type: UpgradeType): string {
     switch (type) {
+      case UpgradeType.CustomCommander:
+        return "Commander";
       case UpgradeType.BoardingTeam:
         return "Boarding Team";
       case UpgradeType.DefensiveRetrofit:

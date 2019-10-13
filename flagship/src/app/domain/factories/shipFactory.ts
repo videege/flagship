@@ -752,7 +752,7 @@ export class ShipFactory {
     return ShipFactory.shipData.filter(x => x.faction === faction);
   }
 
-  instantiateShip(id: number): Ship {
+  instantiateShip(id: number, isForFleetWithCustomCommander: boolean = false): Ship {
     let data = ShipFactory.shipData.find(x => x.id === id);
 
     if (!data)
@@ -775,7 +775,8 @@ export class ShipFactory {
       upgradeSlots.push(new UpgradeSlot(UpgradeType.Title));
     // If the ship is not a flotilla, add a commander slot
     if (data.size !== Size.SmallFlotilla && !upgradeSlots.find(u => u.type === UpgradeType.Commander)) {
-      upgradeSlots.push(new UpgradeSlot(UpgradeType.Commander));
+      const type = isForFleetWithCustomCommander ? UpgradeType.CustomCommander : UpgradeType.Commander;
+      upgradeSlots.push(new UpgradeSlot(type));
     }
 
     if (data.shipClass === ShipClass.Normal) {

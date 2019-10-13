@@ -9,7 +9,6 @@ import { UpgradeSummaryComponent } from './upgrade-summary/upgrade-summary.compo
 import { ShipEditorComponent } from './ship-editor/ship-editor.component';
 import { ShipCardComponent } from './ship-card/ship-card.component';
 import { UpgradeSelectorComponent } from './upgrade-selector/upgrade-selector.component';
-import { UpgradeIconDirective } from '../upgrade-icon.directive';
 import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
 import { FleetEditorComponent } from './fleet-editor/fleet-editor.component';
 import { SquadronSelectorComponent } from './squadron-selector/squadron-selector.component';
@@ -24,6 +23,8 @@ import { MethodologyComponent } from './methodology/methodology.component';
 import { AdditionModificationComponent } from './addition-modification/addition-modification.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../app-material/app-material.module';
+import { CustomCommanderComponent } from './custom-commander/custom-commander.component';
+import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom-ability-selector.component';
 
 
 @NgModule({
@@ -36,7 +37,6 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     ShipEditorComponent,
     ShipCardComponent,
     UpgradeSelectorComponent,
-    UpgradeIconDirective,
     ShipSelectorComponent,
     FleetEditorComponent,
     SquadronSelectorComponent,
@@ -49,6 +49,8 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     AdditionModificationComponent,
     FishingCalculatorComponent,
     MethodologyComponent,
+    CustomCommanderComponent,
+    CustomAbilitySelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,8 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     SquadronSelectorComponent,
     UpgradeSelectorComponent,
     FleetEditorComponent,
-    ObjectiveSelectorComponent
+    ObjectiveSelectorComponent,
+    CustomAbilitySelectorComponent
   ],
 })
 export class FleetsModule { }

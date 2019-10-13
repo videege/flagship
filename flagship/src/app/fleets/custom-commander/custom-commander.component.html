@@ -1,0 +1,63 @@
+<mat-card style="margin-top: 8px;">
+    <mat-card-header>
+        <mat-icon mat-card-avatar style="font-size: 40px;">keyboard_capslock</mat-icon>
+        <mat-card-title>
+            {{ commander.name }}
+            <span fxFlex></span>
+            {{ commander.currentExperience }} XP
+        </mat-card-title>
+        <mat-card-subtitle>Task Force Commander</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p *ngIf="!commander.abilities.length">You have no abilities selected. Click 'Edit Abilities'
+            to get started (your first ability is free.)
+        </p>
+        <p *ngIf="!isEditing">
+            To change your commander's abilities, click 'Edit Abilities' below.
+        </p>
+        <p *ngIf="isEditing">
+            Your changes will not be locked in until you click 'Confirm Changes' below. Once you confirm,
+            the experience cost of your changes will be deducted from your current experience. To replace
+            an ability, first remove it and then add the new ability. To upgrade the tier of an existing ability,
+            click the 'Upgrade' button on the ability.
+        </p>
+    </mat-card-content>
+    <mat-list *ngIf="!isEditing && commander.abilities.length">
+        <mat-list-item *ngFor="let ability of commander.abilities" class="height-auto">
+            <h3 mat-line>{{ ability.name }}</h3>
+            <p matLine style="white-space: normal">
+                <span style="font-style: italic; font-size: .8em;">{{ ability.text }}</span>
+            </p>
+        </mat-list-item>
+    </mat-list>
+    <mat-list *ngIf="isEditing">
+        <mat-list-item *ngFor="let ability of proposedAbilities" class="height-auto">
+            <h3 mat-line>{{ ability.name }}</h3>
+            <p matLine style="white-space: normal">
+                <span style="font-style: italic; font-size: .8em;">{{ ability.text }}</span>
+            </p>
+            <button mat-button (click)="upgradeAbility(ability)" *ngIf="ability.rank"
+                [disabled]="!canUpgradeAbility(ability)">Upgrade</button>
+            <button mat-button (click)="removeAbility(ability)" color="warn">Remove</button>
+        </mat-list-item>
+    </mat-list>
+    <mat-action-list *ngIf="isEditing">
+        <button mat-list-item *ngIf="canAddAbility()" (click)="addNewAbility()">
+            Add New Ability
+        </button>
+    </mat-action-list>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="beginEditing()" *ngIf="!isEditing">
+            Edit Abilities
+        </button>
+        <button mat-button color="primary" (click)="confirmChanges()" *ngIf="isEditing"
+            [disabled]="this.proposedExperience < 0">
+            Confirm Changes ({{ this.commander.currentExperience - this.proposedExperience }} XP)
+        </button>
+        <span fxFlex></span>
+        <button mat-button (click)="cancelEditing()" *ngIf="isEditing">
+            Cancel
+        </button>
+
+    </mat-card-actions>
+</mat-card>

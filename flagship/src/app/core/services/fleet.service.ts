@@ -15,6 +15,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
+import { Upgrade } from 'src/app/domain/upgrade';
 
 export interface FleetCompaignData {
   campaignId: string;
@@ -121,14 +122,21 @@ export class FleetService {
     fleet.setOwnerUid(serializedFleet.ownerUid || userUid);
     fleet.setCampaignId(serializedFleet.campaignId || null);
     if (serializedFleet.customCommander) {
-      fleet.customCommander = CustomCommander.hydrate(serializedFleet.customCommander);
+      fleet.setCommander(CustomCommander.hydrate(serializedFleet.customCommander));
     }
     for (const serializedShip of serializedFleet.ships) {
-      let ship = this.shipFactory.instantiateShip(serializedShip.id);
+      let ship = this.shipFactory.instantiateShip(serializedShip.id, fleet.hasCustomCommander());
       fleet.addShip(ship);
       for (const upgradeId of serializedShip.upgrades) {
-        let upgrade = this.upgradeFactory.instantiateUpgrade(upgradeId);
-        ship.equipUpgrade(upgrade);
+        let upgrade: Upgrade = null;
+        if (upgradeId === -1 && fleet.hasCustomCommander()) {
+          upgrade = this.upgradeFactory.getCustomCommanderUpgrade(fleet.customCommander, fleet.faction)
+        }
+        else {
+          upgrade = this.upgradeFactory.instantiateUpgrade(upgradeId);
+        }
+        if (upgrade)
+          ship.equipUpgrade(upgrade);
       }
     }
     for (const squadronId of serializedFleet.squadrons) {

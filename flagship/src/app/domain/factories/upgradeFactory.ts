@@ -4,8 +4,11 @@ import { Faction } from "../faction";
 import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
 import { SlotGrantingUpgrade } from '../upgrades/slotGrantingUpgrade';
 import { Size } from '../size';
+import { CustomCommander } from '../campaign/customCommander';
+import { CustomCommanderUpgrade } from '../upgrades/CustomCommanderUpgrade';
 
 export class UpgradeFactory {
+
     upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
 
     instantiateUpgrade(id: number): Upgrade {
@@ -36,6 +39,10 @@ export class UpgradeFactory {
         let data = this.upgradeData.filter(ud => ud.type === type &&
             (ud.faction === faction || ud.faction === Faction.Any));
         return data.map(d => this.instantiateUpgrade(d.id));
+    }
+
+    getCustomCommanderUpgrade(customCommander: CustomCommander, faction: Faction) : CustomCommanderUpgrade {
+        return new CustomCommanderUpgrade(customCommander, faction);
     }
 
     constructor() {
@@ -289,7 +296,7 @@ export class UpgradeFactory {
             },
             {
                 id: 2504, name: 'Liberator', type: UpgradeType.Title, faction: Faction.Rebels,
-                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting, 
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting,
                 grantedType: UpgradeType.FleetCommand,
                 text: "You gain 1 additional Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. You cannot spend a command token to resolve a Fleet Command card's effect."
             },
@@ -413,42 +420,42 @@ export class UpgradeFactory {
             },
             {
                 id: 3001, name: 'Leading Shots', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking, you may spend 1 blue die to reroll any number of dice in your attack pool.'
             },
             {
                 id: 3002, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
                 text: 'The battery armaments for your left and right hull zones are increased by 1 blue die.'
             },
             {
                 id: 3003, name: 'Ion Cannon Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'Blue Critical: Choose and discard 1 command token from the defender. If the defender does not have any command tokens, the defending hull zone loses one shield instead.'
             },
             {
                 id: 3004, name: 'MS-1 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
                 text: 'Blue Critical: Choose and exhaust 1 of the defender\'s upgrade cards.'
             },
             {
                 id: 3005, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
                 text: 'The battery armaments for your left and right hull zones are increased by 1 blue die.'
             },
             {
                 id: 3006, name: 'NK-7 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
                 text: 'Blue Critical: You may exhaust this card to force the defender to choose and discard one of his defense tokens.'
             },
             {
                 id: 3007, name: 'Overload Pulse', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
                 text: 'Blue Critical: Exhaust all of the defenders defense tokens.'
             },
             {
                 id: 3008, name: 'SW-7 Ion Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal, 
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking a ship, each of your unspent blue accuracy icons add 1 damage to the damage total.'
             },
             // Weapons Team

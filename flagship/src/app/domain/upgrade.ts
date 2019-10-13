@@ -35,6 +35,10 @@ export class Upgrade implements UpgradeData {
     public points: number, public unique: boolean, public sizeRestriction: Size[] = null) {
 
     }
+
+  getText(): string { 
+    return this.text;
+  }
   
   canEquipToShip(ship: Ship): boolean {
     // Can't equip if wrong faction

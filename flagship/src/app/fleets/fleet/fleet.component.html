@@ -1,8 +1,22 @@
-<div class="content mat-typography" ngStyle.gt-md="max-width: 75%;" style="padding-bottom: 100px;"
-  fxFlex fxLayout="column">
+<div class="content mat-typography" ngStyle.gt-md="max-width: 75%;" style="padding-bottom: 100px;" fxFlex
+  fxLayout="column">
   <flagship-alert [(isOpen)]="fleetAlertOpen" [type]="alertType.WARN">
     <strong>Heads up!</strong> You have more points added than your fleet maximum allows.
   </flagship-alert>
+  <div *ngIf="fleet.customCommander" style="margin-bottom: 16px;">
+    <div fxLayout="row" fxLayoutGap="8px">
+      <span class="mat-headline" style="margin-bottom: 4px;">Custom Commander</span>
+      <span fxFlex></span>
+      <span class="mat-subtitle" style="line-height: 40px;">
+        <a [routerLink]="['/campaigns', fleet.campaignId]">View Campaign</a>
+      </span>
+      <!-- <button mat-button color="primary" (click)="addShip()">Add Ship</button> -->
+    </div>
+    <mat-divider></mat-divider>
+
+    <flagship-custom-commander [commander]="fleet.customCommander" >
+    </flagship-custom-commander>
+  </div>
   <div fxLayout="row" fxLayoutGap="8px">
     <span class="mat-headline" style="margin-bottom: 4px;">Ships</span>
     <span fxFlex></span>
@@ -38,9 +52,12 @@
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px" style="margin-top: 16px;" fxFlex>
-      <flagship-objective [objective]="assaultObjective" [type]="objType.Assault"  [fleet]="fleet" fxFlex></flagship-objective>
-      <flagship-objective [objective]="defenseObjective" [type]="objType.Defense" [fleet]="fleet" fxFlex></flagship-objective>
-      <flagship-objective [objective]="navigationObjective" [type]="objType.Navigation" [fleet]="fleet" fxFlex></flagship-objective>
+    <flagship-objective [objective]="assaultObjective" [type]="objType.Assault" [fleet]="fleet" fxFlex>
+    </flagship-objective>
+    <flagship-objective [objective]="defenseObjective" [type]="objType.Defense" [fleet]="fleet" fxFlex>
+    </flagship-objective>
+    <flagship-objective [objective]="navigationObjective" [type]="objType.Navigation" [fleet]="fleet" fxFlex>
+    </flagship-objective>
   </div>
 </div>
 <eco-fab-speed-dial class="fab-lower-right">
