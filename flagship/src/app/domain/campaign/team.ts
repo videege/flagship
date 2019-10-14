@@ -9,6 +9,7 @@ export interface SerializedTeam {
 }
 
 export class Team {
+
     faction: Faction;
     name: string;
     players: CampaignPlayer[] = [];
@@ -36,8 +37,19 @@ export class Team {
         return this.players.find(x => x.isLeader);
     }
 
+    designateLeader(player: CampaignPlayer) {
+        let leader = this.getLeader();
+        if (!leader) { 
+            player.isLeader = true;
+        } else {
+            leader.isLeader = false;
+            player.isLeader = true;
+        }
+    }
+
     numberOfPlayers() {
         if (!this.players) return 0;
         return this.players.length;
     }
+
 }

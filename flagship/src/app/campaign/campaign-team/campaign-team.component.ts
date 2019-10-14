@@ -9,6 +9,7 @@ import { Campaign } from 'src/app/domain/campaign/campaign';
 import { CampaignService } from 'src/app/core/services/campaign.service';
 import { Guid } from 'guid-typescript';
 import { FleetService } from 'src/app/core/services/fleet.service';
+import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 
 @Component({
   selector: 'flagship-campaign-team',
@@ -22,9 +23,8 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
 
   public faction: string;
   public factionIcon: string;
+  public playerMap: { [id: string] : CampaignUser } = {};
 
-  public displayedColumns = ['name', 'wins', 'losses', 'mov', 'actions'];
-  public roster: MatTableDataSource<CampaignPlayer>;
   private user: firebase.User;
 
   constructor(private afAuth: AngularFireAuth, private campaignService: CampaignService,
@@ -47,13 +47,24 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   private setup(): void {
     this.faction = this.team.faction === Faction.Empire ? "Empire" : "Rebels";
     this.factionIcon = this.team.faction === Faction.Empire ? "ffi-imperial" : "ffi-rebel";
-    this.roster = new MatTableDataSource<CampaignPlayer>(this.team.players);
+    this.playerMap = {};
+    for (const player of this.team.players) {
+      this.playerMap[player.id] = this.campaign.campaignUsers.find(x => x.uid === player.playerUid);
+    }
   }
 
   setTeamName() {
     
   }
 
+  makeTeamLeader(player: CampaignPlayer) {
+    if (player.isLeader) return;
+    this.team.designateLeader(player);
+    this.campaignService.updateCampaign(this.campaign).then(() => {
+
+    });
+  }
+  
   addPlayer() {
     let ref = this.dialog.open(PlayerCreatorDialogComponent, {
       width: '450px',
