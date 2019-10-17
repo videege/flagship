@@ -3,7 +3,8 @@ export enum ObjectiveType {
     Assault = "Assault", //red
     Defense = "Defense", //yellow
     Navigation = "Navigation", //blue
-    Special = "Special" //green
+    Campaign = "Campaign", //green
+    Special = "Special" 
 }
 
 export class Objective {

@@ -1,6 +1,6 @@
 import { Faction } from "./faction";
 import { Ship, ISerializedShip } from "./ship";
-import { Squadron } from "./squadron";
+import { Squadron, ISerializedSquadron } from "./squadron";
 import { Upgrade } from "./upgrade";
 import { UpgradeSlot } from "./upgradeSlot";
 import { UpgradeType } from "./upgradeType";
@@ -19,7 +19,7 @@ export interface ISerializedFleet {
   squadronPointLimit: number;
 
   ships: ISerializedShip[];
-  squadrons: number[];
+  squadrons: ISerializedSquadron[];
   objectives: number[];
 
   ownerUid: string;
@@ -32,7 +32,7 @@ export class Fleet {
 
   public ownerUid: string;
   public campaignId: string;
-  public customCommander: CustomCommander;
+  public customCommander: CustomCommander = null;
 
   public ships: Ship[];
   public squadrons: Squadron[];
@@ -76,7 +76,7 @@ export class Fleet {
 
   serialize(): ISerializedFleet {
     let ships = this.ships.map(s => s.serialize());
-    let squadrons = this.squadrons.map(s => s.id);
+    let squadrons = this.squadrons.map(s => s.serialize());
     let objectives = this.objectives.map(o => o.id);
 
     return {
@@ -91,7 +91,7 @@ export class Fleet {
       objectives: objectives,
       ownerUid: this.ownerUid,
       campaignId: this.campaignId || null,
-      customCommander: this.customCommander!.serialize() || null
+      customCommander: this.customCommander ? this.customCommander.serialize() : null
     };
   }
 

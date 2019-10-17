@@ -306,6 +306,130 @@ export class ObjectiveFactory {
             null,
             15),
         // Campaign
+        new Objective(301, ObjectiveType.Campaign, "Base Defense: Armed Station",
+            `Place obstacles as normal, excluding the station. Then, the second player places the station in the setup area beyond distance 1 of all obstacles and beyond distance 5 of the first player's edge. The station is an armed station; place the Armed Station card near the second player's ship cards.`,
+            `The first player's ships and squadrons cannot resolve the armed stations effect to discard damage cards or recover hull points when they overlap it. Once per round, instead of activating a ship, the second player can perform 1 attack with the armed station.`,
+            null,
+            null,
+            null),
+        new Objective(302, ObjectiveType.Campaign, "Base Defense: Fighter Wing",
+            `Before deploying fleets, the second player may choose up to 40 fleet points of additional non-unique squadrons 
+            and add them to his fleet (even if it exceeds the number of fleet points he could normally spend on squadrons). 
+            Assign squadron ID tokens of a different color to these squadrons.`,
+            null,
+            null,
+            `The fleet point cost of the additional squadrons is added to the first player's score as normal if they are 
+            destroyed. After the winner is determined, the second player removes the additional squadrons from his fleet.`,
+            null),
+        new Objective(303, ObjectiveType.Campaign, "Base Defense: Ion Cannon",
+            `The second player must deploy all of his ships and squadrons before the first player. After deploying fleets, 
+            the second player places 3 objective tokens anywhere in the play area.`,
+            `At the end of the Command Phase, the second player may select 1 enemy ship at distance 1-3 of an objective
+            token and perform an attack against that ship. The attacker is treated as if it is a ship with a battery armament of 4 blue dice,
+            but is not friendly to any ship or squadron. The attack is treated as being at medium range, cannot be obstructed, 
+            can target any of the defender's hull zones, and has the following critical effect: 
+            Blue Critical: The defender must choose and exhaust 1 of his defense tokens.`,
+            null,
+            null,
+            null),
+        new Objective(304, ObjectiveType.Campaign, "Double Agent",
+            `Place obstacles as normal, excluding the station. After deploying fleets, the second player 
+            chooses one of their ships to be objective ship.`,
+            `When the objective ship reveals a command dial, it may gain 1 matching command token without 
+            spending the command dial. When the objective ship is destroyed, the opposing fleet's owner gains 
+            1 victory token. Then the opposing player places the objective token in the play area at distance 
+            1 of the destroyed ship. At the start of any round after the second round, if no player has a victory 
+            token, the first player may remove the objective token from the objective ship and place the objective 
+            token in the play area at distance 1 of that ship. When a ship overlaps the objective token, remove 
+            the token from the play area. Then that ship becomes the objective ship and that ship's owner gains 1 
+            victory token.`,
+            null,
+            null,
+            10),
+        new Objective(305, ObjectiveType.Campaign, "Hired Scum",
+            `The second player places all obstacles, excluding the station. Then the second player chooses 3 
+            obstacles and places 1 objective token on each. Before deploying fleets, the second player chooses 
+            up to 40 points of non-unique, irregular squadrons and adds them to their fleet for this game. 
+            These squadrons are scum and are set aside.`,
+            `At the start of any round after the first round, the second player can deploy up to 2 of the 
+            scum squadrons at distance 1 of an obstacle with an objective token. Then remove that objective 
+            token and 1 other objective token, if able. While a scum squadron is defending, the attacker 
+            may reroll 1 die for each friendly ship or squadron at distance 1 of the defender.`,
+            null,
+            null,
+            null),
+        new Objective(306, ObjectiveType.Campaign, "Holonet Override",
+            `The second player places all obstacles. The station must be placed beyond distance 1 of all 
+            obstacles and beyond distance 5 of both player's edges.`,
+            `The station does not have the ability to discard damage cards or recover hull points. 
+            Each ship can resolve the following effect:
+            Engineering: If you are at distance 1-2 to the station you may spend engineering points to place 
+            (or remove) objective tokens on this card. For each 2 points you spend, you may place (or remove) 1 objective token.
+            When one of the second player's ships resolves this effect, that ship's owner gains 1 victory token 
+            for each objective token it removes.`,
+            null,
+            `The first player gains 1 victory token for each objective token on this card.`,
+            10),
+        new Objective(307, ObjectiveType.Campaign, "Pilot Defection",
+            `Before deploying fleets, the first player must choose 3 additional non-unique squadrons of the opposing 
+            faction with a total value up to 40 points and add them to the second players fleet for this battle.`,
+            `Once per game, at the start of any Squadron Phase, the first player may assign 1 objective token to 
+            1 of the chosen squadrons. This squadron is the defector and is added to the first player's fleet for 
+            the remainder of the game. When the defector ist destroyed, the second player gains 1 victory token.`,
+            null,
+            `If the defector is at distance 1 of one of the first player's ships and beyond distance 1 of enemy ships 
+            or squadrons, the first player gains 1 victory token.`,
+            25),
+        new Objective(308, ObjectiveType.Campaign, "Prototype Recovery",
+            `Before deploying fleets, the second player must choose 1 additional non-unique squadron 
+            with a total value of 8-20 points. This is the prototype, and is set aside. After placing obstacles, 
+            the first player places an objective token in the center of the play area.`,
+            `When a ship at distance 1 of an objective token resolves a squadron command, instead of activating squardons, 
+            that ship's owner may roll 1 blue die. If a critical icon is rolled, the prototype is added to the 
+            player's fleet for the remainder of the game. If that ship belongs to the second player, the 
+            prototype is added if a hit icon is rolled instead. Then the controlling player deploys the 
+            prototype at distance 1 of the objective token and discards the token. While the prototype is attacking, 
+            each critical icon adds 1 to the damage total.`,
+            null,
+            `If the prototype is in the play area, the controlling player gains 1 victory token.`,
+            30),
+        new Objective(309, ObjectiveType.Campaign, "Recruit Allies",
+            `Place obstacles as normal, excluding the station. Before deploying fleets, the first player must 
+            choose 30-50 fleet points of non-unique, irregular squadrons or ships with no upgrades equipped. 
+            These forces are allies and are set aside. Then the second player places 1 objective token in 
+            the play area beyond distance 5 of both players' edges.`,
+            `At the end of the third round, each player sums the command value of their ships at distance 1 
+            of the objective token. The player with the highest total adds the allies to their fleet for 
+            the remainder of the game. Then that player deploys the allies at distance 1 of the objective token. 
+            If the command value totals are equal, the second player adds the allies to their fleet.`,
+            null,
+            `The player controlling the allies adds the fleet value of allies remaining in the play area to their score.`,
+            null),
+        new Objective(310, ObjectiveType.Campaign, "Steal Supplies",
+            `The second player places all obstables, excluding the station. Then the second player places the 
+            station beyond distance 5 of both players edges and beyond distance 1 of other obstacles. 
+            Then the second player places 6 objective tokens on this card.`,
+            `When one of the first player's ships at distance 1 of the station reveals its command dial, 
+            it may remove 1 objective token from this card and place it on that ship's card or a friendly 
+            irregular squadron at distance 1 of that ship. A ship cannot have more objective tokens than 
+            its command value. A squadron can only have 1 objective token on it. When a ship or squadron 
+            with at least 1 objective token is destroyed the second player gains 1 victory token.`,
+            null,
+            `The first player gains 1 victory token for each objective token on their ships or squadrons that 
+            are beyond distance 2 of enemy ships. The second player gains 1 victory token for each objective 
+            token on this card.`,
+            15),
+        new Objective(311, ObjectiveType.Campaign, "Volatile Cargo",
+            `Place obstacles as normal, excluding the station.`,
+            `The second player chooses 3 of their ships or squadrons (at least 1 must be a ship) to be objective ships 
+            or squadrons and assigns an objective token to each. The first player gains 1 victory token for each 
+            objecive token that cannot be assigned. While an objective ship or squadron is defending, before it 
+            suffers damage, it may reduce the total damage by 1. If the defender is destroyed during that attack, each 
+            other ship and squadron at distance 1-2 of the defender suffers damage equal to half of the total number of 
+            hit icons in the attack pool, rounded up. Then the first player gains 1 victory token.`,
+            null,
+            `The second player gains 2 victory tokens for each objective ship or squadron at distance 1-3 of the first player's edge.`,
+            15),
         // Special
     ]
 

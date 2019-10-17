@@ -1,11 +1,13 @@
 import { Faction } from '../faction';
 import { CampaignPlayer, SerializedCampaignPlayer } from './campaignPlayer';
+import { StrategicEffectType } from './strategicEffectType';
 
 export interface SerializedTeam {
     faction: Faction;
     name: string;
     players: SerializedCampaignPlayer[];
     campaignPoints: number;
+    tokens: { [id: number]: number }
 }
 
 export class Team {
@@ -14,13 +16,15 @@ export class Team {
     name: string;
     players: CampaignPlayer[] = [];
     campaignPoints: number = 0;
+    tokens: { [id: number]: number } = {};
 
     public serialize(): SerializedTeam {
         return {
             faction: this.faction,
             name: this.name,
             campaignPoints: this.campaignPoints,
-            players: this.players.map(x => x.serialize())
+            players: this.players.map(x => x.serialize()),
+            tokens: this.tokens
         }
     }
 
@@ -30,7 +34,22 @@ export class Team {
         team.name = data.name || null;
         team.campaignPoints = data.campaignPoints;
         team.players = data.players.map(x => CampaignPlayer.hydrate(x));
+        team.tokens = data.tokens || {};
         return team;
+    }
+
+    addToken(type: StrategicEffectType, count = 1) {
+        if (this.tokens[type]) {
+            this.tokens[type] += count;
+        } else {
+            this.tokens[type] = count;
+        }
+    }
+
+    removeToken(type: StrategicEffectType, count = 1) {
+        if (this.tokens[type] && this.tokens[type] >= count) {
+            this.tokens[type] -= count;
+        }
     }
 
     getLeader() {

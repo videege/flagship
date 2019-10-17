@@ -7,6 +7,7 @@ import { Invite } from './invite';
 import { CampaignPlayer } from './campaignPlayer';
 import { CampaignUser } from './campaignUser';
 import { Validator, RITRValidator } from './validator';
+import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 
 export interface SerializedCampaign {
     id: string;
@@ -40,6 +41,7 @@ export class Campaign {
     public rebels: Team;
 
     public locations: CampaignLocation[] = [];
+    
 
     public serialize(): SerializedCampaign {
         return {
@@ -73,7 +75,8 @@ export class Campaign {
         campaign.history = data.history.map(x => CampaignState.hydrate(x));
         campaign.empire = Team.hydrate(data.empire);
         campaign.rebels = Team.hydrate(data.rebels);
-        campaign.locations = data.locations.map(x => CampaignLocation.hydrate(x));
+        let factory = new CampaignLocationFactory();
+        campaign.locations = factory.createCampaignLocations(campaign.type, data.locations);
         return campaign;
     }
 

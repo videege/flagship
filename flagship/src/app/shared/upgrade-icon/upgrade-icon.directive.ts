@@ -7,22 +7,23 @@ import { UpgradeType } from '../../domain/upgradeType';
 export class UpgradeIconDirective implements OnInit {
 
   @Input() upgradeType: UpgradeType;
-  
+  @Input() small: boolean = false;
+
   protected _elementClass: string[] = [];
 
   @Input('class')
   @HostBinding('class')
   get elementClass(): string {
-      return this._elementClass.join(' ');
+    return this._elementClass.join(' ');
   }
   set(val: string) {
-      this._elementClass = val.split(' ');
+    this._elementClass = val.split(' ');
   }
 
   ngOnInit() {
+    this._elementClass.push(this.small ? 'upgrade-small' : 'upgrade');
 
-    this._elementClass.push('upgrade');
-    let name = this.upgradeType === UpgradeType.CustomCommander 
+    let name = this.upgradeType === UpgradeType.CustomCommander
       ? "commander"
       : this.upgradeType.toLowerCase();
     this._elementClass.push(name);

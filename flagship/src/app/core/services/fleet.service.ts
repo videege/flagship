@@ -136,8 +136,8 @@ export class FleetService {
           ship.equipUpgrade(upgrade);
       }
     }
-    for (const squadronId of serializedFleet.squadrons) {
-      let squadron = this.squadronFactory.instantiateSquadron(squadronId);
+    for (const serializedSquadron of serializedFleet.squadrons) {
+      let squadron = this.squadronFactory.instantiateSquadron(serializedSquadron);
       fleet.addSquadron(squadron);
     }
     for (const objectiveId of (serializedFleet.objectives || [])) {

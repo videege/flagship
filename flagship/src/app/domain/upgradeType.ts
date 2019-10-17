@@ -2,20 +2,20 @@ import { CompileMetadataResolver } from "../../../node_modules/@angular/compiler
 
 export enum UpgradeType {
   Commander = "Commander",
-  CustomCommander = "CustomCommander",
+  CustomCommander = "Custom Commander",
   Officer = "Officer",
-  DefensiveRetrofit = "DefensiveRetrofit",
-  ExperimentalRetrofit = "ExperimentalRetrofit",
-  FleetCommand = "FleetCommand",
-  FleetSupport = "FleetSupport",
-  IonCannons = "IonCannons",
-  OffensiveRetrofit = "OffensiveRetrofit",
+  DefensiveRetrofit = "Defensive Retrofit",
+  ExperimentalRetrofit = "Experimental Retrofit",
+  FleetCommand = "Fleet Command",
+  FleetSupport = "Fleet Support",
+  IonCannons = "Ion Cannons",
+  OffensiveRetrofit = "Offensive Retrofit",
   Ordnance = "Ordnance",
-  SupportTeam = "SupportTeam",
+  SupportTeam = "Support Team",
   Title = "Title",
-  WeaponsTeam = "WeaponsTeam",
+  WeaponsTeam = "Weapons Team",
   Turbolaser = "Turbolasers",
-  BoardingTeam = "BoardingTeam"
+  BoardingTeam = "Boarding Team"
 }
 
 export function sortUpgradeTypes(a: UpgradeType, b: UpgradeType): number {

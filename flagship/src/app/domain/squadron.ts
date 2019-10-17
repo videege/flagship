@@ -25,8 +25,17 @@ export interface SquadronData {
   batteryArmament: Armament;
 }
 
+export interface ISerializedSquadron {
+  id: number;
+  isVeteran: boolean;
+  isScarred: boolean;
+}
+
 export class Squadron implements SquadronData {
   public fleet: Fleet;
+
+  public isScarred: boolean = null;
+  public isVeteran: boolean = null;
 
   constructor(public id: number, public name: string, public shipName: string, public faction: Faction,
     public unique: boolean, public shipUnique: boolean, public irregular: boolean, public points: number,
@@ -34,6 +43,22 @@ export class Squadron implements SquadronData {
     public antiSquadronArmament: Armament, public batteryArmament: Armament,
     public keywords: Keyword[], public text: string) {
 
+  }
+
+  serialize(): ISerializedSquadron {
+    return {
+      id: this.id,
+      isScarred: this.isScarred,
+      isVeteran: this.isVeteran
+    };
+  }
+
+  setIsScarred(isScarred: boolean) {
+    this.isScarred = isScarred;
+  }
+
+  setIsVeteran(isVeteran: boolean) {
+    this.isVeteran = isVeteran;
   }
 
   private _displayName: string = null;

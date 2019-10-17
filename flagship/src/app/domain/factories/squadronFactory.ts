@@ -1,4 +1,4 @@
-import { SquadronData, Squadron } from '../squadron';
+import { SquadronData, Squadron, ISerializedSquadron } from '../squadron';
 import { Faction } from '../faction';
 import { Armament } from '../armament';
 import { Keyword, KeywordType } from '../keyword';
@@ -622,16 +622,22 @@ export class SquadronFactory {
         return SquadronFactory.squadronData.filter(x => x.faction === faction);
     }
 
-    instantiateSquadron(id: number): Squadron {
+    instantiateSquadron(serializedSquadron: ISerializedSquadron | number): Squadron {
+        let id = typeof serializedSquadron === 'number' ? serializedSquadron : serializedSquadron.id;
         let data = SquadronFactory.squadronData.find(x => x.id === id);
 
         if (!data)
             return null;
 
-        return new Squadron(data.id, data.name, data.shipName,
+        let squadron = new Squadron(data.id, data.name, data.shipName,
             data.faction, data.unique, data.shipUnique, data.irregular, data.points,
             data.speed, data.hull, data.defenseTokens, data.antiSquadronArmament,
             data.batteryArmament, data.keywords, data.text);
+        if (typeof serializedSquadron !== 'number') {
+            squadron.setIsScarred(serializedSquadron.isScarred);
+            squadron.setIsVeteran(serializedSquadron.isVeteran);
+        }
+        return squadron;
 
     }
 }

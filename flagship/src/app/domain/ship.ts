@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 export interface ISerializedShip {
   id: number;
   upgrades: number[];
+  isScarred: boolean;
+  isVeteran: boolean;
 }
 
 export enum ShipClass {
@@ -53,6 +55,8 @@ export class Ship implements ShipData {
   public subject: Subject<number>;
 
   public fleet: Fleet;
+  public isScarred: boolean = null;
+  public isVeteran: boolean = null;
 
   constructor(public id: number, public name: string, public shipClass: ShipClass,
     public faction: Faction, public size: Size,
@@ -75,8 +79,18 @@ export class Ship implements ShipData {
       .map(u => u.upgrade.id);
     return {
       id: this.id,
-      upgrades: upgradeIds
+      upgrades: upgradeIds,
+      isScarred: this.isScarred,
+      isVeteran: this.isVeteran
     };
+  }
+
+  setIsScarred(isScarred: boolean) {
+    this.isScarred = isScarred;
+  }
+
+  setIsVeteran(isVeteran: boolean) {
+    this.isVeteran = isVeteran;
   }
 
   currentPointsFromUpgrades(): number {

@@ -112,6 +112,22 @@ i.upgrade:before {
     height: 28px;
 }
 
+i.upgrade-small {
+    width: 12px !important;
+    display: block;
+    height: 12px !important;
+    color: white;
+    text-decoration: none;
+}
+
+i.upgrade-small:before {
+    content: '';
+    background-size: cover;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+}
+
 i.commander:before {
     background: url('/assets/img/commander.png');
 }
