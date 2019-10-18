@@ -8,20 +8,23 @@
     <mat-card-content> -->
 <mat-accordion>
     <mat-expansion-panel *ngFor="let location of campaign.locations">
-        <mat-expansion-panel-header>
-            <mat-panel-title fxFlex>
-                <mat-icon *ngIf="!location.controllingFaction" matListIcon>panorama_fish_eye</mat-icon>
+        <mat-expansion-panel-header class="right-aligned-header">
+            <mat-panel-title>
+                <mat-icon *ngIf="location.controllingFaction == null" matListIcon>panorama_fish_eye</mat-icon>
                 <mat-icon *ngIf="location.controlType === controlTypes.Presence" matListIcon>blur_on</mat-icon>
                 <mat-icon *ngIf="location.controlType === controlTypes.Base" matListIcon>blur_circular</mat-icon>
                 &nbsp;
                 {{ location.name }}
             </mat-panel-title>
             <mat-panel-description>
-                <i matListIcon *ngIf="location.controllingFaction" class="ffi faction-icon"
+                <i *ngIf="location.controllingFaction != null" class="ffi faction-icon"
                     [ngClass]="{'ffi-imperial': location.controllingFaction === factions.Empire, 'ffi-rebel': location.controllingFaction === factions.Rebels}"></i>
-                <span *ngIf="!location.controlType">Unoccupied</span>
-                <span *ngIf="location.controlType">
-                    {{ location.controlType === controlTypes.Presence ? "Presence" : "Base"}}
+                <span *ngIf="location.controlType == null">Unoccupied</span>
+                <span *ngIf="location.controlType === controlTypes.Presence">
+                    {{ location.controllingFaction === factions.Empire ? "Imperial Presence": "Rebel Presence" }}
+                </span>
+                <span *ngIf="location.controlType === controlTypes.Base">
+                    {{ location.controllingFaction === factions.Empire ? "Imperial Base": "Rebel Base" }}
                 </span>
             </mat-panel-description>
         </mat-expansion-panel-header>

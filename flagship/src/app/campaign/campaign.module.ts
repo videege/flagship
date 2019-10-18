@@ -14,10 +14,11 @@ import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import { CampaignLocationsComponent } from './campaign-locations/campaign-locations.component';
 import { CampaignSetupDialogComponent } from './campaign-setup-dialog/campaign-setup-dialog.component';
 import { IssuesListComponent } from './issues-list/issues-list.component';
+import { LocationControlDialogComponent } from './location-control-dialog/location-control-dialog.component';
 
 
 @NgModule({
-  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent],
+  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -33,7 +34,8 @@ import { IssuesListComponent } from './issues-list/issues-list.component';
   entryComponents: [
     CampaignEditorComponent,
     PlayerCreatorDialogComponent,
-    CampaignSetupDialogComponent
+    CampaignSetupDialogComponent,
+    LocationControlDialogComponent
   ]
 })
 export class CampaignModule { }

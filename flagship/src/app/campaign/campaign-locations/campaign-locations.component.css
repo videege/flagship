@@ -1,0 +1,12 @@
+.faction-icon {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.faction-icon.ffi-rebel {
+    color: red;
+}
+
+.faction-icon.ffi-imperial {
+    color: black;
+}

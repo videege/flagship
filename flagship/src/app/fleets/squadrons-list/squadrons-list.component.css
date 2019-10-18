@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
 }
-
+/*
 .squadron-title {
     max-width: 175px;
     overflow: hidden;
@@ -15,12 +15,13 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    /* number of lines to show */
+   
     line-height: 20px;
-    /* fallback */
+    
     max-height: 40px;
-    /* fallback */
+    fallback 
 }
+*/
 
 .points-small {
     font-size: 0.5em;

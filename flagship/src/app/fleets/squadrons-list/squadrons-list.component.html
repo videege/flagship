@@ -1,6 +1,6 @@
 <mat-accordion class="squadron-list">
   <mat-expansion-panel *ngFor="let id of squadronIds">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header class="right-aligned-header">
       <mat-panel-title fxFlex="auto" class="squadron-title">
         {{ distinctSquadrons[id].unique ? "&#9679;&nbsp;" + distinctSquadrons[id].displayName() : distinctSquadrons[id].displayName() }}
         <span *ngIf="distinctSquadrons[id].defenseTokens.length">

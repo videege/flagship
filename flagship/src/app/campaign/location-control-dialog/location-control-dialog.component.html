@@ -1,0 +1,42 @@
+<div mat-dialog-content>
+    <h3>{{ data.location.name }}</h3>
+    <p>
+        You can manually set control of this location using this form. Note that Flagship will
+        maintain location control automatically via the results of recorded battles. Any changes
+        made here will be recorded in the campaign timeline.
+    </p>
+    <form [formGroup]="form" fxLayout="column">
+        <label>Controlling Faction</label>
+        <mat-radio-group aria-label="Faction" formControlName="faction">
+            <mat-radio-button value="0" fxFlex>Empire</mat-radio-button>
+            <mat-radio-button value="1" fxFlex>Rebels</mat-radio-button>
+            <mat-radio-button value="-1" fxFlex>Unoccupied</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="form.get('faction').value !== '-1'" style="margin-top: 8px;">
+            <label>Control Type</label>
+            <mat-radio-group aria-label="Control Type" formControlName="controlType">
+                <mat-radio-button value="0" fxFlex>Presence</mat-radio-button>
+                <mat-radio-button value="1" fxFlex>Base</mat-radio-button>
+            </mat-radio-group>
+            <div *ngIf="form.get('controlType').value === '1'" style="margin-top: 8px;">
+                <label>Secret Base Defense Objective</label>
+                <mat-radio-group aria-label="Base Defense Objective" formControlName="chosenObjective">
+                    <mat-radio-button value="301" fxFlex>Armed Station</mat-radio-button>
+                    <mat-radio-button value="302" fxFlex>Fighter Wing</mat-radio-button>
+                    <mat-radio-button value="303" fxFlex>Ion Cannon</mat-radio-button>
+                </mat-radio-group>
+                <p>
+                    The chosen objective will remain secret until an assault is declared
+                    on this location.
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button [mat-dialog-close]="getData()" 
+        [disabled]="form.invalid || (form.get('controlType').value === '1' && !form.get('chosenObjective').value)"
+        color="primary">Update Location</button>
+</div>

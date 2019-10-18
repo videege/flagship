@@ -65,6 +65,14 @@ eco-fab-speed-dial.fab-lower-right {
     bottom: 20px;
 }
 
+.right-aligned-header > .mat-content {
+    justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
 .mat-card-avatar {
     margin-top: 4px;
 }
