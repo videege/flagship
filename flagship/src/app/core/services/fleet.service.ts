@@ -122,7 +122,8 @@ export class FleetService {
       fleet.setCommander(CustomCommander.hydrate(serializedFleet.customCommander));
     }
     for (const serializedShip of serializedFleet.ships) {
-      let ship = this.shipFactory.instantiateShip(serializedShip.id, fleet.hasCustomCommander());
+      let ship = this.shipFactory.instantiateShip(serializedShip.id, fleet.hasCustomCommander(),
+        serializedShip.isScarred, serializedShip.isVeteran);
       fleet.addShip(ship);
       for (const upgradeId of serializedShip.upgrades) {
         let upgrade: Upgrade = null;

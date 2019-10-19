@@ -13,6 +13,7 @@
       <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
         (+{{ ship.currentPointsFromUpgrades() }})
       </span>
+
     </mat-card-title>
     <mat-card-subtitle>
       Hull: {{ ship.hull }}
@@ -23,7 +24,6 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
       <div>
         <strong>Shields&nbsp;</strong>
@@ -68,12 +68,28 @@
       <flagship-upgrade-summary *ngFor="let upgrade of ship.sortedUpgrades(); let isLast=last;" [upgrade]="upgrade"
         [isLast]="isLast"></flagship-upgrade-summary>
     </div>
+    <mat-chip-list *ngIf="isCampaign">
+        <mat-chip *ngIf="ship.isScarred" color="warn" selected (removed)="unscar()">
+          Scarred <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip *ngIf="ship.isVeteran" color="accent" selected (removed)="demote()">
+          Veteran <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions fxLayout="column" fxLayout.gt-xs="row">
     <button mat-button [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]">
       Edit Ship
     </button>
-    <span fxFlex></span>
-    <button mat-button (click)="deleteShip()" color="warn">Delete Ship</button>
+    <button mat-button *ngIf="isCampaign" color="warn" [disabled]="ship.isScarred" (click)="scar()">
+      Scar Ship
+    </button>
+    <button mat-button *ngIf="isCampaign" color="accent" [disabled]="ship.isVeteran" (click)="promote()">
+      Promote to Veteran
+    </button>
+    <span fxFlex *ngIf="!(isExtraSmall | async)"></span>
+    <button mat-button (click)="deleteShip()" color="warn">
+      Delete Ship
+    </button>
   </mat-card-actions>
 </mat-card>

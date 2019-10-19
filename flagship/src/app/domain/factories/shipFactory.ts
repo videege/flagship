@@ -752,7 +752,8 @@ export class ShipFactory {
     return ShipFactory.shipData.filter(x => x.faction === faction);
   }
 
-  instantiateShip(id: number, isForFleetWithCustomCommander: boolean = false): Ship {
+  instantiateShip(id: number, isForFleetWithCustomCommander: boolean = false,
+    isScarred: boolean = false, isVeteran: boolean = false): Ship {
     let data = ShipFactory.shipData.find(x => x.id === id);
 
     if (!data)
@@ -780,13 +781,16 @@ export class ShipFactory {
     }
 
     if (data.shipClass === ShipClass.Normal) {
-      return new Ship(data.id, data.name, data.shipClass, data.faction,
+      let ship = new Ship(data.id, data.name, data.shipClass, data.faction,
         data.size, data.hull, data.command, data.squadron, data.engineering, data.points,
         data.defenseTokens, data.frontShields, data.leftAuxShields, data.rightAuxShields,
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
         data.frontArmament, data.leftAuxArmament, data.rightAuxArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
         upgradeSlots, data.allowedTitles);
+      ship.isScarred = isScarred;
+      ship.isVeteran = isVeteran;
+      return ship;
     }
     return null;
   }

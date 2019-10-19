@@ -634,8 +634,8 @@ export class SquadronFactory {
             data.speed, data.hull, data.defenseTokens, data.antiSquadronArmament,
             data.batteryArmament, data.keywords, data.text);
         if (typeof serializedSquadron !== 'number') {
-            squadron.setIsScarred(serializedSquadron.isScarred);
-            squadron.setIsVeteran(serializedSquadron.isVeteran);
+            squadron.isScarred = serializedSquadron.isScarred;
+            squadron.isVeteran = serializedSquadron.isVeteran;
         }
         return squadron;
 

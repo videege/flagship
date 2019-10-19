@@ -86,11 +86,17 @@ export class Ship implements ShipData {
   }
 
   setIsScarred(isScarred: boolean) {
-    this.isScarred = isScarred;
+    if (this.isScarred != isScarred) {
+      this.isScarred = isScarred;
+      this.subject.next(this.id);
+    }
   }
 
   setIsVeteran(isVeteran: boolean) {
-    this.isVeteran = isVeteran;
+    if (this.isVeteran != isVeteran) {
+      this.isVeteran = isVeteran;
+      this.subject.next(this.id);
+    }
   }
 
   currentPointsFromUpgrades(): number {

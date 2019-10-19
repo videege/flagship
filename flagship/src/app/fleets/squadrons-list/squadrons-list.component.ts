@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
 export class SquadronsListComponent implements OnInit {
   @Input() fleet: Fleet;
 
+  isCampaign = false;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -32,7 +34,8 @@ export class SquadronsListComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
-    this.initialize()
+    this.isCampaign = !!this.fleet.campaignId;
+    this.initialize();
   }
 
   initialize() {
@@ -68,5 +71,21 @@ export class SquadronsListComponent implements OnInit {
     if (this.squadronCounts[id] > 1) {
       this.fleet.removeSquadron(id);
     }
+  }
+
+  scar(id: number) {
+    this.distinctSquadrons[id].setIsScarred(true);
+  }
+  
+  unscar(id: number) {
+    this.distinctSquadrons[id].setIsScarred(false);
+  }
+
+  promote(id: number) {
+    this.distinctSquadrons[id].setIsVeteran(true);
+  }
+
+  demote(id: number) {
+    this.distinctSquadrons[id].setIsVeteran(false);
   }
 }

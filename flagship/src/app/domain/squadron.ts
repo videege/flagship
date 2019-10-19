@@ -54,11 +54,17 @@ export class Squadron implements SquadronData {
   }
 
   setIsScarred(isScarred: boolean) {
-    this.isScarred = isScarred;
+    if (this.isScarred != isScarred) {
+      this.isScarred = isScarred;
+      this.fleet.subject.next(this.fleet.id);
+    }
   }
 
   setIsVeteran(isVeteran: boolean) {
-    this.isVeteran = isVeteran;
+    if (this.isVeteran != isVeteran) {
+      this.isVeteran = isVeteran;
+      this.fleet.subject.next(this.fleet.id);
+    }
   }
 
   private _displayName: string = null;

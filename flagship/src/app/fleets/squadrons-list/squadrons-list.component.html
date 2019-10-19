@@ -13,14 +13,14 @@
         </span>
       </mat-panel-title>
       <mat-panel-description ngClass.xs="points-small">
-        <span fxFlex></span>
+        <!-- <span fxFlex></span> -->
         <span *ngIf="!(isHandset$ | async)">
           {{ distinctSquadrons[id].points }}
           <span *ngIf="squadronCounts[id] > 1">
             &times; {{squadronCounts[id]}} = {{ distinctSquadrons[id].points * squadronCounts[id] }}
           </span>
         </span>
-        <span matTooltip="{{ distinctSquadrons[id].points + ' &times; ' + squadronCounts[id] }}" 
+        <span matTooltip="{{ distinctSquadrons[id].points + ' &times; ' + squadronCounts[id] }}"
           *ngIf="(isHandset$ | async)">
           {{ squadronCounts[id] * distinctSquadrons[id].points }}
         </span>
@@ -46,6 +46,14 @@
       <li *ngFor="let keyword of distinctSquadrons[id].keywords">{{ keyword.displayText() }}</li>
     </ul>
     <p *ngIf="distinctSquadrons[id].text.length">{{ distinctSquadrons[id].text }}</p>
+    <mat-chip-list *ngIf="isCampaign && distinctSquadrons[id].unique">
+        <mat-chip *ngIf="distinctSquadrons[id].isScarred" color="warn" selected (removed)="unscar(id)">
+          Scarred <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip *ngIf="distinctSquadrons[id].isVeteran" color="accent" selected (removed)="demote(id)">
+          Veteran <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
     <mat-action-row>
       <div *ngIf="!distinctSquadrons[id].unique" fxLayout="row">
         <button mat-icon-button [disabled]="squadronCounts[id] === 1" (click)="decreaseSquadronCount(id)">
@@ -53,6 +61,14 @@
         </button>
         <button mat-icon-button (click)="increaseSquadronCount(id)">
           <mat-icon aria-label="Add One Squadron">add</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="distinctSquadrons[id].unique && isCampaign" fxLayout="row">
+        <button mat-button color="warn" [disabled]="distinctSquadrons[id].isScarred" (click)="scar(id)">
+          {{ (isHandset$ | async) ? 'Scar' : 'Scar Squadron'}}
+        </button>
+        <button mat-button color="accent" [disabled]="distinctSquadrons[id].isVeteran" (click)="promote(id)">
+          {{ (isHandset$ | async) ? 'Veteran': 'Promote to Veteran'}}
         </button>
       </div>
       <span fxFlex></span>
