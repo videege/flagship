@@ -99,7 +99,12 @@
             <flagship-campaign-locations [campaign]="campaign"></flagship-campaign-locations>
         </div>
     </mat-tab>
-    <mat-tab label="Timeline">Timeline</mat-tab>
+    <mat-tab label="Timeline">
+        <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
+            fxLayout="column" fxLayoutGap="8px">
+            <flagship-event-timeline [campaign]="campaign"></flagship-event-timeline>
+        </div>
+    </mat-tab>
 </mat-tab-group>
 
 <!-- <eco-fab-speed-dial class="fab-lower-right">

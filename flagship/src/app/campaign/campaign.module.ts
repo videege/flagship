@@ -15,10 +15,12 @@ import { CampaignLocationsComponent } from './campaign-locations/campaign-locati
 import { CampaignSetupDialogComponent } from './campaign-setup-dialog/campaign-setup-dialog.component';
 import { IssuesListComponent } from './issues-list/issues-list.component';
 import { LocationControlDialogComponent } from './location-control-dialog/location-control-dialog.component';
+import { EventTimelineComponent } from './event-timeline/event-timeline.component';
+import { EventComponent } from './event/event.component';
 
 
 @NgModule({
-  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent],
+  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent, EventTimelineComponent, EventComponent],
   imports: [
     CommonModule,
     SharedModule,

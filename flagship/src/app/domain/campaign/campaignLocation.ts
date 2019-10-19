@@ -2,6 +2,7 @@ import { Faction } from '../faction';
 import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
+import { CampaignEvent } from './campaignEvent';
 
 export interface SerializedCampaignLocation {
     id: number;

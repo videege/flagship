@@ -9,6 +9,8 @@ import { StrategicEffectType, StrategicEffects } from 'src/app/domain/campaign/s
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
 import { LocationControlDialogComponent, LocationControlDialogData } from '../location-control-dialog/location-control-dialog.component';
 import { CampaignService } from 'src/app/core/services/campaign.service';
+import { CampaignEvent, CampaignEventType } from 'src/app/domain/campaign/campaignEvent';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 
@@ -24,9 +26,15 @@ export class CampaignLocationsComponent implements OnInit {
   public factions = Faction;
   public controlTypes = LocationControlType;
   public objectiveFactory = new ObjectiveFactory();
+  user: firebase.User;
 
   constructor(private campaignService: CampaignService,
-    private snackbar: MatSnackBar, private dialog: MatDialog) { }
+    private snackbar: MatSnackBar, private dialog: MatDialog,
+    private afAuth: AngularFireAuth) {
+    this.afAuth.user.subscribe(user => {
+      this.user = user;
+    });
+  }
 
   ngOnInit() {
   }
@@ -47,19 +55,37 @@ export class CampaignLocationsComponent implements OnInit {
     let ref = this.dialog.open(LocationControlDialogComponent, {
       width: '450px',
       data: new LocationControlDialogData(location)
-    }); 
+    });
     ref.afterClosed().subscribe((data: LocationControlDialogData) => {
       if (data) {
+        let change = null;
         if (data.faction !== Faction.Empire && data.faction !== Faction.Rebels) {
-          location.setUnoccupied();
+          if (location.controllingFaction != null) {
+            location.setUnoccupied();
+            change = 'unoccupied';
+          }
         } else {
           if (data.controlType === LocationControlType.Presence) {
-            location.setPresence(data.faction);
+            if (location.controllingFaction != data.faction ||
+              location.controlType != LocationControlType.Presence) {
+              location.setPresence(data.faction);
+              change = `${data.faction === Faction.Empire ? "Imperial presence" : "Rebel presence"}`;
+            }
           } else {
-            location.setBase(data.faction, data.chosenObjective);
+            if (location.controllingFaction != data.faction ||
+              location.controlType != LocationControlType.Base ||
+              location.chosenObjective != data.chosenObjective) {
+              location.setBase(data.faction, data.chosenObjective);
+              change = `${data.faction === Faction.Empire ? "Imperial base" : "Rebel base"}`;
+            }
           }
         }
+        if (change == null) 
+          return;
 
+        this.campaign.addEvent(new CampaignEvent(CampaignEventType.ManualLocationChange,
+          `${location.name} was set to ${change}.`,
+          this.user.uid));
         this.campaignService.updateCampaign(this.campaign).then(() => {
           this.snackbar.open(`${location.name} successfully updated.`, 'OK', {
             duration: 1500

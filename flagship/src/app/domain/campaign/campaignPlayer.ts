@@ -1,3 +1,5 @@
+import { Condition } from './condition';
+
 export interface SerializedCampaignPlayer {
     playerUid: string;
     id: string;
@@ -7,6 +9,7 @@ export interface SerializedCampaignPlayer {
     wins: number;
     losses: number;
     mov: number;
+    condition: Condition;
 }
 
 export class CampaignPlayer {
@@ -15,10 +18,18 @@ export class CampaignPlayer {
     public name: string;
     public fleetId: string;
     public isLeader: boolean;
-
+    public condition: Condition = null;
     public wins: number = 0;
     public losses: number = 0;
     public mov: number = 0;
+
+    public setCondition(condition: Condition) {
+        this.condition = condition;
+    }
+
+    public clearCondition() {
+        this.condition = null;
+    }
 
     public serialize(): SerializedCampaignPlayer {
         return {
@@ -29,7 +40,8 @@ export class CampaignPlayer {
             isLeader: this.isLeader,
             wins: this.wins,
             losses: this.losses,
-            mov: this.mov
+            mov: this.mov,
+            condition: this.condition
         };
     }
 
@@ -43,6 +55,7 @@ export class CampaignPlayer {
         player.wins = data.wins;
         player.losses = data.losses;
         player.mov = data.mov;
+        player.condition = data.condition || null;
         return player;
     }
 }

@@ -10,6 +10,12 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 import { Guid } from 'guid-typescript';
 import { FleetService } from 'src/app/core/services/fleet.service';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
+import { StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';
+
+interface TokenCount {
+  effect: string;
+  count: number;
+}
 
 @Component({
   selector: 'flagship-campaign-team',
@@ -25,6 +31,8 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   public factionIcon: string;
   public playerMap: { [id: string] : CampaignUser } = {};
 
+  public tokenCounts: TokenCount[] = [];
+  
   private user: firebase.User;
 
   constructor(private afAuth: AngularFireAuth, private campaignService: CampaignService,
@@ -51,6 +59,10 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
     for (const player of this.team.players) {
       this.playerMap[player.id] = this.campaign.campaignUsers.find(x => x.uid === player.playerUid);
     }
+    this.tokenCounts = StrategicEffects.RITRStrategicEffects.map(x => <TokenCount>{
+      effect: StrategicEffects.effectName(x),
+      count: this.team.tokens[x] || 0
+    });
   }
 
   setTeamName() {
