@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{ campaign.name }}</mat-card-title>
+        <mat-card-subtitle>{{ campaign.typeName() }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row" class="campaign-score">
+            <div fxLayout="column" fxFlex>
+                <i class="ffi ffi-imperial" style="font-size:48px;"></i>
+                <span>{{ campaign.empire.campaignPoints }} points</span>
+            </div>
+            <h3 fxFlex>&mdash;</h3>
+            <!--todo: make this disappear on small-->
+            <div fxLayout="column" fxFlex>
+                <i class="ffi ffi-rebel" style="font-size:48px;"></i>
+                <span>{{ campaign.rebels.campaignPoints }} points</span>
+            </div>
+        </div>
+        <mat-list>
+            <h3 mat-subheader>Campaign Owner</h3>
+            <mat-list-item>
+                <img matListAvatar [src]="ownerUser.photoURL">
+                <h3 matLine>{{ ownerUser.displayName }}</h3>
+            </mat-list-item>
+            <h3 mat-subheader *ngIf="invitedUsers.length">Invited Users</h3>
+            <mat-list-item *ngFor="let user of invitedUsers">
+                <img matListAvatar [src]="user.photoURL">
+                <h3 matLine>{{ user.displayName }}</h3>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

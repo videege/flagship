@@ -22,6 +22,10 @@ export class CampaignState {
         return this.act.toString();
     }
 
+    public addEvent(event: CampaignEvent) {
+        this.events.push(event);
+    }
+
     public serialize(): SerializedCampaignState {
         return {
             turn: this.turn,

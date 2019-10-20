@@ -7,6 +7,7 @@ import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
 
 export interface CampaignSetupDialogData {
   campaign: Campaign;
+  shouldStart: boolean;
 }
 
 @Component({
@@ -34,9 +35,11 @@ export class CampaignSetupDialogComponent implements OnInit {
     this.issues = this.validator.validateSetupPhase(this.campaign);
     this.canFinalize = this.issues.filter(x => x.severity === IssueSeverity.Error).length === 0;
   }
-
-  finalize() {
-
+  
+  finalize(): CampaignSetupDialogData {
+    return {
+      campaign: this.campaign,
+      shouldStart: true
+    };
   }
-
 }

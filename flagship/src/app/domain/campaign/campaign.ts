@@ -9,6 +9,7 @@ import { CampaignUser } from './campaignUser';
 import { Validator, RITRValidator } from './validator';
 import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 import { SerializedCampaignEvent, CampaignEvent } from './campaignEvent';
+import { Phase } from './phase';
 
 export interface SerializedCampaign {
     id: string;
@@ -24,7 +25,6 @@ export interface SerializedCampaign {
     empire: SerializedTeam;
     rebels: SerializedTeam;
     locations: SerializedCampaignLocation[];
-    events: SerializedCampaignEvent[];
 }
 
 export class Campaign {
@@ -43,7 +43,6 @@ export class Campaign {
     public rebels: Team;
 
     public locations: CampaignLocation[] = [];
-    public events: CampaignEvent[] = [];
 
     public serialize(): SerializedCampaign {
         return {
@@ -59,8 +58,7 @@ export class Campaign {
             history: this.history.map(x => x.serialize()),
             empire: this.empire.serialize(),
             rebels: this.rebels.serialize(),
-            locations: this.locations.map(x => x.serialize()),
-            events: this.events.map(x => x.serialize())
+            locations: this.locations.map(x => x.serialize())
         }
     }
 
@@ -80,7 +78,6 @@ export class Campaign {
         campaign.rebels = Team.hydrate(data.rebels);
         let factory = new CampaignLocationFactory();
         campaign.locations = factory.createCampaignLocations(campaign.type, data.locations);
-        campaign.events = (data.events || []).map(x => CampaignEvent.hydrate(x));
         return campaign;
     }
 
@@ -123,6 +120,22 @@ export class Campaign {
     }
 
     public addEvent(event: CampaignEvent) {
-        this.events.push(event);
+        this.currentState().addEvent(event);
+    }
+
+    public finishSetup() {
+        if (this.currentState().act !== 0)
+            throw new Error("Campaign is already started.");
+            
+        this.history.push(this.createTurn(true));
+    }
+
+    private createTurn(newAct = false): CampaignState {
+        let turn = new CampaignState();
+        let current = this.currentState();
+        turn.phase = Phase.Strategy;
+        turn.act = newAct ? current.act + 1 : current.act;
+        turn.turn = newAct ? 1 : current.turn + 1;
+        return turn;
     }
 }

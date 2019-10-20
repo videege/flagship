@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule, MatDialogModule, MatFormFieldModule, MatRadioModule, MatInputModule, MatSelectModule, MatExpansionModule, MatTooltipModule, MatButtonToggleModule, MatSlideToggleModule, MatCheckboxModule, MatBottomSheetModule, MatTabsModule, MatChipsModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDividerModule, MatDialogModule, MatFormFieldModule, MatRadioModule, MatInputModule, MatSelectModule, MatExpansionModule, MatTooltipModule, MatButtonToggleModule, MatSlideToggleModule, MatCheckboxModule, MatBottomSheetModule, MatTabsModule, MatChipsModule, MatStepperModule } from '@angular/material';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,7 +39,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatBottomSheetModule,
     NgxChartsModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatStepperModule
   ],
   exports: [
     FlexLayoutModule,
@@ -70,7 +71,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatBottomSheetModule,
     NgxChartsModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatStepperModule
   ]
 })
 export class AppMaterialModule { }

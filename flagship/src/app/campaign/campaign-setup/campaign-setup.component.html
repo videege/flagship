@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Campaign Setup Phase</mat-card-title>
+        <mat-card-subtitle>
+            Invite other users to this campaign, create team rosters and establish
+            initial bases.
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <p>
+                Use the roster tab to add players to the campaign. After all players have created
+                a base (using the Locations card) and created their fleets, the campaign owner can click
+                'Finish Setup' to begin the first round of the campaign.
+            </p>
+            <p>
+                If the participants in this campaign want to manage their own campaign data,
+                send them the invite link below.
+                This will allow them to join the campaign and create one or more campaign players.
+            </p>
+            <p>
+                <strong>Heads up!</strong> Once the campaign owner clicks 'Finish Setup', the invite
+                link
+                below will be removed and the roster will be locked.
+            </p>
+            <div fxLayout="row">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Invite URL</mat-label>
+                    <input matInput disabled value="{{ campaign.inviteUrl() }}">
+                    <mat-icon matSuffix class="clickable" (click)="copyInviteUrl()">file_copy</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="finishSetup()">Finish Setup</button>
+    </mat-card-actions>
+</mat-card>
