@@ -80,4 +80,8 @@ export class CampaignTurnComponent implements OnInit, OnChanges, AfterViewInit {
   strategyValidityChanged(valid: boolean) {
     this.strategyValid = valid;
   }
+
+  finishStrategy() {
+    
+  }
 }
