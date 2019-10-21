@@ -28,6 +28,16 @@ export class CampaignLocation {
     public getSectors(): string {
         return this.sectors.join("/");
     }
+
+    public controlLabel(): string {
+        if (this.controllingFaction === null) 
+            return "Unoccupied";
+        
+        let faction = this.controllingFaction === Faction.Empire ? "Imperial" : "Rebel";
+        let type = this.controlType === LocationControlType.Base ? "Base" : "Presence";
+        return `${faction} ${type}`;
+    }
+
     public setBase(faction: Faction, chosenObjective: number) {
         this.controllingFaction = faction;
         this.controlType = LocationControlType.Base;

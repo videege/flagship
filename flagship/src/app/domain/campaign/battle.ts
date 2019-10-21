@@ -98,6 +98,10 @@ export class Battle implements CampaignEvent {
         return battle;
     }
 
+    public playerCount(): number {
+        return this.attackingPlayers.length + this.defendingPlayers.length;
+    }
+
     public recordResult(attackerFleetPoints: number, attackerScore: number,
         attackerPoints: number, defenderFleetPoints: number, defenderScore: number,
         defenderPoints: number) {

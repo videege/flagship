@@ -3,5 +3,7 @@ export enum Phase {
     Strategy,
     Battle,
     Management,
+    PivotalBattle,
+    ClimacticBattle,
     Finished
 }

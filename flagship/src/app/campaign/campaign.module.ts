@@ -20,10 +20,11 @@ import { EventComponent } from './event/event.component';
 import { CampaignInfoComponent } from './campaign-info/campaign-info.component';
 import { CampaignSetupComponent } from './campaign-setup/campaign-setup.component';
 import { CampaignTurnComponent } from './campaign-turn/campaign-turn.component';
+import { StrategyPhaseComponent } from './strategy-phase/strategy-phase.component';
 
 
 @NgModule({
-  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent, EventTimelineComponent, EventComponent, CampaignInfoComponent, CampaignSetupComponent, CampaignTurnComponent],
+  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent, EventTimelineComponent, EventComponent, CampaignInfoComponent, CampaignSetupComponent, CampaignTurnComponent, StrategyPhaseComponent],
   imports: [
     CommonModule,
     SharedModule,

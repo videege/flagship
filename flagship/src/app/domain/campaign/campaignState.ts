@@ -7,6 +7,8 @@ export interface SerializedCampaignState {
     phase: Phase;
     act: number;
     events: SerializedCampaignEvent[];
+    imperialPointsScored: number;
+    rebelPointsScored: number;
 }
 
 export class CampaignState {
@@ -14,6 +16,8 @@ export class CampaignState {
     phase: Phase;
     act: number;
     events: CampaignEvent[] = [];
+    imperialPointsScored: number = 0;
+    rebelPointsScored: number = 0;
 
     public actInRomanNumerals(): string {
         if (this.act === 1) return "I";
@@ -26,12 +30,19 @@ export class CampaignState {
         this.events.push(event);
     }
 
+    public getBattles(): Battle[] {
+        return this.events.filter(x => x.eventType === CampaignEventType.Battle)
+            .map(x => x as Battle);
+    }
+
     public serialize(): SerializedCampaignState {
         return {
             turn: this.turn,
             phase: this.phase,
             act: this.act,
-            events: this.events.map(x => x.serialize())
+            events: this.events.map(x => x.serialize()),
+            rebelPointsScored: this.rebelPointsScored,
+            imperialPointsScored: this.imperialPointsScored
         }
     }
 
@@ -44,10 +55,14 @@ export class CampaignState {
             switch (x.eventType) {
                 case CampaignEventType.Battle:
                     return Battle.hydrate(x as SerializedBattle);
+                case CampaignEventType.ManualLocationChange:
+                    return CampaignEvent.hydrate(x);
                 default:
                     throw new Error("Unrecognized campaign event type.");
             }
         });
+        state.imperialPointsScored = data.imperialPointsScored || 0;
+        state.rebelPointsScored = data.rebelPointsScored || 0;
         return state;
     }
 }
