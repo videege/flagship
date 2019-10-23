@@ -1,6 +1,6 @@
 
 export enum Condition {
-    LowFuel,
-    LowMorale,
-    LowSupplies
+    LowFuel = "Low Fuel",
+    LowMorale = "Low Morale",
+    LowSupplies = "Low Supplies"
 }

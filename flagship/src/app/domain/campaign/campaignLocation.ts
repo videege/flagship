@@ -3,6 +3,7 @@ import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
 import { CampaignEvent } from './campaignEvent';
+import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 
 export interface SerializedCampaignLocation {
     id: number;
@@ -54,6 +55,14 @@ export class CampaignLocation {
         this.controllingFaction = null;
         this.controlType = null;
         this.chosenObjective = null;
+    }
+
+    public isInSameArea(location: CampaignLocation): boolean {
+        return this.sectors.filter(x => location.sectors.includes(x)).length > 0;
+    }
+
+    public isBorderLocation(): boolean {
+        return this.sectors.length > 1;
     }
 
     public serialize(): SerializedCampaignLocation {

@@ -12,11 +12,8 @@
             <mat-step label="Strategy Phase"
                 [editable]="false" [completed]="currentState.phase !== phases.Strategy">
                 <flagship-strategy-phase [campaign]="campaign" [initiativeFaction]="teamWithInitiative"
-                    (validityChange)="strategyValidityChanged($event)"></flagship-strategy-phase>
-                <div>
-                    <button mat-raised-button (click)="finishStrategy()"
-                        color="primary" [disabled]="!strategyValid">Finish Strategy</button>
-                </div>
+                    (validityChange)="strategyValidityChanged($event)"
+                    (phaseComplete)="strategyCompleted()"></flagship-strategy-phase>
             </mat-step>
             <mat-step label="Battle Phase">
 

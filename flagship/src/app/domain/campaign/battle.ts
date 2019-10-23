@@ -29,8 +29,8 @@ export interface BattleResult {
 export class Battle implements CampaignEvent {
     public eventType: CampaignEventType = CampaignEventType.Battle;
     public title: string;
-    public timestamp: Date;
-    public userUid: string;
+    public timestamp: Date = new Date();
+    public userUid: string = null;
 
     public attackingPlayers: BattleParticipant[] = [];
     public defendingPlayers: BattleParticipant[] = [];

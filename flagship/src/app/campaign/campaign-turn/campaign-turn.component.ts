@@ -5,6 +5,7 @@ import { Faction } from 'src/app/domain/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
+import { StrategyPhaseComponent } from '../strategy-phase/strategy-phase.component';
 
 @Component({
   selector: 'flagship-campaign-turn',
@@ -81,7 +82,7 @@ export class CampaignTurnComponent implements OnInit, OnChanges, AfterViewInit {
     this.strategyValid = valid;
   }
 
-  finishStrategy() {
-    
+  strategyCompleted() {
+    this.stepper.selectedIndex = this.phaseToStepperIndex(Phase.Battle);
   }
 }

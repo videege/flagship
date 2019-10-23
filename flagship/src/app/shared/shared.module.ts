@@ -6,8 +6,7 @@ import { AppMaterialModule } from '../app-material/app-material.module';
 import { BatteryComponent } from './battery/battery.component';
 import { ShipIconComponent } from './ship-icon/ship-icon.component';
 import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
-
-
+import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,8 @@ import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
     AlertComponent,
     BatteryComponent,
     ShipIconComponent,
-    UpgradeIconDirective
+    UpgradeIconDirective,
+    NumeralsPipe
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,8 @@ import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
     AlertComponent,
     BatteryComponent,
     ShipIconComponent,
-    UpgradeIconDirective
+    UpgradeIconDirective,
+    NumeralsPipe
   ]
 })
 export class SharedModule { }

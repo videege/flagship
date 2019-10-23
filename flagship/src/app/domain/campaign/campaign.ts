@@ -10,6 +10,7 @@ import { Validator, RITRValidator } from './validator';
 import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 import { SerializedCampaignEvent, CampaignEvent } from './campaignEvent';
 import { Phase } from './phase';
+import { Faction } from '../faction';
 
 export interface SerializedCampaign {
     id: string;
@@ -109,6 +110,14 @@ export class Campaign {
     public getPlayer(playerId: string): CampaignPlayer {
         return this.empire.players.find(x => x.id === playerId) ||
             this.rebels.players.find(x => x.id === playerId);
+    }
+
+    public getFactionOfPlayer(playerId: string): Faction {
+        if (this.empire.players.find(x => x.id === playerId))
+            return Faction.Empire;
+        if (this.rebels.players.find(x => x.id === playerId))
+            return Faction.Rebels;
+        return null;
     }
 
     public campaignOwner(): CampaignUser {

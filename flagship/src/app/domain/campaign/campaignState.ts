@@ -30,6 +30,10 @@ export class CampaignState {
         this.events.push(event);
     }
 
+    public setPhase(phase: Phase) {
+        this.phase = phase;
+    }
+
     public getBattles(): Battle[] {
         return this.events.filter(x => x.eventType === CampaignEventType.Battle)
             .map(x => x as Battle);

@@ -1,13 +1,33 @@
 <form>
     <p>
-        Use the form below to declare this turn's battles. When finished, click 'Go to Battle Phase' to
+        Use the form below to declare this turn's battles. When finished, click 'Finish Strategy Phase' to
         confirm the battles and move to the next phase.
     </p>
-    <div *ngFor="let battle of battles; let even = even; let index = index;">
+    <div *ngIf="canInitiativeTeamUseDiplomats || canNonInitiativeTeamUseDiplomats">
+        <p>
+            If a team has at least one diplomat token, that team can declare an area they will spend
+            a token at. This choice will affect the 'Low Morale' condition for assaults in the area of the token.
+        </p>
+        <div *ngIf="canNonInitiativeTeamUseDiplomats">
+            <mat-form-field fxFlex>
+                <mat-label>{{ nonInitiativeTeamLabel }} Diplomats Area</mat-label>
+                <mat-select [(ngModel)]="nonInitiativeTeamDiplomatsArea" name="{{ 'nidiplomats-' + index }}"
+                    (selectionChange)="formChanged()" required>
+                    <mat-option *ngIf="nonInitiativeTeamDiplomatsArea"></mat-option>
+                    <mat-option *ngFor="let area of areas" [value]="area">
+                        Area {{ area | numerals }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngFor=" let battle of battles; let even=even; let index=index;">
         <h4 class="no-margin">Battle #{{ index + 1 }}</h4>
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
-                <mat-label>Attacking {{ even ? initiativeTeamLabel : nonInitiativeTeamLabel }} Player</mat-label>
+                <mat-label>Attacking {{ even ? initiativeTeamLabel : nonInitiativeTeamLabel }} Player
+                </mat-label>
                 <mat-select [(ngModel)]="battle.attackingPlayer" name="{{ 'attacker-' + index }}"
                     (selectionChange)="formChanged()" required>
                     <mat-option *ngIf="battle.attackingPlayer"></mat-option>
@@ -19,7 +39,8 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex>
-                <mat-label>Defending {{ even ? nonInitiativeTeamLabel : initiativeTeamLabel }} Player</mat-label>
+                <mat-label>Defending {{ even ? nonInitiativeTeamLabel : initiativeTeamLabel }} Player
+                </mat-label>
                 <mat-select [(ngModel)]="battle.defendingPlayer" name="{{ 'defender-' + index }}"
                     (selectionChange)="formChanged()" required>
                     <mat-option *ngIf="battle.defendingPlayer"></mat-option>
@@ -32,16 +53,31 @@
             </mat-form-field>
             <mat-form-field fxFlex>
                 <mat-label>Battle Location</mat-label>
-                <mat-select [(ngModel)]="battle.location" name="{{ 'location-' + index"
+                <mat-select [(ngModel)]="battle.location" name="{{ 'location-' + index }}"
                     (selectionChange)="formChanged()" required>
                     <mat-option *ngIf="battle.location"></mat-option>
-                    <mat-option *ngFor="let location of (even ? availableInitiativeLocations : availableNonInitiativeLocations)" 
+                    <mat-option
+                        *ngFor="let location of (even ? availableInitiativeLocations : availableNonInitiativeLocations)"
                         [value]="location">
                         {{ location.name }} ({{ location.controlLabel() }})
                     </mat-option>
-            </mat-select>
-        </mat-form-field>
-       </div>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf=" battle.attackingConditions.length">
+            <label>{{ battle.attackingPlayer.name }} will gain: </label>
+            <mat-radio-group [(ngModel)]="battle.chosenAttackingCondition" name="{{ 'attacker-condition-' + index }}"
+                (change)="formChanged()">
+                <mat-radio-button *ngFor="let condition of battle.attackingConditions" [value]="condition">
+                    {{ condition }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
     </div>
-    <flagship-issues-list [issues]="issues"></flagship-issues-list>
+    <flagship-issues-list [issues]="issues">
+    </flagship-issues-list>
+    <div>
+        <mat-bar-button (btnClick)="completePhase()" 
+            [options]="completeButtonOptions"></mat-bar-button>
+    </div>
 </form>
