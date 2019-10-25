@@ -31,6 +31,16 @@ export class CampaignPlayer {
         this.condition = null;
     }
 
+    public recordWin(marginOfVictory: number) {
+        this.mov += marginOfVictory;
+        this.wins += 1;
+    }
+
+    public recordLoss(marginOfVictory: number) {
+        this.mov -= marginOfVictory;
+        this.losses += 1;
+    }
+
     public serialize(): SerializedCampaignPlayer {
         return {
             playerUid: this.playerUid,

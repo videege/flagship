@@ -60,6 +60,44 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     return names.join(", ");
   }
 
+  public completePhase() {
+    this.completeButtonOptions.active = true;
+    for (let i = 0; i < this.battles.length; i++) {
+      let battle = this.battles[i];
+      battle.objectiveId = this.battleObjectives[i].id;
+      battle.recordResult(this.attackerBattleResults[i].fleetPoints,
+        this.attackerBattleResults[i].score, this.attackerBattleResults[i].earnedPoints,
+        this.defenderBattleResults[i].fleetPoints, this.defenderBattleResults[i].score,
+        this.defenderBattleResults[i].earnedPoints);
+      // Record the overall results in the state and rosters
+      this.campaign.applyBattleResults(battle);
+      let winningFleets = battle.attackersWon()
+        ? battle.attackingPlayers.map(p => this.fleets[p.fleetId])
+        : battle.defendingPlayers.map(p => this.fleets[p.fleetId]);
+      let losingFleets = battle.attackersWon()
+        ? battle.defendingPlayers.map(p => this.fleets[p.fleetId])
+        : battle.attackingPlayers.map(p => this.fleets[p.fleetId]);
+      for (const fleet of winningFleets) {
+        fleet.customCommander.addExperience(battle.attackersWon() 
+          ? battle.attackerResult.earnedXP : battle.defenderResult.earnedXP);
+        this.fleetService.updateFleet(fleet).then(() => {}, (errors) => { alert(errors); });
+      }
+      for (const fleet of losingFleets) {
+        fleet.customCommander.addExperience(battle.attackersWon() 
+          ? battle.defenderResult.earnedXP : battle.attackerResult.earnedXP);
+        this.fleetService.updateFleet(fleet).then(() => {}, (errors) => { alert(errors); });
+      }
+    }
+    this.currentState.setPhase(Phase.Management);
+    this.campaignService.updateCampaign(this.campaign).then(() => {
+      this.phaseComplete.emit();
+    }, (errors) => {
+      alert(errors);
+    }).finally(() => {
+      this.completeButtonOptions.active = false;
+    })
+  }
+
   private setup() {
     let locationFactory = new CampaignLocationFactory();
     this.currentState = this.campaign.currentState();
@@ -171,7 +209,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         this.defenderBattleResults[i].earnedXP = null;
         this.battleStates[i] = BattleState.Declared;
       }
-    } 
+    }
   }
 
   private calculateBattleResults(winner: BattleResult, loser: BattleResult, isBaseObjective: boolean,

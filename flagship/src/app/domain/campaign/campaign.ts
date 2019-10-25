@@ -11,6 +11,7 @@ import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 import { SerializedCampaignEvent, CampaignEvent } from './campaignEvent';
 import { Phase } from './phase';
 import { Faction } from '../faction';
+import { Battle } from './battle';
 
 export interface SerializedCampaign {
     id: string;
@@ -116,7 +117,7 @@ export class Campaign {
         return this.empire.players.concat(this.rebels.players);
     }
 
-    public getPlayersMap(): { [id: string] : CampaignPlayer } {
+    public getPlayersMap(): { [id: string]: CampaignPlayer } {
         let players = this.getPlayers();
         let map = {};
         for (const player of players) {
@@ -148,7 +149,7 @@ export class Campaign {
     public finishSetup() {
         if (this.currentState().act !== 0)
             throw new Error("Campaign is already started.");
-            
+
         this.history.push(this.createTurn(true));
     }
 
@@ -159,5 +160,34 @@ export class Campaign {
         turn.act = newAct ? current.act + 1 : current.act;
         turn.turn = newAct ? 1 : current.turn + 1;
         return turn;
+    }
+
+    public applyBattleResults(battle: Battle) {
+        // update the roster with stats, and the current turn
+        let currentState = this.currentState();
+        let winningFaction = battle.getWinnerFaction(this.empire);
+        let winningTeam = winningFaction === Faction.Empire ? this.empire : this.rebels;
+        let losingTeam = winningFaction === Faction.Empire ? this.rebels : this.empire;
+        let winningResult = battle.attackersWon() ? battle.attackerResult : battle.defenderResult;
+        let losingResult = battle.attackersWon() ? battle.defenderResult : battle.attackerResult;
+        let winningPlayerIds = battle.attackersWon() ?
+            battle.attackingPlayers.map(x => x.playerId) : battle.defendingPlayers.map(x => x.playerId);
+        let losingPlayerIds = battle.attackersWon() ?
+            battle.defendingPlayers.map(x => x.playerId) : battle.attackingPlayers.map(x => x.playerId);
+
+        winningTeam.campaignPoints += winningResult.earnedPoints;
+        losingTeam.campaignPoints += losingResult.earnedPoints;
+        currentState.imperialPointsScored += winningFaction === Faction.Empire ? winningResult.earnedPoints : losingResult.earnedPoints;
+        currentState.rebelPointsScored += winningFaction === Faction.Empire ? losingResult.earnedPoints : winningResult.earnedPoints;
+        
+        let winningPlayers = winningTeam.players.filter(p => winningPlayerIds.includes(p.id));
+        let losingPlayers = losingTeam.players.filter(p => losingPlayerIds.includes(p.id));
+        let mov = battle.marginOfVictory();
+        for (const player of winningPlayers) {
+            player.recordWin(mov);
+        }
+        for (const player of losingPlayers) {
+            player.recordLoss(mov);
+        }
     }
 }

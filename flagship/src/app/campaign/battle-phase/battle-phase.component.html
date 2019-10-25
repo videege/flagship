@@ -6,13 +6,28 @@
     <p *ngIf="!loadedFleets">Loading fleets...</p>
     <div *ngIf="loadedFleets">
         <div *ngFor="let battle of battles; let index=index;" fxLayout="column">
-            <h4 class="no-margin">{{ battle.title }}</h4>
-            <h5>
-                <span>
-                    {{ getParticipantNames(battle.attackingPlayers) }} </span>
-                vs.
-                {{ getParticipantNames(battle.defendingPlayers) }}
-            </h5>
+            <h3>{{ battle.title }}</h3>
+            <div class="matchup" fxLayout="row" fxLayoutGap="4px">
+                <div *ngFor="let player of battle.attackingPlayers">
+                    <span class="player-name">{{ players[player.playerId].name }}</span>
+                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                        <mat-chip>Attacker</mat-chip>
+                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                            {{ players[player.playerId].condition }}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <div>vs.</div>
+                <div *ngFor="let player of battle.defendingPlayers">
+                    <span class="player-name">{{ players[player.playerId].name }}</span>
+                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                        <mat-chip>Defender</mat-chip>
+                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                            {{ players[player.playerId].condition }}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
             <mat-form-field fxFlex>
                 <mat-label>Objective Played</mat-label>
                 <mat-select [(ngModel)]="battleObjectives[index]" name="{{ 'battle-obj-' + index }}"
@@ -56,20 +71,21 @@
                 Attacking team ({{ getParticipantNames(battle.attackingPlayers) }}) wins with an MoV of
                 {{ attackerBattleResults[index].score - defenderBattleResults[index].score }} against
                 defending team ({{ getParticipantNames(battle.defendingPlayers) }}).
-                Attacking team player(s) earn {{ attackerBattleResults[index].earnedXP }} XP and
-                {{ attackerBattleResults[index].earnedPoints }} campaign points.
-                Defending team player(s) earn {{ defenderBattleResults[index].earnedXP }} XP and
-                {{ defenderBattleResults[index].earnedPoints }} campaign points.
             </p>
             <p *ngIf="battleStates[index] === states.DefendersWon">
                 Defending team ({{ getParticipantNames(battle.defendingPlayers) }}) wins with an MoV of
                 {{ defenderBattleResults[index].score - attackerBattleResults[index].score }} against
                 attacking team ({{ getParticipantNames(battle.attackingPlayers) }}).
-                Attacking team player(s) earn {{ attackerBattleResults[index].earnedXP }} XP and
+            </p>
+            <p *ngIf="battleStates[index] !== states.Declared">
+                {{ getParticipantNames(battle.attackingPlayers) }} earns {{ attackerBattleResults[index].earnedXP }}
+                XP and
                 {{ attackerBattleResults[index].earnedPoints }} campaign points.
-                Defending team player(s) earn {{ defenderBattleResults[index].earnedXP }} XP and
+                {{ getParticipantNames(battle.defendingPlayers) }} earns {{ defenderBattleResults[index].earnedXP }}
+                XP and
                 {{ defenderBattleResults[index].earnedPoints }} campaign points.
             </p>
+
         </div>
         <flagship-issues-list [issues]="issues">
         </flagship-issues-list>

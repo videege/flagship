@@ -49,6 +49,10 @@ body {
     width: 100%;
 }
 
+.small-mat-chip-list {
+
+}
+
 :host {
     width: 100%;
 }

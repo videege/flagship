@@ -7,6 +7,8 @@ import { CampaignLocation } from './campaignLocation';
 import { CampaignPlayer } from './campaignPlayer';
 import { LocationControlType } from './locationControlType';
 import { Condition } from './condition';
+import { Team } from './team';
+import { Faction, oppositeFaction } from '../faction';
 
 export interface SerializedBattle extends SerializedCampaignEvent {
     attackingPlayers: BattleParticipant[];
@@ -100,6 +102,16 @@ export class Battle implements CampaignEvent {
 
     public playerCount(): number {
         return this.attackingPlayers.length + this.defendingPlayers.length;
+    }
+
+    public getWinnerFaction(team: Team): Faction {
+        if (this.state === BattleState.Declared) {
+            return null;
+        }
+        let winnersAreProvidedTeam = team.players.map(x => x.id)
+            .includes(this.state === BattleState.AttackersWon 
+                ? this.attackingPlayers[0].playerId : this.defendingPlayers[0].playerId);
+        return winnersAreProvidedTeam ? team.faction : oppositeFaction(team.faction);
     }
 
     public recordResult(attackerFleetPoints: number, attackerScore: number,

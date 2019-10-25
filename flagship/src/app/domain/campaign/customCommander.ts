@@ -20,6 +20,11 @@ export class CustomCommander {
         this.subject = new Subject<number>();
     }
 
+    addExperience(xp: number) {
+        this.currentExperience += xp;
+        this.lifetimeExperience += xp;
+    }
+
     getText(): string {
         if (!this.abilities.length) return '';
 
