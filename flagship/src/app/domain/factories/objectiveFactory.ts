@@ -441,6 +441,10 @@ export class ObjectiveFactory {
         return this.objectives.filter(o => o.type === type);
     }
 
+    getObjectivesByIds(ids: number[]) {
+        return this.objectives.filter(o => ids.includes(o.id));
+    }
+
     getObjectiveNamesForIds(ids: number[]): string[] {
         return this.objectives.filter(o => ids.indexOf(o.id) >= 0).map(o => o.name);
     }

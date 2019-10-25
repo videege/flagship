@@ -12,7 +12,7 @@ import { StrategyPhaseComponent } from '../strategy-phase/strategy-phase.compone
   templateUrl: './campaign-turn.component.html',
   styleUrls: ['./campaign-turn.component.css']
 })
-export class CampaignTurnComponent implements OnInit, OnChanges, AfterViewInit {
+export class CampaignTurnComponent implements OnInit, OnChanges {
 
   @Input() campaign: Campaign;
   @ViewChild('stepper', { static: false }) stepper: MatVerticalStepper;
@@ -27,17 +27,15 @@ export class CampaignTurnComponent implements OnInit, OnChanges, AfterViewInit {
   strategyValid = false;
   battleValid = false;
   managementValid = false;
+  currentStep = 0;
 
   constructor() {
     
   }
 
-  ngAfterViewInit(): void {
-    this.stepper.selectedIndex = this.phaseToStepperIndex(this.currentState.phase);
-  }
-
   ngOnInit() {
     this.setup();
+    this.currentStep = this.phaseToStepperIndex(this.currentState.phase);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -83,6 +81,14 @@ export class CampaignTurnComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   strategyCompleted() {
-    this.stepper.selectedIndex = this.phaseToStepperIndex(Phase.Battle);
+    this.currentStep = this.phaseToStepperIndex(Phase.Battle);
+  }
+
+  battleValidityChanged(valid: boolean) {
+    this.battleValid = valid;
+  }
+
+  battleCompleted() {
+    this.currentStep = this.phaseToStepperIndex(Phase.Management);
   }
 }

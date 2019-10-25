@@ -5,6 +5,7 @@ import { Faction } from '../faction';
 import { CampaignLocation } from './campaignLocation';
 import { LocationControlType } from './locationControlType';
 import { CampaignUser } from './campaignUser';
+import { FleetService } from 'src/app/core/services/fleet.service';
 
 export interface Validator {
     validateSetupPhase(campaign: Campaign): Issue[];
@@ -31,6 +32,7 @@ export class RITRValidator implements Validator {
         if (!this.teamHasPlacedBases(campaign.rebels, campaign.locations)) {
             issues.push(this.error('The Rebel team has the incorrect number of bases placed.  Each team should have 1 base per player.'))
         }
+        // Todo: validate that every fleet has all objectives set.
         let playersControllingBothSides = this.getPlayersControllingBothSides(campaign);
         for (const player of playersControllingBothSides) {
             issues.push(this.warning(`${player.displayName} is controlling players on each team.  This user will be able to see both teams' secret information.`))
@@ -51,6 +53,7 @@ export class RITRValidator implements Validator {
         return { text: text, severity: IssueSeverity.Error };
     }
 
+    
     private areTeamsBalanced(campaign: Campaign): boolean {
         return campaign.empire.numberOfPlayers() === campaign.rebels.numberOfPlayers();
     }

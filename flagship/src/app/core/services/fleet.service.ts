@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Fleet, ISerializedFleet } from '../../domain/fleet';
 import { Faction } from '../../domain/faction';
-import { Observable, of } from 'rxjs';
+import { Observable, of, combineLatest } from 'rxjs';
 
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { tap, map } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
 import { Upgrade } from 'src/app/domain/upgrade';
+import { firestore } from 'firebase';
 
 export interface FleetCompaignData {
   campaignId: string;
@@ -63,6 +64,17 @@ export class FleetService {
           }, (err) => reject(err))
         }, err => reject(err))
     });
+  }
+
+  public getFleetsByIds(ids: string[]): Observable<Fleet[]> {
+    let documents = ids.map(id => this.db.doc<ISerializedFleet>(`fleets/${id}`));
+
+    return combineLatest(...documents.map(d => d.get())).pipe(
+      map(docs => docs.map(d => d.data() as ISerializedFleet)),
+      map((fleets: ISerializedFleet[]) => {
+        return fleets.map(f => this.hydrateFleet(f, f.id))
+      })
+    );
   }
 
   public getFleetsForUser(): Observable<Fleet[]> {

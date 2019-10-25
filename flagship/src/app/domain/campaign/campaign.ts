@@ -112,6 +112,19 @@ export class Campaign {
             this.rebels.players.find(x => x.id === playerId);
     }
 
+    public getPlayers(): CampaignPlayer[] {
+        return this.empire.players.concat(this.rebels.players);
+    }
+
+    public getPlayersMap(): { [id: string] : CampaignPlayer } {
+        let players = this.getPlayers();
+        let map = {};
+        for (const player of players) {
+            map[player.id] = player;
+        }
+        return map;
+    }
+
     public getFactionOfPlayer(playerId: string): Faction {
         if (this.empire.players.find(x => x.id === playerId))
             return Faction.Empire;
