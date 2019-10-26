@@ -99,7 +99,6 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   }
 
   private setup() {
-    let locationFactory = new CampaignLocationFactory();
     this.currentState = this.campaign.currentState();
     this.battles = this.currentState.getBattles();
     this.players = this.campaign.getPlayersMap();

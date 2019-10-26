@@ -6,6 +6,7 @@ import { Phase } from 'src/app/domain/campaign/phase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
 import { StrategyPhaseComponent } from '../strategy-phase/strategy-phase.component';
+import { ManagementCompletedEvent } from '../management-phase/management-phase.component';
 
 @Component({
   selector: 'flagship-campaign-turn',
@@ -89,6 +90,14 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   }
 
   battleCompleted() {
+    this.currentStep = this.phaseToStepperIndex(Phase.Management);
+  }
+
+  managementValidityChanged(valid: boolean) {
+    this.managementValid = valid;
+  }
+
+  managementCompleted(event: ManagementCompletedEvent) {
     this.currentStep = this.phaseToStepperIndex(Phase.Management);
   }
 }

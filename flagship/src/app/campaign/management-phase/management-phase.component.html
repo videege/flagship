@@ -1,0 +1,71 @@
+<form>
+    <h3>Determine Battle Effects</h3>
+    <p>
+        Campaign points have already been applied to team totals. The changes to
+        campaign locations as a result of this turn's battle(s) are displayed below.
+    </p>
+    <ul>
+        <li *ngFor="let outcome of outcomes">
+            <strong>{{ outcome.location.name }}</strong>
+            <span *ngIf="outcome.locationChanged"> transitions from {{ outcome.location.controlLabel() }} to
+                {{ outcome.afterLocation.controlLabel() }}.</span>
+            <span *ngIf="!outcome.locationChanged"> unchanged ({{ outcome.location.controlLabel() }}.</span>
+        </li>
+    </ul>
+    <h4>Build New Bases</h4>
+    <p>
+        At the cost of 2 resource tokens each, each team may designate
+        locations where they have presence as new bases.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
+            <h5>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }} (Resources:
+                {{ upkeep.currentResourceTokens }})</h5>
+            <mat-form-field
+                *ngIf="upkeep.eligibleBaseLocations.length && upkeep.currentResourceTokens >= 2; else noBases">
+                <mat-label>New {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} Base(s)</mat-label>
+                <mat-select [(ngModel)]="upkeep.newBases" name="{{ 'newbases-' + index }}"
+                    (selectionChange)="formChanged()" required multiple>
+                    <mat-option *ngFor="let location of upkeep.eligibleBaseLocations" [value]="location">
+                        {{ location.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <ng-template #noBases>
+                <p>
+                    This team does not have enough resource tokens or does not have any eligible locations to build
+                    a base.
+                </p>
+            </ng-template>
+        </div>
+    </div>
+    <h3>Gain Strategic Effect Tokens</h3>
+    <p>
+        Each team may select a token for each base they control as well as each
+        location they placed a presence sticker at this turn.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
+            <h5>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h5>
+            <div *ngFor="let location of upkeep.tokenLocations; let li = index;">
+                
+            </div>
+            <mat-form-field
+                *ngIf="upkeep.eligibleBaseLocations.length && upkeep.currentResourceTokens >= 2; else noBases">
+                <mat-label>New {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} Base(s)</mat-label>
+                <mat-select [(ngModel)]="upkeep.newBases" name="{{ 'newbases-' + index }}"
+                    (selectionChange)="formChanged()" required multiple>
+                    <mat-option *ngFor="let location of upkeep.eligibleBaseLocations" [value]="location">
+                        {{ location.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <ng-template #noBases>
+                <p>
+                    This team does not have enough resource tokens or does not have any eligible locations to build
+                    a base.
+                </p>
+            </ng-template>
+        </div>
+    </div>
+</form>

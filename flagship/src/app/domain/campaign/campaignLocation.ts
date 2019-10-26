@@ -4,6 +4,7 @@ import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
 import { CampaignEvent } from './campaignEvent';
 import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
+import { Battle } from './battle';
 
 export interface SerializedCampaignLocation {
     id: number;

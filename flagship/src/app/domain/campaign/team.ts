@@ -52,6 +52,10 @@ export class Team {
         }
     }
 
+    tokensOfType(type: StrategicEffectType): number {
+        return this.tokens[type] || 0;
+    }
+    
     getLeader() {
         return this.players.find(x => x.isLeader);
     }

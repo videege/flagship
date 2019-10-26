@@ -6,7 +6,7 @@ rules_version = '2';
 // }
 function isUserOnCampaign(campaignId) {
   return campaignId != null && 
-    request.auth.uid in get(/databases/{database}/documents/campaigns/${campaignId}).data.playerUids;
+    request.auth.uid in get(/databases/{database}/documents/campaigns/$(campaignId)).data.playerUids;
 }
 
 service cloud.firestore {
