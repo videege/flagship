@@ -1,23 +1,30 @@
 import { Phase } from './phase';
 import { CampaignEvent, SerializedCampaignEvent, CampaignEventType } from './campaignEvent';
 import { Battle, SerializedBattle } from './battle';
+import { Faction } from '../faction';
 
 export interface SerializedCampaignState {
     turn: number;
     phase: Phase;
     act: number;
+    initiativeFaction: Faction;
     events: SerializedCampaignEvent[];
     imperialPointsScored: number;
     rebelPointsScored: number;
+    imperialSkilledSpacersSpent: number;
+    rebelSkilledSpacersSpent: number;
 }
 
 export class CampaignState {
     turn: number;
     phase: Phase;
     act: number;
+    initiativeFaction: Faction;
     events: CampaignEvent[] = [];
     imperialPointsScored: number = 0;
     rebelPointsScored: number = 0;
+    imperialSkilledSpacersSpent: number = 0;
+    rebelSkilledSpacersSpent: number = 0;
 
     public actInRomanNumerals(): string {
         if (this.act === 1) return "I";
@@ -44,9 +51,12 @@ export class CampaignState {
             turn: this.turn,
             phase: this.phase,
             act: this.act,
+            initiativeFaction: this.initiativeFaction,
             events: this.events.map(x => x.serialize()),
             rebelPointsScored: this.rebelPointsScored,
-            imperialPointsScored: this.imperialPointsScored
+            imperialPointsScored: this.imperialPointsScored,
+            imperialSkilledSpacersSpent: this.imperialSkilledSpacersSpent,
+            rebelSkilledSpacersSpent: this.rebelSkilledSpacersSpent
         }
     }
 
@@ -55,6 +65,7 @@ export class CampaignState {
         state.turn = data.turn;
         state.phase = data.phase;
         state.act = data.act;
+        state.initiativeFaction = data.initiativeFaction || Faction.Rebels;
         state.events = data.events.map(x => {
             switch (x.eventType) {
                 case CampaignEventType.Battle:
@@ -67,6 +78,8 @@ export class CampaignState {
         });
         state.imperialPointsScored = data.imperialPointsScored || 0;
         state.rebelPointsScored = data.rebelPointsScored || 0;
+        state.imperialSkilledSpacersSpent = data.imperialSkilledSpacersSpent || 0;
+        state.rebelSkilledSpacersSpent = data.rebelSkilledSpacersSpent || 0;
         return state;
     }
 }

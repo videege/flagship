@@ -48,24 +48,73 @@
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
             <h5>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h5>
             <div *ngFor="let location of upkeep.tokenLocations; let li = index;">
-                
+                <mat-form-field>
+                    <mat-label>Token for {{ location.name }}</mat-label>
+                    <mat-select [(ngModel)]="upkeep.tokenChoices[location.id]"
+                        name="{{ 'tokens-' + index + '-l-' + li}}" (selectionChange)="formChanged()" required>
+                        <mat-option *ngFor="let effect of location.strategicEffects" [value]="effect">
+                            {{ effects.effectName(effect) }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            <mat-form-field
-                *ngIf="upkeep.eligibleBaseLocations.length && upkeep.currentResourceTokens >= 2; else noBases">
-                <mat-label>New {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} Base(s)</mat-label>
-                <mat-select [(ngModel)]="upkeep.newBases" name="{{ 'newbases-' + index }}"
-                    (selectionChange)="formChanged()" required multiple>
-                    <mat-option *ngFor="let location of upkeep.eligibleBaseLocations" [value]="location">
-                        {{ location.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <ng-template #noBases>
-                <p>
-                    This team does not have enough resource tokens or does not have any eligible locations to build
-                    a base.
-                </p>
-            </ng-template>
         </div>
+    </div>
+    <h3>Gain Rewards &amp; Spend Commander Experience</h3>
+    <p>
+        Each player's battle reward is shown below. Command experience has already been added to each custom
+        commander. Note that Flagship does not enforce rules around fleet changes during the campaign - it is up
+        to each player to ensure that fleet modifications adhere to the rewards gained after battle.
+    </p>
+    <ul>
+        <li *ngFor="let outcome of outcomes">
+            <strong>{{ outcome.battle.title }}</strong>
+            <ul>
+                <li *ngFor="let player of outcome.winningPlayers">
+                    {{ player.name }} may select
+                    <span *ngFor="let reward of outcome.location.rewards; let last = last;">
+                        <span *ngIf="reward.isSquadronReward()">
+                            up to {{ reward.winnerPoints }} of squadrons
+                        </span>
+                        <span *ngIf="!reward.isSquadronReward()">
+                            up to a {{ reward.winnerPoints }} point {{ reward.upgradeType }} upgrade
+                        </span>
+                        <span *ngIf="!last">, or </span>
+                        <span *ngIf="last && !outcome.rewardsCanBeUnique">
+                            . This reward <strong>cannot</strong> be unique.</span>
+                        <span *ngIf="last && outcome.rewardsCanBeUnique">
+                            . This reward <strong>can</strong> be unique.
+                        </span>
+                    </span>
+                </li>
+                <li *ngFor="let player of outcome.losingPlayers">
+                    {{ player.name }} may select
+                    <span *ngFor="let reward of outcome.location.rewards; let last = last;">
+                        <span *ngIf="reward.isSquadronReward()">
+                            up to {{ reward.loserPoints }} of squadrons
+                        </span>
+                        <span *ngIf="!reward.isSquadronReward()">
+                            up to a {{ reward.loserPoints }} point {{ reward.upgradeType }} upgrade
+                        </span>
+                        <span *ngIf="!last">, or </span>
+                        <span *ngIf="last && !outcome.rewardsCanBeUnique">
+                            . This reward <strong>cannot</strong> be unique.</span>
+                        <span *ngIf="last && outcome.rewardsCanBeUnique">
+                            . This reward <strong>can</strong> be unique.
+                        </span>
+                    </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Refit &amp; Expand Fleets</h3>
+    <p>
+        Each player should use the fleet builder to denote which ships/squadrons are being 
+        unscarred.  
+    </p>
+    <flagship-issues-list [issues]="issues">
+    </flagship-issues-list>
+    <div>
+        <mat-bar-button (btnClick)="completePhase()" [options]="completeButtonOptions"></mat-bar-button>
     </div>
 </form>

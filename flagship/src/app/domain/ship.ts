@@ -85,6 +85,14 @@ export class Ship implements ShipData {
     };
   }
 
+  getSummaryName(): string {
+    const title = this.upgradeSlots.find(x => x.type === UpgradeType.Title && x.isEnabled && x.isFilled());
+    if (title) {
+      return `${this.name} - ${title.upgrade.name} [${this.currentPoints()} points]`;
+    }
+    return `${this.name} [${this.currentPoints()} points]`
+  }
+
   setIsScarred(isScarred: boolean) {
     if (this.isScarred != isScarred) {
       this.isScarred = isScarred;

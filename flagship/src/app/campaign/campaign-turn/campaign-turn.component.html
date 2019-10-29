@@ -7,7 +7,7 @@
         <mat-card-subtitle>{{ phaseName }} Phase</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>{{ teamWithInitiative === factions.Empire ? "Imperial" : "Rebel" }} team has initiative this turn.</p>
+        <p>{{ currentState.initiativeFaction === factions.Empire ? "Imperial" : "Rebel" }} team has initiative this turn.</p>
         <mat-vertical-stepper [linear]="true" #stepper [selectedIndex]="currentStep">
             <mat-step label="Strategy Phase" [editable]="false" [completed]="currentState.phase !== phases.Strategy">
                 <flagship-strategy-phase *ngIf="currentState.phase === phases.Strategy" [campaign]="campaign"
@@ -21,7 +21,7 @@
                 </flagship-battle-phase>
             </mat-step>
             <mat-step label="Management Phase" [editable]="false"
-                [completed]="currentState.phase !== phases.Strategy && currentState.phase !== phases.Battle && currentState !== phases.Management">
+                [completed]="currentState.phase !== phases.Strategy && currentState.phase !== phases.Battle && currentState.phase !== phases.Management">
                 <flagship-management-phase *ngIf="currentState.phase === phases.Management" [campaign]="campaign"
                     (validityChange)="managementValidityChanged($event)" (phaseComplete)="managementCompleted($event)">
                 </flagship-management-phase>

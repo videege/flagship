@@ -3,10 +3,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { Campaign, SerializedCampaign } from 'src/app/domain/campaign/campaign';
-import { map } from 'rxjs/operators';
+import { map, switchMap, combineLatest } from 'rxjs/operators';
 import { CampaignType } from 'src/app/domain/campaign/campaignType';
 import { CampaignFactory } from 'src/app/domain/factories/campaignFactory';
 import { Invite } from 'src/app/domain/campaign/invite';
+import { FleetService } from './fleet.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class CampaignService {
   private campaignFactory = new CampaignFactory();
 
   constructor(private db: AngularFirestore,
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth,
+    private fleetService: FleetService) {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
     })
@@ -40,7 +42,17 @@ export class CampaignService {
   public getCampaignForUser(id: string): Observable<Campaign> {
     return this.db.doc<SerializedCampaign>(`campaigns/${id}`).valueChanges()
       .pipe(
-        map(serialized => Campaign.hydrate(serialized))
+        map(serialized => Campaign.hydrate(serialized)),
+        switchMap(campaign => {
+          let fleetIds = campaign.getPlayers().map(x => x.fleetId);
+          return this.fleetService.getFleetsByIds(fleetIds)
+            .pipe(
+              map(fleets => {
+                campaign.setFleets(fleets);
+                return campaign;
+              })
+            );
+        })
       );
   }
 

@@ -12,6 +12,7 @@ import { SerializedCampaignEvent, CampaignEvent } from './campaignEvent';
 import { Phase } from './phase';
 import { Faction } from '../faction';
 import { Battle } from './battle';
+import { Fleet } from '../fleet';
 
 export interface SerializedCampaign {
     id: string;
@@ -43,6 +44,8 @@ export class Campaign {
 
     public empire: Team;
     public rebels: Team;
+
+    public fleets: { [id: string] : Fleet } = null;
 
     public locations: CampaignLocation[] = [];
 
@@ -81,6 +84,13 @@ export class Campaign {
         let factory = new CampaignLocationFactory();
         campaign.locations = factory.createCampaignLocations(campaign.type, data.locations);
         return campaign;
+    }
+
+    public setFleets(fleets: Fleet[]) {
+        this.fleets = {};
+        for (const fleet of fleets) {
+            this.fleets[fleet.id] = fleet;
+        }
     }
 
     public currentState(): CampaignState {
@@ -159,6 +169,9 @@ export class Campaign {
         turn.phase = Phase.Strategy;
         turn.act = newAct ? current.act + 1 : current.act;
         turn.turn = newAct ? 1 : current.turn + 1;
+        turn.initiativeFaction = this.empire.campaignPoints < this.rebels.campaignPoints
+            ? Faction.Empire
+            : Faction.Rebels;
         return turn;
     }
 

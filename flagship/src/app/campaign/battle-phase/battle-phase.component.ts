@@ -16,6 +16,25 @@ import { LocationControlType } from 'src/app/domain/campaign/locationControlType
 import { BattleState } from 'src/app/domain/campaign/battleState';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
+import { Ship } from 'src/app/domain/ship';
+import { Squadron } from 'src/app/domain/squadron';
+import { Faction } from 'src/app/domain/faction';
+
+class FleetModification {
+  eligibleShipsForScarring: Ship[] = [];
+  eligibleSquadronsForScarring: Squadron[] = [];
+  eligibleShipsForVeteran: Ship[] = [];
+  eligibleSquadronsForVeteran: Squadron[] = [];
+  maxVeterans = 1;
+  scarredShipIds: number[] = [];
+  scarredSquadronIds: number[] = [];
+  veteranShipIds: number[] = [];
+  veteranSquadronIds: number[] = [];
+
+  tooManyVeterans(): boolean {
+    return this.veteranShipIds.length + this.veteranSquadronIds.length > this.maxVeterans;
+  }
+}
 
 @Component({
   selector: 'flagship-battle-phase',
@@ -32,7 +51,6 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   completeButtonOptions = indeterminateOptions('Finish Battle Phase');
   objectiveFactory = new ObjectiveFactory();
   currentState: CampaignState;
-  fleets: { [id: string]: Fleet } = {};
   battles: Battle[];
   possibleObjectives: Objective[][] = [];
   attackerBattleResults: BattleResult[] = [];
@@ -41,7 +59,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   battleStates: BattleState[] = [];
   issues: Issue[] = [];
   players: { [id: string]: CampaignPlayer } = {};
-  loadedFleets = false;
+  fleetMods: { [id: string]: FleetModification } = {};
 
   constructor(private campaignService: CampaignService,
     private fleetService: FleetService) { }
@@ -72,20 +90,22 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
       // Record the overall results in the state and rosters
       this.campaign.applyBattleResults(battle);
       let winningFleets = battle.attackersWon()
-        ? battle.attackingPlayers.map(p => this.fleets[p.fleetId])
-        : battle.defendingPlayers.map(p => this.fleets[p.fleetId]);
+        ? battle.attackingPlayers.map(p => this.campaign.fleets[p.fleetId])
+        : battle.defendingPlayers.map(p => this.campaign.fleets[p.fleetId]);
       let losingFleets = battle.attackersWon()
-        ? battle.defendingPlayers.map(p => this.fleets[p.fleetId])
-        : battle.attackingPlayers.map(p => this.fleets[p.fleetId]);
+        ? battle.defendingPlayers.map(p => this.campaign.fleets[p.fleetId])
+        : battle.attackingPlayers.map(p => this.campaign.fleets[p.fleetId]);
       for (const fleet of winningFleets) {
-        fleet.customCommander.addExperience(battle.attackersWon() 
+        fleet.customCommander.addExperience(battle.attackersWon()
           ? battle.attackerResult.earnedXP : battle.defenderResult.earnedXP);
-        this.fleetService.updateFleet(fleet).then(() => {}, (errors) => { alert(errors); });
+        this.applyFleetMods(fleet);
+        this.fleetService.updateFleet(fleet).then(() => { }, (errors) => { alert(errors); });
       }
       for (const fleet of losingFleets) {
-        fleet.customCommander.addExperience(battle.attackersWon() 
+        fleet.customCommander.addExperience(battle.attackersWon()
           ? battle.defenderResult.earnedXP : battle.attackerResult.earnedXP);
-        this.fleetService.updateFleet(fleet).then(() => {}, (errors) => { alert(errors); });
+        this.applyFleetMods(fleet);
+        this.fleetService.updateFleet(fleet).then(() => { }, (errors) => { alert(errors); });
       }
     }
     this.currentState.setPhase(Phase.Management);
@@ -98,45 +118,73 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     })
   }
 
+  private applyFleetMods(fleet: Fleet) {
+    let mod = this.fleetMods[fleet.id];
+    for (const shipId of mod.scarredShipIds) {
+      let ship = fleet.ships.find(x => x.id === shipId);
+      if (ship) {
+        ship.setIsScarred(true);
+      }
+    }
+    for (const shipId of mod.veteranShipIds) {
+      let ship = fleet.ships.find(x => x.id === shipId);
+      if (ship) {
+        ship.setIsVeteran(true);
+      }
+    }
+    for (const squadronId of mod.scarredSquadronIds) {
+      let squad = fleet.squadrons.find(x => x.id === squadronId);
+      if (squad) {
+        squad.setIsScarred(true);
+      }
+    }
+    for (const squadronId of mod.veteranSquadronIds) {
+      let squad = fleet.squadrons.find(x => x.id === squadronId);
+      if (squad) {
+        squad.setIsVeteran(true);
+      }
+    }
+  }
+
   private setup() {
     this.currentState = this.campaign.currentState();
     this.battles = this.currentState.getBattles();
     this.players = this.campaign.getPlayersMap();
-    let fleetIds = [];
-    for (const battle of this.battles) {
-      fleetIds.push(...battle.attackingPlayers.map(x => x.fleetId));
-      fleetIds.push(...battle.defendingPlayers.map(x => x.fleetId));
+
+    for (let i = 0; i < this.battles.length; i++) {
+      let battle = this.battles[i];
+      for (let participant of [...battle.attackingPlayers, ...battle.defendingPlayers]) {
+        let mod = new FleetModification();
+        let fleet = this.campaign.fleets[participant.fleetId];
+        mod.eligibleShipsForScarring = fleet.ships.filter(x => !x.isScarred);
+        mod.eligibleSquadronsForScarring = fleet.squadrons.filter(x => !x.isScarred && x.unique);
+        mod.eligibleShipsForVeteran = fleet.ships.filter(x => !x.isVeteran);
+        mod.eligibleSquadronsForVeteran = fleet.squadrons.filter(x => !x.isVeteran && x.unique);
+        mod.maxVeterans = 1 + (this.campaign.getFactionOfPlayer(participant.playerId) === Faction.Empire
+          ? this.currentState.imperialSkilledSpacersSpent
+          : this.currentState.rebelSkilledSpacersSpent);
+        this.fleetMods[participant.fleetId] = mod;
+      }
+      this.attackerBattleResults.push({
+        fleetPoints: battle.attackingPlayers
+          .map(x => this.campaign.fleets[x.fleetId].currentPoints())
+          .reduce((sum, val) => sum + val),
+        score: null,
+        earnedXP: null,
+        earnedPoints: null
+      });
+      this.defenderBattleResults.push({
+        fleetPoints: battle.defendingPlayers
+          .map(x => this.campaign.fleets[x.fleetId].currentPoints())
+          .reduce((sum, val) => sum + val),
+        score: null,
+        earnedXP: null,
+        earnedPoints: null
+      });
+      this.possibleObjectives.push(this.getPossibleObjectives(this.battles[i]));
+      this.battleObjectives.push(null);
+      this.battleStates.push(BattleState.Declared);
     }
-    this.fleetService.getFleetsByIds(fleetIds).subscribe((fleets: Fleet[]) => {
-      for (const fleet of fleets) {
-        this.fleets[fleet.id] = fleet;
-      }
-      for (let i = 0; i < this.battles.length; i++) {
-        let battle = this.battles[i];
-        this.attackerBattleResults.push({
-          fleetPoints: battle.attackingPlayers
-            .map(x => this.fleets[x.fleetId].currentPoints())
-            .reduce((sum, val) => sum + val),
-          score: null,
-          earnedXP: null,
-          earnedPoints: null
-        });
-        this.defenderBattleResults.push({
-          fleetPoints: battle.defendingPlayers
-            .map(x => this.fleets[x.fleetId].currentPoints())
-            .reduce((sum, val) => sum + val),
-          score: null,
-          earnedXP: null,
-          earnedPoints: null
-        });
-        this.possibleObjectives.push(this.getPossibleObjectives(this.battles[i]));
-        this.battleObjectives.push(null);
-        this.battleStates.push(BattleState.Declared);
-      }
-      this.loadedFleets = true;
-      this.determineValidity();
-      this.validityChange.emit(this.isValid());
-    })
 
     if (this.currentState.phase !== Phase.Battle) {
       this.issues = [];
@@ -156,7 +204,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     }
     objectiveIds = objectiveIds.concat(location.objectives);
     let objectives = this.objectiveFactory.getObjectivesByIds(objectiveIds);
-    let defenderObjectives = this.fleets[battle.defendingPlayers[0].fleetId].objectives;
+    let defenderObjectives = this.campaign.fleets[battle.defendingPlayers[0].fleetId].objectives;
     for (const objective of defenderObjectives) {
       if (objectives.find(o => o.type === objective.type))
         continue;
@@ -181,8 +229,12 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     return [301, 302, 303].includes(objective.id);
   }
 
+  private getFleetsInBattle(battle: Battle): Fleet[] {
+    return battle.attackingPlayers.map(x => x.fleetId).concat(battle.defendingPlayers.map(x => x.fleetId))
+      .map(x => this.campaign.fleets[x]);
+  }
+
   private determineResults() {
-    if (!this.loadedFleets) return;
 
     for (let i = 0; i < this.battles.length; i++) {
       const battle = this.battles[i];
@@ -236,7 +288,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
 
   private determineValidity() {
     this.issues = [];
-    if (!this.loadedFleets) {
+    if (!this.campaign.fleets) {
       this.issues.push({
         severity: IssueSeverity.Error,
         text: "Still loading fleets..."
@@ -282,6 +334,15 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
           text: `${battle.title}: No objective has been chosen.`
         });
         return;
+      }
+    }
+    for (const fleetId of Object.keys(this.fleetMods)) {
+      const fleetMod = this.fleetMods[fleetId];
+      if (fleetMod.tooManyVeterans()) {
+        this.issues.push({
+          severity: IssueSeverity.Error,
+          text: `${this.campaign.fleets[fleetId].name} has selected too many ships/squadrons as veterans.`
+        });
       }
     }
   }

@@ -6,6 +6,7 @@ import { CampaignLocation } from './campaignLocation';
 import { LocationControlType } from './locationControlType';
 import { CampaignUser } from './campaignUser';
 import { FleetService } from 'src/app/core/services/fleet.service';
+import { Fleet } from '../fleet';
 
 export interface Validator {
     validateSetupPhase(campaign: Campaign): Issue[];
@@ -32,10 +33,40 @@ export class RITRValidator implements Validator {
         if (!this.teamHasPlacedBases(campaign.rebels, campaign.locations)) {
             issues.push(this.error('The Rebel team has the incorrect number of bases placed.  Each team should have 1 base per player.'))
         }
-        // Todo: validate that every fleet has all objectives set.
+
         let playersControllingBothSides = this.getPlayersControllingBothSides(campaign);
         for (const player of playersControllingBothSides) {
             issues.push(this.warning(`${player.displayName} is controlling players on each team.  This user will be able to see both teams' secret information.`))
+        }
+
+        if (campaign.fleets !== null) {
+            // valdiate fleet issues
+            let empireUniques: string[] = [];
+            let rebelUniques: string[] = [];
+
+            for (const player of campaign.getPlayers()) {
+                let fleet = campaign.fleets[player.fleetId];
+
+                if (!this.fleetHasObjectivesSet(fleet)) {
+                    issues.push(this.warning(`${player.name}'s fleet does not have all objectives set.  This will impact Flagship's ability to record the correct objectives for battles.`))
+                }
+
+                if (!this.fleetHasReasonablePointsForSetup(fleet)) {
+                    issues.push(this.warning(`${player.name}'s fleet currently has ${fleet.currentPoints()} - are you sure this is correct?`));
+                }
+
+                let fleetUniques = fleet.getEquippedUniqueNames();
+                for (const unique of fleetUniques) {
+                    if ((fleet.faction === Faction.Empire ? empireUniques : rebelUniques).includes(unique)) {
+                        issues.push(this.error(`${player.name}'s fleet has ${unique} equipped, which is already equipped in a teammate's fleet.`));
+                    }
+                }
+                if (fleet.faction === Faction.Empire) {
+                    empireUniques = empireUniques.concat(fleetUniques);
+                } else {
+                    rebelUniques = rebelUniques.concat(fleetUniques);
+                }
+            }
         }
 
         return issues;
@@ -53,13 +84,13 @@ export class RITRValidator implements Validator {
         return { text: text, severity: IssueSeverity.Error };
     }
 
-    
+
     private areTeamsBalanced(campaign: Campaign): boolean {
         return campaign.empire.numberOfPlayers() === campaign.rebels.numberOfPlayers();
     }
 
     private teamHasCorrectNumberOfPlayers(team: Team): boolean {
-        return team.players && 
+        return team.players &&
             (team.numberOfPlayers() == 2 || team.numberOfPlayers() == 3);
     }
 
@@ -67,7 +98,7 @@ export class RITRValidator implements Validator {
         let numBases = team.numberOfPlayers();
         let teamBases = locations.filter(x => x.controllingFaction === team.faction &&
             x.controlType === LocationControlType.Base);
-        
+
         return teamBases.length === numBases;
     }
 
@@ -81,6 +112,15 @@ export class RITRValidator implements Validator {
             }
         }
         return players;
+    }
+
+    private fleetHasObjectivesSet(fleet: Fleet): boolean {
+        return fleet.objectives && fleet.objectives.length === 3;
+    }
+
+    private fleetHasReasonablePointsForSetup(fleet: Fleet): boolean {
+        const points = fleet.currentPoints();
+        return points >= 150 && points <= 200;
     }
 
 }

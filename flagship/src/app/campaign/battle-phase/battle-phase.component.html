@@ -3,93 +3,143 @@
         Use the form below to record the results of this turn's battles. When finished, click 'Finish Battle Phase' to
         confirm the results and move to the management phase (commander experience will be awarded at this point).
     </p>
-    <p *ngIf="!loadedFleets">Loading fleets...</p>
-    <div *ngIf="loadedFleets">
-        <div *ngFor="let battle of battles; let index=index;" fxLayout="column">
-            <h3>{{ battle.title }}</h3>
-            <div class="matchup" fxLayout="row" fxLayoutGap="4px">
-                <div *ngFor="let player of battle.attackingPlayers">
-                    <span class="player-name">{{ players[player.playerId].name }}</span>
-                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
-                        <mat-chip>Attacker</mat-chip>
-                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
-                            {{ players[player.playerId].condition }}
-                        </mat-chip>
-                    </mat-chip-list>
-                </div>
-                <div>vs.</div>
-                <div *ngFor="let player of battle.defendingPlayers">
-                    <span class="player-name">{{ players[player.playerId].name }}</span>
-                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
-                        <mat-chip>Defender</mat-chip>
-                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
-                            {{ players[player.playerId].condition }}
-                        </mat-chip>
-                    </mat-chip-list>
-                </div>
+    <div *ngFor="let battle of battles; let index=index;" fxLayout="column" style="margin-bottom: 8px;">
+        <h3>{{ battle.title }}</h3>
+        <div class="matchup" fxLayout="row" fxLayoutGap="4px">
+            <div *ngFor="let player of battle.attackingPlayers">
+                <span class="player-name">{{ players[player.playerId].name }}</span>
+                <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                    <mat-chip>Attacker</mat-chip>
+                    <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                        {{ players[player.playerId].condition }}
+                    </mat-chip>
+                </mat-chip-list>
             </div>
-            <mat-form-field fxFlex>
-                <mat-label>Objective Played</mat-label>
-                <mat-select [(ngModel)]="battleObjectives[index]" name="{{ 'battle-obj-' + index }}"
-                    (selectionChange)="formChanged()" required>
-                    <mat-option *ngIf="battleObjectives[index]"></mat-option>
-                    <mat-option *ngFor="let objective of possibleObjectives[index]" [value]="objective">
-                        {{ objective.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
-                <mat-form-field fxFlex>
-                    <mat-label>Attacker(s) Total Fleet Points</mat-label>
-                    <input matInput [(ngModel)]="attackerBattleResults[index].fleetPoints"
-                        (ngModelChange)="formChanged()" name="{{ 'attacker-tfp-' + index }}" required type="number" />
-                </mat-form-field>
-                <mat-form-field fxFlex>
-                    <mat-label>Attacker(s) Score</mat-label>
-                    <input matInput [(ngModel)]="attackerBattleResults[index].score" (ngModelChange)="formChanged()"
-                        name="{{ 'attacker-score-' + index }}" required type="number" />
-                </mat-form-field>
+            <div>vs.</div>
+            <div *ngFor="let player of battle.defendingPlayers">
+                <span class="player-name">{{ players[player.playerId].name }}</span>
+                <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                    <mat-chip>Defender</mat-chip>
+                    <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                        {{ players[player.playerId].condition }}
+                    </mat-chip>
+                </mat-chip-list>
             </div>
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
-                <mat-form-field fxFlex>
-                    <mat-label>Defender(s) Total Fleet Points</mat-label>
-                    <input matInput [(ngModel)]="defenderBattleResults[index].fleetPoints"
-                        (ngModelChange)="formChanged()" name="{{ 'defender-tfp-' + index }}" required type="number" />
-                </mat-form-field>
-                <mat-form-field fxFlex>
-                    <mat-label>Defender(s) Score</mat-label>
-                    <input matInput [(ngModel)]="defenderBattleResults[index].score" (ngModelChange)="formChanged()"
-                        name="{{ 'defender-score-' + index }}" required type="number" />
-                </mat-form-field>
-            </div>
-            <h5>Battle Result</h5>
-            <p *ngIf="battleStates[index] === states.Declared">
-                Enter the total fleet points and scores above to view the winner, margin of victory,
-                and experience rewards that will result from this battle.
-            </p>
-            <p *ngIf="battleStates[index] === states.AttackersWon">
-                Attacking team ({{ getParticipantNames(battle.attackingPlayers) }}) wins with an MoV of
-                {{ attackerBattleResults[index].score - defenderBattleResults[index].score }} against
-                defending team ({{ getParticipantNames(battle.defendingPlayers) }}).
-            </p>
-            <p *ngIf="battleStates[index] === states.DefendersWon">
-                Defending team ({{ getParticipantNames(battle.defendingPlayers) }}) wins with an MoV of
-                {{ defenderBattleResults[index].score - attackerBattleResults[index].score }} against
-                attacking team ({{ getParticipantNames(battle.attackingPlayers) }}).
-            </p>
-            <p *ngIf="battleStates[index] !== states.Declared">
-                {{ getParticipantNames(battle.attackingPlayers) }} earns {{ attackerBattleResults[index].earnedXP }}
-                XP and
-                {{ attackerBattleResults[index].earnedPoints }} campaign points.
-                {{ getParticipantNames(battle.defendingPlayers) }} earns {{ defenderBattleResults[index].earnedXP }}
-                XP and
-                {{ defenderBattleResults[index].earnedPoints }} campaign points.
-            </p>
-
         </div>
-        <flagship-issues-list [issues]="issues">
-        </flagship-issues-list>
+        <mat-form-field fxFlex>
+            <mat-label>Objective Played</mat-label>
+            <mat-select [(ngModel)]="battleObjectives[index]" name="{{ 'battle-obj-' + index }}"
+                (selectionChange)="formChanged()" required>
+                <mat-option *ngIf="battleObjectives[index]"></mat-option>
+                <mat-option *ngFor="let objective of possibleObjectives[index]" [value]="objective">
+                    {{ objective.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+                <mat-label>Attacker(s) Total Fleet Points</mat-label>
+                <input matInput [(ngModel)]="attackerBattleResults[index].fleetPoints" (ngModelChange)="formChanged()"
+                    name="{{ 'attacker-tfp-' + index }}" required type="number" />
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Attacker(s) Score</mat-label>
+                <input matInput [(ngModel)]="attackerBattleResults[index].score" (ngModelChange)="formChanged()"
+                    name="{{ 'attacker-score-' + index }}" required type="number" />
+            </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+                <mat-label>Defender(s) Total Fleet Points</mat-label>
+                <input matInput [(ngModel)]="defenderBattleResults[index].fleetPoints" (ngModelChange)="formChanged()"
+                    name="{{ 'defender-tfp-' + index }}" required type="number" />
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Defender(s) Score</mat-label>
+                <input matInput [(ngModel)]="defenderBattleResults[index].score" (ngModelChange)="formChanged()"
+                    name="{{ 'defender-score-' + index }}" required type="number" />
+            </mat-form-field>
+        </div>
+        <h4>Battle Result</h4>
+        <p *ngIf="battleStates[index] === states.Declared">
+            Enter the total fleet points and scores above to view the winner, margin of victory,
+            and experience rewards that will result from this battle.
+        </p>
+        <p *ngIf="battleStates[index] === states.AttackersWon">
+            Attacking team ({{ getParticipantNames(battle.attackingPlayers) }}) wins with an MoV of
+            {{ attackerBattleResults[index].score - defenderBattleResults[index].score }} against
+            defending team ({{ getParticipantNames(battle.defendingPlayers) }}).
+        </p>
+        <p *ngIf="battleStates[index] === states.DefendersWon">
+            Defending team ({{ getParticipantNames(battle.defendingPlayers) }}) wins with an MoV of
+            {{ defenderBattleResults[index].score - attackerBattleResults[index].score }} against
+            attacking team ({{ getParticipantNames(battle.attackingPlayers) }}).
+        </p>
+        <p *ngIf="battleStates[index] !== states.Declared">
+            {{ getParticipantNames(battle.attackingPlayers) }} earns {{ attackerBattleResults[index].earnedXP }}
+            XP and
+            {{ attackerBattleResults[index].earnedPoints }} campaign points.
+            {{ getParticipantNames(battle.defendingPlayers) }} earns {{ defenderBattleResults[index].earnedXP }}
+            XP and
+            {{ defenderBattleResults[index].earnedPoints }} campaign points.
+        </p>
+        <h5>Designate Scarred and Veteran Forces</h5>
+        <div *ngFor="let fleet of getFleetsInBattle(battle); let fi = index;">
+            <h5>{{ fleet.name }} ({{ fleet.customCommander.name }})</h5>
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                    <mat-label>Scarred Ships</mat-label>
+                    <mat-select [(ngModel)]="fleetMods[fleet.id].scarredShipIds"
+                        name="{{ 'battle-' + index + 'scarships-' + fi}}" (selectionChange)="formChanged()" multiple>
+                        <mat-option *ngFor="let ship of fleetMods[fleet.id].eligibleShipsForScarring" [value]="ship.id">
+                            {{ ship.getSummaryName() }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>Scarred Squadrons</mat-label>
+                    <mat-select [(ngModel)]="fleetMods[fleet.id].scarredSquadronIds"
+                        name="{{ 'battle-' + index + 'scarsquads-' + fi}}" (selectionChange)="formChanged()" multiple>
+                        <mat-option *ngFor="let squadron of fleetMods[fleet.id].eligibleSquadronsForScarring"
+                            [value]="squadron.id">
+                            {{ squadron.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                    <mat-label>Veteran Ship(s)</mat-label>
+                    <mat-select [(ngModel)]="fleetMods[fleet.id].veteranShipIds"
+                        name="{{ 'battle-' + index + 'vetships-' + fi}}" (selectionChange)="formChanged()" multiple>
+                        <mat-option *ngFor="let ship of fleetMods[fleet.id].eligibleShipsForVeteran" [value]="ship.id">
+                            {{ ship.getSummaryName() }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>
+                        Max # Veterans:
+                        {{ fleetMods[fleet.id].maxVeterans }} (1 + {{ fleetMods[fleet.id].maxVeterans - 1 }} Skilled
+                        Spacers)
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>Veteran Squadron(s)</mat-label>
+                    <mat-select [(ngModel)]="fleetMods[fleet.id].veteranSquadronIds"
+                        name="{{ 'battle-' + index + 'vetquads-' + fi}}" (selectionChange)="formChanged()" multiple>
+                        <mat-option *ngFor="let squadron of fleetMods[fleet.id].eligibleSquadronsForVeteran"
+                            [value]="squadron.id">
+                            {{ squadron.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
     </div>
+    <flagship-issues-list [issues]="issues">
+    </flagship-issues-list>
+
 
     <div>
         <mat-bar-button (btnClick)="completePhase()" [options]="completeButtonOptions"></mat-bar-button>

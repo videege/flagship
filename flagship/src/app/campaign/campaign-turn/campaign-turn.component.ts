@@ -23,7 +23,6 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
 
   currentState: CampaignState;
   phaseName: string;
-  teamWithInitiative: Faction;
 
   strategyValid = false;
   battleValid = false;
@@ -46,8 +45,6 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
 
   setup() {
     this.currentState = this.campaign.currentState();
-    this.teamWithInitiative = this.campaign.empire.campaignPoints < this.campaign.rebels.campaignPoints
-      ? Faction.Empire : Faction.Rebels;
     this.phaseName = this.getPhaseName(this.currentState.phase);
   }
 
