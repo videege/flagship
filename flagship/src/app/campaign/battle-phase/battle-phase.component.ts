@@ -115,7 +115,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
       alert(errors);
     }).finally(() => {
       this.completeButtonOptions.active = false;
-    })
+    });
   }
 
   private applyFleetMods(fleet: Fleet) {

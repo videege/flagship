@@ -4,4 +4,5 @@ export interface BattleParticipant {
     playerId: string;
     fleetId: string;
     condition: Condition;
+    spentAllyToken: boolean;
 }

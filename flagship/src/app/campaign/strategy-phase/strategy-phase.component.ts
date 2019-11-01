@@ -28,6 +28,9 @@ export class DeclaredBattle {
   defendingConditions: Condition[] = [];
   chosenDefendingCondition: Condition = null;
 
+  attackerSpendingAllyToken: boolean = false;
+  defenderSpendingAllyToken: boolean = false;
+
   public getTitle(): string {
     let name = this.location.name;
     if (this.location.controllingFaction === null) {
@@ -51,7 +54,6 @@ export class DeclaredBattle {
 export class StrategyPhaseComponent implements OnInit, OnChanges {
 
   @Input() campaign: Campaign;
-  @Input() initiativeFaction: Faction;
   @Output() validityChange = new EventEmitter<boolean>();
   @Output() phaseComplete = new EventEmitter<void>();
   completeButtonOptions = indeterminateOptions('Finish Strategy Phase');
@@ -71,6 +73,10 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
   canNonInitiativeTeamUseDiplomats: boolean = false;
   initiativeTeamDiplomatsArea: number = null;
   nonInitiativeTeamDiplomatsArea: number = null;
+  imperialSkilledSpacersSpent = 0;
+  imperialSkilledSpacersMax = 0;
+  rebelSkilledSpacersSpent = 0;
+  rebelSkilledSpacersMax = 0;
   areas: number[] = [1, 2, 3, 4, 5];
   issues: Issue[] = [];
 
@@ -86,15 +92,30 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       this.setup();
   }
 
+  public canPlayerSpendAlly(player: CampaignPlayer): boolean {
+    if (!player) return false;
+
+    let team = this.campaign.getTeamOfPlayer(player.id);
+    return team.tokensOfType(StrategicEffectType.Ally) >= 1;
+  }
+
   public completePhase() {
     this.completeButtonOptions.active = true;
     if (this.nonInitiativeTeamDiplomatsArea >= 1) {
-      (this.initiativeFaction === Faction.Empire ? 
-        this.campaign.rebels : this.campaign.empire).tokens[StrategicEffectType.Diplomats] -= 1;
+      (this.currentState.initiativeFaction === Faction.Empire ?
+        this.campaign.rebels : this.campaign.empire).removeToken(StrategicEffectType.Diplomats, 1);
     }
     if (this.initiativeTeamDiplomatsArea >= 1) {
-      (this.initiativeFaction === Faction.Empire ? 
-        this.campaign.empire : this.campaign.rebels).tokens[StrategicEffectType.Diplomats] -= 1;
+      (this.currentState.initiativeFaction === Faction.Empire ?
+        this.campaign.empire : this.campaign.rebels).removeToken(StrategicEffectType.Diplomats, 1);
+    }
+    if (this.imperialSkilledSpacersSpent > 0) {
+      this.campaign.empire.removeToken(StrategicEffectType.SkilledSpacers, this.imperialSkilledSpacersSpent);
+      this.currentState.imperialSkilledSpacersSpent = this.imperialSkilledSpacersSpent;
+    }
+    if (this.rebelSkilledSpacersSpent > 0) {
+      this.campaign.rebels.removeToken(StrategicEffectType.SkilledSpacers, this.rebelSkilledSpacersSpent);
+      this.currentState.rebelSkilledSpacersSpent = this.rebelSkilledSpacersSpent;
     }
     for (const declaredBattle of this.battles) {
       if (declaredBattle.chosenAttackingCondition) {
@@ -103,9 +124,22 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       if (declaredBattle.chosenDefendingCondition) {
         declaredBattle.defendingPlayer.setCondition(declaredBattle.chosenDefendingCondition);
       }
+
       let battle = Battle.declareBattle(null, declaredBattle.getTitle(),
-      declaredBattle.location, [declaredBattle.attackingPlayer], 
-      [declaredBattle.defendingPlayer], BattleType.Normal);
+        declaredBattle.location, [declaredBattle.attackingPlayer],
+        [declaredBattle.defendingPlayer], BattleType.Normal);
+      if (declaredBattle.attackerSpendingAllyToken) {
+        battle.attackingPlayers.find(x => x.playerId ===
+          declaredBattle.attackingPlayer.id).spentAllyToken = true;
+        this.campaign.getTeamOfPlayer(declaredBattle.attackingPlayer.id)
+          .removeToken(StrategicEffectType.Ally);
+      }
+      if (declaredBattle.defendingPlayer) {
+        battle.defendingPlayers.find(x => x.playerId ===
+          declaredBattle.defendingPlayer.id).spentAllyToken = true;
+        this.campaign.getTeamOfPlayer(declaredBattle.defendingPlayer.id)
+          .removeToken(StrategicEffectType.Ally);
+      }
       this.campaign.addEvent(battle);
     }
     this.campaign.currentState().setPhase(Phase.Battle);
@@ -126,7 +160,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     for (let i = 0; i < this.numberOfBattlesRequired; i++) {
       this.battles.push(new DeclaredBattle());
     }
-    let isEmpire = this.initiativeFaction === Faction.Empire;
+    let isEmpire = this.currentState.initiativeFaction === Faction.Empire;
 
     this.availableInitiativePlayers = [].concat(isEmpire ? this.campaign.empire.players : this.campaign.rebels.players);
     this.availableNonInitiativePlayers = [].concat(isEmpire ? this.campaign.rebels.players : this.campaign.empire.players);
@@ -135,11 +169,13 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     this.initiativeTeamLabel = isEmpire ? "Imperial" : "Rebel";
     this.nonInitiativeTeamLabel = isEmpire ? "Rebel" : "Imperial";
     this.canInitiativeTeamUseDiplomats = isEmpire
-      ? this.campaign.empire.tokens[StrategicEffectType.Diplomats] >= 1
-      : this.campaign.rebels.tokens[StrategicEffectType.Diplomats] >= 1;
+      ? this.campaign.empire.tokensOfType(StrategicEffectType.Diplomats) >= 1
+      : this.campaign.rebels.tokensOfType(StrategicEffectType.Diplomats) >= 1;
     this.canNonInitiativeTeamUseDiplomats = isEmpire
-      ? this.campaign.rebels.tokens[StrategicEffectType.Diplomats] >= 1
-      : this.campaign.empire.tokens[StrategicEffectType.Diplomats] >= 1;
+      ? this.campaign.rebels.tokensOfType(StrategicEffectType.Diplomats) >= 1
+      : this.campaign.empire.tokensOfType(StrategicEffectType.Diplomats) >= 1;
+    this.imperialSkilledSpacersMax = this.campaign.empire.tokensOfType(StrategicEffectType.SkilledSpacers);
+    this.rebelSkilledSpacersMax = this.campaign.rebels.tokensOfType(StrategicEffectType.SkilledSpacers);
 
     if (this.currentState.phase !== Phase.Strategy) {
       this.issues = [];
@@ -192,7 +228,8 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       return false;
 
     let faction = this.campaign.getFactionOfPlayer(player.id);
-    let diplomatsArea = faction === this.initiativeFaction ? this.nonInitiativeTeamDiplomatsArea : this.initiativeTeamDiplomatsArea;
+    let diplomatsArea = faction === this.currentState.initiativeFaction 
+      ? this.nonInitiativeTeamDiplomatsArea : this.initiativeTeamDiplomatsArea;
     return location.sectors.includes(diplomatsArea);
   }
 
@@ -267,6 +304,8 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     let baseAssaultLocation: { [faction: number]: CampaignLocation } = {};
     let iniativeTeamDeclaredAttackWithoutLowFuel = false;
     let nonInitiativeTeamDeclaredAttackWithoutLowFuel = false;
+    let empireAllyTokens = 0;
+    let rebelAllyTokens = 0;
 
     for (let i = 0; i < this.battles.length; i++) {
       let battle = this.battles[i];
@@ -280,6 +319,38 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       }
       if (seenPlayers.indexOf(battle.attackingPlayer.id) === -1) seenPlayers.push(battle.attackingPlayer.id);
       if (seenPlayers.indexOf(battle.defendingPlayer.id) === -1) seenPlayers.push(battle.defendingPlayer.id);
+
+      if (battle.attackerSpendingAllyToken) {
+        let faction = this.campaign.getFactionOfPlayer(battle.attackingPlayer.id);
+        if (faction === Faction.Empire) {
+          empireAllyTokens += 1;
+        } else {
+          rebelAllyTokens += 1;
+        }
+      }
+      if (battle.defenderSpendingAllyToken) {
+        let faction = this.campaign.getFactionOfPlayer(battle.defendingPlayer.id);
+        if (faction === Faction.Empire) {
+          empireAllyTokens += 1;
+        } else {
+          rebelAllyTokens += 1;
+        }
+      }
+
+      if (empireAllyTokens > 1) {
+        this.issues.push({
+          severity: IssueSeverity.Error,
+          text: "The Imperials may only spend 1 Ally Token in this phase."
+        });
+        return;
+      }
+      if (rebelAllyTokens > 1) {
+        this.issues.push({
+          severity: IssueSeverity.Error,
+          text: "The Rebels may only spend 1 Ally Token in this phase."
+        });
+        return;
+      }
 
       if (seenLocations.indexOf(battle.location.id) === -1) {
         seenLocations.push(battle.location.id);
@@ -303,7 +374,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
         return;
       }
       // Players with low morale can't attack locations in a diplomats area
-      let diplomatArea = this.campaign.getFactionOfPlayer(battle.attackingPlayer.id) === this.initiativeFaction
+      let diplomatArea = this.campaign.getFactionOfPlayer(battle.attackingPlayer.id) === this.currentState.initiativeFaction
         ? this.nonInitiativeTeamDiplomatsArea : this.initiativeTeamDiplomatsArea;
       if (battle.attackingPlayer.condition === Condition.LowMorale &&
         battle.location.sectors.includes(diplomatArea)) {
@@ -346,6 +417,21 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       this.issues.push({
         severity: IssueSeverity.Error,
         text: `One or more players are not specified as attackers or defenders.  Each player must participate in a single battle.`
+      });
+      return;
+    }
+
+    if (this.imperialSkilledSpacersSpent > this.imperialSkilledSpacersMax) {
+      this.issues.push({
+        severity: IssueSeverity.Error,
+        text: `The Imperial team cannot spend more than ${this.imperialSkilledSpacersMax} Skilled Spacers token(s).`
+      });
+      return;
+    }
+    if (this.rebelSkilledSpacersSpent > this.rebelSkilledSpacersMax) {
+      this.issues.push({
+        severity: IssueSeverity.Error,
+        text: `The Rebel team cannot spend more than ${this.rebelSkilledSpacersMax} Skilled Spacers token(s).`
       });
       return;
     }

@@ -5,26 +5,37 @@
     </p>
     <div *ngFor="let battle of battles; let index=index;" fxLayout="column" style="margin-bottom: 8px;">
         <h3>{{ battle.title }}</h3>
-        <div class="matchup" fxLayout="row" fxLayoutGap="4px">
-            <div *ngFor="let player of battle.attackingPlayers">
-                <span class="player-name">{{ players[player.playerId].name }}</span>
-                <mat-chip-list style="display: inline-flex; margin-left: 4px">
-                    <mat-chip>Attacker</mat-chip>
-                    <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
-                        {{ players[player.playerId].condition }}
-                    </mat-chip>
-                </mat-chip-list>
+        <div class="matchup" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+            <div fxFlex.gt-xs="45" fxLayout="column">
+                <div *ngFor="let player of battle.attackingPlayers" fxLayout="column" fxLayoutGap="8px">
+                    <div>
+                        <span class="player-name">{{ players[player.playerId].name }}</span>&nbsp;
+                        <span>(Attacker)</span>
+                    </div>
+                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                            {{ players[player.playerId].condition }}
+                        </mat-chip>
+                        <mat-chip color="accent" selected *ngIf="player.spentAllyToken">Ally Token</mat-chip>
+                    </mat-chip-list>
+                </div>
             </div>
-            <div>vs.</div>
-            <div *ngFor="let player of battle.defendingPlayers">
-                <span class="player-name">{{ players[player.playerId].name }}</span>
-                <mat-chip-list style="display: inline-flex; margin-left: 4px">
-                    <mat-chip>Defender</mat-chip>
-                    <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
-                        {{ players[player.playerId].condition }}
-                    </mat-chip>
-                </mat-chip-list>
+            <div fxFlex.gt-xs="10">vs.</div>
+            <div fxFlex.gt-xs="45" fxLayout="column">
+                <div *ngFor="let player of battle.defendingPlayers" fxLayout="column" fxLayoutGap="8px">
+                    <div>
+                        <span class="player-name">{{ players[player.playerId].name }}</span>&nbsp;
+                        <span>(Defender)</span>
+                    </div>
+                    <mat-chip-list style="display: inline-flex; margin-left: 4px">
+                        <mat-chip color="warn" selected *ngIf="players[player.playerId].condition">
+                            {{ players[player.playerId].condition }}
+                        </mat-chip>
+                        <mat-chip color="accent" selected *ngIf="player.spentAllyToken">Ally Token</mat-chip>
+                    </mat-chip-list>
+                </div>
             </div>
+
         </div>
         <mat-form-field fxFlex>
             <mat-label>Objective Played</mat-label>
@@ -84,7 +95,7 @@
             {{ defenderBattleResults[index].earnedPoints }} campaign points.
         </p>
         <h5>Designate Scarred and Veteran Forces</h5>
-        <div *ngFor="let fleet of getFleetsInBattle(battle); let fi = index;">
+        <div *ngFor="let fleet of getFleetsInBattle(battle); let fi = index;" style="margin-bottom: 4px;">
             <h5>{{ fleet.name }} ({{ fleet.customCommander.name }})</h5>
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>

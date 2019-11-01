@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
 import { StrategyPhaseComponent } from '../strategy-phase/strategy-phase.component';
 import { ManagementCompletedEvent } from '../management-phase/management-phase.component';
+import { CampaignService } from 'src/app/core/services/campaign.service';
 
 @Component({
   selector: 'flagship-campaign-turn',
@@ -29,7 +30,7 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   managementValid = false;
   currentStep = 0;
 
-  constructor() {
+  constructor(private campaignService: CampaignService) {
     
   }
 
@@ -95,6 +96,12 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   }
 
   managementCompleted(event: ManagementCompletedEvent) {
-    this.currentStep = this.phaseToStepperIndex(Phase.Management);
+    if (event.nextPhase === Phase.Strategy) {
+      //create a new turn
+      this.campaign.goToNextTurn();
+      this.campaignService.updateCampaign(this.campaign).then(() => {
+        this.setup();
+      });
+    }
   }
 }

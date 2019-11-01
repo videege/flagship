@@ -15,6 +15,8 @@ import { BattleReward } from 'src/app/domain/campaign/battleReward';
 import { BattleType } from 'src/app/domain/campaign/battleType';
 import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
 import { ObjectiveType } from 'src/app/domain/objective';
+import { CampaignService } from 'src/app/core/services/campaign.service';
+import { FleetService } from 'src/app/core/services/fleet.service';
 
 export class ManagementCompletedEvent {
   nextPhase: Phase;
@@ -29,6 +31,9 @@ class Upkeep {
   tokenLocations: CampaignLocation[] = [];
   tokenChoices: { [id: number]: StrategicEffectType } = {};
   currentResourceTokens: number;
+  currentRepairTokens: number;
+  repairTokensSpent: number = 0;
+
 }
 
 class BattleOutcome {
@@ -51,14 +56,14 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   @Input() campaign: Campaign;
   @Output() validityChange = new EventEmitter<boolean>();
-  @Output() phaseComplete = new EventEmitter<void>();
+  @Output() phaseComplete = new EventEmitter<ManagementCompletedEvent>();
 
   factions = Faction;
   effects = StrategicEffects;
   currentState: CampaignState;
   players: { [id: string]: CampaignPlayer } = {};
   issues: Issue[] = [];
-  
+
   outcomes: BattleOutcome[] = [];
   empireUpkeep = new Upkeep(Faction.Empire);
   rebelUpkeep = new Upkeep(Faction.Rebels);
@@ -68,7 +73,8 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   locationFactory = new CampaignLocationFactory();
 
-  constructor() { }
+  constructor(private campaignService: CampaignService,
+    private fleetService: FleetService) { }
 
   ngOnInit() {
     this.setup()
@@ -79,11 +85,56 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       this.setup();
   }
 
-  completePhase() {
-
+  public getUnscarringLimit(upkeep: Upkeep): string {
+    let bases = this.campaign.locations.filter(x => x.controllingFaction === upkeep.faction &&
+      x.controlType === LocationControlType.Base).length;
+    let newBases = upkeep.newBases.length;
+    let repairYards = upkeep.repairTokensSpent;
+    let total = bases + newBases + repairYards;
+    return `${total} (${bases} bases + ${newBases} new bases + ${repairYards} Repair Yard Tokens)`;
   }
 
-  
+  completePhase() {
+    this.completeButtonOptions.active = true;
+
+    for (const outcome of this.outcomes) {
+      if (outcome.locationChanged) {
+        let location = this.campaign.locations.find(x => x.id === outcome.location.id);
+        location.setPresence(outcome.afterLocation.controllingFaction);
+
+      }
+    }
+
+    for (const upkeep of [this.empireUpkeep, this.rebelUpkeep]) {
+      let team = upkeep.faction === Faction.Empire ? this.campaign.empire : this.campaign.rebels;
+      for (const base of upkeep.newBases) {
+        let location = this.campaign.locations.find(x => x.id === base.id);
+        location.setBase(upkeep.faction, 301); //todo fix?
+        team.removeToken(StrategicEffectType.Resources, 2);
+      }
+
+      if (upkeep.repairTokensSpent > 0) {
+        team.removeToken(StrategicEffectType.RepairYards, upkeep.repairTokensSpent);
+      }
+
+      for (const tokenLocation of upkeep.tokenLocations) {
+        const effect = upkeep.tokenChoices[tokenLocation.id];
+        team.addToken(effect, 1);
+      }
+    }
+
+    let nextPhase = Phase.Strategy; //todo fix
+    this.campaignService.updateCampaign(this.campaign).then(() => {
+      this.phaseComplete.emit({
+        nextPhase: nextPhase
+      });
+    }, (errors) => {
+      alert(errors);
+    }).finally(() => {
+      this.completeButtonOptions.active = false;
+    })
+  }
+
   private setup() {
     this.currentState = this.campaign.currentState();
     let battles = this.currentState.getBattles();
@@ -101,7 +152,9 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Base);
 
     this.empireUpkeep.currentResourceTokens = this.campaign.empire.tokensOfType(StrategicEffectType.Resources);
+    this.empireUpkeep.currentRepairTokens = this.campaign.empire.tokensOfType(StrategicEffectType.RepairYards);
     this.rebelUpkeep.currentResourceTokens = this.campaign.rebels.tokensOfType(StrategicEffectType.Resources);
+    this.rebelUpkeep.currentRepairTokens = this.campaign.rebels.tokensOfType(StrategicEffectType.RepairYards);
 
     let objectiveFactory = new ObjectiveFactory();
     for (const battle of battles) {
@@ -134,10 +187,12 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
         }
       }
       this.outcomes.push(outcome);
-      if (outcome.winningFaction === Faction.Empire) {
-        this.empireUpkeep.tokenLocations = this.empireUpkeep.tokenLocations.concat(location);
-      } else {
-        this.rebelUpkeep.tokenLocations = this.rebelUpkeep.tokenLocations.concat(location);
+      if (location.hasEffects()) {
+        if (outcome.winningFaction === Faction.Empire) {
+          this.empireUpkeep.tokenLocations = this.empireUpkeep.tokenLocations.concat(location);
+        } else {
+          this.rebelUpkeep.tokenLocations = this.rebelUpkeep.tokenLocations.concat(location);
+        }
       }
     }
 
@@ -183,7 +238,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   private determineValidity() {
     this.issues = [];
-    
+
     for (const upkeep of [this.empireUpkeep, this.rebelUpkeep]) {
       const factionName = upkeep.faction === Faction.Empire ? 'Imperials' : 'Rebels';
       let resources = upkeep.currentResourceTokens;

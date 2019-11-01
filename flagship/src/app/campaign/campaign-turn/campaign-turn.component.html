@@ -11,7 +11,7 @@
         <mat-vertical-stepper [linear]="true" #stepper [selectedIndex]="currentStep">
             <mat-step label="Strategy Phase" [editable]="false" [completed]="currentState.phase !== phases.Strategy">
                 <flagship-strategy-phase *ngIf="currentState.phase === phases.Strategy" [campaign]="campaign"
-                    [initiativeFaction]="teamWithInitiative" (validityChange)="strategyValidityChanged($event)"
+                    (validityChange)="strategyValidityChanged($event)"
                     (phaseComplete)="strategyCompleted()"></flagship-strategy-phase>
             </mat-step>
             <mat-step label="Battle Phase" [editable]="false"

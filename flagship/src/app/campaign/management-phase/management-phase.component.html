@@ -46,7 +46,7 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
-            <h5>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h5>
+            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
             <div *ngFor="let location of upkeep.tokenLocations; let li = index;">
                 <mat-form-field>
                     <mat-label>Token for {{ location.name }}</mat-label>
@@ -109,8 +109,35 @@
     </ul>
     <h3>Refit &amp; Expand Fleets</h3>
     <p>
-        Each player should use the fleet builder to denote which ships/squadrons are being 
-        unscarred.  
+        Players can use the fleet builder to modify their fleets.
+        The number of ships/unique squadrons which can be unscarred by each player on each team
+        is listed below, but please keep in mind the fleet builder does not currently enforce these
+        limits. Indicate below if the team is spending any Repair Yard tokens to increase the amount
+        of ships/unique squadrons which can be unscarred.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;"
+            fxLayout="column">
+            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens > 0">
+                <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens }})</mat-label>
+                <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()" name="{{ 'ry-' + index }}"
+                    required type="number" min="0" [max]="upkeep.currentRepairTokens" />
+            </mat-form-field>
+            <span *ngIf="upkeep.currentRepairTokens === 0" fxFlex.gt-xs>
+                The team does not have any Repair Yard tokens.
+            </span>
+            <p>
+                The {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} team's players may unscar
+                up to {{ getUnscarringLimit(upkeep) }} scarred ships or squadrons.
+            </p>
+        </div>
+    </div>
+    <h3>Complete Campaign Turn</h3>
+    <p>
+        Once all players are finished modifying fleets, click 'Finish Management Phase' below to
+        finish this phase.  Based on the state of the campaign at the end of this turn, finishing
+        the current management phase will move the campaign to the next turn within the current act.
     </p>
     <flagship-issues-list [issues]="issues">
     </flagship-issues-list>

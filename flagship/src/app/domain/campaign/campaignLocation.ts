@@ -2,9 +2,6 @@ import { Faction } from '../faction';
 import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
-import { CampaignEvent } from './campaignEvent';
-import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
-import { Battle } from './battle';
 
 export interface SerializedCampaignLocation {
     id: number;
@@ -29,6 +26,10 @@ export class CampaignLocation {
 
     public getSectors(): string {
         return this.sectors.join("/");
+    }
+
+    public hasEffects(): boolean {
+        return this.strategicEffects && this.strategicEffects.length > 0;
     }
 
     public controlLabel(): string {

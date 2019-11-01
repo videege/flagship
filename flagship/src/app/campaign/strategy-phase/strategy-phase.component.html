@@ -1,9 +1,11 @@
 <form>
     <p>
-        Use the form below to declare this turn's battles. When finished, click 'Finish Strategy Phase' to
+        Use the form below to declare this turn's battles and token usage. When finished, click 'Finish Strategy Phase'
+        to
         confirm the battles and move to the next phase.
     </p>
     <div *ngIf="canInitiativeTeamUseDiplomats || canNonInitiativeTeamUseDiplomats">
+        <h3>Diplomat Tokens</h3>
         <p>
             If a team has at least one diplomat token, that team can declare an area they will spend
             a token at. This choice will affect the 'Low Morale' condition for assaults in the area of the token.
@@ -20,13 +22,25 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <div *ngIf="canInitiativeTeamUseDiplomats">
+            <mat-form-field fxFlex>
+                <mat-label>{{ initiativeTeamLabel }} Diplomats Area</mat-label>
+                <mat-select [(ngModel)]="initiativeTeamDiplomatsArea" name="{{ 'idiplomats-' + index }}"
+                    (selectionChange)="formChanged()" required>
+                    <mat-option *ngIf="initiativeTeamDiplomatsArea"></mat-option>
+                    <mat-option *ngFor="let area of areas" [value]="area">
+                        Area {{ area | numerals }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
-
-    <div *ngFor=" let battle of battles; let even=even; let index=index;">
-        <h4 class="no-margin">Battle #{{ index + 1 }}</h4>
+    <div *ngFor="let battle of battles; let even=even; let index=index;" style="margin-bottom: 8px;">
+        <h3 class="no-margin">Battle #{{ index + 1 }}</h3>
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
-                <mat-label>Attacking {{ even ? initiativeTeamLabel : nonInitiativeTeamLabel }} Player
+                <mat-label>
+                    Attacker ({{ even ? initiativeTeamLabel : nonInitiativeTeamLabel }})
                 </mat-label>
                 <mat-select [(ngModel)]="battle.attackingPlayer" name="{{ 'attacker-' + index }}"
                     (selectionChange)="formChanged()" required>
@@ -39,7 +53,8 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex>
-                <mat-label>Defending {{ even ? nonInitiativeTeamLabel : initiativeTeamLabel }} Player
+                <mat-label>
+                    Defender ({{ even ? nonInitiativeTeamLabel : initiativeTeamLabel }})
                 </mat-label>
                 <mat-select [(ngModel)]="battle.defendingPlayer" name="{{ 'defender-' + index }}"
                     (selectionChange)="formChanged()" required>
@@ -64,6 +79,18 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <mat-checkbox fxFlex [disabled]="!canPlayerSpendAlly(battle.attackingPlayer)"
+                name="{{ 'attacker-ally-' + index }}" [(ngModel)]="battle.attackerSpendingAllyToken"
+                (change)="formChanged()">
+                Attacker Spends Ally Token
+            </mat-checkbox>
+            <mat-checkbox fxFlex [disabled]="!canPlayerSpendAlly(battle.defendingPlayer)"
+                name="{{ 'defender-ally-' + index }}" [(ngModel)]="battle.defenderSpendingAllyToken"
+                (change)="formChanged()">
+                Defender Spends Ally Token
+            </mat-checkbox>
+        </div>
         <div *ngIf=" battle.attackingConditions.length">
             <label>{{ battle.attackingPlayer.name }} will gain: </label>
             <mat-radio-group [(ngModel)]="battle.chosenAttackingCondition" name="{{ 'attacker-condition-' + index }}"
@@ -74,10 +101,32 @@
             </mat-radio-group>
         </div>
     </div>
+    <h3>Skilled Spacers</h3>
+    <p>
+        For each Skilled Spacers token a team spends, players on that team may designate an additional
+        eligible ship or unique squadron as a veteran at the end of the Battle Phase.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+        <mat-form-field fxFlex.gt-xs *ngIf="imperialSkilledSpacersMax > 0">
+            <mat-label>Imperial Skilled Spacers</mat-label>
+            <input matInput [(ngModel)]="imperialSkilledSpacersSpent" (ngModelChange)="formChanged()" name="iss"
+                required type="number" min="0" [max]="imperialSkilledSpacersMax" />
+        </mat-form-field>
+        <span *ngIf="imperialSkilledSpacersMax === 0" fxFlex.gt-xs>
+            The Imperial team does not have any Skilled Spacers tokens.
+        </span>
+        <mat-form-field fxFlex.gt-xs *ngIf="rebelSkilledSpacersMax > 0">
+            <mat-label>Rebel Skilled Spacers</mat-label>
+            <input matInput [(ngModel)]="rebelSkilledSpacersSpent" (ngModelChange)="formChanged()" name="rss"
+                required type="number" min="0" [max]="rebelSkilledSpacersMax" />
+        </mat-form-field>
+        <span *ngIf="rebelSkilledSpacersMax === 0" fxFlex.gt-xs>
+            The Rebel team does not have any Skilled Spacers tokens.
+        </span>
+    </div>
     <flagship-issues-list [issues]="issues">
     </flagship-issues-list>
     <div>
-        <mat-bar-button (btnClick)="completePhase()" 
-            [options]="completeButtonOptions"></mat-bar-button>
+        <mat-bar-button (btnClick)="completePhase()" [options]="completeButtonOptions"></mat-bar-button>
     </div>
 </form>

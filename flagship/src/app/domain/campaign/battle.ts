@@ -90,12 +90,14 @@ export class Battle implements CampaignEvent {
         battle.attackingPlayers = attackingPlayers.map(x => <BattleParticipant>{
             playerId: x.id,
             fleetId: x.fleetId,
-            condition: x.condition
+            condition: x.condition,
+            spentAllyToken: false
         });
         battle.defendingPlayers = defendingPlayers.map(x => <BattleParticipant>{
             playerId: x.id,
             fleetId: x.fleetId,
-            condition: x.condition
+            condition: x.condition,
+            spentAllyToken: false
         });
         return battle;
     }

@@ -45,7 +45,7 @@ export class Campaign {
     public empire: Team;
     public rebels: Team;
 
-    public fleets: { [id: string] : Fleet } = null;
+    public fleets: { [id: string]: Fleet } = null;
 
     public locations: CampaignLocation[] = [];
 
@@ -144,6 +144,14 @@ export class Campaign {
         return null;
     }
 
+    public getTeamOfPlayer(playerId: string): Team {
+        if (this.empire.players.find(x => x.id === playerId))
+            return this.empire;
+        if (this.rebels.players.find(x => x.id === playerId))
+            return this.rebels;
+        return null;
+    }
+
     public campaignOwner(): CampaignUser {
         return this.campaignUsers.find(x => x.uid === this.ownerUid);
     }
@@ -161,6 +169,10 @@ export class Campaign {
             throw new Error("Campaign is already started.");
 
         this.history.push(this.createTurn(true));
+    }
+
+    public goToNextTurn() {
+        this.history.push(this.createTurn(false));
     }
 
     private createTurn(newAct = false): CampaignState {
@@ -192,7 +204,7 @@ export class Campaign {
         losingTeam.campaignPoints += losingResult.earnedPoints;
         currentState.imperialPointsScored += winningFaction === Faction.Empire ? winningResult.earnedPoints : losingResult.earnedPoints;
         currentState.rebelPointsScored += winningFaction === Faction.Empire ? losingResult.earnedPoints : winningResult.earnedPoints;
-        
+
         let winningPlayers = winningTeam.players.filter(p => winningPlayerIds.includes(p.id));
         let losingPlayers = losingTeam.players.filter(p => losingPlayerIds.includes(p.id));
         let mov = battle.marginOfVictory();

@@ -1,3 +1,9 @@
 .matchup {
     margin-bottom: 4px;
+    text-align: center;
+}
+
+.player-name {
+    font-size: 1.2em;
+    font-weight: bold;
 }
