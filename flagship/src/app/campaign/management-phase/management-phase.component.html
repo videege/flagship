@@ -91,16 +91,23 @@
                     {{ player.name }} may select
                     <span *ngFor="let reward of outcome.location.rewards; let last = last;">
                         <span *ngIf="reward.isSquadronReward()">
-                            up to {{ reward.loserPoints }} of squadrons
+                            up to
+                            {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
+                            ({{ reward.loserPoints}} + reward.understrengthBonus(outcome.loserFleetDifference) }}
+                            understrength bonus)
+                            points of squadrons
                         </span>
                         <span *ngIf="!reward.isSquadronReward()">
-                            up to a {{ reward.loserPoints }} point {{ reward.upgradeType }} upgrade
+                            up to a {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
+                            ({{ reward.loserPoints}} +
+                            {{ reward.understrengthBonus(outcome.loserFleetDifference) }} understrength bonus)
+                            point {{ reward.upgradeType }} upgrade
                         </span>
-                        <span *ngIf="!last">, or </span>
+                        <span *ngIf="!last"> or </span>
                         <span *ngIf="last && !outcome.rewardsCanBeUnique">
-                            . This reward <strong>cannot</strong> be unique.</span>
+                            &mdash; this reward <strong>cannot</strong> be unique.</span>
                         <span *ngIf="last && outcome.rewardsCanBeUnique">
-                            . This reward <strong>can</strong> be unique.
+                            &mdash; this reward <strong>can</strong> be unique.
                         </span>
                     </span>
                 </li>
@@ -116,13 +123,12 @@
         of ships/unique squadrons which can be unscarred.
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;"
-            fxLayout="column">
+        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxLayout="column">
             <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
             <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens > 0">
                 <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens }})</mat-label>
-                <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()" name="{{ 'ry-' + index }}"
-                    required type="number" min="0" [max]="upkeep.currentRepairTokens" />
+                <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()"
+                    name="{{ 'ry-' + index }}" required type="number" min="0" [max]="upkeep.currentRepairTokens" />
             </mat-form-field>
             <span *ngIf="upkeep.currentRepairTokens === 0" fxFlex.gt-xs>
                 The team does not have any Repair Yard tokens.
@@ -133,10 +139,35 @@
             </p>
         </div>
     </div>
+    <h4>Remove Conditions</h4>
+
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+        <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
+            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <p *ngIf="!upkeep.conditionStatuses.length">
+                No players have conditions to remove.
+            </p>
+            <mat-list dense>
+                <mat-list-item *ngFor="let conditionStatus of upkeep.conditionStatuses; let li = index;" class="height-auto">
+                    <h3 matLine>{{ conditionStatus.player.name }} - {{ conditionStatus.condition }}</h3>
+                    <p matLine *ngIf="conditionStatus.canRemoveForFree" style="white-space: normal">
+                        This condition will be automatically removed due to the player playing a battle this round
+                        with the {{ conditionStatus.isLowMorale ? 'Recruit Allies' : 'Steal Supplies' }} objective.
+                    </p>
+                    <p matLine *ngIf="!conditionStatus.canRemoveForFree" style="white-space: normal">
+                        This condition can be removed at the cost of spending a 
+                        {{ conditionStatus.isLowMorale ? 'Skilled Spacers' : 'Resource' }} token.
+                    </p>
+                    <mat-checkbox [(ngModel)]="conditionStatus.willSpendToken" name="{{ 'crm-' + index }}"
+                        *ngIf="!conditionStatus.canRemoveForFree" (change)="formChanged()">Remove</mat-checkbox>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
     <h3>Complete Campaign Turn</h3>
     <p>
         Once all players are finished modifying fleets, click 'Finish Management Phase' below to
-        finish this phase.  Based on the state of the campaign at the end of this turn, finishing
+        finish this phase. Based on the state of the campaign at the end of this turn, finishing
         the current management phase will move the campaign to the next turn within the current act.
     </p>
     <flagship-issues-list [issues]="issues">

@@ -116,6 +116,11 @@ export class Battle implements CampaignEvent {
         return winnersAreProvidedTeam ? team.faction : oppositeFaction(team.faction);
     }
 
+    public playerIsParticipant(playerId: string): boolean {
+        return (this.attackingPlayers.find(x => x.playerId === playerId) ||
+            this.defendingPlayers.find(x => x.playerId === playerId)) !== null;
+    }
+
     public recordResult(attackerFleetPoints: number, attackerScore: number,
         attackerPoints: number, defenderFleetPoints: number, defenderScore: number,
         defenderPoints: number) {

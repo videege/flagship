@@ -148,6 +148,34 @@
         </div>
 
     </div>
+    <h3>Record Spent Destiny &amp; Spynet Tokens</h3>
+    <p>Across all players for each team, record the total amount of Destiny and Spynet tokens spent during battles.</p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
+        <div *ngFor="let tokens of [empireTokens, rebelTokens]; let index = index;" fxLayout="column" fxLayoutGap="4px">
+            <h4>{{ tokens.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <div style="height: 60px">
+                <mat-form-field fxFlex.gt-xs *ngIf="tokens.maxDestiny > 0">
+                    <mat-label>Spent Destiny Tokens (Max: {{ tokens.maxDestiny }})</mat-label>
+                    <input matInput [(ngModel)]="tokens.destiny" (ngModelChange)="formChanged()"
+                        name="{{ 'destiny-' + index }}" required type="number" min="0" [max]="tokens.maxDestiny" />
+                </mat-form-field>
+                <span *ngIf="tokens.maxDestiny === 0" fxFlex.gt-xs>
+                    The team does not have any Destiny tokens.
+                </span>
+            </div>
+            <div style="height: 60px">
+                <mat-form-field fxFlex.gt-xs *ngIf="tokens.maxSpynet > 0">
+                    <mat-label>Spent Spynet Tokens (Max: {{ tokens.maxSpynet }})</mat-label>
+                    <input matInput [(ngModel)]="tokens.spynet" (ngModelChange)="formChanged()"
+                        name="{{ 'spynet-' + index }}" required type="number" min="0" [max]="tokens.maxSpynet" />
+                </mat-form-field>
+                <span *ngIf="tokens.maxSpynet === 0" fxFlex.gt-xs>
+                    The team does not have any Spynet tokens.
+                </span>
+            </div>
+
+        </div>
+    </div>
     <flagship-issues-list [issues]="issues">
     </flagship-issues-list>
 

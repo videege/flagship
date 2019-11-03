@@ -9,6 +9,12 @@ export class LocationReward {
         return !this.upgradeType;
     }
 
+    public understrengthBonus(loserFleetPointDifference) : number {
+        if (loserFleetPointDifference <= 0) return 0;
+        
+        return Math.floor(loserFleetPointDifference / 25) * 5;
+    }
+
     static upgradeReward(type: UpgradeType, winnerPoints: number, loserPoints: number = null) : LocationReward {
         let reward = new LocationReward();
         reward.upgradeType = type;

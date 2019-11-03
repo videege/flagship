@@ -19,6 +19,8 @@ import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocati
 import { Ship } from 'src/app/domain/ship';
 import { Squadron } from 'src/app/domain/squadron';
 import { Faction } from 'src/app/domain/faction';
+import { Team } from 'src/app/domain/campaign/team';
+import { StrategicEffectType } from 'src/app/domain/campaign/strategicEffectType';
 
 class FleetModification {
   eligibleShipsForScarring: Ship[] = [];
@@ -36,6 +38,14 @@ class FleetModification {
   }
 }
 
+class BattleTokens {
+  faction: Faction;
+  destiny: number = 0;
+  maxDestiny: number = 0;
+  spynet: number = 0;
+  maxSpynet: number = 0;
+}
+
 @Component({
   selector: 'flagship-battle-phase',
   templateUrl: './battle-phase.component.html',
@@ -47,6 +57,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   @Output() phaseComplete = new EventEmitter<void>();
 
   public states = BattleState;
+  public factions = Faction;
 
   completeButtonOptions = indeterminateOptions('Finish Battle Phase');
   objectiveFactory = new ObjectiveFactory();
@@ -60,6 +71,8 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   issues: Issue[] = [];
   players: { [id: string]: CampaignPlayer } = {};
   fleetMods: { [id: string]: FleetModification } = {};
+  empireTokens: BattleTokens;
+  rebelTokens: BattleTokens;
 
   constructor(private campaignService: CampaignService,
     private fleetService: FleetService) { }
@@ -78,8 +91,16 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     return names.join(", ");
   }
 
+  private removeSpentTokens(tokens: BattleTokens, team: Team) {
+    team.removeToken(StrategicEffectType.Destiny, tokens.destiny || 0);
+    team.removeToken(StrategicEffectType.Spynet, tokens.spynet || 0);
+  }
+
   public completePhase() {
     this.completeButtonOptions.active = true;
+    this.removeSpentTokens(this.empireTokens, this.campaign.empire);
+    this.removeSpentTokens(this.rebelTokens, this.campaign.rebels);
+    
     for (let i = 0; i < this.battles.length; i++) {
       let battle = this.battles[i];
       battle.objectiveId = this.battleObjectives[i].id;
@@ -150,6 +171,8 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     this.currentState = this.campaign.currentState();
     this.battles = this.currentState.getBattles();
     this.players = this.campaign.getPlayersMap();
+    this.empireTokens = this.setupBattleTokens(this.campaign.empire);
+    this.rebelTokens = this.setupBattleTokens(this.campaign.rebels);
 
     for (let i = 0; i < this.battles.length; i++) {
       let battle = this.battles[i];
@@ -193,6 +216,14 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
       this.determineValidity();
       this.validityChange.emit(this.isValid());
     }
+  }
+
+  private setupBattleTokens(team: Team): BattleTokens {
+    let tokens = new BattleTokens();
+    tokens.faction = team.faction;
+    tokens.maxDestiny = team.tokensOfType(StrategicEffectType.Destiny);
+    tokens.maxSpynet = team.tokensOfType(StrategicEffectType.Spynet);
+    return tokens;
   }
 
   getPossibleObjectives(battle: Battle): Objective[] {
