@@ -9,6 +9,7 @@ import { LocationControlType } from './locationControlType';
 import { Condition } from './condition';
 import { Team } from './team';
 import { Faction, oppositeFaction } from '../faction';
+import { PivotalObjective } from './pivotalObjective';
 
 export interface SerializedBattle extends SerializedCampaignEvent {
     attackingPlayers: BattleParticipant[];
@@ -19,6 +20,7 @@ export interface SerializedBattle extends SerializedCampaignEvent {
     objectiveId: number;
     attackerResult: BattleResult;
     defenderResult: BattleResult;
+    pivotalObjective: PivotalObjective;
 }
 
 export interface BattleResult {
@@ -40,6 +42,7 @@ export class Battle implements CampaignEvent {
     public state: BattleState;
     public locationId: number;
     public objectiveId: number = null;
+    public pivotalObjective: PivotalObjective = null;
     public attackerResult: BattleResult = null;
     public defenderResult: BattleResult = null;
 
@@ -56,7 +59,8 @@ export class Battle implements CampaignEvent {
             locationId: this.locationId,
             objectiveId: this.objectiveId,
             attackerResult: this.attackerResult,
-            defenderResult: this.defenderResult
+            defenderResult: this.defenderResult,
+            pivotalObjective: this.pivotalObjective
         };
     }
 
@@ -73,6 +77,7 @@ export class Battle implements CampaignEvent {
         battle.objectiveId = data.objectiveId || null;
         battle.attackerResult = data.attackerResult || null;
         battle.defenderResult = data.defenderResult || null;
+        battle.pivotalObjective = data.pivotalObjective || null;
         return battle;
     }
 

@@ -90,6 +90,8 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   @Output() phaseComplete = new EventEmitter<ManagementCompletedEvent>();
 
   factions = Faction;
+  phases = Phase;
+
   effects = StrategicEffects;
   currentState: CampaignState;
   players: { [id: string]: CampaignPlayer } = {};
@@ -101,6 +103,10 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   completeButtonOptions = indeterminateOptions('Finish Management Phase');
   specialBattleType: BattleType = null;
+  nextPhase: Phase = Phase.Strategy;
+  canBeClimactic = false;
+  willBeClimactic = false;
+  losingFaction: Faction;
 
   locationFactory = new CampaignLocationFactory();
 
@@ -163,16 +169,32 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       }
     }
 
-    let nextPhase = Phase.Strategy; //todo fix
+    if (this.nextPhase === Phase.Strategy) {
+      //create a new turn
+      this.campaign.goToNextTurn();
+    } else if (this.nextPhase === Phase.PivotalBattle) {
+      this.currentState.setPhase(this.willBeClimactic ? Phase.ClimacticBattle : Phase.PivotalBattle);
+    }
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit({
-        nextPhase: nextPhase
+        nextPhase: this.willBeClimactic ? Phase.ClimacticBattle : this.nextPhase 
       });
     }, (errors) => {
       alert(errors);
     }).finally(() => {
       this.completeButtonOptions.active = false;
     })
+  }
+
+  private determineNextPhase() {
+   this.nextPhase = Phase.Strategy;
+   this.specialBattleType = null;
+
+   if (this.currentState.actShouldEnd(this.campaign.numberOfPlayers())) {
+    this.nextPhase = Phase.PivotalBattle;
+    this.canBeClimactic = Math.abs(this.campaign.empire.campaignPoints - this.campaign.rebels.campaignPoints) >= 5;
+    this.losingFaction = this.campaign.getLosingFaction();
+   }
   }
 
   private setup() {
@@ -247,7 +269,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     this.setupConditionStatuses(this.empireUpkeep, this.campaign.empire);
     this.setupConditionStatuses(this.rebelUpkeep, this.campaign.rebels);
 
-    this.determineIfNextStepIsSpecial();
+    this.determineNextPhase();
 
     if (this.currentState.phase !== Phase.Management) {
       this.issues = [];
@@ -256,10 +278,6 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       this.determineValidity();
       this.validityChange.emit(this.isValid());
     }
-  }
-
-  private determineIfNextStepIsSpecial() {
-
   }
 
   private setupConditionStatuses(upkeep: Upkeep, team: Team) {

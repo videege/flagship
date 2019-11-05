@@ -15,7 +15,9 @@
     <h4>Build New Bases</h4>
     <p>
         At the cost of 2 resource tokens each, each team may designate
-        locations where they have presence as new bases.
+        locations where they have presence as new bases. <strong>Note:</strong>
+        when building a base, the chosen defense objective is set to "Base Defense: Armed Station".
+        You can change the objective via the Locations tab after the base is built.
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
@@ -148,14 +150,15 @@
                 No players have conditions to remove.
             </p>
             <mat-list dense>
-                <mat-list-item *ngFor="let conditionStatus of upkeep.conditionStatuses; let li = index;" class="height-auto">
+                <mat-list-item *ngFor="let conditionStatus of upkeep.conditionStatuses; let li = index;"
+                    class="height-auto">
                     <h3 matLine>{{ conditionStatus.player.name }} - {{ conditionStatus.condition }}</h3>
                     <p matLine *ngIf="conditionStatus.canRemoveForFree" style="white-space: normal">
                         This condition will be automatically removed due to the player playing a battle this round
                         with the {{ conditionStatus.isLowMorale ? 'Recruit Allies' : 'Steal Supplies' }} objective.
                     </p>
                     <p matLine *ngIf="!conditionStatus.canRemoveForFree" style="white-space: normal">
-                        This condition can be removed at the cost of spending a 
+                        This condition can be removed at the cost of spending a
                         {{ conditionStatus.isLowMorale ? 'Skilled Spacers' : 'Resource' }} token.
                     </p>
                     <mat-checkbox [(ngModel)]="conditionStatus.willSpendToken" name="{{ 'crm-' + index }}"
@@ -164,12 +167,36 @@
             </mat-list>
         </div>
     </div>
-    <h3>Complete Campaign Turn</h3>
-    <p>
-        Once all players are finished modifying fleets, click 'Finish Management Phase' below to
-        finish this phase. Based on the state of the campaign at the end of this turn, finishing
-        the current management phase will move the campaign to the next turn within the current act.
-    </p>
+    <div *ngIf="nextPhase === phases.Strategy">
+        <h3>Complete Campaign Turn</h3>
+        <p>
+            Once all players are finished modifying fleets, click 'Finish Management Phase' below to
+            finish this phase. Based on the state of the campaign at the end of this turn, finishing
+            the current management phase will move the campaign to the next turn within the current act.
+        </p>
+    </div>
+    <div *ngIf="nextPhase !== phases.Strategy">
+        <h3>Pivotal Battle</h3>
+        <p>
+            Based on the results of this turn's battles, the current act in the campaign will end after this turn.
+            When you click 'Finish Management Phase', a special Pivotal Battle phase will begin where you can
+            record the result of the act's pivotal battle.
+        </p>
+        <p *ngIf="currentState.act === 3">
+            This upcoming Pivotal Battle will be the <strong>final battle</strong> of the campaign (you have
+            reached the end of Act III).
+        </p>
+        <div *ngIf="canBeClimactic">
+            <p> 
+                <strong>Heads up!</strong> Because the 
+                {{ losingFaction === factions.Empire ? "Imperial" : "Rebel" }} team is losing by at least
+                5 campaign points, that team may choose that the upcoming Pivotal Battle will instead be
+                the <strong>Climactic Battle</strong>.  If you choose this option, the campaign will end 
+                after the battle.
+            </p>
+            <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()">Begin Climactic Battle</mat-checkbox>
+        </div>
+    </div>
     <flagship-issues-list [issues]="issues">
     </flagship-issues-list>
     <div>

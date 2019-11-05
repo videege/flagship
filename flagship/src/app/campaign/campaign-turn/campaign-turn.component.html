@@ -26,6 +26,14 @@
                     (validityChange)="managementValidityChanged($event)" (phaseComplete)="managementCompleted($event)">
                 </flagship-management-phase>
             </mat-step>
+            <mat-step [label]="phaseName" [editable]="false" 
+                [hidden]="currentState.phase !== phases.PivotalBattle && currentState.phase !== phases.ClimacticBattle"
+                [completed]="false">
+                <flagship-pivotal-battle-phase [campaign]="campaign" 
+                    *ngIf="currentState.phase === phases.PivotalBattle || currentState.phase === phases.ClimacticBattle"
+                    (validityChange)="pbValidityChanged($event)" (phaseComplete)="pbCompleted($event)">
+                </flagship-pivotal-battle-phase>
+            </mat-step>
         </mat-vertical-stepper>
     </mat-card-content>
 </mat-card>

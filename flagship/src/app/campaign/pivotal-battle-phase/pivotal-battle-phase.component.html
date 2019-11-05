@@ -1,0 +1,28 @@
+<form>
+    <h3>Declare {{ label }} Battle</h3>
+    <p>
+        The {{ declaringFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will
+        declare this battle, choosing the battle's objective and location.
+    </p>
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
+        <mat-form-field fxFlex.gt-xs>
+            <mat-label>Special Objective</mat-label>
+            <mat-select [(ngModel)]="pivotalObjective" (selectionChange)="objectiveChanged()"
+                name="obj" required>
+                <mat-option *ngFor="let obj of pivotalObjectives" [value]="obj">
+                    {{ obj }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex.gt-xs *ngIf="pivotalObjective">
+            <mat-label>Battle Location</mat-label>
+            <mat-select [(ngModel)]="location" (selectionChange)="formChanged()" 
+                name="loc" required>
+                <mat-option *ngFor="let loc of eligibleLocations" [value]="loc">
+                    {{ loc.name }} [{{ loc.controlLabel() }}]
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+</form>

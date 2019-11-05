@@ -175,6 +175,18 @@ export class Campaign {
         this.history.push(this.createTurn(false));
     }
 
+    public getLosingFaction(): Faction {
+        if (this.empire.campaignPoints !== this.rebels.campaignPoints) {
+            return this.empire.campaignPoints < this.rebels.campaignPoints
+                ? Faction.Empire : Faction.Rebels;
+        } else {
+            let empireLocations = this.locations.filter(x => x.controllingFaction === Faction.Empire);
+            let rebelLocations = this.locations.filter(x => x.controllingFaction === Faction.Rebels);
+            return empireLocations.length < rebelLocations.length
+                ? Faction.Empire : Faction.Rebels;
+        }
+    }
+
     private createTurn(newAct = false): CampaignState {
         let turn = new CampaignState();
         let current = this.currentState();

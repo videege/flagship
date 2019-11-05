@@ -28,10 +28,11 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   strategyValid = false;
   battleValid = false;
   managementValid = false;
+  pbValid = false;
   currentStep = 0;
 
   constructor(private campaignService: CampaignService) {
-    
+
   }
 
   ngOnInit() {
@@ -57,6 +58,9 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
         return 1;
       case Phase.Management:
         return 2;
+      case Phase.PivotalBattle:
+      case Phase.ClimacticBattle:
+        return 3;
       default:
         return 0;
     }
@@ -70,6 +74,10 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
         return "Battle";
       case Phase.Management:
         return "Management";
+      case Phase.PivotalBattle:
+        return "Pivotal Battle";
+      case Phase.ClimacticBattle:
+        return "Climactic Battle"; 
       default:
         return "";
     }
@@ -97,11 +105,18 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
 
   managementCompleted(event: ManagementCompletedEvent) {
     if (event.nextPhase === Phase.Strategy) {
-      //create a new turn
-      this.campaign.goToNextTurn();
-      this.campaignService.updateCampaign(this.campaign).then(() => {
-        this.setup();
-      });
+      this.setup();
+      this.currentStep = this.phaseToStepperIndex(Phase.Strategy);
+    } else {
+      this.currentStep = this.phaseToStepperIndex(Phase.PivotalBattle);
     }
+  }
+
+  pbValidityChanged(valid: boolean) {
+    this.pbValid = valid;
+  }
+
+  pbCompleted() {
+    
   }
 }

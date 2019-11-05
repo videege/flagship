@@ -33,6 +33,12 @@ export class CampaignState {
         return this.act.toString();
     }
 
+    public actShouldEnd(numberOfFleets: number): boolean {
+        return numberOfFleets === 4 
+        ? (this.imperialPointsScored >= 4 || this.rebelPointsScored >= 4) 
+        : (this.imperialPointsScored >= 5 || this.rebelPointsScored >= 5);
+    }
+
     public addEvent(event: CampaignEvent) {
         this.events.push(event);
     }
