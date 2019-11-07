@@ -11,18 +11,30 @@ import { Faction, oppositeFaction } from 'src/app/domain/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
+import { Objective } from 'src/app/domain/objective';
+import { StrategicEffectType } from 'src/app/domain/campaign/strategicEffectType';
 
 class Outcome {
   constructor(public faction: Faction) {
 
   }
 
-  fleetPoints: number;
-  score: number;
-  campaignPoints: number = 0;
-
+  fleetPoints: number = null;
+  score: number = null;
 }
 
+class PivotalReward {
+  winnerFaction: Faction;
+  attackersWon: boolean;
+  marginOfVictory: number;
+  winnerCampaignPoints: number;
+  winningTeamXP: number;
+  losingTeamXP: number;
+}
+
+class ConquestReward extends PivotalReward {
+  chosenTokenIfDefendersWon: StrategicEffectType;
+}
 
 @Component({
   selector: 'flagship-pivotal-battle-phase',
@@ -47,11 +59,14 @@ export class PivotalBattlePhaseComponent implements OnInit {
     PivotalObjective.DemonstrationOfForce,
     PivotalObjective.Evacuation
   ];
+  conquestObjective: Objective = null;
   location: CampaignLocation;
   eligibleLocations: CampaignLocation[] = [];
   declaringFaction: Faction;
   attackerResult: Outcome;
   defenderResult: Outcome;
+
+  reward: PivotalReward = null;
 
   issues: Issue[] = [];
 
@@ -78,6 +93,7 @@ export class PivotalBattlePhaseComponent implements OnInit {
     this.location = null;
     this.attackerResult = null;
     this.defenderResult = null;
+    this.conquestObjective = null;
 
     switch (this.pivotalObjective) {
       case PivotalObjective.Conquest:
@@ -98,10 +114,15 @@ export class PivotalBattlePhaseComponent implements OnInit {
         this.defenderResult = new Outcome(this.declaringFaction);
         break;
     }
-    
+
   }
 
   public formChanged() {
+    if (this.pivotalObjective === PivotalObjective.Conquest && this.location) {
+      this.conquestObjective = this.objectiveFactory.getObjective(this.location.chosenObjective);
+    } else {
+      this.conquestObjective = null;
+    }
     this.determineValidity();
     this.validityChange.emit(this.isValid());
   }
@@ -109,11 +130,93 @@ export class PivotalBattlePhaseComponent implements OnInit {
   private isValid() {
     let valid = this.issues.filter(x => x.severity === IssueSeverity.Error).length === 0;
     this.completeButtonOptions.disabled = !valid;
+    this.resetOutcomes();
+    if (valid) {
+      this.determineOutcomes();
+    }
     return valid;
+  }
+
+  private resetOutcomes() {
+    this.reward = null;
+  }
+
+  private determineOutcomes() {
+    if (this.pivotalObjective === PivotalObjective.Conquest) {
+      this.reward = this.determineConquestReward();
+    }
+
+  }
+
+  private setRewardBasicInfo(reward: PivotalReward) {
+    reward.attackersWon = this.attackerResult.score > this.defenderResult.score;
+    reward.winnerFaction = reward.attackersWon ? this.attackerResult.faction : this.defenderResult.faction;
+    reward.marginOfVictory = Math.abs(this.attackerResult.score - this.defenderResult.score);
+    reward.winningTeamXP = 1 + Math.floor(reward.marginOfVictory / 75);
+    reward.losingTeamXP = 2;
+    let understrengthBonus = Math.floor(Math.abs(this.attackerResult.fleetPoints - this.defenderResult.fleetPoints) / 25);
+    if (reward.attackersWon) {
+      if (this.attackerResult.fleetPoints < this.defenderResult.fleetPoints) {
+        reward.winningTeamXP += understrengthBonus;
+      } else {
+        reward.losingTeamXP += understrengthBonus;
+      }
+    } else {
+      if (this.attackerResult.fleetPoints < this.defenderResult.fleetPoints) {
+        reward.losingTeamXP += understrengthBonus;
+      } else {
+        reward.winningTeamXP += understrengthBonus;
+      }
+    }
+  }
+
+  private determineConquestReward() : PivotalReward{
+    let reward = new ConquestReward();
+    this.setRewardBasicInfo(reward);
+
+    if (reward.attackersWon) {
+      reward.winnerCampaignPoints = 2 + this.location.baseAssaultBonus;
+    } else {
+      reward.winnerCampaignPoints = 1;
+    }
+    return reward;
   }
 
   private determineValidity() {
     this.issues = [];
+
+    if (this.pivotalObjective === null) {
+      this.issues.push({
+        severity: IssueSeverity.Error,
+        text: `You must specify the battle's special objective.`
+      });
+      return;
+    }
+
+    if (!this.location) {
+      this.issues.push({
+        severity: IssueSeverity.Error,
+        text: `You must specify the battle's location.`
+      });
+      return;
+    }
+
+    for (const outcome of [this.attackerResult, this.defenderResult]) {
+      if (!outcome.fleetPoints || outcome.fleetPoints <= 0) {
+        this.issues.push({
+          severity: IssueSeverity.Error,
+          text: `You must each team's total fleet points.`
+        });
+        return;
+      }
+      if (outcome.score === null || outcome.score < 0) {
+        this.issues.push({
+          severity: IssueSeverity.Error,
+          text: `You must each team's total score.`
+        });
+        return;
+      }
+    }
   }
 
 }
