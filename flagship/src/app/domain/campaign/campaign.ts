@@ -13,6 +13,8 @@ import { Phase } from './phase';
 import { Faction } from '../faction';
 import { Battle } from './battle';
 import { Fleet } from '../fleet';
+import { ObjectiveFactory } from '../factories/objectiveFactory';
+import { ObjectiveType } from '../objective';
 
 export interface SerializedCampaign {
     id: string;
@@ -48,6 +50,8 @@ export class Campaign {
     public fleets: { [id: string]: Fleet } = null;
 
     public locations: CampaignLocation[] = [];
+
+    private objectiveFactory = new ObjectiveFactory();
 
     public serialize(): SerializedCampaign {
         return {
@@ -152,6 +156,10 @@ export class Campaign {
         return null;
     }
 
+    public getTeamForFaction(faction: Faction): Team {
+        return faction === Faction.Empire ? this.empire : this.rebels;
+    }
+
     public campaignOwner(): CampaignUser {
         return this.campaignUsers.find(x => x.uid === this.ownerUid);
     }
@@ -171,8 +179,22 @@ export class Campaign {
         this.history.push(this.createTurn(true));
     }
 
+    public completed() {
+        let turn = new CampaignState();
+        turn.phase = Phase.Finished;
+        turn.act = null;
+        turn.turn = null;
+        turn.initiativeFaction = null;
+        this.history.push(turn);
+        return turn;
+    }
+
     public goToNextTurn() {
         this.history.push(this.createTurn(false));
+    }
+
+    public goToNextAct() {
+        this.history.push(this.createTurn(true));
     }
 
     public getLosingFaction(): Faction {
@@ -196,6 +218,10 @@ export class Campaign {
         turn.initiativeFaction = this.empire.campaignPoints < this.rebels.campaignPoints
             ? Faction.Empire
             : Faction.Rebels;
+        if (!newAct) {
+            turn.imperialPointsScored = current.imperialPointsScored;
+            turn.rebelPointsScored = current.rebelPointsScored;
+        }
         return turn;
     }
 
@@ -225,6 +251,14 @@ export class Campaign {
         }
         for (const player of losingPlayers) {
             player.recordLoss(mov);
+        }
+
+        let location = this.locations.find(x => x.id === battle.locationId);
+        let objective = this.objectiveFactory.getObjective(battle.objectiveId);
+        if (location && objective) {
+            if (objective.type === ObjectiveType.Campaign && ![301,302,303].includes(battle.objectiveId)) {
+                location.markCampaignObjectiveAsPlayed(battle.objectiveId);
+            }
         }
     }
 }

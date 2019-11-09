@@ -9,6 +9,8 @@
                 <flagship-campaign-turn [campaign]="campaign" fxFlex
                     *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished">
                 </flagship-campaign-turn>
+                <flagship-finished-campaign [campaign]="campaign" fxFlex
+                    *ngIf="currentState.phase === phases.Finished"></flagship-finished-campaign>
                 <flagship-campaign-info [campaign]="campaign"
                     fxFlex fxFlex.gt-sm="35"></flagship-campaign-info>
             </div>
@@ -39,21 +41,3 @@
         </div>
     </mat-tab>
 </mat-tab-group>
-
-<!-- <eco-fab-speed-dial class="fab-lower-right">
-  <eco-fab-speed-dial-trigger [spin]="true">
-    <button mat-fab color="primary">
-      <mat-icon aria-label="Add Ship/Squadron" class="spin180">add</mat-icon>
-    </button>
-  </eco-fab-speed-dial-trigger>
-  <eco-fab-speed-dial-actions>
-    <button mat-mini-fab (click)="addShip()" matTooltip="Add Ship" matTooltipPosition="left">
-      <i class="swg mini-fab-icon"
-        [ngClass]="{'swg-deathstar': fleet.faction === 0, 'swg-jedistarfight': fleet.faction === 1}"></i>
-    </button>
-    <button mat-mini-fab (click)="addSquadron()" matTooltip="Add Squadron" matTooltipPosition="left">
-      <i class="swg mini-fab-icon"
-        [ngClass]="{'swg-tie-2': fleet.faction === 0, 'swg-xwing-2': fleet.faction === 1}"></i>
-    </button>
-  </eco-fab-speed-dial-actions>
-</eco-fab-speed-dial> -->

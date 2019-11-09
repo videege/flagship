@@ -117,6 +117,11 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   }
 
   pbCompleted() {
-    
+    // Determine if the game is over
+   this.currentState = this.campaign.currentState();
+   if (this.currentState.phase !== Phase.Finished) {
+     this.setup();
+     this.currentStep = this.phaseToStepperIndex(Phase.Strategy);
+   }
   }
 }

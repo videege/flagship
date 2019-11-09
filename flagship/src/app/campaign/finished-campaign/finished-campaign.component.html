@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{ winner === factions.Empire ? "Empire Wins!" : "Rebels Win!" }}
+        </mat-card-title>
+        <mat-card-subtitle>Campaign Finished</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+       <h3>{{ outcome.label }}</h3>
+       <p>{{ outcome.text }}</p>
+    </mat-card-content>
+</mat-card>

@@ -194,7 +194,10 @@
                 the <strong>Climactic Battle</strong>.  If you choose this option, the campaign will end 
                 after the battle.
             </p>
-            <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()">Begin Climactic Battle</mat-checkbox>
+            <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()" 
+                name="climactic">
+                Begin Climactic Battle
+            </mat-checkbox>
         </div>
     </div>
     <flagship-issues-list [issues]="issues">

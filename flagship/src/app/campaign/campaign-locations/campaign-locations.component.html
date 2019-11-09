@@ -55,7 +55,7 @@
                 </p>
             </div>
         </div>
-        <mat-action-row>
+        <mat-action-row *ngIf="canModify">
             <button mat-button color="primary" (click)="setLocationControl(location)">
                 Set Location Control
             </button>

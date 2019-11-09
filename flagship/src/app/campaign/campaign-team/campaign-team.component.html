@@ -29,9 +29,8 @@
                 <a mat-button [routerLink]="['/fleets', player.fleetId]">View Fleet</a>
             </mat-list-item>
         </mat-list>
-        <mat-card-actions>
+        <mat-card-actions *ngIf="canAddPlayers">
             <button mat-button (click)="addPlayer()">Add Player</button>
-            <!-- <button mat-button (click)="setTeamName()">Set Team Name</button> -->
         </mat-card-actions>
     </mat-card>
     <mat-card>

@@ -233,7 +233,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
       objectiveIds.push(location.chosenObjective);
       return this.objectiveFactory.getObjectivesByIds(objectiveIds);
     }
-    objectiveIds = objectiveIds.concat(location.objectives);
+    objectiveIds = objectiveIds.concat(location.objectives.filter(x => !location.playedCampaignObjectives.includes(x)));
     let objectives = this.objectiveFactory.getObjectivesByIds(objectiveIds);
     let defenderObjectives = this.campaign.fleets[battle.defendingPlayers[0].fleetId].objectives;
     for (const objective of defenderObjectives) {

@@ -11,6 +11,7 @@ import { Guid } from 'guid-typescript';
 import { FleetService } from 'src/app/core/services/fleet.service';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 import { StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';
+import { Phase } from 'src/app/domain/campaign/phase';
 
 interface TokenCount {
   effect: string;
@@ -30,7 +31,7 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   public faction: string;
   public factionIcon: string;
   public playerMap: { [id: string] : CampaignUser } = {};
-
+  public canAddPlayers = false;
   public tokenCounts: TokenCount[] = [];
   
   private user: firebase.User;
@@ -47,12 +48,14 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.team.currentValue !== changes.team.previousValue) {
+    if (changes.team.currentValue !== changes.team.previousValue ||
+      changes.campaign.currentValue !== changes.campaign.previousValue) {
       this.setup();
     }
   }
 
   private setup(): void {
+    this.canAddPlayers = this.campaign.currentState().phase === Phase.CampaignSetup;
     this.faction = this.team.faction === Faction.Empire ? "Empire" : "Rebels";
     this.factionIcon = this.team.faction === Faction.Empire ? "ffi-imperial" : "ffi-rebel";
     this.playerMap = {};

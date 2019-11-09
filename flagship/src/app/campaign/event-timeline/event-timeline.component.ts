@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
+import { CampaignEvent } from 'src/app/domain/campaign/campaignEvent';
 
 @Component({
   selector: 'flagship-event-timeline',
@@ -7,11 +8,11 @@ import { Campaign } from 'src/app/domain/campaign/campaign';
   styleUrls: ['./event-timeline.component.css']
 })
 export class EventTimelineComponent implements OnInit {
+  
   @Input() campaign: Campaign;
   
   constructor() { }
 
   ngOnInit() {
   }
-
 }

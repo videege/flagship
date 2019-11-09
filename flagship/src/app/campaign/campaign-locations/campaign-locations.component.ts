@@ -11,6 +11,7 @@ import { LocationControlDialogComponent, LocationControlDialogData } from '../lo
 import { CampaignService } from 'src/app/core/services/campaign.service';
 import { CampaignEvent, CampaignEventType } from 'src/app/domain/campaign/campaignEvent';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Phase } from 'src/app/domain/campaign/phase';
 
 
 
@@ -26,6 +27,7 @@ export class CampaignLocationsComponent implements OnInit {
   public factions = Faction;
   public controlTypes = LocationControlType;
   public objectiveFactory = new ObjectiveFactory();
+  public canModify = false;
   user: firebase.User;
 
   constructor(private campaignService: CampaignService,
@@ -37,6 +39,7 @@ export class CampaignLocationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.canModify = this.campaign.currentState().phase !== Phase.Finished;
   }
 
   public getObjectiveNames(objectives: number[]): string {

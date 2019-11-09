@@ -8,6 +8,7 @@ export interface SerializedCampaignLocation {
     controllingFaction: Faction;
     controlType: LocationControlType;
     chosenObjective: number;
+    playedCampaignObjectives: number[];
 }
  
 export class CampaignLocation {
@@ -18,6 +19,7 @@ export class CampaignLocation {
     public controlType: LocationControlType;
 
     public objectives: number[] = [];
+    public playedCampaignObjectives: number[] = [];
     public chosenObjective: number;
     public strategicEffects: StrategicEffectType[] = [];
     public rewards: LocationReward[] = [];
@@ -67,12 +69,17 @@ export class CampaignLocation {
         return this.sectors.length > 1;
     }
 
+    public markCampaignObjectiveAsPlayed(objectiveId: number) {
+        this.playedCampaignObjectives.push(objectiveId);
+    }
+
     public serialize(): SerializedCampaignLocation {
         return {
             id: this.id,
             controllingFaction: this.controllingFaction,
             controlType: this.controlType,
             chosenObjective: this.chosenObjective,
+            playedCampaignObjectives: this.playedCampaignObjectives
         };
     }
     

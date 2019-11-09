@@ -15,7 +15,7 @@
         </mat-form-field>
         <mat-form-field fxFlex.gt-xs *ngIf="pivotalObjective">
             <mat-label>Battle Location</mat-label>
-            <mat-select [(ngModel)]="location" (selectionChange)="formChanged()" name="loc" required>
+            <mat-select [(ngModel)]="location" (selectionChange)="locationChanged()" name="loc" required>
                 <mat-option *ngFor="let loc of eligibleLocations" [value]="loc">
                     {{ loc.name }} [{{ loc.controlLabel() }}]
                 </mat-option>
@@ -49,20 +49,122 @@
     <div *ngIf="reward">
         <h4>Battle Outcome</h4>
         <p>
-            {{ reward.winningFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team wins with a
+            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team wins with a
             margin of victory of {{ reward.marginOfVictory }} points.
-            {{ reward.winningFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will receive
-            {{ reward.winnerCampaignPoints }} campaign points.
+            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will receive
+            <strong>{{ reward.winnerCampaignPoints(isClimactic) }} campaign points</strong>
+            <span *ngIf="isClimactic">
+                ({{ reward.flatCampaignPoints }} + 2 &times; {{ reward.victoryBonus }} [Climactic 2X Victory Bonus]).
+            </span>
+            <span *ngIf="!isClimactic">
+                ({{ reward.flatCampaignPoints }} + {{ reward.victoryBonus }} [Victory Bonus]).
+            </span>
+
         </p>
         <p>
-            {{ reward.winningFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team commanders will
+            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team commanders will
             receive {{ reward.winningTeamXP }} XP each.
         </p>
         <p>
-            {{ reward.winningFaction === factions.Empire ? 'Rebel' : 'Imperial' }} team commanders will
+            {{ reward.winnerFaction === factions.Empire ? 'Rebel' : 'Imperial' }} team commanders will
             receive {{ reward.losingTeamXP }} XP each.
         </p>
+        <div *ngIf="pivotalObjective === objTypes.Conquest && !reward.attackersWon">
+            <p>
+                Because the defending team won, that team may choose to gain either a Skilled Spacers
+                or Repair Yards Token.
+            </p>
+            <mat-form-field>
+                <mat-label>Defender Token Reward</mat-label>
+                <mat-select [(ngModel)]="reward.chosenTokenIfDefendersWon" (selectionChange)="formChanged()"
+                    name="chosenTokenIfDefendersWon" required>
+                    <mat-option [value]="effects.SkilledSpacers">
+                        Skilled Spacers
+                    </mat-option>
+                    <mat-option [value]="effects.RepairYards">
+                        Repair Yards
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="pivotalObjective === objTypes.DemonstrationOfForce">
+            <div *ngIf="reward.attackersWon">
+                <p>
+                    Because the attacking team won, that team may choose up to two locations in this area
+                    that are unoccupied or have an enemy presence and convert them to be locations with
+                    {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} presence. The
+                    attacking team will gain additional campaign points equal to each location's victory bonus
+                    value.
+                </p>
+                <mat-form-field>
+                    <mat-label>Chosen Locations</mat-label>
+                    <mat-select [(ngModel)]="reward.attackingVictoryLocations" (selectionChange)="formChanged()"
+                        name="doflocations" required multiple>
+                        <mat-option *ngFor="let location of reward.eligibleAttackingVictoryLocations" [value]="location"
+                            [disabled]="reward.attackingVictoryLocations.length === 2 && !reward.attackingVictoryLocations.includes(location)">
+                            {{ location.name }} (Bonus: {{ location.baseAssaultBonus }})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <p>
+                    Each player (from each team) may choose a reward from one of the two chosen locations.
+                </p>
+            </div>
+            <div *ngIf="!reward.attackersWon">
+                <p>
+                    Because the defending team won, that team will gain a Diplomats token. Each player (from each team)
+                    may choose a reward from a friendly location in Area(s)
+                    <span *ngFor="let area of location.sectors; let last = last;">
+                        {{ area | numerals }}{{ !last ? ' or ' : ''}}
+                    </span>.
+                </p>
+            </div>
+        </div>
+        <div *ngIf="pivotalObjective === objTypes.Evacuation">
+            <div *ngIf="reward.attackersWon">
+                <p>
+                    Because the attacking team won, the {{ location.controlLabel() }} at {{ location.name }}
+                    will be destroyed. The {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }}
+                    team will also gain one Resource token and one Skilled Spacers token.
+                </p>
+            </div>
+            <div *ngIf="!reward.attackersWon">
+                <p>
+                    Because the defending team won, the
+                    {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }}
+                    team may relocate their base from {{ location.name }} to any location that is unoccupied or has
+                    friendly
+                    presence. The {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will gain
+                    that location's victory bonus value in campaign points, and may gain a strategic effect token from
+                    the new base location.
+                </p>
+                <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
+                    <mat-form-field fxFlex.gt-xs>
+                        <mat-label>New Base Location</mat-label>
+                        <mat-select [(ngModel)]="reward.chosenLocation" (selectionChange)="evacLocationChanged()"
+                            name="evacLocations" required>
+                            <mat-option *ngFor="let location of reward.eligibleMoveLocations" [value]="location">
+                                {{ location.name }} (Bonus: {{ location.baseAssaultBonus }})
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex.gt-xs *ngIf="reward.chosenLocation">
+                        <mat-label>Chosen Strategic Effect Token</mat-label>
+                        <mat-select [(ngModel)]="reward.chosenToken" (selectionChange)="formChanged()"
+                            name="evacToken" [disabled]="!reward.chosenLocation.hasEffects()">
+                            <mat-option *ngFor="let effect of reward.chosenLocation.strategicEffects" [value]="effect">
+                                {{ effectUtils.effectName(effect) }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
     </div>
     <flagship-issues-list [issues]="issues">
     </flagship-issues-list>
+    <div>
+        <mat-bar-button (btnClick)="completePhase()" [options]="completeButtonOptions"></mat-bar-button>
+    </div>
 </form>
