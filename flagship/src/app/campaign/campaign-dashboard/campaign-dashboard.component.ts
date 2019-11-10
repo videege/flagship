@@ -13,7 +13,7 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 @Component({
   selector: 'flagship-campaign-dashboard',
   templateUrl: './campaign-dashboard.component.html',
-  styleUrls: ['./campaign-dashboard.component.css']
+  styleUrls: ['./campaign-dashboard.component.scss']
 })
 export class CampaignDashboardComponent implements OnInit {
 

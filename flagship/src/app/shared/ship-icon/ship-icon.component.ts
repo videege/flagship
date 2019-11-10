@@ -4,7 +4,7 @@ import { Ship } from 'src/app/domain/ship';
 @Component({
   selector: 'flagship-ship-icon',
   templateUrl: './ship-icon.component.html',
-  styleUrls: ['./ship-icon.component.css']
+  styleUrls: ['./ship-icon.component.scss']
 })
 export class ShipIconComponent implements OnInit {
 

@@ -5,7 +5,7 @@ import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 @Component({
   selector: 'flagship-campaign-info',
   templateUrl: './campaign-info.component.html',
-  styleUrls: ['./campaign-info.component.css']
+  styleUrls: ['./campaign-info.component.scss']
 })
 export class CampaignInfoComponent implements OnInit {
   @Input() campaign: Campaign;

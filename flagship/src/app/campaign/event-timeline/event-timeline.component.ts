@@ -5,7 +5,7 @@ import { CampaignEvent } from 'src/app/domain/campaign/campaignEvent';
 @Component({
   selector: 'flagship-event-timeline',
   templateUrl: './event-timeline.component.html',
-  styleUrls: ['./event-timeline.component.css']
+  styleUrls: ['./event-timeline.component.scss']
 })
 export class EventTimelineComponent implements OnInit {
   

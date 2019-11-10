@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'flagship-ship-detail',
   templateUrl: './ship-detail.component.html',
-  styleUrls: ['./ship-detail.component.css']
+  styleUrls: ['./ship-detail.component.scss']
 })
 export class ShipDetailComponent implements OnInit {
   isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);

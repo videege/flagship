@@ -13,7 +13,7 @@ export type AlertTypeString = ('info' | 'error' | 'warn' | 'success');
 @Component({
   selector: 'flagship-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css'],
+  styleUrls: ['./alert.component.scss'],
   animations: [
     trigger('info-slide-in', [
       state('true', style({display: 'block', opacity: 1, height: '*'})),

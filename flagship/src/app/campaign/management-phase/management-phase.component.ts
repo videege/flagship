@@ -81,7 +81,7 @@ class BattleOutcome {
 @Component({
   selector: 'flagship-management-phase',
   templateUrl: './management-phase.component.html',
-  styleUrls: ['./management-phase.component.css']
+  styleUrls: ['./management-phase.component.scss']
 })
 export class ManagementPhaseComponent implements OnInit, OnChanges {
 

@@ -14,7 +14,7 @@ export interface UpgradeSelectorData {
 @Component({
   selector: 'flagship-upgrade-selector',
   templateUrl: './upgrade-selector.component.html',
-  styleUrls: ['./upgrade-selector.component.css']
+  styleUrls: ['./upgrade-selector.component.scss']
 })
 export class UpgradeSelectorComponent implements OnInit {
 

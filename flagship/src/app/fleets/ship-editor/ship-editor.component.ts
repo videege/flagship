@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'flagship-ship-editor',
   templateUrl: './ship-editor.component.html',
-  styleUrls: ['./ship-editor.component.css']
+  styleUrls: ['./ship-editor.component.scss']
 })
 export class ShipEditorComponent implements OnInit {
   public ship: Ship;

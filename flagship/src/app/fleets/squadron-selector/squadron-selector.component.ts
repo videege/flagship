@@ -10,7 +10,7 @@ export interface SquadronSelectorData {
 @Component({
   selector: 'flagship-squadron-selector',
   templateUrl: './squadron-selector.component.html',
-  styleUrls: ['./squadron-selector.component.css']
+  styleUrls: ['./squadron-selector.component.scss']
 })
 export class SquadronSelectorComponent implements OnInit {
 

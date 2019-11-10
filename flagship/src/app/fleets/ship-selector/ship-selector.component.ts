@@ -10,7 +10,7 @@ export interface ShipSelectorData {
 @Component({
   selector: 'flagship-ship-selector',
   templateUrl: './ship-selector.component.html',
-  styleUrls: ['./ship-selector.component.css']
+  styleUrls: ['./ship-selector.component.scss']
 })
 export class ShipSelectorComponent implements OnInit {
 

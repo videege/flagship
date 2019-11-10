@@ -6,7 +6,7 @@ import { DieType } from 'src/app/domain/statistics/dieRoll';
 @Component({
   selector: 'flagship-addition-modification',
   templateUrl: './addition-modification.component.html',
-  styleUrls: ['./addition-modification.component.css']
+  styleUrls: ['./addition-modification.component.scss']
 })
 export class AdditionModificationComponent implements OnInit {
 

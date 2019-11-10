@@ -60,7 +60,7 @@ interface TableData {
 @Component({
   selector: 'flagship-ship-statistics',
   templateUrl: './ship-statistics.component.html',
-  styleUrls: ['./ship-statistics.component.css']
+  styleUrls: ['./ship-statistics.component.scss']
 })
 export class ShipStatisticsComponent implements OnInit {
   public ship: Ship;

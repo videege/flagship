@@ -51,7 +51,7 @@ class Format {
 @Component({
   selector: 'flagship-fleet-editor',
   templateUrl: './fleet-editor.component.html',
-  styleUrls: ['./fleet-editor.component.css']
+  styleUrls: ['./fleet-editor.component.scss']
 })
 export class FleetEditorComponent implements OnInit {
 

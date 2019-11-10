@@ -57,7 +57,7 @@ class EvacuationReward extends PivotalReward {
 @Component({
   selector: 'flagship-pivotal-battle-phase',
   templateUrl: './pivotal-battle-phase.component.html',
-  styleUrls: ['./pivotal-battle-phase.component.css']
+  styleUrls: ['./pivotal-battle-phase.component.scss']
 })
 export class PivotalBattlePhaseComponent implements OnInit {
   @Input() campaign: Campaign;

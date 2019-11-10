@@ -5,7 +5,7 @@ import { UpgradeType } from 'src/app/domain/upgradeType';
 @Component({
   selector: 'flagship-upgrade-summary',
   templateUrl: './upgrade-summary.component.html',
-  styleUrls: ['./upgrade-summary.component.css']
+  styleUrls: ['./upgrade-summary.component.scss']
 })
 export class UpgradeSummaryComponent implements OnInit {
 

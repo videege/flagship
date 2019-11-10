@@ -8,7 +8,7 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 @Component({
   selector: 'flagship-campaign-setup',
   templateUrl: './campaign-setup.component.html',
-  styleUrls: ['./campaign-setup.component.css']
+  styleUrls: ['./campaign-setup.component.scss']
 })
 export class CampaignSetupComponent implements OnInit {
   @Input() campaign: Campaign;

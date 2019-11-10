@@ -10,7 +10,7 @@ import { FlagshipRouteData } from "../app.route-data";
 @Component({
   selector: 'flagship-app-nav',
   templateUrl: './app-nav.component.html',
-  styleUrls: ['./app-nav.component.css']
+  styleUrls: ['./app-nav.component.scss']
 })
 export class AppNavComponent implements OnInit {
 

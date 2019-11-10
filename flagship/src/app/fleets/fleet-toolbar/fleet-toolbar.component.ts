@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'flagship-fleet-toolbar',
   templateUrl: './fleet-toolbar.component.html',
-  styleUrls: ['./fleet-toolbar.component.css']
+  styleUrls: ['./fleet-toolbar.component.scss']
 })
 export class FleetToolbarComponent implements OnInit {
 

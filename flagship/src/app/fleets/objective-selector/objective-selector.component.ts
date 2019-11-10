@@ -12,7 +12,7 @@ export interface ObjectiveSelectorData {
 @Component({
   selector: 'flagship-objective-selector',
   templateUrl: './objective-selector.component.html',
-  styleUrls: ['./objective-selector.component.css']
+  styleUrls: ['./objective-selector.component.scss']
 })
 export class ObjectiveSelectorComponent implements OnInit {
 

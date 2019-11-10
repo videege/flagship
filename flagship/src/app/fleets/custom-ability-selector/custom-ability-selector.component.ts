@@ -15,7 +15,7 @@ export class CustomAbilitySelectorData {
 @Component({
   selector: 'flagship-custom-ability-selector',
   templateUrl: './custom-ability-selector.component.html',
-  styleUrls: ['./custom-ability-selector.component.css']
+  styleUrls: ['./custom-ability-selector.component.scss']
 })
 export class CustomAbilitySelectorComponent implements OnInit {
 

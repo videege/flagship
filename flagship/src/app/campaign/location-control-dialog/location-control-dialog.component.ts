@@ -19,7 +19,7 @@ export class LocationControlDialogData {
 @Component({
   selector: 'flagship-location-control-dialog',
   templateUrl: './location-control-dialog.component.html',
-  styleUrls: ['./location-control-dialog.component.css']
+  styleUrls: ['./location-control-dialog.component.scss']
 })
 export class LocationControlDialogComponent implements OnInit {
 

@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'flagship-fleet',
   templateUrl: './fleet.component.html',
-  styleUrls: ['./fleet.component.css']
+  styleUrls: ['./fleet.component.scss']
 })
 export class FleetComponent implements OnInit {
   public fleet: Fleet;

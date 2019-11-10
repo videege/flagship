@@ -6,7 +6,7 @@ import { RerollStrategy } from '../../domain/statistics/rerolls/rerollStrategy';
 @Component({
   selector: 'flagship-reroll-modification',
   templateUrl: './reroll-modification.component.html',
-  styleUrls: ['./reroll-modification.component.css']
+  styleUrls: ['./reroll-modification.component.scss']
 })
 export class RerollModificationComponent implements OnInit {
   @Input() modification: RerollModification;

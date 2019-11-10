@@ -21,7 +21,7 @@ interface TokenCount {
 @Component({
   selector: 'flagship-campaign-team',
   templateUrl: './campaign-team.component.html',
-  styleUrls: ['./campaign-team.component.css']
+  styleUrls: ['./campaign-team.component.scss']
 })
 export class CampaignTeamComponent implements OnInit, OnChanges {
   

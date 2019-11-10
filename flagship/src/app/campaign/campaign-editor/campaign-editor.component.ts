@@ -12,7 +12,7 @@ export class CampaignEditorData {
 @Component({
   selector: 'flagship-campaign-editor',
   templateUrl: './campaign-editor.component.html',
-  styleUrls: ['./campaign-editor.component.css']
+  styleUrls: ['./campaign-editor.component.scss']
 })
 export class CampaignEditorComponent implements OnInit {
 

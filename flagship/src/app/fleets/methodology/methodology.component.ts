@@ -4,7 +4,7 @@ import { IDieModification } from '../../domain/statistics/dieModification';
 @Component({
   selector: 'flagship-methodology',
   templateUrl: './methodology.component.html',
-  styleUrls: ['./methodology.component.css']
+  styleUrls: ['./methodology.component.scss']
 })
 export class MethodologyComponent implements OnInit {
   @Input() modifications: IDieModification[];

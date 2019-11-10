@@ -49,7 +49,7 @@ export class DeclaredBattle {
 @Component({
   selector: 'flagship-strategy-phase',
   templateUrl: './strategy-phase.component.html',
-  styleUrls: ['./strategy-phase.component.css']
+  styleUrls: ['./strategy-phase.component.scss']
 })
 export class StrategyPhaseComponent implements OnInit, OnChanges {
 

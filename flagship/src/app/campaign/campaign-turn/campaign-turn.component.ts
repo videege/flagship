@@ -12,7 +12,7 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 @Component({
   selector: 'flagship-campaign-turn',
   templateUrl: './campaign-turn.component.html',
-  styleUrls: ['./campaign-turn.component.css']
+  styleUrls: ['./campaign-turn.component.scss']
 })
 export class CampaignTurnComponent implements OnInit, OnChanges {
 

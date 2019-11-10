@@ -1,3 +1,10 @@
 <div *ngFor="let state of campaign.history">
-    {{ state | json }}
+    <mgl-timeline [alternate]="true">
+        <mgl-timeline-entry *ngFor="let event of state.events">
+            <mgl-timeline-entry-header>{{ event.title }}</mgl-timeline-entry-header>
+            <mgl-timeline-entry-content>blah blah blah</mgl-timeline-entry-content>
+            <mgl-timeline-entry-dot></mgl-timeline-entry-dot>
+            <mgl-timeline-entry-side>2018</mgl-timeline-entry-side>
+        </mgl-timeline-entry>
+    </mgl-timeline>
 </div>

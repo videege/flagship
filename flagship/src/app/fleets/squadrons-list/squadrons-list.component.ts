@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'flagship-squadrons-list',
   templateUrl: './squadrons-list.component.html',
-  styleUrls: ['./squadrons-list.component.css']
+  styleUrls: ['./squadrons-list.component.scss']
 })
 export class SquadronsListComponent implements OnInit {
   @Input() fleet: Fleet;

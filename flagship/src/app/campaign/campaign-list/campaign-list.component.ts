@@ -8,7 +8,7 @@ import { CampaignType } from 'src/app/domain/campaign/campaignType';
 @Component({
   selector: 'flagship-campaign-list',
   templateUrl: './campaign-list.component.html',
-  styleUrls: ['./campaign-list.component.css']
+  styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent implements OnInit {
 

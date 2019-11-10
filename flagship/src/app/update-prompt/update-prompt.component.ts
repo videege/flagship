@@ -4,7 +4,7 @@ import { MatBottomSheetRef } from '@angular/material';
 @Component({
   selector: 'flagship-update-prompt',
   templateUrl: './update-prompt.component.html',
-  styleUrls: ['./update-prompt.component.css']
+  styleUrls: ['./update-prompt.component.scss']
 })
 export class UpdatePromptComponent implements OnInit {
 

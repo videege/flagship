@@ -9,7 +9,7 @@ import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-edi
 @Component({
   selector: 'flagship-fleet-list',
   templateUrl: './fleet-list.component.html',
-  styleUrls: ['./fleet-list.component.css']
+  styleUrls: ['./fleet-list.component.scss']
 })
 export class FleetListComponent implements OnInit {
   faction = Faction;

@@ -8,7 +8,7 @@ export interface ShipCardData {
 @Component({
   selector: 'flagship-ship-card',
   templateUrl: './ship-card.component.html',
-  styleUrls: ['./ship-card.component.css']
+  styleUrls: ['./ship-card.component.scss']
 })
 export class ShipCardComponent implements OnInit {
 

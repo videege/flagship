@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material';
 @Component({
   selector: 'flagship-custom-commander',
   templateUrl: './custom-commander.component.html',
-  styleUrls: ['./custom-commander.component.css']
+  styleUrls: ['./custom-commander.component.scss']
 })
 export class CustomCommanderComponent implements OnInit {
   @Input() commander: CustomCommander;

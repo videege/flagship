@@ -4,7 +4,7 @@ import {AuthProvider} from 'ngx-auth-firebaseui';
 @Component({
   selector: 'flagship-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 

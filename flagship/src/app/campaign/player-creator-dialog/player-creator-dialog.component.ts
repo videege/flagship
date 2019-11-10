@@ -13,7 +13,7 @@ export class PlayerCreatorDialogData {
 @Component({
   selector: 'flagship-player-creator-dialog',
   templateUrl: './player-creator-dialog.component.html',
-  styleUrls: ['./player-creator-dialog.component.css']
+  styleUrls: ['./player-creator-dialog.component.scss']
 })
 export class PlayerCreatorDialogComponent implements OnInit {
 

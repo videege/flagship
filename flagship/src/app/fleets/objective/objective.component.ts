@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'flagship-objective',
   templateUrl: './objective.component.html',
-  styleUrls: ['./objective.component.css']
+  styleUrls: ['./objective.component.scss']
 })
 export class ObjectiveComponent implements OnInit {
 

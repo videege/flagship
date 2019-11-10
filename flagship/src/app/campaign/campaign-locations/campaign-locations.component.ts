@@ -18,7 +18,7 @@ import { Phase } from 'src/app/domain/campaign/phase';
 @Component({
   selector: 'flagship-campaign-locations',
   templateUrl: './campaign-locations.component.html',
-  styleUrls: ['./campaign-locations.component.css']
+  styleUrls: ['./campaign-locations.component.scss']
 })
 export class CampaignLocationsComponent implements OnInit {
   @Input() campaign: Campaign;

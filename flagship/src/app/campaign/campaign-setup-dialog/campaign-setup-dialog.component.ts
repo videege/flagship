@@ -13,7 +13,7 @@ export interface CampaignSetupDialogData {
 @Component({
   selector: 'flagship-campaign-setup-dialog',
   templateUrl: './campaign-setup-dialog.component.html',
-  styleUrls: ['./campaign-setup-dialog.component.css']
+  styleUrls: ['./campaign-setup-dialog.component.scss']
 })
 export class CampaignSetupDialogComponent implements OnInit {
 

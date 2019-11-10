@@ -49,7 +49,7 @@ class BattleTokens {
 @Component({
   selector: 'flagship-battle-phase',
   templateUrl: './battle-phase.component.html',
-  styleUrls: ['./battle-phase.component.css']
+  styleUrls: ['./battle-phase.component.scss']
 })
 export class BattlePhaseComponent implements OnInit, OnChanges {
   @Input() campaign: Campaign;

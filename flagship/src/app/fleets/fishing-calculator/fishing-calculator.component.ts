@@ -34,7 +34,7 @@ class FishChart {
 @Component({
   selector: 'flagship-fishing-calculator',
   templateUrl: './fishing-calculator.component.html',
-  styleUrls: ['./fishing-calculator.component.css']
+  styleUrls: ['./fishing-calculator.component.scss']
 })
 export class FishingCalculatorComponent implements OnInit, OnChanges {
   @Input() longRange: IAttackPool;

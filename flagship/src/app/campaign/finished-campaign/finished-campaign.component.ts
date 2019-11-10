@@ -5,7 +5,7 @@ import { Faction, oppositeFaction } from 'src/app/domain/faction';
 @Component({
   selector: 'flagship-finished-campaign',
   templateUrl: './finished-campaign.component.html',
-  styleUrls: ['./finished-campaign.component.css']
+  styleUrls: ['./finished-campaign.component.scss']
 })
 export class FinishedCampaignComponent implements OnInit {
   @Input() campaign: Campaign;

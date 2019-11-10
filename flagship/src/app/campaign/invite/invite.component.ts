@@ -9,7 +9,7 @@ import { indeterminateOptions } from 'src/app/shared/utils/progressButtonConfigs
 @Component({
   selector: 'flagship-invite',
   templateUrl: './invite.component.html',
-  styleUrls: ['./invite.component.css']
+  styleUrls: ['./invite.component.scss']
 })
 export class InviteComponent implements OnInit {
 

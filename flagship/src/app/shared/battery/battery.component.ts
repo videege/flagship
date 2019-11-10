@@ -4,7 +4,7 @@ import { Armament } from '../../domain/armament';
 @Component({
   selector: 'flagship-battery',
   templateUrl: './battery.component.html',
-  styleUrls: ['./battery.component.css']
+  styleUrls: ['./battery.component.scss']
 })
 export class BatteryComponent implements OnChanges {
 
