@@ -1,10 +1,10 @@
-<div *ngFor="let state of campaign.history">
-    <mgl-timeline [alternate]="true">
-        <mgl-timeline-entry *ngFor="let event of state.events">
-            <mgl-timeline-entry-header>{{ event.title }}</mgl-timeline-entry-header>
-            <mgl-timeline-entry-content>blah blah blah</mgl-timeline-entry-content>
-            <mgl-timeline-entry-dot></mgl-timeline-entry-dot>
-            <mgl-timeline-entry-side>2018</mgl-timeline-entry-side>
-        </mgl-timeline-entry>
-    </mgl-timeline>
-</div>
+<mgl-timeline [alternate]="true" [toggle]="false">
+    <mgl-timeline-entry *ngFor="let event of events">
+        <mgl-timeline-entry-header class="timeline-header">{{ event.title }}</mgl-timeline-entry-header>
+        <mgl-timeline-entry-content>{{ event.content }}</mgl-timeline-entry-content>
+        <mgl-timeline-entry-dot>
+            <i *ngIf="event.dot.icon" [class]="event.dot.icon"></i>
+        </mgl-timeline-entry-dot>
+        <mgl-timeline-entry-side>{{ event.side }}</mgl-timeline-entry-side>
+    </mgl-timeline-entry>
+</mgl-timeline>

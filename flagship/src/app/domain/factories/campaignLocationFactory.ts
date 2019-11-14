@@ -32,12 +32,13 @@ export class CampaignLocationFactory {
                 id: x.id,
                 controlType: null,
                 controllingFaction: null,
-                chosenObjective: null
+                chosenObjective: null,
+                playedCampaignObjectives: []
             };
             return CampaignLocation.newLocation(x.id,
                 x.name, x.objectives, x.effects, x.baseAssaultBonus,
                 x.sectors, x.rewards, state.controllingFaction,
-                state.controlType, state.chosenObjective);
+                state.controlType, state.chosenObjective, state.playedCampaignObjectives);
         })
         return locations;
     }

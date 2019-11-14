@@ -134,7 +134,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
         this.campaign.getTeamOfPlayer(declaredBattle.attackingPlayer.id)
           .removeToken(StrategicEffectType.Ally);
       }
-      if (declaredBattle.defendingPlayer) {
+      if (declaredBattle.defenderSpendingAllyToken) {
         battle.defendingPlayers.find(x => x.playerId ===
           declaredBattle.defendingPlayer.id).spentAllyToken = true;
         this.campaign.getTeamOfPlayer(declaredBattle.defendingPlayer.id)

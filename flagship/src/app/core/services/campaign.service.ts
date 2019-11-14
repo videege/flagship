@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Campaign, SerializedCampaign } from 'src/app/domain/campaign/campaign';
 import { map, switchMap, combineLatest } from 'rxjs/operators';
 import { CampaignType } from 'src/app/domain/campaign/campaignType';
@@ -45,6 +45,10 @@ export class CampaignService {
         map(serialized => Campaign.hydrate(serialized)),
         switchMap(campaign => {
           let fleetIds = campaign.getPlayers().map(x => x.fleetId);
+          if (!fleetIds || !fleetIds.length) {
+            campaign.setFleets([]);
+            return of(campaign);
+          }
           return this.fleetService.getFleetsByIds(fleetIds)
             .pipe(
               map(fleets => {

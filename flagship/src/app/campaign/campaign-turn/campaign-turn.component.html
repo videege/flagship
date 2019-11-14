@@ -8,30 +8,28 @@
     </mat-card-header>
     <mat-card-content>
         <p>{{ currentState.initiativeFaction === factions.Empire ? "Imperial" : "Rebel" }} team has initiative this turn.</p>
-        <mat-vertical-stepper [linear]="true" #stepper [selectedIndex]="currentStep">
+        <mat-vertical-stepper [linear]="true" #stepper >
             <mat-step label="Strategy Phase" [editable]="false" [completed]="currentState.phase !== phases.Strategy">
                 <flagship-strategy-phase *ngIf="currentState.phase === phases.Strategy" [campaign]="campaign"
                     (validityChange)="strategyValidityChanged($event)"
-                    (phaseComplete)="strategyCompleted()"></flagship-strategy-phase>
+                    ></flagship-strategy-phase>
             </mat-step>
             <mat-step label="Battle Phase" [editable]="false"
                 [completed]="currentState.phase !== phases.Strategy && currentState.phase !== phases.Battle">
                 <flagship-battle-phase *ngIf="currentState.phase === phases.Battle" [campaign]="campaign"
-                    (validityChange)="battleValidityChanged($event)" (phaseComplete)="battleCompleted()">
+                    (validityChange)="battleValidityChanged($event)" >
                 </flagship-battle-phase>
             </mat-step>
             <mat-step label="Management Phase" [editable]="false"
                 [completed]="currentState.phase !== phases.Strategy && currentState.phase !== phases.Battle && currentState.phase !== phases.Management">
                 <flagship-management-phase *ngIf="currentState.phase === phases.Management" [campaign]="campaign"
-                    (validityChange)="managementValidityChanged($event)" (phaseComplete)="managementCompleted($event)">
+                    (validityChange)="managementValidityChanged($event)" >
                 </flagship-management-phase>
             </mat-step>
-            <mat-step [label]="phaseName" [editable]="false" 
-                [hidden]="currentState.phase !== phases.PivotalBattle && currentState.phase !== phases.ClimacticBattle"
-                [completed]="false">
+            <mat-step label="Pivotal / Climactic Battle" [editable]="false" class="whatever" [completed]="false">
                 <flagship-pivotal-battle-phase [campaign]="campaign" 
                     *ngIf="currentState.phase === phases.PivotalBattle || currentState.phase === phases.ClimacticBattle"
-                    (validityChange)="pbValidityChanged($event)" (phaseComplete)="pbCompleted($event)">
+                    (validityChange)="pbValidityChanged($event)" >
                 </flagship-pivotal-battle-phase>
             </mat-step>
         </mat-vertical-stepper>

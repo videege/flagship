@@ -19,7 +19,7 @@ export class CampaignState {
     turn: number;
     phase: Phase;
     act: number;
-    initiativeFaction: Faction;
+    initiativeFaction: Faction = null;
     events: CampaignEvent[] = [];
     imperialPointsScored: number = 0;
     rebelPointsScored: number = 0;
@@ -31,6 +31,12 @@ export class CampaignState {
         if (this.act === 2) return "II";
         if (this.act === 3) return "III";
         return this.act.toString();
+    }
+
+    public name(): string {
+        if (this.phase === Phase.CampaignSetup) return 'Setup';
+        else if (this.phase === Phase.Finished) return 'Finished';
+        return `Act ${this.actInRomanNumerals()} Turn ${this.turn}`;
     }
 
     public actShouldEnd(numberOfFleets: number): boolean {

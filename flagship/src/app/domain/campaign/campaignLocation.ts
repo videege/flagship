@@ -85,7 +85,8 @@ export class CampaignLocation {
     
     static newLocation(id: number, name: string, objectives: number[], strategicEffects: StrategicEffectType[],
         baseAssaultBonus: number, sectors: number[], rewards: LocationReward[], controllingFaction: Faction = null,
-        controlType: LocationControlType = null, chosenObjective: number = null): CampaignLocation {
+        controlType: LocationControlType = null, chosenObjective: number = null,
+        playedCampaignObjectives: number[] = []): CampaignLocation {
             let location = new CampaignLocation();
             location.id = id;
             location.name = name;
@@ -97,6 +98,7 @@ export class CampaignLocation {
             location.baseAssaultBonus = baseAssaultBonus;
             location.sectors = sectors;
             location.rewards = rewards;
+            location.playedCampaignObjectives = playedCampaignObjectives;
             return location;
         }
 }

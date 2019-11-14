@@ -73,6 +73,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   fleetMods: { [id: string]: FleetModification } = {};
   empireTokens: BattleTokens;
   rebelTokens: BattleTokens;
+  locations: { [id: number]: CampaignLocation } = {};
 
   constructor(private campaignService: CampaignService,
     private fleetService: FleetService) { }
@@ -228,12 +229,13 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
 
   getPossibleObjectives(battle: Battle): Objective[] {
     let location = this.campaign.locations.find(x => x.id === battle.locationId);
+    this.locations[location.id] = location;
     let objectiveIds = [];
     if (location.controlType === LocationControlType.Base) {
       objectiveIds.push(location.chosenObjective);
       return this.objectiveFactory.getObjectivesByIds(objectiveIds);
     }
-    objectiveIds = objectiveIds.concat(location.objectives.filter(x => !location.playedCampaignObjectives.includes(x)));
+    objectiveIds = objectiveIds.concat(location.objectives);
     let objectives = this.objectiveFactory.getObjectivesByIds(objectiveIds);
     let defenderObjectives = this.campaign.fleets[battle.defendingPlayers[0].fleetId].objectives;
     for (const objective of defenderObjectives) {

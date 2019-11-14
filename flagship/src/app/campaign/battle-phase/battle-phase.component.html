@@ -42,8 +42,12 @@
             <mat-select [(ngModel)]="battleObjectives[index]" name="{{ 'battle-obj-' + index }}"
                 (selectionChange)="formChanged()" required>
                 <mat-option *ngIf="battleObjectives[index]"></mat-option>
-                <mat-option *ngFor="let objective of possibleObjectives[index]" [value]="objective">
+                <mat-option *ngFor="let objective of possibleObjectives[index]" [value]="objective"
+                    [disabled]="this.locations[battle.locationId].playedCampaignObjectives.includes(objective.id)">
                     {{ objective.name }}
+                    <span *ngIf="this.locations[battle.locationId].playedCampaignObjectives.includes(objective.id)">
+                        [Already Played]
+                    </span>
                 </mat-option>
             </mat-select>
         </mat-form-field>

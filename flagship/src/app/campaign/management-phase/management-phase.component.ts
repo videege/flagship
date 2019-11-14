@@ -177,7 +177,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     }
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit({
-        nextPhase: this.willBeClimactic ? Phase.ClimacticBattle : this.nextPhase 
+        nextPhase: this.willBeClimactic ? Phase.ClimacticBattle : this.nextPhase
       });
     }, (errors) => {
       alert(errors);
@@ -187,14 +187,14 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   }
 
   private determineNextPhase() {
-   this.nextPhase = Phase.Strategy;
-   this.specialBattleType = null;
+    this.nextPhase = Phase.Strategy;
+    this.specialBattleType = null;
 
-   if (this.currentState.actShouldEnd(this.campaign.numberOfPlayers())) {
-    this.nextPhase = Phase.PivotalBattle;
-    this.canBeClimactic = Math.abs(this.campaign.empire.campaignPoints - this.campaign.rebels.campaignPoints) >= 5;
-    this.losingFaction = this.campaign.getLosingFaction();
-   }
+    if (this.currentState.actShouldEnd(this.campaign.numberOfPlayers())) {
+      this.nextPhase = Phase.PivotalBattle;
+      this.canBeClimactic = Math.abs(this.campaign.empire.campaignPoints - this.campaign.rebels.campaignPoints) >= 5;
+      this.losingFaction = this.campaign.getLosingFaction();
+    }
   }
 
   private setup() {
@@ -209,9 +209,11 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Presence);
 
     this.empireUpkeep.tokenLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Empire && x.controlType === LocationControlType.Base);
+      .filter(x => x.controllingFaction === Faction.Empire && x.controlType === LocationControlType.Base &&
+        x.hasEffects());
     this.rebelUpkeep.tokenLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Base);
+      .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Base &&
+        x.hasEffects());
 
     this.empireUpkeep.currentResourceTokens = this.campaign.empire.tokensOfType(StrategicEffectType.Resources);
     this.empireUpkeep.currentRepairTokens = this.campaign.empire.tokensOfType(StrategicEffectType.RepairYards);

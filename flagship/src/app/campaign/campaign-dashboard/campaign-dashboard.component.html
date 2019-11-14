@@ -3,16 +3,15 @@
         <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
             fxLayout="column" fxLayoutGap="8px">
             <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
-                
-                <flagship-campaign-setup [campaign]="campaign" fxFlex 
+
+                <flagship-campaign-setup [campaign]="campaign" fxFlex
                     *ngIf="currentState.phase === phases.CampaignSetup"></flagship-campaign-setup>
                 <flagship-campaign-turn [campaign]="campaign" fxFlex
                     *ngIf="currentState.phase !== phases.CampaignSetup && currentState.phase !== phases.Finished">
                 </flagship-campaign-turn>
-                <flagship-finished-campaign [campaign]="campaign" fxFlex
-                    *ngIf="currentState.phase === phases.Finished"></flagship-finished-campaign>
-                <flagship-campaign-info [campaign]="campaign"
-                    fxFlex fxFlex.gt-sm="35"></flagship-campaign-info>
+                <flagship-finished-campaign [campaign]="campaign" fxFlex *ngIf="currentState.phase === phases.Finished">
+                </flagship-finished-campaign>
+                <flagship-campaign-info [campaign]="campaign" fxFlex fxFlex.gt-sm="35"></flagship-campaign-info>
             </div>
         </div>
     </mat-tab>
@@ -35,9 +34,12 @@
         </div>
     </mat-tab>
     <mat-tab label="Timeline">
-        <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
-            fxLayout="column" fxLayoutGap="8px">
-            <flagship-event-timeline [campaign]="campaign"></flagship-event-timeline>
-        </div>
+        <ng-template matTabContent>
+            <div class="content mat-typography" ngStyle.gt-md="max-width: 90%;" style="padding-bottom: 100px;" fxFlex
+                fxLayout="column" fxLayoutGap="8px">
+                <flagship-event-timeline [campaign]="campaign"></flagship-event-timeline>
+            </div>
+        </ng-template>
+
     </mat-tab>
 </mat-tab-group>

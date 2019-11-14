@@ -47,7 +47,7 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
 
   setup() {
     this.currentState = this.campaign.currentState();
-    this.phaseName = this.getPhaseName(this.currentState.phase);
+    this.setStep(this.currentState.phase);
   }
 
   private phaseToStepperIndex(phase: Phase): number {
@@ -77,10 +77,20 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
       case Phase.PivotalBattle:
         return "Pivotal Battle";
       case Phase.ClimacticBattle:
-        return "Climactic Battle"; 
+        return "Climactic Battle";
       default:
         return "";
     }
+  }
+
+  private setStep(phase: Phase) {
+    setTimeout(() => {
+      this.stepper.linear = false;
+      this.currentStep = this.phaseToStepperIndex(phase);
+      this.stepper.selectedIndex = this.currentStep;
+      this.phaseName = this.getPhaseName(this.currentState.phase);
+      this.stepper.linear = true;
+    });
   }
 
   strategyValidityChanged(valid: boolean) {
@@ -88,7 +98,7 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   }
 
   strategyCompleted() {
-    this.currentStep = this.phaseToStepperIndex(Phase.Battle);
+    this.setStep(Phase.Battle);
   }
 
   battleValidityChanged(valid: boolean) {
@@ -96,7 +106,7 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   }
 
   battleCompleted() {
-    this.currentStep = this.phaseToStepperIndex(Phase.Management);
+    this.setStep(Phase.Management);
   }
 
   managementValidityChanged(valid: boolean) {
@@ -106,9 +116,9 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   managementCompleted(event: ManagementCompletedEvent) {
     if (event.nextPhase === Phase.Strategy) {
       this.setup();
-      this.currentStep = this.phaseToStepperIndex(Phase.Strategy);
+      this.setStep(Phase.Strategy);
     } else {
-      this.currentStep = this.phaseToStepperIndex(Phase.PivotalBattle);
+      this.setStep(Phase.PivotalBattle);
     }
   }
 
@@ -118,10 +128,10 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
 
   pbCompleted() {
     // Determine if the game is over
-   this.currentState = this.campaign.currentState();
-   if (this.currentState.phase !== Phase.Finished) {
-     this.setup();
-     this.currentStep = this.phaseToStepperIndex(Phase.Strategy);
-   }
+    this.currentState = this.campaign.currentState();
+    if (this.currentState.phase !== Phase.Finished) {
+      this.setup();
+      this.setStep(Phase.Strategy);
+    }
   }
 }

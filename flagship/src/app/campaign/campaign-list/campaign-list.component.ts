@@ -12,7 +12,7 @@ import { CampaignType } from 'src/app/domain/campaign/campaignType';
 })
 export class CampaignListComponent implements OnInit {
 
-  displayedColumns = ['name', 'type', 'players'];
+  displayedColumns = ['name', 'type', 'turn', 'players'];
   
   public campaigns: Campaign[];
   public dataSource: MatTableDataSource<Campaign>;
