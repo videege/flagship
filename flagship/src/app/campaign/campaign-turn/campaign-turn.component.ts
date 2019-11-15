@@ -86,10 +86,24 @@ export class CampaignTurnComponent implements OnInit, OnChanges {
   private setStep(phase: Phase) {
     setTimeout(() => {
       this.stepper.linear = false;
+      let previousStep = this.currentStep;
       this.currentStep = this.phaseToStepperIndex(phase);
+      if (previousStep > this.currentStep) {
+        this.stepper.steps.forEach((step) => {
+          step.completed = false;
+          step.editable = true;
+          step.interacted = false;
+        });
+      }
       this.stepper.selectedIndex = this.currentStep;
       this.phaseName = this.getPhaseName(this.currentState.phase);
       this.stepper.linear = true;
+      if (previousStep > this.currentStep) {
+        this.stepper.steps.forEach((step) => {
+          step.completed = false;
+          step.editable = false;
+        });
+      }
     });
   }
 

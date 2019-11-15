@@ -54,7 +54,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       if (state.act > act) {
         act = state.act;
         this.events.push({
-          title: `End of Act ${state.actInRomanNumerals()}`,
+          title: `End of Act ${lastState.actInRomanNumerals()}`,
           content: `Rebels scored ${lastState.rebelPointsScored} points - Empire scored ${lastState.imperialPointsScored} points.`,
           side: null,
           dot: {
@@ -126,7 +126,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       if (battle.state === BattleState.Declared) {
         return `This battle has been declared but not yet fought.`;
       } else if (battle.state === BattleState.AttackersWon) {
-        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.defenderResult.score} to ${battle.attackerResult.score}.`
+        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.attackerResult.score} to ${battle.defenderResult.score}.`
       } else {
         return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score}.`
       }

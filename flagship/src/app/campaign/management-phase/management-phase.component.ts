@@ -173,7 +173,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       //create a new turn
       this.campaign.goToNextTurn();
     } else if (this.nextPhase === Phase.PivotalBattle) {
-      this.currentState.setPhase(this.willBeClimactic ? Phase.ClimacticBattle : Phase.PivotalBattle);
+      this.campaign.currentState().setPhase(this.willBeClimactic ? Phase.ClimacticBattle : Phase.PivotalBattle);
     }
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit({

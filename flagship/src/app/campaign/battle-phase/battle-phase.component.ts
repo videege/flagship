@@ -130,7 +130,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         this.fleetService.updateFleet(fleet).then(() => { }, (errors) => { alert(errors); });
       }
     }
-    this.currentState.setPhase(Phase.Management);
+    this.campaign.currentState().setPhase(Phase.Management);
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit();
     }, (errors) => {

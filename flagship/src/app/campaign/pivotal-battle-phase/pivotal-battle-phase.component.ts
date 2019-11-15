@@ -13,6 +13,8 @@ import { LocationControlType } from 'src/app/domain/campaign/locationControlType
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
 import { Objective } from 'src/app/domain/objective';
 import { StrategicEffectType, StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';
+import { Battle } from 'src/app/domain/campaign/battle';
+import { BattleType } from 'src/app/domain/campaign/battleType';
 
 class Outcome {
   constructor(public faction: Faction) {
@@ -172,6 +174,17 @@ export class PivotalBattlePhaseComponent implements OnInit {
       }
     }
 
+    let battle = Battle.declareBattle(null, 
+      `${this.isClimactic ? 'Climactic' : 'Pivotal'} Battle at ${this.location.name}`,
+      this.location, this.campaign.getTeamForFaction(this.attackerResult.faction).players,
+      this.campaign.getTeamForFaction(this.defenderResult.faction).players,
+      this.isClimactic ? BattleType.Climactic : BattleType.Pivotal);
+    battle.pivotalObjective = this.pivotalObjective;
+    battle.recordResult(this.attackerResult.fleetPoints,
+      this.attackerResult.score, this.reward.attackersWon ? this.reward.winnerCampaignPoints(this.isClimactic) : 0,
+      this.defenderResult.fleetPoints, this.defenderResult.score,
+      !this.reward.attackersWon ? this.reward.winnerCampaignPoints(this.isClimactic) : 0);
+    this.campaign.addEvent(battle);
     // Determine if the game is over
     if (this.isClimactic || this.currentState.act === 3) {
       this.campaign.completed();
