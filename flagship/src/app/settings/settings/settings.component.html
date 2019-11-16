@@ -10,9 +10,8 @@
         </mat-card-content>
         <mat-card-content *ngIf="loaded">
             <p>The settings below will be used when creating new fleets.</p>
-            <form name="settingsForm" fxLayout="column" fxLayoutGap="8px"
-                fxLayout.gt-xs="row">
-                <mat-form-field>
+            <form name="settingsForm" fxLayout="column" fxLayoutGap="8px" fxLayout.gt-xs="row">
+                <mat-form-field fxFlex.gt-xs>
                     <mat-label>Default Faction</mat-label>
                     <mat-select required [(ngModel)]="settings.faction" name="faction"
                         (selectionChange)="saveSettings()">
@@ -21,9 +20,17 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Author Name" name="author" 
-                        [(ngModel)]="settings.author" type="text" (ngModelChange)="debounceSaveSettings()"/>
+                <mat-form-field fxFlex.gt-xs>
+                    <input matInput placeholder="Author Name" name="author" [(ngModel)]="settings.author" type="text"
+                        (ngModelChange)="debounceSaveSettings()" />
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs>
+                    <mat-label>Display Campaign Fleets in 'My Fleets'</mat-label>
+                    <mat-select required [(ngModel)]="settings.displayCampaignFleets" name="displayCampaignFleets"
+                        (selectionChange)="saveSettings()">
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No (Fleets Accessible via Campaign)</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </form>
         </mat-card-content>

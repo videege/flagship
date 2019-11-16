@@ -29,10 +29,23 @@ export class FleetListComponent implements OnInit {
     this.fleets = [];
     this.fleetService.getFleetsForUser().subscribe((fleets: Fleet[]) => {
       this.fleets = fleets;
-      this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+      this.dataSource = new MatTableDataSource<Fleet>(this.fleets
+        .filter(f => {
+          if (this.settings && !this.settings.displayCampaignFleets) {
+            return !f.campaignId;
+          }
+          return true;
+        }));
     });
     this.settingsService.settings$.subscribe(settings => {
       this.settings = settings;
+      this.dataSource = new MatTableDataSource<Fleet>(this.fleets
+        .filter(f => {
+          if (this.settings && !this.settings.displayCampaignFleets) {
+            return !f.campaignId;
+          }
+          return true;
+        }));
     });
   }
 
