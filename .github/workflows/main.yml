@@ -12,14 +12,18 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd ./flagship
+          npm install
       - name: Build
-        run: npm run build-prod
+        run: |
+          cd ./flagship
+          npm run build-prod
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: dist
+          path: flagship/dist
   deploy:
     name: Deploy
     needs: build
