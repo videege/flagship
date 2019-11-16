@@ -4,6 +4,7 @@ import { Fleet } from '../../domain/fleet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserSettings } from 'src/app/domain/settings/userSettings';
 
 export enum FleetEditorMode {
   New,
@@ -18,12 +19,12 @@ export class FleetEditorData {
   pointLimit: number;
   squadronPointLimit: number;
 
-  static newFleet(): FleetEditorData {
+  static newFleet(settings: UserSettings): FleetEditorData {
     return {
       mode: FleetEditorMode.New,
       name: null,
-      faction: Faction.Empire,
-      author: null,
+      faction: settings && settings.faction != null ? settings.faction : Faction.Empire,
+      author: settings && settings.author ? settings.author : null,
       pointLimit: 400,
       squadronPointLimit: 134
     }

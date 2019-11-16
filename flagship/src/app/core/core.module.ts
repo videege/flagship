@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FleetService } from './services/fleet.service';
 import { CampaignState } from '../domain/campaign/campaignState';
 import { BreadcrumbService } from './services/breadcrumb.service';
+import { SettingsService } from './services/settings.service';
 
 
 
@@ -11,7 +12,8 @@ import { BreadcrumbService } from './services/breadcrumb.service';
   providers: [
     FleetService,
     CampaignState,
-    BreadcrumbService
+    BreadcrumbService,
+    SettingsService
   ],
   imports: [
     CommonModule

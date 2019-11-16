@@ -15,6 +15,9 @@ service cloud.firestore {
       allow read, update, delete: if request.auth.uid == userId;
       allow create: if request.auth.uid != null;
     }
+    match /settings/{userId} {
+      allow read, update, delete, create: if request.auth.uid == userId;
+    }
     match /fleets/{fleetId} {
       allow read: if true;
       allow update: if request.auth.uid == resource.data.ownerUid || 

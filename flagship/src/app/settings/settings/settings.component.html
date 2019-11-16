@@ -1,0 +1,74 @@
+<div class="content mat-typography" ngStyle.gt-md="max-width: 75%;" style="padding-bottom: 100px;" fxFlex
+    fxLayout="column" fxLayoutGap="16px">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>User Settings</mat-card-title>
+            <mat-card-subtitle>Change your preferred faction and author name.</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content *ngIf="!loaded">
+            Loading...
+        </mat-card-content>
+        <mat-card-content *ngIf="loaded">
+            <p>The settings below will be used when creating new fleets.</p>
+            <form name="settingsForm" fxLayout="column" fxLayoutGap="8px"
+                fxLayout.gt-xs="row">
+                <mat-form-field>
+                    <mat-label>Default Faction</mat-label>
+                    <mat-select required [(ngModel)]="settings.faction" name="faction"
+                        (selectionChange)="saveSettings()">
+                        <mat-option *ngFor="let faction of factions" [value]="faction.val">
+                            {{ faction.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Author Name" name="author" 
+                        [(ngModel)]="settings.author" type="text" (ngModelChange)="debounceSaveSettings()"/>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>About Flagship</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Flagship is an application supporting Star Wars Armada play though
+                fleet building, analytics, and campaign management. It was created
+                and is maintained by Joshua Barron. You can file issues or contribute
+                to the development of Flagship at
+                <a href="https://github.com/videege/flagship">GitHub</a>.
+            </p>
+            <h3>Legal</h3>
+
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Legal Information</mat-card-title>
+            <mat-card-subtitle>Privacy Policy &amp; Disclaimer</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <h3>Privacy Policy</h3>
+            <p>
+                This privacy notice discloses the privacy practices for Flagship. We only retain
+                basic user information to provide persistence for created fleets and campaigns. We
+                will never share your personal information with third parties except if required by
+                law. Your continued use of our website will be regarded as acceptance of our practices around
+                privacy and personal information. If you have any questions about how we handle user
+                data and personal information, feel free to contact us on GitHub.
+            </p>
+            <h3>License &amp; Disclaimer</h3>
+            <p>Flagship's source code is licensed under the
+                <a href="https://github.com/videege/flagship/blob/master/LICENSE">MIT License</a>.
+            </p>
+            <p>
+                This software is not endorsed by Disney, Lucasfilm Ltd. or Fantasy Flight Games and is intended
+                for entertainment purposes only. Star Wars, all iconography, all names and pictures of characters,
+                vehicles, and any other Star Wars items are registered trademarks and/or copyrights of Lucasfilm Ltd.
+                or their respective trademark and copyright holders.
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>

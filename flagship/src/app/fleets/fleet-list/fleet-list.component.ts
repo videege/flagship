@@ -5,6 +5,8 @@ import { Faction } from '../../domain/faction';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-editor.component';
+import { SettingsService } from 'src/app/core/services/settings.service';
+import { UserSettings } from 'src/app/domain/settings/userSettings';
 
 @Component({
   selector: 'flagship-fleet-list',
@@ -15,8 +17,10 @@ export class FleetListComponent implements OnInit {
   faction = Faction;
 
   displayedColumns = ['faction', 'name', 'commander', 'points', 'actions'];
+  settings: UserSettings;
 
-  constructor(private fleetService: FleetService, private dialog: MatDialog) {}
+  constructor(private fleetService: FleetService, private dialog: MatDialog,
+    private settingsService: SettingsService) {}
 
   public fleets: Fleet[];
   dataSource: MatTableDataSource<Fleet>;
@@ -26,6 +30,9 @@ export class FleetListComponent implements OnInit {
     this.fleetService.getFleetsForUser().subscribe((fleets: Fleet[]) => {
       this.fleets = fleets;
       this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
+    });
+    this.settingsService.settings$.subscribe(settings => {
+      this.settings = settings;
     });
   }
 
@@ -48,7 +55,7 @@ export class FleetListComponent implements OnInit {
   addFleet() {
     let ref = this.dialog.open(FleetEditorComponent, {
       width: '450px',
-      data: FleetEditorData.newFleet()
+      data: FleetEditorData.newFleet(this.settings)
     }); 
     ref.afterClosed().subscribe((data: FleetEditorData) => {
       if (data) {
