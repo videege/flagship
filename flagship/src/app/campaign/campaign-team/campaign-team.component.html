@@ -40,11 +40,29 @@
             <mat-card-subtitle>{{ team.name || "No team name set" }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <table mat-table [dataSource]="tokenCounts" fxFlex>
-                <mat-text-column name="effect"></mat-text-column>
-                <mat-text-column name="count"></mat-text-column>
-                <tr mat-header-row *matHeaderRowDef="['effect', 'count']"></tr>
-                <tr mat-row *matRowDef="let myRowData; columns: ['effect', 'count']"></tr>
+            <p>
+                Note: Flagship will automatically manage token inventory as the campaign
+                progresses, so you do not need to manually add and remove tokens here unless
+                you are correcting a mistake.
+            </p>
+            <table mat-table [dataSource]="tokenCounts" style="width: 100%;">
+                <mat-text-column name="effect" fxFlex></mat-text-column>
+                <mat-text-column name="count" fxFlex></mat-text-column>
+                <ng-container matColumnDef="modify">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let count">
+                        <button mat-icon-button (click)="increaseToken(count.type)"
+                            [disabled]="!canEditTokens">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="decreaseToken(count.type)"
+                            [disabled]="!canEditTokens">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="['effect', 'count', 'modify']"></tr>
+                <tr mat-row *matRowDef="let myRowData; columns: ['effect', 'count', 'modify']"></tr>
             </table>
         </mat-card-content>
 

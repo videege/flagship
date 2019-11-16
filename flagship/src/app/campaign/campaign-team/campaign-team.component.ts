@@ -10,10 +10,11 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 import { Guid } from 'guid-typescript';
 import { FleetService } from 'src/app/core/services/fleet.service';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
-import { StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';
+import { StrategicEffects, StrategicEffectType } from 'src/app/domain/campaign/strategicEffectType';
 import { Phase } from 'src/app/domain/campaign/phase';
 
 interface TokenCount {
+  type: StrategicEffectType;
   effect: string;
   count: number;
 }
@@ -33,6 +34,7 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   public playerMap: { [id: string] : CampaignUser } = {};
   public canAddPlayers = false;
   public tokenCounts: TokenCount[] = [];
+  public canEditTokens = true;
   
   private user: firebase.User;
 
@@ -62,7 +64,12 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
     for (const player of this.team.players) {
       this.playerMap[player.id] = this.campaign.campaignUsers.find(x => x.uid === player.playerUid);
     }
+    this.setupTokens();
+  }
+
+  private setupTokens() {
     this.tokenCounts = StrategicEffects.RITRStrategicEffects.map(x => <TokenCount>{
+      type: x,
       effect: StrategicEffects.effectName(x),
       count: this.team.tokens[x] || 0
     });
@@ -70,6 +77,22 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
 
   setTeamName() {
     
+  }
+
+  increaseToken(effect: StrategicEffectType) {
+    this.team.addToken(effect);
+    this.canEditTokens = false;
+    this.campaignService.updateCampaign(this.campaign).then()
+      .finally(() => { this.canEditTokens = true; });
+  }
+
+  decreaseToken(effect: StrategicEffectType) {
+    if (this.team.tokensOfType(effect) <= 0) return;
+
+    this.team.removeToken(effect);
+    this.canEditTokens = false;
+    this.campaignService.updateCampaign(this.campaign).then()
+      .finally(() => { this.canEditTokens = true; });
   }
 
   makeTeamLeader(player: CampaignPlayer) {
