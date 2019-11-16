@@ -16,7 +16,7 @@ import { UserSettings } from 'src/app/domain/settings/userSettings';
 export class FleetListComponent implements OnInit {
   faction = Faction;
 
-  displayedColumns = ['faction', 'name', 'commander', 'points', 'actions'];
+  displayedColumns = ['faction', 'name', 'commander', 'points', 'campaign', 'actions'];
   settings: UserSettings;
 
   constructor(private fleetService: FleetService, private dialog: MatDialog,
