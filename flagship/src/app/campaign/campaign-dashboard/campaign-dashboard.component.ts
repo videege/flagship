@@ -9,6 +9,8 @@ import { ClipboardService } from 'ngx-clipboard';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 import { CampaignSetupDialogComponent, CampaignSetupDialogData } from '../campaign-setup-dialog/campaign-setup-dialog.component';
 import { CampaignService } from 'src/app/core/services/campaign.service';
+import { BreadcrumbService } from 'src/app/core/services/breadcrumb.service';
+import { FlagshipRouteData } from 'src/app/app.route-data';
 
 @Component({
   selector: 'flagship-campaign-dashboard',
@@ -26,7 +28,8 @@ export class CampaignDashboardComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute, private clipboardService: ClipboardService,
-    private snackbar: MatSnackBar, private campaignService: CampaignService) {
+    private snackbar: MatSnackBar, private campaignService: CampaignService,
+    private breadcrumbService: BreadcrumbService) {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
@@ -43,6 +46,7 @@ export class CampaignDashboardComponent implements OnInit {
     let campaignId = this.route.snapshot.params.id;
     this.campaignService.getCampaignForUser(campaignId).subscribe((campaign) => {
       this.campaign = campaign;
+      this.breadcrumbService.setBreadcrumb(new FlagshipRouteData(campaign.name, 'Campaigns', '/campaigns'));
       this.currentState = this.campaign.currentState();
       this.loading = false;
     });

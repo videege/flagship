@@ -3,7 +3,8 @@
         <mgl-timeline-entry-header class="timeline-header">{{ event.title }}</mgl-timeline-entry-header>
         <mgl-timeline-entry-content>{{ event.content }}</mgl-timeline-entry-content>
         <mgl-timeline-entry-dot>
-            <i *ngIf="event.dot.icon" [class]="event.dot.icon"></i>
+            <i *ngIf="event.dot.icon && !event.dot.isMatIcon" [class]="event.dot.icon"></i>
+            <mat-icon class="timeline-icon" *ngIf="event.dot.icon && event.dot.isMatIcon">{{ event.dot.icon }}</mat-icon>
         </mgl-timeline-entry-dot>
         <mgl-timeline-entry-side>{{ event.side }}</mgl-timeline-entry-side>
     </mgl-timeline-entry>

@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FlagshipRouteData } from "../app.route-data";
+import { BreadcrumbService } from '../core/services/breadcrumb.service';
 
 @Component({
   selector: 'flagship-app-nav',
@@ -26,7 +27,8 @@ export class AppNavComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver,
     public afAuth: AngularFireAuth, private route: ActivatedRoute,
-    private router: Router, private titleService: Title) {
+    private router: Router, private titleService: Title,
+    private breadcrumbService: BreadcrumbService) {
   }
 
   private getChildRoute(route: ActivatedRoute): ActivatedRoute {
@@ -45,11 +47,18 @@ export class AppNavComponent implements OnInit {
         filter(data => data['nav'] != null),
       ).subscribe(data => {
         let routeData = data['nav'] as FlagshipRouteData;
-        this.title = routeData.getTitle(data);
-        this.parentLabel = routeData.getParentLabel(data);
-        this.parentLink = routeData.getParentLink(data);
+        this.setNavInfo(routeData, data);
+      });
 
-        this.titleService.setTitle(this.title);
-      })
+      this.breadcrumbService.breadcrumbData$.subscribe((routeData: FlagshipRouteData) => {
+        this.setNavInfo(routeData, null);
+      });
+  }
+
+  private setNavInfo(routeData: FlagshipRouteData, data) {
+    this.title = routeData.getTitle(data);
+    this.parentLabel = routeData.getParentLabel(data);
+    this.parentLink = routeData.getParentLink(data);
+    this.titleService.setTitle(this.title);
   }
 }

@@ -17,6 +17,7 @@ interface TimelineEvent {
 
 interface TimelineDot {
   icon: string;
+  isMatIcon: boolean;
   dotSize: number;
   dotClass: string;
 }
@@ -53,12 +54,19 @@ export class EventTimelineComponent implements OnInit, OnChanges {
     for (const state of states) {
       if (state.act > act) {
         act = state.act;
+        let icon = 'looks_one';
+        if (lastState.act === 2) {
+          icon = 'looks_two';
+        } else if (lastState.act === 3) {
+          icon = 'looks_3';
+        }
         this.events.push({
           title: `End of Act ${lastState.actInRomanNumerals()}`,
           content: `Rebels scored ${lastState.rebelPointsScored} points - Empire scored ${lastState.imperialPointsScored} points.`,
           side: null,
           dot: {
-            icon: null,
+            icon: icon,
+            isMatIcon: true,
             dotSize: 60,
             dotClass: 'accent'
           }
@@ -74,7 +82,8 @@ export class EventTimelineComponent implements OnInit, OnChanges {
           content: `Rebels scored ${this.campaign.rebels.campaignPoints} points - Empire scored ${this.campaign.empire.campaignPoints} points.`,
           side: null,
           dot: {
-            icon: null,
+            icon: 'done_all',
+            isMatIcon: true,
             dotSize: 60,
             dotClass: 'accent'
           }
@@ -98,21 +107,24 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       let battle = <Battle>event;
       if (battle.state === BattleState.Declared) {
         return {
-          icon: null,
+          icon: 'gps-fixed',
+          isMatIcon: true,
           dotClass: 'accent',
           dotSize: 30
         };
       } else {
         return {
           icon: battle.getWinnerFaction(this.campaign.empire) === Faction.Empire
-            ? 'ffi ffi-imperial faction-timeline-icon' : 'ffi ffi-rebel faction-timeline-icon',
+            ? 'ffi ffi-imperial timeline-icon' : 'ffi ffi-rebel timeline-icon',
+          isMatIcon: false,
           dotClass: 'primary',
           dotSize: 45
         };
       }
     }
     return {
-      icon: null,
+      icon: 'panorama_fish_eye',
+      isMatIcon: true,
       dotClass: 'accent',
       dotSize: 30
     };

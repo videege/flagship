@@ -1,13 +1,17 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FleetService } from './services/fleet.service';
+import { CampaignState } from '../domain/campaign/campaignState';
+import { BreadcrumbService } from './services/breadcrumb.service';
 
 
 
 @NgModule({
   declarations: [],
   providers: [
-    FleetService
+    FleetService,
+    CampaignState,
+    BreadcrumbService
   ],
   imports: [
     CommonModule
