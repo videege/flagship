@@ -199,7 +199,8 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     this.validityChange.emit(this.isValid());
   }
 
-  private checkForLowFuel(player: CampaignPlayer, location: CampaignLocation): boolean {
+  private checkForLowFuel(player: CampaignPlayer, location: CampaignLocation,
+    isAttacker: boolean): boolean {
     // If the location is in an area that does not have a friendly base,
     // or if there is no friendly-controlled border location to an addjacent area with a friendly base,
     // you get low fuel.
@@ -218,6 +219,13 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       if (friendlyBasesInNeighboringRegion.length)
         return false;
     }
+
+    let fleet = this.campaign.fleets[player.fleetId];
+    if (fleet && fleet.hasCustomCommander() &&
+      ((!isAttacker && fleet.customCommander.isReadyDefender()) ||
+      (isAttacker && fleet.customCommander.isIndependentRaider()))) {
+      return false;
+    }
     return true;
   }
 
@@ -228,7 +236,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       return false;
 
     let faction = this.campaign.getFactionOfPlayer(player.id);
-    let diplomatsArea = faction === this.currentState.initiativeFaction 
+    let diplomatsArea = faction === this.currentState.initiativeFaction
       ? this.nonInitiativeTeamDiplomatsArea : this.initiativeTeamDiplomatsArea;
     return location.sectors.includes(diplomatsArea);
   }
@@ -252,10 +260,10 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       battle.defendingConditions = [];
       if (battle.attackingPlayer && battle.defendingPlayer && battle.location) {
         // Low Fuel
-        if (!battle.attackingPlayer.condition && this.checkForLowFuel(battle.attackingPlayer, battle.location)) {
+        if (!battle.attackingPlayer.condition && this.checkForLowFuel(battle.attackingPlayer, battle.location, true)) {
           battle.attackingConditions.push(Condition.LowFuel);
         }
-        if (!battle.defendingPlayer.condition && this.checkForLowFuel(battle.defendingPlayer, battle.location)) {
+        if (!battle.defendingPlayer.condition && this.checkForLowFuel(battle.defendingPlayer, battle.location, false)) {
           battle.defendingConditions.push(Condition.LowFuel);
         }
         // Low morale

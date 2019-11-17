@@ -1,6 +1,7 @@
 import { CustomAbilityFactory } from '../factories/customAbilityFactory';
 import { CustomCommanderAbility } from './customCommanderAbility';
 import { Subject } from 'rxjs';
+import undefined from 'firebase/empty-import';
 
 export interface SerializedCustomCommander {
     name: string;
@@ -18,6 +19,14 @@ export class CustomCommander {
 
     constructor() {
         this.subject = new Subject<number>();
+    }
+
+    isReadyDefender(): boolean {
+        return !!this.abilities.find(x => x.id === 18);
+    }
+
+    isIndependentRaider(): boolean {
+        return !!this.abilities.find(x => x.id === 19);
     }
 
     addExperience(xp: number) {
