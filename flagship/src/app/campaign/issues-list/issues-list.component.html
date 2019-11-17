@@ -1,5 +1,5 @@
 <mat-list dense>
-    <mat-list-item *ngFor="let issue of issues">
+    <mat-list-item *ngFor="let issue of issues" class="height-auto">
         <mat-icon matListIcon [ngClass]="issueIconMap[issue.severity]">{{ issueIconMap[issue.severity] }}</mat-icon>
         <p matLine style="white-space: normal;"> {{ issue.text }} </p>
     </mat-list-item>

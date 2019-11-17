@@ -11,11 +11,9 @@
         <mat-list *ngIf="team.players.length">
             <mat-list-item *ngFor="let player of team.players">
                 <img matListAvatar [src]="playerMap[player.id].photoURL" [alt]="playerMap[player.id].displayName"
-                    matTooltip="Controlled by {{ playerMap[player.id].displayName }}">
-                <h3 mat-line>
-                    {{ player.name }}
-
-                </h3>
+                    matTooltip="Controlled by {{ playerMap[player.id].displayName }}"
+                    *ngIf="!(isHandsetPortrait$ | async)">
+                <h3 mat-line>{{ player.name }}</h3>
                 <p mat-line>
                     <span>{{ player.wins }} W / {{ player.losses }} L / {{ player.mov }} MOV</span>
                 </p>
@@ -25,7 +23,6 @@
                         </mat-icon>
                     </button>
                 </div>
-
                 <a mat-button [routerLink]="['/fleets', player.fleetId]">View Fleet</a>
             </mat-list-item>
         </mat-list>

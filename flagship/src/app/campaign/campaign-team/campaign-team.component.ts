@@ -12,6 +12,9 @@ import { FleetService } from 'src/app/core/services/fleet.service';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 import { StrategicEffects, StrategicEffectType } from 'src/app/domain/campaign/strategicEffectType';
 import { Phase } from 'src/app/domain/campaign/phase';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 interface TokenCount {
   type: StrategicEffectType;
@@ -38,8 +41,14 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   
   private user: firebase.User;
 
+  isHandsetPortrait$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  .pipe(
+    map(result => result.matches)
+  );
+
   constructor(private afAuth: AngularFireAuth, private campaignService: CampaignService,
-    private dialog: MatDialog, private fleetService: FleetService) { 
+    private dialog: MatDialog, private fleetService: FleetService, 
+    private breakpointObserver: BreakpointObserver) { 
     this.afAuth.user.subscribe(user => {
       this.user = user;
     });
