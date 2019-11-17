@@ -8,6 +8,9 @@
         "prod": [
           "flagship-armada"
         ],
+        "prod-cicd": [
+          "flagship-armada"
+        ],
         "dev": [
           "flagship-armada-dev"
         ]
