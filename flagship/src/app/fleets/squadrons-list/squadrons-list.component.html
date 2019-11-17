@@ -3,14 +3,6 @@
     <mat-expansion-panel-header class="right-aligned-header">
       <mat-panel-title fxFlex="auto" class="squadron-title">
         {{ distinctSquadrons[id].unique ? "&#9679;&nbsp;" + distinctSquadrons[id].displayName() : distinctSquadrons[id].displayName() }}
-        <span *ngIf="distinctSquadrons[id].defenseTokens.length">
-          <i class="ffi squadron-icon" *ngFor="let token of distinctSquadrons[id].defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
-                           'ffi-swa-evade': token === 1,
-                           'ffi-swa-redirect': token === 2,
-                           'ffi-swa-contain': token === 3,
-                           'ffi-swa-scatter': token === 4
-                          }"></i>
-        </span>
       </mat-panel-title>
       <mat-panel-description ngClass.xs="points-small">
         <!-- <span fxFlex></span> -->
@@ -26,6 +18,15 @@
         </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <div *ngIf="distinctSquadrons[id].defenseTokens.length">
+      <span>Defense Tokens:&nbsp;</span>
+      <i class="ffi squadron-icon" *ngFor="let token of distinctSquadrons[id].defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
+                             'ffi-swa-evade': token === 1,
+                             'ffi-swa-redirect': token === 2,
+                             'ffi-swa-contain': token === 3,
+                             'ffi-swa-scatter': token === 4
+                            }"></i>
+    </div>
     <div fxLayout="row" fxLayoutGap="4px">
       <span fxFlex>
         <i class="ffi ffi-swa-speed squadron-icon"></i>{{ distinctSquadrons[id].speed }}
@@ -47,13 +48,13 @@
     </ul>
     <p *ngIf="distinctSquadrons[id].text.length">{{ distinctSquadrons[id].text }}</p>
     <mat-chip-list *ngIf="isCampaign && distinctSquadrons[id].unique">
-        <mat-chip *ngIf="distinctSquadrons[id].isScarred" color="warn" selected (removed)="unscar(id)">
-          Scarred <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <mat-chip *ngIf="distinctSquadrons[id].isVeteran" color="accent" selected (removed)="demote(id)">
-          Veteran <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+      <mat-chip *ngIf="distinctSquadrons[id].isScarred" color="warn" selected (removed)="unscar(id)">
+        Scarred <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="distinctSquadrons[id].isVeteran" color="accent" selected (removed)="demote(id)">
+        Veteran <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
     <mat-action-row>
       <div *ngIf="!distinctSquadrons[id].unique" fxLayout="row">
         <button mat-icon-button [disabled]="squadronCounts[id] === 1" (click)="decreaseSquadronCount(id)">
@@ -72,8 +73,11 @@
         </button>
       </div>
       <span fxFlex></span>
-      <button mat-button color="warn" (click)="removeDistinctSquadron(id)">
+      <button mat-button color="warn" (click)="removeDistinctSquadron(id)" *ngIf="!(isHandset$ | async)">
         {{ squadronCounts[id] > 1 ? "Remove Squadrons" : "Remove Squadron" }}
+      </button>
+      <button mat-icon-button color="warn" (click)="removeDistinctSquadron(id)" *ngIf="(isHandset$ | async)">
+        <mat-icon aria-label="Remove Squadron(s)">delete</mat-icon>
       </button>
     </mat-action-row>
   </mat-expansion-panel>
