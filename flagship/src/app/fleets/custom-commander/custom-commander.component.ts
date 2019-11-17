@@ -97,17 +97,19 @@ export class CustomCommanderComponent implements OnInit {
       let matchingAbility = this.commander.abilities.find(x => x.id === ability.id);
       if (matchingAbility) continue;
 
-      let lesserAbility = this.commander.abilities.find(x => x.group === ability.group);
-      if (lesserAbility) {
-        let nextRank: CustomCommanderAbility = lesserAbility;
-        do {
-          nextRank = this.abilityFactory.getNextRank(nextRank);
-          this.proposedExperience -= nextRank.xpCost;
-        } while (nextRank.id !== ability.id)
-        continue;
+      if (ability.rank !== null) {
+        let lesserAbility = this.commander.abilities.find(x => x.group === ability.group);
+        if (lesserAbility) {
+          let nextRank: CustomCommanderAbility = lesserAbility;
+          do {
+            nextRank = this.abilityFactory.getNextRank(nextRank);
+            this.proposedExperience -= nextRank.xpCost;
+          } while (nextRank.id !== ability.id)
+          continue;
+        }
       }
 
-      if (this.proposedAbilities.length === 1 && 
+      if (this.proposedAbilities.length === 1 &&
         this.commander.abilities.length === 0 &&
         this.commander.currentExperience === 0 &&
         this.commander.lifetimeExperience === 0)
@@ -121,7 +123,7 @@ export class CustomCommanderComponent implements OnInit {
         newAbility = this.abilityFactory.getAbility(newAbility.prerequisiteId);
         this.proposedExperience -= newAbility.xpCost;
       }
-      
+
     }
   }
 
