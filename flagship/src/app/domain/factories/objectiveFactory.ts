@@ -1,4 +1,4 @@
-import { ObjectiveType, Objective } from '../objective';
+import { ObjectiveType, Objective } from '../game/objective';
 
 export class ObjectiveFactory {
 

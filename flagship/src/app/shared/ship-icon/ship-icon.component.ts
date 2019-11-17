@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ship } from 'src/app/domain/ship';
+import { Ship } from 'src/app/domain/game/ship';
 
 @Component({
   selector: 'flagship-ship-icon',

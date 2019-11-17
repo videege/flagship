@@ -1,4 +1,4 @@
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 import { CampaignPlayer, SerializedCampaignPlayer } from './campaignPlayer';
 import { StrategicEffectType } from './strategicEffectType';
 

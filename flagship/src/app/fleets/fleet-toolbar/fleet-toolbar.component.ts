@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Fleet } from '../../domain/fleet';
+import { Fleet } from '../../domain/game/fleet';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Ship } from '../../domain/ship';
+import { Ship } from '../../domain/game/ship';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

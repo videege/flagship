@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Squadron } from '../../domain/squadron';
-import { Fleet } from '../../domain/fleet';
+import { Squadron } from '../../domain/game/squadron';
+import { Fleet } from '../../domain/game/fleet';
 import { SquadronFactory } from '../../domain/factories/squadronFactory';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';

@@ -1,7 +1,7 @@
 import { Phase } from './phase';
 import { CampaignEvent, SerializedCampaignEvent, CampaignEventType } from './campaignEvent';
 import { Battle, SerializedBattle } from './battle';
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 
 export interface SerializedCampaignState {
     turn: number;

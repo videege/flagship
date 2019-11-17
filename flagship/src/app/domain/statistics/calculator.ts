@@ -1,4 +1,4 @@
-import { Armament } from '../armament';
+import { Armament } from '../game/armament';
 import { AttackPool, IAttackPool } from './attackPool';
 import { IDieModification, ICalculatedProbabilities } from './dieModification';
 import { FiringArc } from './firingArc';

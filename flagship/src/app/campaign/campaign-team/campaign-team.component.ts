@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Team } from 'src/app/domain/campaign/team';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { AngularFireAuth } from '@angular/fire/auth';

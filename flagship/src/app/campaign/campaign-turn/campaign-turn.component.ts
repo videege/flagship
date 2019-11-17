@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { CampaignState } from 'src/app/domain/campaign/campaignState';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';

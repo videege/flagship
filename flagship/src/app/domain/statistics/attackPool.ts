@@ -1,5 +1,5 @@
 import { DieRoll, DieType } from './dieRoll';
-import { Armament } from '../armament';
+import { Armament } from '../game/armament';
 import { IDieModification } from './dieModification';
 import { PoolStatistics } from './poolStatistics';
 import { FiringArc } from './firingArc';

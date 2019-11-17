@@ -1,6 +1,6 @@
-import { Upgrade } from "../upgrade";
-import { UpgradeType } from "../upgradeType";
-import { Faction } from "../faction";
+import { Upgrade } from "../game/upgrade";
+import { UpgradeType } from "../game/upgradeType";
+import { Faction } from "../game/faction";
 import { CustomCommander } from '../campaign/customCommander';
 import { BehaviorSubject } from 'rxjs';
 

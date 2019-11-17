@@ -1,4 +1,4 @@
-import { UpgradeType } from '../upgradeType';
+import { UpgradeType } from '../game/upgradeType';
 
 export class LocationReward {
     public upgradeType: UpgradeType;

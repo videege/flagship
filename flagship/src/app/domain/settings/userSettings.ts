@@ -1,4 +1,4 @@
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 
 export interface SerializedUserSettings {
     uid: string;

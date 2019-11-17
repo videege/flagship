@@ -2,9 +2,9 @@ import { Routes, ActivatedRouteSnapshot, RouterModule, Data } from '@angular/rou
 
 import { Resolve } from '@angular/router';
 import { Injectable, NgModule } from '@angular/core';
-import { Fleet } from '../domain/fleet';
+import { Fleet } from '../domain/game/fleet';
 import { Observable } from 'rxjs';
-import { Ship } from '../domain/ship';
+import { Ship } from '../domain/game/ship';
 import { map } from 'rxjs/operators';
 import { DefaultToolbarComponent } from '../shared/default-toolbar/default-toolbar.component';
 import { FlagshipRouteData } from "../app.route-data";

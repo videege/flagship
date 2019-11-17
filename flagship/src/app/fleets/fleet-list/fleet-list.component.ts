@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FleetService } from '../../core/services/fleet.service';
-import { Fleet } from '../../domain/fleet';
-import { Faction } from '../../domain/faction';
+import { Fleet } from '../../domain/game/fleet';
+import { Faction } from '../../domain/game/faction';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-editor.component';

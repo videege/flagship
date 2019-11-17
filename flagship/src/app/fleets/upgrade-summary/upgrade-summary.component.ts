@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Upgrade } from '../../domain/upgrade';
-import { UpgradeType } from 'src/app/domain/upgradeType';
+import { Upgrade } from '../../domain/game/upgrade';
+import { UpgradeType } from 'src/app/domain/game/upgradeType';
 
 @Component({
   selector: 'flagship-upgrade-summary',

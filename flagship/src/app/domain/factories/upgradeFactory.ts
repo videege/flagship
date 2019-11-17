@@ -1,9 +1,9 @@
-import { Upgrade, UpgradeData, UpgradeClass, SlotGrantingUpgradeData } from "../upgrade";
-import { UpgradeType } from "../upgradeType";
-import { Faction } from "../faction";
+import { Upgrade, UpgradeData, UpgradeClass, SlotGrantingUpgradeData } from "../game/upgrade";
+import { UpgradeType } from "../game/upgradeType";
+import { Faction } from "../game/faction";
 import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
 import { SlotGrantingUpgrade } from '../upgrades/slotGrantingUpgrade';
-import { Size } from '../size';
+import { Size } from '../game/size';
 import { CustomCommander } from '../campaign/customCommander';
 import { CustomCommanderUpgrade } from '../upgrades/customCommanderUpgrade';
 

@@ -1,7 +1,7 @@
 import { IDieModification } from '../dieModification';
 import { LeadingShotsModification } from '../rerolls/leadingShots';
 import { RerollStrategy } from '../rerolls/rerollStrategy';
-import { Ship } from '../../ship';
+import { Ship } from '../../game/ship';
 import { AdditionModification, AdditionRestriction } from '../additions/additionModification';
 import { FiringArc } from '../firingArc';
 

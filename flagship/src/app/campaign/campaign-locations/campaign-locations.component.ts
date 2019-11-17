@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
 import { StrategicEffectType, StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';

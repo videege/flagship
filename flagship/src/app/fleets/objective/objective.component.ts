@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Objective, ObjectiveType } from '../../domain/objective';
+import { Objective, ObjectiveType } from '../../domain/game/objective';
 import { ObjectiveSelectorData, ObjectiveSelectorComponent } from '../objective-selector/objective-selector.component';
-import { Fleet } from '../../domain/fleet';
+import { Fleet } from '../../domain/game/fleet';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

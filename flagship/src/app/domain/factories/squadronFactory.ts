@@ -1,8 +1,8 @@
-import { SquadronData, Squadron, ISerializedSquadron } from '../squadron';
-import { Faction } from '../faction';
-import { Armament } from '../armament';
-import { Keyword, KeywordType } from '../keyword';
-import { DefenseToken } from '../defenseToken';
+import { SquadronData, Squadron, ISerializedSquadron } from '../game/squadron';
+import { Faction } from '../game/faction';
+import { Armament } from '../game/armament';
+import { Keyword, KeywordType } from '../game/keyword';
+import { DefenseToken } from '../game/defenseToken';
 
 export class SquadronFactory {
     static squadronData: SquadronData[] = [

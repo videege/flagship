@@ -1,9 +1,9 @@
-import { Upgrade, SlotGrantingUpgradeData } from "../upgrade";
-import { UpgradeType } from "../upgradeType";
-import { Faction } from "../faction";
-import { Ship } from "../ship";
-import { UpgradeSlot } from "../upgradeSlot";
-import { Size } from '../size';
+import { Upgrade, SlotGrantingUpgradeData } from "../game/upgrade";
+import { UpgradeType } from "../game/upgradeType";
+import { Faction } from "../game/faction";
+import { Ship } from "../game/ship";
+import { UpgradeSlot } from "../game/upgradeSlot";
+import { Size } from '../game/size';
 
 export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeData {
     constructor(id: number, name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,

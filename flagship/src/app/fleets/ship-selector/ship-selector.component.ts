@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ShipFactory } from '../../domain/factories/shipFactory';
-import { Ship, ShipData } from '../../domain/ship';
-import { Fleet } from '../../domain/fleet';
+import { Ship, ShipData } from '../../domain/game/ship';
+import { Fleet } from '../../domain/game/fleet';
 
 export interface ShipSelectorData {
   fleet: Fleet;

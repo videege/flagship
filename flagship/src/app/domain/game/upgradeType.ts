@@ -1,4 +1,4 @@
-import { CompileMetadataResolver } from "../../../node_modules/@angular/compiler";
+import { CompileMetadataResolver } from "@angular/compiler";
 
 export enum UpgradeType {
   Commander = "Commander",

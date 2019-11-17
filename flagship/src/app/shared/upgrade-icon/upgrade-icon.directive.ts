@@ -1,5 +1,5 @@
 import { Directive, Input, HostBinding, OnInit } from '@angular/core';
-import { UpgradeType } from '../../domain/upgradeType';
+import { UpgradeType } from '../../domain/game/upgradeType';
 
 @Directive({
   selector: '[flagshipUpgradeIcon]'

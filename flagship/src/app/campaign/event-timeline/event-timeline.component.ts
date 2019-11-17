@@ -5,7 +5,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Battle } from 'src/app/domain/campaign/battle';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { BattleState } from 'src/app/domain/campaign/battleState';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 
 interface TimelineEvent {

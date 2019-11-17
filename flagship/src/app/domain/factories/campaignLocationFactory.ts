@@ -2,7 +2,7 @@ import { CampaignType } from '../campaign/campaignType';
 import { SerializedCampaignLocation, CampaignLocation } from '../campaign/campaignLocation';
 import { StrategicEffectType } from '../campaign/strategicEffectType';
 import { LocationReward } from '../campaign/locationReward';
-import { UpgradeType } from '../upgradeType';
+import { UpgradeType } from '../game/upgradeType';
 
 interface StaticLocationData {
     id: number;

@@ -10,11 +10,11 @@ import { Validator, RITRValidator } from './validator';
 import { CampaignLocationFactory } from '../factories/campaignLocationFactory';
 import { SerializedCampaignEvent, CampaignEvent } from './campaignEvent';
 import { Phase } from './phase';
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 import { Battle } from './battle';
-import { Fleet } from '../fleet';
+import { Fleet } from '../game/fleet';
 import { ObjectiveFactory } from '../factories/objectiveFactory';
-import { ObjectiveType } from '../objective';
+import { ObjectiveType } from '../game/objective';
 
 export interface SerializedCampaign {
     id: string;

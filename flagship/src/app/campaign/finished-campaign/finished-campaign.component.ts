@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
-import { Faction, oppositeFaction } from 'src/app/domain/faction';
+import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
 
 @Component({
   selector: 'flagship-finished-campaign',

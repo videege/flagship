@@ -1,11 +1,11 @@
-import { Ship, ShipData, ShipClass } from "../ship";
-import { Faction } from '../faction';
-import { DefenseToken } from '../defenseToken';
-import { Size } from '../size';
-import { Armament } from '../armament';
-import { NavigationChart } from '../navigationChart';
-import { UpgradeSlot } from '../upgradeSlot';
-import { UpgradeType } from '../upgradeType';
+import { Ship, ShipData, ShipClass } from "../game/ship";
+import { Faction } from '../game/faction';
+import { DefenseToken } from '../game/defenseToken';
+import { Size } from '../game/size';
+import { Armament } from '../game/armament';
+import { NavigationChart } from '../game/navigationChart';
+import { UpgradeSlot } from '../game/upgradeSlot';
+import { UpgradeType } from '../game/upgradeType';
 
 export class ShipFactory {
   private static titles = {

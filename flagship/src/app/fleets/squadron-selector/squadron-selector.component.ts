@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Fleet } from '../../domain/fleet';
+import { Fleet } from '../../domain/game/fleet';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SquadronFactory } from '../../domain/factories/squadronFactory';
-import { SquadronData } from '../../domain/squadron';
+import { SquadronData } from '../../domain/game/squadron';
 
 export interface SquadronSelectorData {
   fleet: Fleet;

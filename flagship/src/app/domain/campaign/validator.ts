@@ -1,12 +1,12 @@
 import { Campaign } from './campaign';
 import { Issue, IssueSeverity } from './issue';
 import { Team } from './team';
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 import { CampaignLocation } from './campaignLocation';
 import { LocationControlType } from './locationControlType';
 import { CampaignUser } from './campaignUser';
 import { FleetService } from 'src/app/core/services/fleet.service';
-import { Fleet } from '../fleet';
+import { Fleet } from '../game/fleet';
 
 export interface Validator {
     validateSetupPhase(campaign: Campaign): Issue[];

@@ -2,7 +2,7 @@ import { CampaignType } from '../campaign/campaignType';
 import { Team } from '../campaign/team';
 import { CampaignState } from '../campaign/campaignState';
 import { Phase } from '../campaign/phase';
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 import { CampaignLocation, SerializedCampaignLocation } from '../campaign/campaignLocation';
 import { StrategicEffectType } from '../campaign/strategicEffectType';
 import { SerializedCustomCommander } from '../campaign/customCommander';

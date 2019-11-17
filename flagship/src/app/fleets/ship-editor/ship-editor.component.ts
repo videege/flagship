@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Ship } from '../../domain/ship';
-import { UpgradeType, sortUpgradeTypes } from '../../domain/upgradeType';
-import { Upgrade } from '../../domain/upgrade';
+import { Ship } from '../../domain/game/ship';
+import { UpgradeType, sortUpgradeTypes } from '../../domain/game/upgradeType';
+import { Upgrade } from '../../domain/game/upgrade';
 import { MatDialog } from '@angular/material/dialog';
 import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.component';
-import { UpgradeSlot } from '../../domain/upgradeSlot';
+import { UpgradeSlot } from '../../domain/game/upgradeSlot';
 import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
 import { ActivatedRoute } from '@angular/router';
 

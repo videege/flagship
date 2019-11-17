@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Armament } from '../../domain/armament';
+import { Armament } from '../../domain/game/armament';
 
 @Component({
   selector: 'flagship-battery',

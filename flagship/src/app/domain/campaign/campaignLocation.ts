@@ -1,4 +1,4 @@
-import { Faction } from '../faction';
+import { Faction } from '../game/faction';
 import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';

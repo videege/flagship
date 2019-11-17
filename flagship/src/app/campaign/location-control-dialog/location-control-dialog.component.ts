@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Fleet } from '../../domain/fleet';
-import { ObjectiveType, Objective } from '../../domain/objective';
+import { Fleet } from '../../domain/game/fleet';
+import { ObjectiveType, Objective } from '../../domain/game/objective';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ObjectiveFactory } from '../../domain/factories/objectiveFactory';
 

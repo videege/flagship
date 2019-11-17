@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Faction } from '../../domain/faction';
-import { Fleet } from '../../domain/fleet';
+import { Faction } from '../../domain/game/faction';
+import { Fleet } from '../../domain/game/fleet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

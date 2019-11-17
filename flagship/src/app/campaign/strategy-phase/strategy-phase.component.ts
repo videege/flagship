@@ -5,7 +5,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { CampaignEventType } from 'src/app/domain/campaign/campaignEvent';
 import { Battle } from 'src/app/domain/campaign/battle';
-import { Faction } from 'src/app/domain/faction';
+import { Faction } from 'src/app/domain/game/faction';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { Condition } from 'src/app/domain/campaign/condition';

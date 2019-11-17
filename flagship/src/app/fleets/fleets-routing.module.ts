@@ -6,10 +6,10 @@ import { ShipStatisticsComponent } from './ship-statistics/ship-statistics.compo
 
 import { Resolve } from '@angular/router';
 import { Injectable, NgModule } from '@angular/core';
-import { Fleet } from '../domain/fleet';
+import { Fleet } from '../domain/game/fleet';
 import { Observable } from 'rxjs';
 import { FleetService } from '../core/services/fleet.service';
-import { Ship } from '../domain/ship';
+import { Ship } from '../domain/game/ship';
 import { map } from 'rxjs/operators';
 import { DefaultToolbarComponent } from '../shared/default-toolbar/default-toolbar.component';
 import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';

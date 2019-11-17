@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Fleet, ISerializedFleet } from '../../domain/fleet';
-import { Faction } from '../../domain/faction';
+import { Fleet, ISerializedFleet } from '../../domain/game/fleet';
+import { Faction } from '../../domain/game/faction';
 import { Observable, of, combineLatest } from 'rxjs';
 
 import { LocalStorage } from '@ngx-pwa/local-storage';
@@ -12,7 +12,7 @@ import { ObjectiveFactory } from '../../domain/factories/objectiveFactory';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
-import { Upgrade } from 'src/app/domain/upgrade';
+import { Upgrade } from 'src/app/domain/game/upgrade';
 import { firestore } from 'firebase';
 
 export interface FleetCompaignData {

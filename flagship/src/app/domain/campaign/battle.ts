@@ -8,7 +8,7 @@ import { CampaignPlayer } from './campaignPlayer';
 import { LocationControlType } from './locationControlType';
 import { Condition } from './condition';
 import { Team } from './team';
-import { Faction, oppositeFaction } from '../faction';
+import { Faction, oppositeFaction } from '../game/faction';
 import { PivotalObjective } from './pivotalObjective';
 
 export interface SerializedBattle extends SerializedCampaignEvent {

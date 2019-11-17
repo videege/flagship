@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Fleet } from '../../domain/fleet';
-import { Ship } from '../../domain/ship';
+import { Fleet } from '../../domain/game/fleet';
+import { Ship } from '../../domain/game/ship';
 import { ShipFactory } from '../../domain/factories/shipFactory';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { UpgradeFactory } from '../../domain/factories/upgradeFactory';
 import { ShipSelectorComponent, ShipSelectorData } from '../ship-selector/ship-selector.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Squadron } from '../../domain/squadron';
+import { Squadron } from '../../domain/game/squadron';
 import { SquadronSelectorComponent, SquadronSelectorData } from '../squadron-selector/squadron-selector.component';
 import { AlertType } from '../../shared/alert/alert.component';
-import { ObjectiveType, Objective } from '../../domain/objective';
+import { ObjectiveType, Objective } from '../../domain/game/objective';
 import { ObjectiveSelectorComponent } from '../objective-selector/objective-selector.component';
 import { ActivatedRoute } from '@angular/router';
 

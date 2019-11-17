@@ -7,8 +7,8 @@ import { UpgradeType } from "./upgradeType";
 
 import { Subject } from 'rxjs';
 import { Objective } from './objective';
-import { CustomCommander, SerializedCustomCommander } from './campaign/customCommander';
-import { CustomCommanderAbilityCategory } from './campaign/customCommanderAbilityCategory';
+import { CustomCommander, SerializedCustomCommander } from '../campaign/customCommander';
+import { CustomCommanderAbilityCategory } from '../campaign/customCommanderAbilityCategory';
 
 export interface ISerializedFleet {
   id: string;

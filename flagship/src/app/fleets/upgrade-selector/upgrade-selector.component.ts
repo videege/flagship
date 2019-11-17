@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UpgradeSlot } from '../../domain/upgradeSlot';
+import { UpgradeSlot } from '../../domain/game/upgradeSlot';
 import { UpgradeFactory } from '../../domain/factories/upgradeFactory';
-import { Faction } from '../../domain/faction';
-import { Ship } from '../../domain/ship';
-import { Upgrade } from '../../domain/upgrade';
-import { UpgradeType } from 'src/app/domain/upgradeType';
+import { Faction } from '../../domain/game/faction';
+import { Ship } from '../../domain/game/ship';
+import { Upgrade } from '../../domain/game/upgrade';
+import { UpgradeType } from 'src/app/domain/game/upgradeType';
 
 export interface UpgradeSelectorData {
   slot: UpgradeSlot;

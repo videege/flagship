@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ship } from '../../domain/ship';
+import { Ship } from '../../domain/game/ship';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DieModificationFactory } from '../../domain/statistics/factories/dieModificationFactory';
 import { IDieModification, ModificationType } from '../../domain/statistics/dieModification';
-import { Armament } from '../../domain/armament';
+import { Armament } from '../../domain/game/armament';
 import { Calculator } from '../../domain/statistics/calculator';
 import { IAttackPool } from '../../domain/statistics/attackPool';
 import { PoolStatistics } from '../../domain/statistics/poolStatistics';
