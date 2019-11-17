@@ -5,7 +5,7 @@
   "hosting": [
     {
       "target": "dev",
-      "public": "dist/flagship-dev",
+      "public": "flagship/dist/flagship-dev",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -57,7 +57,7 @@
     },
     {
       "target": "prod",
-      "public": "dist/flagship-prod",
+      "public": "flagship/dist/flagship-prod",
       "ignore": [
         "firebase.json",
         "**/.*",

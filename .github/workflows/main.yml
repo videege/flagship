@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: flagship/dist
+          path: flagship/dist/flagship-prod
   deploy:
     name: Deploy
     needs: build
