@@ -9,6 +9,5 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "262477298760",
     appId: "1:262477298760:web:34cee621b0cb92e4392c7d"
-  },
-  collectionPrefix: ''
+  }
 };

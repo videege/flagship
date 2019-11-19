@@ -5,15 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCHmA5kxq4H7zjJU_CpiE_aypE1LvxeRZE",
-    authDomain: "flagship-armada.firebaseapp.com",
-    databaseURL: "https://flagship-armada.firebaseio.com",
-    projectId: "flagship-armada",
+    apiKey: "AIzaSyAmVMMhoPnGOs-LLCCUozwQt3onJ-ltCdY",
+    authDomain: "flagship-armada-development.firebaseapp.com",
+    databaseURL: "https://flagship-armada-development.firebaseio.com",
+    projectId: "flagship-armada-development",
     storageBucket: "",
-    messagingSenderId: "262477298760",
-    appId: "1:262477298760:web:fea968ad2f563eed392c7d"
-  },
-  collectionPrefix: 'dev-'
+    messagingSenderId: "243520392824",
+    appId: "1:243520392824:web:648ab41c9e615fdb01e78d"
+  }
 };
 
 /*
@@ -22,4 +21,4 @@ export const environment = {
  * below file. Don't forget to comment it out in production mode
  * because it will have a performance impact when errors are thrown
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.

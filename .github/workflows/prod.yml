@@ -1,8 +1,8 @@
-name: Build and Deploy Development
+name: Build and Deploy Production
 on:
   push:
     branches:
-      - master
+      - release
 
 jobs:
   build:
@@ -18,12 +18,12 @@ jobs:
       - name: Build
         run: |
           cd ./flagship
-          npm run build-dev
-      - name: Archive Dev Artifact
+          npm run build-prod
+      - name: Archive Prod Artifact
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: flagship/dist/flagship-dev
+          path: flagship/dist/flagship-prod
   deploy:
     name: Deploy
     needs: build
@@ -38,6 +38,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:dev-cicd --project development
+          args: deploy --only hosting:prod-cicd --project default
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

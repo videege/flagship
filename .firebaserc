@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "flagship-armada"
+    "default": "flagship-armada",
+    "development": "flagship-armada-development"
   },
   "targets": {
     "flagship-armada": {
@@ -10,9 +11,16 @@
         ],
         "prod-cicd": [
           "flagship-armada"
-        ],
+        ]
+      }
+    },
+    "flagship-armada-development": {
+      "hosting": {
         "dev": [
-          "flagship-armada-dev"
+          "flagship-armada-development"
+        ],
+        "dev-cicd": [
+          "flagship-armada-development"
         ]
       }
     }
