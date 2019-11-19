@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "262477298760",
     appId: "1:262477298760:web:fea968ad2f563eed392c7d"
-  }
+  },
+  collectionPrefix: 'dev-'
 };
 
 /*
