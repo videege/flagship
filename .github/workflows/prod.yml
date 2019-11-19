@@ -35,9 +35,21 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-      - name: Deploy to Firebase
+      - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:prod-cicd --project default
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Deploy to Firebase Functions
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions --project default
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Deploy to Firebase Firestore
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only firestore --project default
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
