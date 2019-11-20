@@ -20,7 +20,8 @@ import { Phase } from 'src/app/domain/campaign/phase';
   templateUrl: './campaign-locations.component.html',
   styleUrls: ['./campaign-locations.component.scss']
 })
-export class CampaignLocationsComponent implements OnInit {
+export class CampaignLocationsComponent implements OnInit, OnChanges {
+
   @Input() campaign: Campaign;
 
   public campaigns: Campaign[];
@@ -28,19 +29,35 @@ export class CampaignLocationsComponent implements OnInit {
   public controlTypes = LocationControlType;
   public objectiveFactory = new ObjectiveFactory();
   public canModify = false;
+  public viewableFactions: Faction[] = [];
   user: firebase.User;
 
   constructor(private campaignService: CampaignService,
     private snackbar: MatSnackBar, private dialog: MatDialog,
     private afAuth: AngularFireAuth) {
-    this.afAuth.user.subscribe(user => {
-      this.user = user;
-    });
+
   }
 
   ngOnInit() {
-    this.canModify = this.campaign.currentState().phase !== Phase.Finished;
+    this.afAuth.user.subscribe(user => {
+      this.user = user;
+      this.setup();
+    });
+    this.setup();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setup();
+  }
+
+  private setup() {
+    this.canModify = this.campaign.currentState().phase !== Phase.Finished;
+    if (this.user)
+      this.viewableFactions = this.campaign.getPlayers().filter(p => p.playerUid == this.user.uid)
+        .map(p => this.campaign.getFactionOfPlayer(p.id));
+  }
+
+
 
   public getObjectiveNames(objectives: number[]): string {
     if (!objectives) return 'None';
@@ -83,7 +100,7 @@ export class CampaignLocationsComponent implements OnInit {
             }
           }
         }
-        if (change == null) 
+        if (change == null)
           return;
 
         this.campaign.addEvent(new CampaignEvent(CampaignEventType.ManualLocationChange,

@@ -28,6 +28,7 @@
                 </span>
             </mat-panel-description>
         </mat-expansion-panel-header>
+
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
             <div fxFlex>
                 <p>
@@ -42,6 +43,12 @@
                     <strong>Strategic Effect(s): </strong>
                     {{ getStrategicEffects(location.strategicEffects) }}
                 </p>
+
+                <p
+                    *ngIf="location.controlType === controlTypes.Base && viewableFactions.includes(location.controllingFaction)">
+                    <strong>Secret Objective:</strong>
+                    {{ getObjectiveNames([location.chosenObjective]) }}
+                </p>
             </div>
             <div fxFlex>
                 <p>
@@ -55,6 +62,7 @@
                 </p>
             </div>
         </div>
+
         <mat-action-row *ngIf="canModify">
             <button mat-button color="primary" (click)="setLocationControl(location)">
                 Set Location Control
