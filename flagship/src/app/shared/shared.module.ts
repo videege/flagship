@@ -7,6 +7,7 @@ import { BatteryComponent } from './battery/battery.component';
 import { ShipIconComponent } from './ship-icon/ship-icon.component';
 import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
 import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
     BatteryComponent,
     ShipIconComponent,
     UpgradeIconDirective,
-    NumeralsPipe
+    NumeralsPipe,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,11 @@ import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
     BatteryComponent,
     ShipIconComponent,
     UpgradeIconDirective,
-    NumeralsPipe
+    NumeralsPipe,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule { }

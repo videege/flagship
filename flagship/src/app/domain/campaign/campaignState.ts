@@ -40,9 +40,9 @@ export class CampaignState {
     }
 
     public actShouldEnd(numberOfFleets: number): boolean {
-        return numberOfFleets === 4 
-        ? (this.imperialPointsScored >= 4 || this.rebelPointsScored >= 4) 
-        : (this.imperialPointsScored >= 5 || this.rebelPointsScored >= 5);
+        return numberOfFleets === 4
+            ? (this.imperialPointsScored >= 4 || this.rebelPointsScored >= 4)
+            : (this.imperialPointsScored >= 5 || this.rebelPointsScored >= 5);
     }
 
     public addEvent(event: CampaignEvent) {
@@ -83,6 +83,7 @@ export class CampaignState {
                 case CampaignEventType.Battle:
                     return Battle.hydrate(x as SerializedBattle);
                 case CampaignEventType.ManualLocationChange:
+                case CampaignEventType.ManualXPChange:
                     return CampaignEvent.hydrate(x);
                 default:
                     throw new Error("Unrecognized campaign event type.");

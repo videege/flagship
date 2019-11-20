@@ -123,6 +123,11 @@ export class FleetService {
     return doc.delete();
   }
 
+  public deleteFleetById(id: string): Promise<void> {
+    let doc = this.db.doc<ISerializedFleet>(`fleets/${id}`);
+    return doc.delete();
+  }
+
   private hydrateFleet(serializedFleet: ISerializedFleet, id: string = null): Fleet {
     let fleet = new Fleet(id || serializedFleet.id,
       serializedFleet.name, serializedFleet.author, serializedFleet.faction,

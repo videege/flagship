@@ -1,7 +1,8 @@
 
 export enum CampaignEventType {
     Battle = 0,
-    ManualLocationChange = 1
+    ManualLocationChange = 1,
+    ManualXPChange = 2
 }
 
 export interface SerializedCampaignEvent {

@@ -143,6 +143,6 @@ export class EventTimelineComponent implements OnInit, OnChanges {
         return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score}.`
       }
     }
-    return `Event was performed by ${this.campaign.campaignUsers.find(x => x.uid === event.userUid).displayName}.`;
+    return `Action performed by ${this.campaign.campaignUsers.find(x => x.uid === event.userUid).displayName}.`;
   }
 }

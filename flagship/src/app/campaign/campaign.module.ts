@@ -16,7 +16,6 @@ import { CampaignSetupDialogComponent } from './campaign-setup-dialog/campaign-s
 import { IssuesListComponent } from './issues-list/issues-list.component';
 import { LocationControlDialogComponent } from './location-control-dialog/location-control-dialog.component';
 import { EventTimelineComponent } from './event-timeline/event-timeline.component';
-import { EventComponent } from './event/event.component';
 import { CampaignInfoComponent } from './campaign-info/campaign-info.component';
 import { CampaignSetupComponent } from './campaign-setup/campaign-setup.component';
 import { CampaignTurnComponent } from './campaign-turn/campaign-turn.component';
@@ -25,10 +24,32 @@ import { BattlePhaseComponent } from './battle-phase/battle-phase.component';
 import { ManagementPhaseComponent } from './management-phase/management-phase.component';
 import { PivotalBattlePhaseComponent } from './pivotal-battle-phase/pivotal-battle-phase.component';
 import { FinishedCampaignComponent } from './finished-campaign/finished-campaign.component';
+import { SetExperienceDialogComponent } from './set-experience-dialog/set-experience-dialog.component';
 
 
 @NgModule({
-  declarations: [CampaignListComponent, CampaignDashboardComponent, CampaignEditorComponent, CampaignTeamComponent, PlayerCreatorDialogComponent, InviteComponent, CampaignLocationsComponent, CampaignSetupDialogComponent, IssuesListComponent, LocationControlDialogComponent, EventTimelineComponent, EventComponent, CampaignInfoComponent, CampaignSetupComponent, CampaignTurnComponent, StrategyPhaseComponent, BattlePhaseComponent, ManagementPhaseComponent, PivotalBattlePhaseComponent, FinishedCampaignComponent],
+  declarations: [
+    CampaignListComponent,
+    CampaignDashboardComponent, 
+    CampaignEditorComponent, 
+    CampaignTeamComponent, 
+    PlayerCreatorDialogComponent, 
+    InviteComponent, 
+    CampaignLocationsComponent, 
+    CampaignSetupDialogComponent, 
+    IssuesListComponent, 
+    LocationControlDialogComponent, 
+    EventTimelineComponent, 
+    CampaignInfoComponent, 
+    CampaignSetupComponent, 
+    CampaignTurnComponent, 
+    StrategyPhaseComponent, 
+    BattlePhaseComponent, 
+    ManagementPhaseComponent, 
+    PivotalBattlePhaseComponent, 
+    FinishedCampaignComponent, 
+    SetExperienceDialogComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -40,12 +61,13 @@ import { FinishedCampaignComponent } from './finished-campaign/finished-campaign
   providers: [
     CampaignResolver,
     InviteResolver
-  ], 
+  ],
   entryComponents: [
     CampaignEditorComponent,
     PlayerCreatorDialogComponent,
     CampaignSetupDialogComponent,
-    LocationControlDialogComponent
+    LocationControlDialogComponent,
+    SetExperienceDialogComponent
   ]
 })
 export class CampaignModule { }

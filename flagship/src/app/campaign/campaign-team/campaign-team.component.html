@@ -17,13 +17,36 @@
                 <p mat-line>
                     <span>{{ player.wins }} W / {{ player.losses }} L / {{ player.mov }} MOV</span>
                 </p>
+                <p mat-line>
+                    <strong>XP:</strong>
+                    <span>
+                        {{ commanders[player.id].currentExperience }} current,
+                        {{ commanders[player.id].lifetimeExperience }} lifetime
+                    </span>
+                </p>
                 <div matTooltip="{{ player.isLeader ? 'Team Leader' : 'Promote to Team Leader'}}">
                     <button mat-icon-button [disabled]="player.isLeader" (click)="makeTeamLeader(player)">
                         <mat-icon [class.gold]="player.isLeader">{{ player.isLeader ? 'star' : 'star_border' }}
                         </mat-icon>
                     </button>
                 </div>
-                <a mat-button [routerLink]="['/fleets', player.fleetId]">View Fleet</a>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="View Fleet or Set XP">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <a mat-menu-item [routerLink]="['/fleets', player.fleetId]">
+                        <mat-icon>edit</mat-icon>
+                        <span>View / Edit Fleet</span>
+                    </a>
+                    <button mat-menu-item (click)="setXP(player)">
+                        <mat-icon>plus_one</mat-icon>
+                        <span>Set XP</span>
+                    </button>
+                    <button mat-menu-item *ngIf="canAddPlayers" (click)="deletePlayer(player)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete Player</span>
+                    </button>
+                </mat-menu>
             </mat-list-item>
         </mat-list>
         <mat-card-actions *ngIf="canAddPlayers">
@@ -48,12 +71,10 @@
                 <ng-container matColumnDef="modify">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let count">
-                        <button mat-icon-button (click)="increaseToken(count.type)"
-                            [disabled]="!canEditTokens">
+                        <button mat-icon-button (click)="increaseToken(count.type)" [disabled]="!canEditTokens">
                             <mat-icon>add</mat-icon>
                         </button>
-                        <button mat-icon-button (click)="decreaseToken(count.type)"
-                            [disabled]="!canEditTokens">
+                        <button mat-icon-button (click)="decreaseToken(count.type)" [disabled]="!canEditTokens">
                             <mat-icon>remove</mat-icon>
                         </button>
                     </td>

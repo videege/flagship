@@ -1,0 +1,22 @@
+<div mat-dialog-content>
+    <h3>Set Experience Points</h3>
+    <p>
+        You can manually set the current experience of this commander below.
+        Note that Flagship will automatically award experience as you progress through the campaign,
+        so this should only be necessary to correct mistakes. Any changes you make below
+        will be recorded in the campaign's timeline.
+    </p>
+    <form fxLayout="column">
+        <mat-form-field>
+            <input placeholder="Current Experience Points"
+                matInput type="number" [(ngModel)]="xp" required min="0" name="xp"/>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <span fxFlex></span>
+    <button mat-button (click)="setExperience()"
+        [disabled]="xp === null || xp < 0"
+        color="primary">Update Experience Points</button>
+</div>
