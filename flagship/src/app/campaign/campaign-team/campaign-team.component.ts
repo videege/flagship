@@ -135,7 +135,7 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
         });
       });
 
-    })
+    });
   }
 
   addPlayer() {

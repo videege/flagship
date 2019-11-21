@@ -105,6 +105,11 @@ export class CampaignService {
     return doc.update(serialized);
   }
 
+  public deleteCampaign(campaign: Campaign): Promise<void> {
+    let doc = this.db.doc<SerializedCampaign>(`campaigns/${campaign.id}`);
+    return doc.delete();
+  }
+
   public createCampaignInvitation(campaign: Campaign): Promise<Campaign> {
     if (!this.user) throw new Error("User not logged in.");
 
