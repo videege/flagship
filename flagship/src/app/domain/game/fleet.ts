@@ -50,7 +50,7 @@ export class Fleet {
 
     this.subject = new Subject<string>();
   }
-  
+
   public setId(id: string) {
     this.id = id;
   }
@@ -143,7 +143,7 @@ export class Fleet {
     if (upgrade.unique && this.hasUniqueNameEquipped(upgrade.name)) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -186,6 +186,16 @@ export class Fleet {
     if (idx >= 0) {
       this.ships[idx].subject.unsubscribe();
       this.ships.splice(idx, 1);
+      if (this.hasCustomCommander()) {
+        if (this.customCommander.hasAdditionalSupport() &&
+          this.customCommander.additionalSupportShipUid === ship.uid) {
+          this.customCommander.setAdditionalSupportShip(null);
+        }
+        if (this.customCommander.hasCommandBridge() &&
+          this.customCommander.commandBridgeShipUid === ship.uid) {
+          this.customCommander.setCommandBridgeShip(null);
+        }
+      }
       this.subject.next(this.id);
     }
   }

@@ -786,6 +786,9 @@ export class ShipFactory {
       if (customCommander.additionalSupportShipUid === uid) {
         upgradeSlots.push(new UpgradeSlot(UpgradeType.FleetSupport));
       }
+      if (customCommander.commandBridgeShipUid === uid) {
+        upgradeSlots.push(new UpgradeSlot(UpgradeType.FleetCommand));
+      }
     }
 
     if (data.shipClass === ShipClass.Normal) {

@@ -9,7 +9,6 @@ export interface SerializedCustomCommander {
     currentExperience: number;
     abilities: number[];
     additionalSupportShipUid: string;
-    commandStaffShipUid: string;
     commandBridgeShipUid: string;
 }
 
@@ -21,7 +20,6 @@ export class CustomCommander {
     public abilities: CustomCommanderAbility[] = [];
 
     public additionalSupportShipUid: string = null;
-    public commandStaffShipUid: string = null;
     public commandBridgeShipUid: string = null;
 
     constructor() {
@@ -47,10 +45,6 @@ export class CustomCommander {
 
     hasCommandStaff(): boolean {
         return !!this.abilities.find(x => x.id === 21);
-    }
-
-    setCommandStaffShip(uid: string) {
-        this.commandStaffShipUid = uid;
     }
 
     hasCommandBridge(): boolean {
@@ -80,9 +74,9 @@ export class CustomCommander {
     }
 
     setAbilities(abilities: CustomCommanderAbility[], newExperience: number) {
-       this.abilities = abilities;
-       this.currentExperience = newExperience;
-       this.subject.next(-1);
+        this.abilities = abilities;
+        this.currentExperience = newExperience;
+        this.subject.next(-1);
     }
 
     public serialize(): SerializedCustomCommander {
@@ -92,7 +86,6 @@ export class CustomCommander {
             currentExperience: this.currentExperience,
             abilities: this.abilities.map(x => x.id),
             additionalSupportShipUid: this.additionalSupportShipUid,
-            commandStaffShipUid: this.commandStaffShipUid,
             commandBridgeShipUid: this.commandBridgeShipUid
         };
     }
@@ -106,7 +99,6 @@ export class CustomCommander {
         commander.abilities = data.abilities.map(id => factory.getAbility(id));
         commander.additionalSupportShipUid = data.additionalSupportShipUid || null;
         commander.commandBridgeShipUid = data.commandBridgeShipUid || null;
-        commander.commandStaffShipUid = data.commandStaffShipUid || null;
         return commander;
     }
 }

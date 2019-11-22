@@ -5,6 +5,5 @@
   <br>
 </span>
 <span *ngIf="upgrade && !isDetailed">
-  {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{ upgrade.modification ? "&nbsp;(M)" : "" }}
-  {{ !isLast ? ', ' : '' }}
+  {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{ upgrade.modification ? "&nbsp;(M)" : "" }}{{ !isLast ? ', ' : '' }}
 </span>

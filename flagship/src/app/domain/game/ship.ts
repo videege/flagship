@@ -249,7 +249,8 @@ export class Ship implements ShipData {
 
   isFlagship(): boolean {
     return this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled &&
-      u.type === UpgradeType.Commander && u.isFilled()) != null;
+      (u.type === UpgradeType.Commander || u.type === UpgradeType.CustomCommander)
+       && u.isFilled()) != null;
   }
 
   sortedUpgrades(): Upgrade[] {

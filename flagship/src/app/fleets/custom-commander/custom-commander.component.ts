@@ -30,8 +30,9 @@ export class CustomCommanderComponent implements OnInit, OnChanges {
   additionalSupportShip: Ship = null;
 
   shipsForCommandBridge(): Ship[] {
-    return this.fleet.ships.filter(x => (x.size === Size.Medium || x.size === Size.Large) &&
-      !x.upgradeSlots.find(u => u.type === UpgradeType.FleetCommand));
+    return this.fleet.ships.filter(x => x.uid === this.commander.commandBridgeShipUid ||
+      ((x.size === Size.Medium || x.size === Size.Large) &&
+        !x.upgradeSlots.find(u => u.type === UpgradeType.FleetCommand)));
   }
 
   shipsForAdditionalSupport(): Ship[] {
@@ -59,15 +60,18 @@ export class CustomCommanderComponent implements OnInit, OnChanges {
   }
 
   additionalSupportShipChanged() {
-    this.removeAdditionalSupportFromCurrentShip();
-    this.addAdditionalSupportToSelectedShip();
+    this.removeUpgradeSlotFromCurrentShip(this.commander.additionalSupportShipUid,
+      this.additionalSupportShip, UpgradeType.FleetSupport);
+    this.addUpgradeSlotToSelectedShip(this.commander.additionalSupportShipUid,
+      this.additionalSupportShip, UpgradeType.FleetSupport);
     this.commander.setAdditionalSupportShip(this.additionalSupportShip.uid);
   }
 
-  removeAdditionalSupportFromCurrentShip() {
-    let ship = this.fleet.ships.find(x => x.uid === this.commander.additionalSupportShipUid);
-    if (ship && ship !== this.additionalSupportShip) {
-      let fleetSupport = ship.upgradeSlots.filter(x => x.type === UpgradeType.FleetSupport);
+  removeUpgradeSlotFromCurrentShip(uid: string, selectedShip: Ship, type: UpgradeType,
+    force = false) {
+    let ship = this.fleet.ships.find(x => x.uid === uid);
+    if (ship && (ship !== selectedShip || force)) {
+      let fleetSupport = ship.upgradeSlots.filter(x => x.type === type);
       let lastFleetSupport = fleetSupport[fleetSupport.length - 1];
       if (lastFleetSupport) {
         if (lastFleetSupport.isFilled()) {
@@ -78,15 +82,19 @@ export class CustomCommanderComponent implements OnInit, OnChanges {
     }
   }
 
-  addAdditionalSupportToSelectedShip() {
-    let ship = this.fleet.ships.find(x => x.uid === this.commander.additionalSupportShipUid)
-    if (this.additionalSupportShip && ship != this.additionalSupportShip) {
-      this.additionalSupportShip.upgradeSlots.push(new UpgradeSlot(UpgradeType.FleetSupport));
+  addUpgradeSlotToSelectedShip(uid: string, selectedShip: Ship, type: UpgradeType) {
+    let ship = this.fleet.ships.find(x => x.uid === uid)
+    if (selectedShip && ship != selectedShip) {
+      selectedShip.upgradeSlots.push(new UpgradeSlot(type));
     }
   }
 
   commandBridgeShipChanged() {
-
+    this.removeUpgradeSlotFromCurrentShip(this.commander.commandBridgeShipUid,
+      this.commandBridgeShip, UpgradeType.FleetCommand);
+    this.addUpgradeSlotToSelectedShip(this.commander.commandBridgeShipUid,
+      this.commandBridgeShip, UpgradeType.FleetCommand);
+    this.commander.setCommandBridgeShip(this.commandBridgeShip.uid);
   }
 
   canAddFreeAbility() {
@@ -205,6 +213,32 @@ export class CustomCommanderComponent implements OnInit, OnChanges {
 
   confirmChanges() {
     this.isEditing = false;
+    // Check for the removal of command staff
+    if (this.commander.hasCommandStaff() && !this.proposedAbilities.find(x => x.id === 21)) {
+      let flagship = this.fleet.ships.find(x => x.isFlagship());
+      if (flagship) {
+        let officers = flagship.upgradeSlots.filter((u: UpgradeSlot) => u.isEnabled &&
+          u.type === UpgradeType.Officer);
+        let lastOfficer = officers[officers.length - 1];
+        if (lastOfficer.isFilled()) {
+          flagship.unequipUpgrade(lastOfficer);
+        }
+        flagship.upgradeSlots.splice(flagship.upgradeSlots.indexOf(lastOfficer, 1));
+      }
+    }
+    // Check for removal of command bridge, additional support
+    if (this.commander.hasAdditionalSupport() && !this.proposedAbilities.find(x => x.id === 20) &&
+      this.additionalSupportShip) {
+      this.removeUpgradeSlotFromCurrentShip(this.commander.additionalSupportShipUid,
+        this.additionalSupportShip, UpgradeType.FleetSupport, true);
+      this.commander.setAdditionalSupportShip(null);
+    }
+    if (this.commander.hasCommandBridge() && !this.proposedAbilities.find(x => x.id === 22) &&
+      this.commandBridgeShip) {
+      this.removeUpgradeSlotFromCurrentShip(this.commander.commandBridgeShipUid,
+        this.commandBridgeShip, UpgradeType.FleetCommand, true);
+      this.commander.setCommandBridgeShip(null);
+    }
     this.commander.setAbilities(this.proposedAbilities, this.proposedExperience);
   }
 }
