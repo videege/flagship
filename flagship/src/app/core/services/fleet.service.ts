@@ -14,6 +14,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
 import { Upgrade } from 'src/app/domain/game/upgrade';
 import { firestore } from 'firebase';
+import { Guid } from 'guid-typescript';
 
 export interface FleetCompaignData {
   campaignId: string;
@@ -139,8 +140,8 @@ export class FleetService {
       fleet.setCommander(CustomCommander.hydrate(serializedFleet.customCommander));
     }
     for (const serializedShip of serializedFleet.ships) {
-      let ship = this.shipFactory.instantiateShip(serializedShip.id, fleet.hasCustomCommander(),
-        serializedShip.isScarred, serializedShip.isVeteran);
+      let ship = this.shipFactory.instantiateShip(serializedShip.id, fleet.customCommander,
+        serializedShip.isScarred, serializedShip.isVeteran, serializedShip.uid || Guid.create().toString());
       fleet.addShip(ship);
       for (const upgradeId of serializedShip.upgrades) {
         let upgrade: Upgrade = null;

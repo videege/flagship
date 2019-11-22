@@ -8,6 +8,9 @@ export interface SerializedCustomCommander {
     lifetimeExperience: number;
     currentExperience: number;
     abilities: number[];
+    additionalSupportShipUid: string;
+    commandStaffShipUid: string;
+    commandBridgeShipUid: string;
 }
 
 export class CustomCommander {
@@ -16,6 +19,10 @@ export class CustomCommander {
     public lifetimeExperience: number = 0;
     public currentExperience: number = 0;
     public abilities: CustomCommanderAbility[] = [];
+
+    public additionalSupportShipUid: string = null;
+    public commandStaffShipUid: string = null;
+    public commandBridgeShipUid: string = null;
 
     constructor() {
         this.subject = new Subject<number>();
@@ -27,6 +34,32 @@ export class CustomCommander {
 
     isIndependentRaider(): boolean {
         return !!this.abilities.find(x => x.id === 19);
+    }
+
+    hasAdditionalSupport(): boolean {
+        return !!this.abilities.find(x => x.id === 20);
+    }
+
+    setAdditionalSupportShip(uid: string) {
+        this.additionalSupportShipUid = uid;
+        this.subject.next(-1);
+    }
+
+    hasCommandStaff(): boolean {
+        return !!this.abilities.find(x => x.id === 21);
+    }
+
+    setCommandStaffShip(uid: string) {
+        this.commandStaffShipUid = uid;
+    }
+
+    hasCommandBridge(): boolean {
+        return !!this.abilities.find(x => x.id === 22);
+    }
+
+    setCommandBridgeShip(uid: string) {
+        this.commandBridgeShipUid = uid;
+        this.subject.next(-1);
     }
 
     addExperience(xp: number) {
@@ -57,7 +90,10 @@ export class CustomCommander {
             name: this.name,
             lifetimeExperience: this.lifetimeExperience,
             currentExperience: this.currentExperience,
-            abilities: this.abilities.map(x => x.id)
+            abilities: this.abilities.map(x => x.id),
+            additionalSupportShipUid: this.additionalSupportShipUid,
+            commandStaffShipUid: this.commandStaffShipUid,
+            commandBridgeShipUid: this.commandBridgeShipUid
         };
     }
 
@@ -68,6 +104,9 @@ export class CustomCommander {
         commander.lifetimeExperience = data.lifetimeExperience;
         commander.currentExperience = data.currentExperience;
         commander.abilities = data.abilities.map(id => factory.getAbility(id));
+        commander.additionalSupportShipUid = data.additionalSupportShipUid || null;
+        commander.commandBridgeShipUid = data.commandBridgeShipUid || null;
+        commander.commandStaffShipUid = data.commandStaffShipUid || null;
         return commander;
     }
 }

@@ -28,6 +28,23 @@
             <p matLine style="white-space: normal">
                 <span style="font-style: italic; font-size: .8em;">{{ ability.text }}</span>
             </p>
+            <p matLine *ngIf="ability.id === 20">
+                <mat-select [(value)]="additionalSupportShip" (selectionChange)="additionalSupportShipChanged()"
+                    placeholder="Ship For Additional Support">
+                    <mat-option [value]="ship" *ngFor="let ship of shipsForAdditionalSupport()">
+                        {{ ship.getSummaryName() }}
+                    </mat-option>
+                </mat-select>
+            </p>
+            <p matLine *ngIf="ability.id === 22">
+                <mat-select [(value)]="commandBridgeShip" (selectionChange)="commandBridgeShipChanged()"
+                placeholder="Ship For Command Bridge">
+                    <mat-option [value]="ship" *ngFor="let ship of shipsForCommandBridge()">
+                        {{ ship.getSummaryName() }}
+                    </mat-option>
+                </mat-select>
+            </p>
+
         </mat-list-item>
     </mat-list>
     <mat-list *ngIf="isEditing">
@@ -41,6 +58,7 @@
             <button mat-button (click)="removeAbility(ability)" color="warn">Remove</button>
         </mat-list-item>
     </mat-list>
+
     <mat-action-list *ngIf="isEditing">
         <button mat-list-item *ngIf="canAddAbility()" (click)="addNewAbility()">
             Add New Ability

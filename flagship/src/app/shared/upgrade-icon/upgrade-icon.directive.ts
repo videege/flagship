@@ -25,7 +25,7 @@ export class UpgradeIconDirective implements OnInit {
 
     let name = this.upgradeType === UpgradeType.CustomCommander
       ? "commander"
-      : this.upgradeType.toLowerCase();
+      : this.upgradeType.toLowerCase().replace(' ', '');
     this._elementClass.push(name);
   }
 

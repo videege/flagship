@@ -11,6 +11,7 @@ import { Squadron } from './squadron';
 import { Subject } from 'rxjs';
 
 export interface ISerializedShip {
+  uid: string;
   id: number;
   upgrades: number[];
   isScarred: boolean;
@@ -58,7 +59,7 @@ export class Ship implements ShipData {
   public isScarred: boolean = null;
   public isVeteran: boolean = null;
 
-  constructor(public id: number, public name: string, public shipClass: ShipClass,
+  constructor(public uid: string, public id: number, public name: string, public shipClass: ShipClass,
     public faction: Faction, public size: Size,
     public hull: number, public command: number,
     public squadron: number, public engineering: number, public points: number,
@@ -78,6 +79,7 @@ export class Ship implements ShipData {
     let upgradeIds = this.upgradeSlots.filter(u => u.isEnabled && u.isFilled())
       .map(u => u.upgrade.id);
     return {
+      uid: this.uid,
       id: this.id,
       upgrades: upgradeIds,
       isScarred: this.isScarred,

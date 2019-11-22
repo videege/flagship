@@ -1,26 +1,91 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
 import { CustomCommanderAbility } from 'src/app/domain/campaign/customCommanderAbility';
 import { CustomAbilityFactory } from 'src/app/domain/factories/customAbilityFactory';
 import { CustomAbilitySelectorComponent, CustomAbilitySelectorData } from '../custom-ability-selector/custom-ability-selector.component';
 import { MatDialog } from '@angular/material';
+import { Ship } from 'src/app/domain/game/ship';
+import { Fleet } from 'src/app/domain/game/fleet';
+import { Size } from 'src/app/domain/game/size';
+import { UpgradeType } from 'src/app/domain/game/upgradeType';
+import { UpgradeSlot } from 'src/app/domain/game/upgradeSlot';
 
 @Component({
   selector: 'flagship-custom-commander',
   templateUrl: './custom-commander.component.html',
   styleUrls: ['./custom-commander.component.scss']
 })
-export class CustomCommanderComponent implements OnInit {
+export class CustomCommanderComponent implements OnInit, OnChanges {
+
   @Input() commander: CustomCommander;
+  @Input() fleet: Fleet;
 
   isEditing = false;
   proposedAbilities: CustomCommanderAbility[] = [];
   proposedExperience: number;
 
   abilityFactory = new CustomAbilityFactory();
+
+  commandBridgeShip: Ship = null;
+  additionalSupportShip: Ship = null;
+
+  shipsForCommandBridge(): Ship[] {
+    return this.fleet.ships.filter(x => (x.size === Size.Medium || x.size === Size.Large) &&
+      !x.upgradeSlots.find(u => u.type === UpgradeType.FleetCommand));
+  }
+
+  shipsForAdditionalSupport(): Ship[] {
+    return this.fleet.ships.filter(x => x.upgradeSlots.find(u => u.type === UpgradeType.FleetSupport));
+  }
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+    if (this.commander.hasAdditionalSupport()) {
+      this.additionalSupportShip = this.fleet.ships.find(x => x.uid === this.commander.additionalSupportShipUid);
+    }
+    if (this.commander.hasCommandBridge()) {
+      this.commandBridgeShip = this.fleet.ships.find(x => x.uid === this.commander.commandBridgeShipUid);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.commander.hasAdditionalSupport() || !this.commander.additionalSupportShipUid) {
+      this.additionalSupportShip = null;
+    }
+    if (!this.commander.hasCommandBridge() || !this.commander.commandBridgeShipUid) {
+      this.commandBridgeShip = null;
+    }
+  }
+
+  additionalSupportShipChanged() {
+    this.removeAdditionalSupportFromCurrentShip();
+    this.addAdditionalSupportToSelectedShip();
+    this.commander.setAdditionalSupportShip(this.additionalSupportShip.uid);
+  }
+
+  removeAdditionalSupportFromCurrentShip() {
+    let ship = this.fleet.ships.find(x => x.uid === this.commander.additionalSupportShipUid);
+    if (ship && ship !== this.additionalSupportShip) {
+      let fleetSupport = ship.upgradeSlots.filter(x => x.type === UpgradeType.FleetSupport);
+      let lastFleetSupport = fleetSupport[fleetSupport.length - 1];
+      if (lastFleetSupport) {
+        if (lastFleetSupport.isFilled()) {
+          lastFleetSupport.unequipUpgrade(ship);
+        }
+        ship.upgradeSlots.splice(ship.upgradeSlots.indexOf(lastFleetSupport), 1);
+      }
+    }
+  }
+
+  addAdditionalSupportToSelectedShip() {
+    let ship = this.fleet.ships.find(x => x.uid === this.commander.additionalSupportShipUid)
+    if (this.additionalSupportShip && ship != this.additionalSupportShip) {
+      this.additionalSupportShip.upgradeSlots.push(new UpgradeSlot(UpgradeType.FleetSupport));
+    }
+  }
+
+  commandBridgeShipChanged() {
 
   }
 

@@ -6,6 +6,8 @@ import { Armament } from '../game/armament';
 import { NavigationChart } from '../game/navigationChart';
 import { UpgradeSlot } from '../game/upgradeSlot';
 import { UpgradeType } from '../game/upgradeType';
+import { CustomCommander } from '../campaign/customCommander';
+import { Guid } from 'guid-typescript';
 
 export class ShipFactory {
   private static titles = {
@@ -752,15 +754,15 @@ export class ShipFactory {
     return ShipFactory.shipData.filter(x => x.faction === faction);
   }
 
-  instantiateShip(id: number, isForFleetWithCustomCommander: boolean = false,
-    isScarred: boolean = false, isVeteran: boolean = false): Ship {
+  instantiateShip(id: number, customCommander: CustomCommander = null,
+    isScarred: boolean = false, isVeteran: boolean = false,
+    uid: string = Guid.create().toString()): Ship {
     let data = ShipFactory.shipData.find(x => x.id === id);
 
     if (!data)
       return null;
 
-    // make a deep clone of the data
-
+    let isForFleetWithCustomCommander = !!customCommander;
 
     let upgradeSlots = data.upgradeSlots.map(x => new UpgradeSlot(x.type));
     if (upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
@@ -780,8 +782,14 @@ export class ShipFactory {
       upgradeSlots.push(new UpgradeSlot(type));
     }
 
+    if (isForFleetWithCustomCommander) {
+      if (customCommander.additionalSupportShipUid === uid) {
+        upgradeSlots.push(new UpgradeSlot(UpgradeType.FleetSupport));
+      }
+    }
+
     if (data.shipClass === ShipClass.Normal) {
-      let ship = new Ship(data.id, data.name, data.shipClass, data.faction,
+      let ship = new Ship(uid, data.id, data.name, data.shipClass, data.faction,
         data.size, data.hull, data.command, data.squadron, data.engineering, data.points,
         data.defenseTokens, data.frontShields, data.leftAuxShields, data.rightAuxShields,
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
