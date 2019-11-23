@@ -3,17 +3,10 @@
     <mat-expansion-panel-header class="right-aligned-header">
       <mat-panel-title fxFlex="auto" class="squadron-title">
         {{ distinctSquadrons[id].unique ? "&#9679;&nbsp;" + distinctSquadrons[id].displayName() : distinctSquadrons[id].displayName() }}
+        {{ squadronCounts[id] > 1 ? '(' + squadronCounts[id] + ')' : ''}}
       </mat-panel-title>
       <mat-panel-description ngClass.xs="points-small">
-        <!-- <span fxFlex></span> -->
-        <span *ngIf="!(isHandset$ | async)">
-          {{ distinctSquadrons[id].points }}
-          <span *ngIf="squadronCounts[id] > 1">
-            &times; {{squadronCounts[id]}} = {{ distinctSquadrons[id].points * squadronCounts[id] }}
-          </span>
-        </span>
-        <span matTooltip="{{ distinctSquadrons[id].points + ' &times; ' + squadronCounts[id] }}"
-          *ngIf="(isHandset$ | async)">
+        <span matTooltip="{{ distinctSquadrons[id].points + ' &times; ' + squadronCounts[id] }}">
           {{ squadronCounts[id] * distinctSquadrons[id].points }}
         </span>
       </mat-panel-description>
