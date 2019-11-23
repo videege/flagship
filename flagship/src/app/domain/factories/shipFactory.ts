@@ -20,6 +20,7 @@ export class ShipFactory {
     quasar: [2013, 2014, 2015],
     vsd: [2010],
     interdictor: [2012],
+    onager: [],
     // rebels
     assaultFrigate: [2500, 2501],
     cr90: [2502, 2503, 2504, 2505],
@@ -30,7 +31,9 @@ export class ShipFactory {
     nebulon: [2522, 2523, 2524, 2525],
     pelta: [2526],
     hammerhead: [2508, 2509, 2510],
-    mc75: [2513, 2514, 2515]
+    mc75: [2513, 2514, 2515],
+    starhawkMarkI: [2527, 2528, 2529],
+    starhawkMarkII: [2529]
   };
 
   static shipData: ShipData[] = [
@@ -743,6 +746,42 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.nebulon
+    },
+    {
+      id: 121, name: 'Starhawk-Class Battleship Mark I', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 140, hull: 14, command: 4, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Salvo],
+      leftShields: 4, rightShields: 4, frontShields: 6, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 2, 2), rearArmament: new Armament(2, 0, 1),
+      leftArmament: new Armament(2, 2, 1), rightArmament: new Armament(2, 2, 1),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(1, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
+        new UpgradeSlot(UpgradeType.Superweapon)
+      ],
+      allowedTitles: ShipFactory.titles.starhawkMarkI
+    },
+    {
+      id: 122, name: 'Starhawk-Class Battleship Mark II', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 150, hull: 14, command: 4, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Salvo],
+      leftShields: 4, rightShields: 4, frontShields: 6, rearShields: 2, leftAuxShields: null, rightAuxShields: null,
+      frontArmament: new Armament(3, 3, 1), rearArmament: new Armament(2, 1, 0),
+      leftArmament: new Armament(3, 2, 0), rightArmament: new Armament(3, 2, 0),
+      leftAuxArmament: null, rightAuxArmament: null,
+      antiSquadronArmament: new Armament(1, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
+        new UpgradeSlot(UpgradeType.Superweapon)
+      ],
+      allowedTitles: ShipFactory.titles.starhawkMarkII
     }
   ];
 

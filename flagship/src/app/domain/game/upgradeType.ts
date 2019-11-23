@@ -15,7 +15,8 @@ export enum UpgradeType {
   Title = "Title",
   WeaponsTeam = "Weapons Team",
   Turbolaser = "Turbolasers",
-  BoardingTeam = "Boarding Team"
+  BoardingTeam = "Boarding Team",
+  Superweapon = "Superweapon"
 }
 
 export function sortUpgradeTypes(a: UpgradeType, b: UpgradeType): number {

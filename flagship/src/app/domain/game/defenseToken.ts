@@ -3,5 +3,6 @@ export enum DefenseToken {
   Evade,
   Redirect,
   Contain,
-  Scatter
+  Scatter,
+  Salvo
 }

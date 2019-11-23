@@ -412,6 +412,21 @@ export class UpgradeFactory {
                 grantedType: UpgradeType.Officer,
                 text: "You gain 1 additional Officer icon in your upgrade bar. You can be assigned up to 4 command tokens instead of a number of command tokens equal to your command value."
             },
+            {
+                id: 2527, name: 'Amity', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "Mark I only. After you deploy, gain 1 Evade defense token. When an enemy ship overlaps you, you may deal 1 additional facedown damage card to both ships."
+            },
+            {
+                id: 2528, name: 'Concord', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 12, upgradeClass: UpgradeClass.Normal,
+                text: "Mark I only. After you deploy, gain 1 Salvo defense token. While defending, if your speed is 0, during your Spend Defense Tokens step, you can spend 1 defense token."
+            },
+            {
+                id: 2529, name: 'Unity', type: UpgradeType.Title, faction: Faction.Rebels,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "After you deploy, gain 1 Redirect defense token. While attacking a squadron, if the defender is engaged with a friendly squadron without the printed Heavy keyword, you may reroll 1 die."
+            },
             // Ion Cannons
             {
                 id: 3000, name: 'Heavy Ion Emplacements', type: UpgradeType.IonCannons, faction: Faction.Any,
