@@ -10,9 +10,9 @@
         </mat-card-content>
         <mat-list *ngIf="team.players.length">
             <mat-list-item *ngFor="let player of team.players">
-                <img matListAvatar [src]="playerMap[player.id].photoURL" [alt]="playerMap[player.id].displayName"
-                    matTooltip="Controlled by {{ playerMap[player.id].displayName }}"
-                    *ngIf="!(isHandsetPortrait$ | async)">
+                <img matListAvatar [src]="playerMap[player.id]?.photoURL" [alt]="playerMap[player.id]?.displayName"
+                    matTooltip="Controlled by {{ playerMap[player.id]?.displayName }}"
+                    *ngIf="!(isHandsetPortrait$ | async) && playerMap[player.id]">
                 <h3 mat-line>{{ player.name }}</h3>
                 <p mat-line>
                     <span>{{ player.wins }} W / {{ player.losses }} L / {{ player.mov }} MOV</span>
