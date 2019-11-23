@@ -13,12 +13,8 @@
     </mat-expansion-panel-header>
     <div *ngIf="distinctSquadrons[id].defenseTokens.length">
       <span>Defense Tokens:&nbsp;</span>
-      <i class="ffi squadron-icon" *ngFor="let token of distinctSquadrons[id].defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
-                             'ffi-swa-evade': token === 1,
-                             'ffi-swa-redirect': token === 2,
-                             'ffi-swa-contain': token === 3,
-                             'ffi-swa-scatter': token === 4
-                            }"></i>
+      <flagship-defense-token *ngFor="let token of distinctSquadrons[id].defenseTokens"
+                            [type]="token" [size]="14" class="squadron-icon"></flagship-defense-token>
     </div>
     <div fxLayout="row" fxLayoutGap="4px">
       <span fxFlex>

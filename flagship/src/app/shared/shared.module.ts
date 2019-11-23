@@ -8,6 +8,7 @@ import { ShipIconComponent } from './ship-icon/ship-icon.component';
 import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
 import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DefenseTokenComponent } from './defense-token/defense-token.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ShipIconComponent,
     UpgradeIconDirective,
     NumeralsPipe,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    DefenseTokenComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ShipIconComponent,
     UpgradeIconDirective,
     NumeralsPipe,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    DefenseTokenComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

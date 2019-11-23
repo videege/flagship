@@ -1,5 +1,4 @@
-<div class="content mat-typography" fxLayout="column" fxLayout.gt-sm="row" 
-  fxLayoutGap="16px">
+<div class="content mat-typography" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
   <mat-card fxFlex.gt-sm="50">
     <mat-card-header>
       <!-- <div mat-card-avatar>
@@ -52,14 +51,8 @@
             <strong>Defense Tokens</strong>
           </div>
           <div>
-            <span>
-              <i class="ffi defense-token" *ngFor="let token of ship.defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
-                                     'ffi-swa-evade': token === 1,
-                                     'ffi-swa-redirect': token === 2,
-                                     'ffi-swa-contain': token === 3,
-                                     'ffi-swa-scatter': token === 4
-                                    }"></i>
-            </span>
+              <flagship-defense-token *ngFor="let token of ship.defenseTokens" [type]="token" [size]="27"
+                class="defense-token"></flagship-defense-token>
           </div>
         </div>
         <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
@@ -109,8 +102,7 @@
     <mat-card-actions>
       <button mat-button routerLink="statistics">View Statistics</button>
       <span fxFlex></span>
-      <button mat-button color="primary" 
-        [routerLink]="['/fleets', ship.fleet.id]">
+      <button mat-button color="primary" [routerLink]="['/fleets', ship.fleet.id]">
         OK
       </button>
     </mat-card-actions>

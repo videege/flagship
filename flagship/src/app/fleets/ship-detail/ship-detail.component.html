@@ -56,12 +56,8 @@
       </div>
       <span *ngIf="ship.defenseTokens.length" ngStyle.gt-sm="text-align: right;" fxFlex>
         Defense Tokens:
-        <i class="ffi defense-token" *ngFor="let token of ship.defenseTokens" [ngClass]="{'ffi-swa-brace': token === 0, 
-                           'ffi-swa-evade': token === 1,
-                           'ffi-swa-redirect': token === 2,
-                           'ffi-swa-contain': token === 3,
-                           'ffi-swa-scatter': token === 4
-                          }"></i>
+        <flagship-defense-token *ngFor="let token of ship.defenseTokens" [type]="token" [size]="18"
+          class="defense-token"></flagship-defense-token>
       </span>
     </div>
     <div>
@@ -69,13 +65,13 @@
         [isLast]="isLast"></flagship-upgrade-summary>
     </div>
     <mat-chip-list *ngIf="isCampaign">
-        <mat-chip *ngIf="ship.isScarred" color="warn" selected (removed)="unscar()">
-          Scarred <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <mat-chip *ngIf="ship.isVeteran" color="accent" selected (removed)="demote()">
-          Veteran <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+      <mat-chip *ngIf="ship.isScarred" color="warn" selected (removed)="unscar()">
+        Scarred <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="ship.isVeteran" color="accent" selected (removed)="demote()">
+        Veteran <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
   </mat-card-content>
   <mat-card-actions fxLayout="column" fxLayout.gt-xs="row">
     <button mat-button [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]">
