@@ -29,7 +29,7 @@
         <strong>Shields&nbsp;</strong>
         <span>F: {{ ship.frontShields }}&nbsp;</span>
         <span>L/R: {{ ship.leftShields }}&nbsp;</span>
-        <span *ngIf="ship.leftAuxShields">LA/RA: {{ ship.leftAuxShields }}&nbsp;</span>
+        <span *ngIf="hugeShip && hugeShip.leftAuxShields">LA/RA: {{ hugeShip.leftAuxShields }}&nbsp;</span>
         <span>R: {{ ship.rearShields }}&nbsp;</span>
       </div>
       <div fxFlex ngStyle.gt-sm="text-align: right;">
@@ -42,14 +42,15 @@
       </div>
     </div>
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px" style="margin-top:8px;">
-      <div *ngIf="ship.ignitionArmament">SW: <flagship-battery [armament]="ship.ignitionArmament"></flagship-battery>
+      <div *ngIf="ignitionShip && ignitionShip.ignitionArmament">
+        SW: <flagship-battery [armament]="ignitionShip.ignitionArmament"></flagship-battery>
       </div>
       <div>F: <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
       </div>
       <div>L/R: <flagship-battery [armament]="ship.leftArmament"></flagship-battery>
       </div>
-      <div *ngIf="ship.leftAuxArmament">
-        LA/RA: <flagship-battery [armament]="ship.leftAuxArmament">
+      <div *ngIf="hugeShip && hugeShip.leftAuxArmament">
+        LA/RA: <flagship-battery [armament]="hugeShip.leftAuxArmament">
         </flagship-battery>
       </div>
       <div>R: <flagship-battery [armament]="ship.rearArmament"></flagship-battery>

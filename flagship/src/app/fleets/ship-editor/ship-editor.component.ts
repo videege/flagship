@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Ship, IgnitionCapableShip } from '../../domain/game/ship';
+import { Ship, IgnitionCapableShip, HugeShip, ShipClass } from '../../domain/game/ship';
 import { UpgradeType, sortUpgradeTypes } from '../../domain/game/upgradeType';
 import { Upgrade } from '../../domain/game/upgrade';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,13 +14,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ship-editor.component.scss']
 })
 export class ShipEditorComponent implements OnInit {
-  public ship: Ship | IgnitionCapableShip;
+  public ship: Ship | IgnitionCapableShip | HugeShip;
+  hugeShip: HugeShip;
+  ignitionShip : IgnitionCapableShip;
 
   public upgradeTypes = UpgradeType;
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.ship = this.route.snapshot.data.ship;
+    this.hugeShip = this.ship.shipClass === ShipClass.Huge ? <HugeShip>this.ship : null;
+    this.ignitionShip = this.ship.shipClass === ShipClass.IgnitionCapable ? <IgnitionCapableShip>this.ship : null;
   }
 
   viewShipCard() {
