@@ -47,4 +47,9 @@
             </mat-list-item>
         </mat-list>
     </mat-card-content>
+    <mat-card-actions *ngIf="showCurrentActStats">
+        <button mat-button (click)="setActScore()" color="accent">
+            Set Score for Current Act
+        </button>
+    </mat-card-actions>
 </mat-card>

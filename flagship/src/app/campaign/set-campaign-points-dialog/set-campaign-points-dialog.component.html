@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+    <h3>Set Campaign Score for Act {{ data.act | numerals }}</h3>
+    <p>
+        You can manually set the score for the current act below.
+        Note that Flagship will automatically record campaign points earned as
+        progress through the campaign,
+        so this should only be necessary to correct mistakes. Any changes you make below
+        will be recorded in the campaign's timeline.
+    </p>
+    <form fxLayout="column">
+        <mat-form-field>
+            <input placeholder="Empire Score"
+                matInput type="number" [(ngModel)]="empireScore" required min="0" name="empireScore"/>
+        </mat-form-field>
+        <mat-form-field>
+            <input placeholder="Rebel Score"
+                matInput type="number" [(ngModel)]="rebelScore" required min="0" name="rebelScore"/>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <span fxFlex></span>
+    <button mat-button (click)="setScore()"
+        [disabled]="empireScore === null || empireScore < 0 || rebelScore === null || rebelScore < 0"
+        color="primary">Update Score for Current Act</button>
+</div>

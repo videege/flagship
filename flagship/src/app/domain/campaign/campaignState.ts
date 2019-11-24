@@ -84,6 +84,7 @@ export class CampaignState {
                     return Battle.hydrate(x as SerializedBattle);
                 case CampaignEventType.ManualLocationChange:
                 case CampaignEventType.ManualXPChange:
+                case CampaignEventType.ManualScoreChange:
                     return CampaignEvent.hydrate(x);
                 default:
                     throw new Error("Unrecognized campaign event type.");

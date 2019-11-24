@@ -25,6 +25,7 @@ import { ManagementPhaseComponent } from './management-phase/management-phase.co
 import { PivotalBattlePhaseComponent } from './pivotal-battle-phase/pivotal-battle-phase.component';
 import { FinishedCampaignComponent } from './finished-campaign/finished-campaign.component';
 import { SetExperienceDialogComponent } from './set-experience-dialog/set-experience-dialog.component';
+import { SetCampaignPointsDialogComponent } from './set-campaign-points-dialog/set-campaign-points-dialog.component';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { SetExperienceDialogComponent } from './set-experience-dialog/set-experi
     ManagementPhaseComponent, 
     PivotalBattlePhaseComponent, 
     FinishedCampaignComponent, 
-    SetExperienceDialogComponent
+    SetExperienceDialogComponent, SetCampaignPointsDialogComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +68,8 @@ import { SetExperienceDialogComponent } from './set-experience-dialog/set-experi
     PlayerCreatorDialogComponent,
     CampaignSetupDialogComponent,
     LocationControlDialogComponent,
-    SetExperienceDialogComponent
+    SetExperienceDialogComponent,
+    SetCampaignPointsDialogComponent
   ]
 })
 export class CampaignModule { }
