@@ -9,6 +9,7 @@ import { Fleet } from "./fleet";
 import { NavigationChart } from "./navigationChart";
 import { Squadron } from './squadron';
 import { Subject } from 'rxjs';
+import { ClipboardIfSupportedDirective } from 'ngx-clipboard';
 
 export interface ISerializedShip {
   uid: string;
@@ -19,7 +20,9 @@ export interface ISerializedShip {
 }
 
 export enum ShipClass {
-  Normal
+  Normal,
+  IgnitionCapable,
+  Huge
 }
 
 export interface ShipData {
@@ -34,8 +37,6 @@ export interface ShipData {
   engineering: number;
   points: number;
   frontShields: number;
-  leftAuxShields: number;
-  rightAuxShields: number;
   leftShields: number;
   rightShields: number;
   rearShields: number;
@@ -44,12 +45,21 @@ export interface ShipData {
   upgradeSlots: UpgradeSlot[];
   antiSquadronArmament: Armament;
   frontArmament: Armament;
-  leftAuxArmament: Armament;
-  rightAuxArmament: Armament;
   leftArmament: Armament;
   rightArmament: Armament;
   rearArmament: Armament;
   navigationChart: NavigationChart;
+}
+
+export interface HugeShipData extends ShipData {
+  leftAuxShields: number;
+  rightAuxShields: number;
+  leftAuxArmament: Armament;
+  rightAuxArmament: Armament;
+}
+
+export interface IgnitionCapableShipData extends ShipData {
+  ignitionArmament: Armament;
 }
 
 export class Ship implements ShipData {
@@ -64,11 +74,9 @@ export class Ship implements ShipData {
     public hull: number, public command: number,
     public squadron: number, public engineering: number, public points: number,
     public defenseTokens: DefenseToken[], public frontShields: number,
-    public leftAuxShields: number, public rightAuxShields: number,
     public leftShields: number, public rightShields: number,
     public rearShields: number,
     public antiSquadronArmament: Armament, public frontArmament: Armament,
-    public leftAuxArmament: Armament, public rightAuxArmament: Armament,
     public leftArmament: Armament, public rightArmament: Armament,
     public rearArmament: Armament, public navigationChart: NavigationChart,
     public upgradeSlots: UpgradeSlot[], public allowedTitles: number[]) {
@@ -257,5 +265,51 @@ export class Ship implements ShipData {
     return this.upgradeSlots.filter((u: UpgradeSlot) => u.isEnabled && u.isFilled())
       .map(u => u.upgrade)
       .sort((a, b) => sortUpgradeTypes(a.type, b.type));
+  }
+}
+
+
+export class HugeShip extends Ship implements HugeShipData {
+  constructor(uid: string, id: number, name: string, shipClass: ShipClass,
+    faction: Faction, size: Size,
+    hull: number, command: number,
+    squadron: number, engineering: number, points: number,
+    defenseTokens: DefenseToken[], frontShields: number,
+    leftShields: number, rightShields: number,
+    rearShields: number,
+    antiSquadronArmament: Armament, frontArmament: Armament,
+    leftArmament: Armament, rightArmament: Armament,
+    rearArmament: Armament, navigationChart: NavigationChart,
+    upgradeSlots: UpgradeSlot[], allowedTitles: number[],
+    public leftAuxShields: number, public rightAuxShields: number,
+    public leftAuxArmament: Armament, public rightAuxArmament: Armament) {
+      super(uid, id, name, shipClass, faction, size, hull,
+        command, squadron, engineering, points, defenseTokens,
+        frontShields, leftShields,
+        rightShields, rearShields, antiSquadronArmament, frontArmament,
+        leftArmament, rightArmament, rearArmament,
+        navigationChart, upgradeSlots, allowedTitles);
+  }
+}
+
+export class IgnitionCapableShip extends Ship implements IgnitionCapableShipData {
+  constructor(uid: string, id: number, name: string, shipClass: ShipClass,
+    faction: Faction, size: Size,
+    hull: number, command: number,
+    squadron: number, engineering: number, points: number,
+    defenseTokens: DefenseToken[], frontShields: number,
+    leftShields: number, rightShields: number,
+    rearShields: number,
+    antiSquadronArmament: Armament, frontArmament: Armament,
+    leftArmament: Armament, rightArmament: Armament,
+    rearArmament: Armament, navigationChart: NavigationChart,
+    upgradeSlots: UpgradeSlot[], allowedTitles: number[],
+    public ignitionArmament: Armament) {
+      super(uid, id, name, shipClass, faction, size, hull,
+        command, squadron, engineering, points, defenseTokens,
+        frontShields, leftShields,
+        rightShields, rearShields, antiSquadronArmament, frontArmament,
+        leftArmament, rightArmament, rearArmament,
+        navigationChart, upgradeSlots, allowedTitles);
   }
 }

@@ -7,8 +7,9 @@ import { Size } from "../game/size";
 
 export class CommanderUpgrade extends Upgrade {
     constructor(id: number, name: string, faction: Faction, text: string, modification: boolean,
-        points: number, sizeRestriction: Size[] = null) {
-        super(id, name, UpgradeType.Commander, faction, text, modification, points, true, sizeRestriction);
+        points: number, sizeRestriction: Size[] = null, shipRestriction: number[] = null) {
+        super(id, name, UpgradeType.Commander, faction, text, modification, points, true, sizeRestriction,
+            shipRestriction);
     }
 
     canEquipToShip(ship: Ship): boolean {

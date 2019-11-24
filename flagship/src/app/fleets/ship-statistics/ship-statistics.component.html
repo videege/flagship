@@ -48,8 +48,9 @@
         ngStyle.gt-xs="width: 150px;" style="width: 100px;">
         <mat-option [value]="arcs.Front">Front Arc</mat-option>
         <mat-option [value]="arcs.Left">Side Arc</mat-option>
-        <mat-option [value]="arcs.LeftAux" *ngIf="ship.leftAuxArmament">Auxiliary Arc</mat-option>
+        <mat-option [value]="arcs.LeftAux" *ngIf="isHuge">Auxiliary Arc</mat-option>
         <mat-option [value]="arcs.Rear">Rear Arc</mat-option>
+        <mat-option [value]="arcs.Superweapon" *ngIf="isIgnition">Superweapon</mat-option>
       </mat-select>
       <flagship-battery [armament]="armament"></flagship-battery>
       <span fxFlex></span>

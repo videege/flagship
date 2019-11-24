@@ -7,8 +7,9 @@ import { Size } from '../game/size';
 
 export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeData {
     constructor(id: number, name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,
-        points: number, unique: boolean, public grantedType: UpgradeType, sizeRestriction: Size[] = null) {
-        super(id, name, type, faction, text, modification, points, unique, sizeRestriction);
+        points: number, unique: boolean, public grantedType: UpgradeType, sizeRestriction: Size[] = null,
+        shipRestriction: number[] = null) {
+        super(id, name, type, faction, text, modification, points, unique, sizeRestriction, shipRestriction);
     }
  
     canEquipToShip(ship: Ship): boolean {

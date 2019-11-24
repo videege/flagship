@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ship } from '../../domain/game/ship';
+import { Ship, HugeShip, IgnitionCapableShip, ShipClass } from '../../domain/game/ship';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DieModificationFactory } from '../../domain/statistics/factories/dieModificationFactory';
@@ -63,7 +63,10 @@ interface TableData {
   styleUrls: ['./ship-statistics.component.scss']
 })
 export class ShipStatisticsComponent implements OnInit {
-  public ship: Ship;
+  public ship: Ship|HugeShip|IgnitionCapableShip;
+
+  public isHuge: boolean = false;
+  public isIgnition: boolean = false;
 
   public showingEffects = true;
   public sidenavMode = 'side';
@@ -143,6 +146,9 @@ export class ShipStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.ship = this.route.snapshot.data.ship;
+    this.isIgnition = this.ship.shipClass === ShipClass.IgnitionCapable;
+    this.isHuge = this.ship.shipClass === ShipClass.Huge;
+
     this.showingEffects = !this.breakpointObserver.isMatched([
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait
@@ -181,10 +187,12 @@ export class ShipStatisticsComponent implements OnInit {
       this.armament = this.ship.frontArmament;
     } else if (arc === FiringArc.Left) {
       this.armament = this.ship.leftArmament;
-    } else if (arc === FiringArc.LeftAux) {
-      this.armament = this.ship.leftAuxArmament;
+    } else if (arc === FiringArc.LeftAux && this.isHuge) {
+      this.armament = (<HugeShip>this.ship).leftAuxArmament;
     } else if (arc === FiringArc.Rear) {
       this.armament = this.ship.rearArmament;
+    } else if (arc === FiringArc.Superweapon) {
+      this.armament = (<IgnitionCapableShip>this.ship).ignitionArmament;
     }
   }
 

@@ -57,6 +57,9 @@
         </div>
         <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">
           <strong>Armament</strong>
+          <div *ngIf="ship.ignitionArmament">
+            Superweapon: <flagship-battery [armament]="ship.ignitionArmament"></flagship-battery>
+          </div>
           <div>Front:
             <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
           </div>

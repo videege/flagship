@@ -42,6 +42,8 @@
       </div>
     </div>
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px" style="margin-top:8px;">
+      <div *ngIf="ship.ignitionArmament">SW: <flagship-battery [armament]="ship.ignitionArmament"></flagship-battery>
+      </div>
       <div>F: <flagship-battery [armament]="ship.frontArmament"></flagship-battery>
       </div>
       <div>L/R: <flagship-battery [armament]="ship.leftArmament"></flagship-battery>

@@ -4,5 +4,6 @@ export enum FiringArc {
     Right = 1 << 3,
     LeftAux = 1 << 4,
     RightAux = 1 << 5,
-    Rear = 1 << 6
+    Rear = 1 << 6,
+    Superweapon = 1 << 7
 }

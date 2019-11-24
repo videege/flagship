@@ -19,18 +19,20 @@ export class UpgradeFactory {
 
         if (data.upgradeClass === UpgradeClass.Commander)
             return new CommanderUpgrade(data.id, data.name, data.faction,
-                data.text, data.modification, data.points, data.sizeRestriction);
+                data.text, data.modification, data.points, data.sizeRestriction,
+                data.shipRestriction);
 
         if (data.upgradeClass === UpgradeClass.SlotGranting) {
             let slotData = <SlotGrantingUpgradeData>data;
             return new SlotGrantingUpgrade(slotData.id, slotData.name, slotData.type,
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
-                slotData.unique, slotData.grantedType, data.sizeRestriction);
+                slotData.unique, slotData.grantedType, data.sizeRestriction,
+                data.shipRestriction);
         }
         if (data.upgradeClass === UpgradeClass.Normal)
             return new Upgrade(data.id, data.name, data.type, data.faction,
                 data.text, data.modification, data.points, data.unique,
-                data.sizeRestriction);
+                data.sizeRestriction, data.shipRestriction);
 
         return null;
     }
@@ -107,6 +109,11 @@ export class UpgradeFactory {
                 id: 1011, name: 'Emperor Palpatine', type: UpgradeType.Commander, faction: Faction.Empire,
                 unique: true, modification: false, points: 35, upgradeClass: UpgradeClass.Commander,
                 text: "After deploying fleets, place 1 defense token of each type on this card. At the start of each Ship Phase you may discard 1 of those tokens. If you do, until the end of the round, if an enemy ship or squadron spends a matching token during its Spend Defense Token step, discard that token."
+            },
+            {
+                id: 1012, name: 'General Romodi', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
+                text: "While a friendly ship is attacking a ship, if the attack is obstructed by a ship or obstacle, the attacker does not remove a die (even if the attack is also obstructed by a card effect), and may add 1 red die to the attack pool."
             },
             {
                 id: 1500, name: 'Admiral Ackbar', type: UpgradeType.Commander, faction: Faction.Rebels,
@@ -274,6 +281,12 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "Concentrate Fire: Your Concentrate Fire tokens can either reroll 1 attack die or add 1 die to the attack pool. If you add a die, that die must be of a color already in the attack pool."
             },
+            {
+                id: 2023, name: 'Rakehell', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Navigate: While executing a 0-speed maneuver, you can resolve clicks of yaw at the speed-0 joint, and are treated as having a yaw value of \"I\" for that maneuver."
+            },
+            // Rebel titles
             {
                 id: 2500, name: 'Gallant Haven', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
@@ -603,6 +616,11 @@ export class UpgradeFactory {
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Choose and spend a number of its defense tokens up to your squadron value."
             },
+            {
+                id: 6005, name: 'Shriv Suurgav', type: UpgradeType.BoardingTeam, faction: Faction.Rebels,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "When you reveal a command, you may discard a squadron dial or token and this card to choose 1 enemy ship at close range. Choose and discard 1 weapons team, support team, offensive retrofit, defensive retrofit, ordnance, ion cannons, or turbolasers upgrade card equipped to that ship."
+            },
             // Ordnance - 7
             {
                 id: 7000, name: 'Assault Concussion Missiles', type: UpgradeType.Ordnance, faction: Faction.Any,
@@ -887,6 +905,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
                 text: "When you spend a command token, you may exhaust this card to gain one command token of the same type."
             },
+            {
+                id: 10221, name: 'Commander Beck', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "During your activation, you may resolve a command as if you had spent a command token. If you do, gain 1 raid token of the matching type. You may resolve this effect twice per activation."
+            },
             // Rebel Officers
             {
                 id: 10500, name: 'Adar Tallon', type: UpgradeType.Officer, faction: Faction.Rebels,
@@ -953,6 +976,16 @@ export class UpgradeFactory {
                 id: 10512, name: 'Walex Blissex', type: UpgradeType.Officer, faction: Faction.Rebels,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "When you activate, you may discard this card to recover 1 of your discarded defense tokens."
+            },
+            {
+                id: 10513, name: 'Kyrsta Agate', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Red or Blue Critical: You may exhaust this card to ready 1 of your exhausted defense tokens. You can resolve this critical effect during a Salvo attack."
+            },
+            {
+                id: 10514, name: 'Wedge Antilles', type: UpgradeType.Officer, faction: Faction.Rebels,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "Before the end of the Squadron Phase, you may spend 1 squadron token to choose up to 3 friendly non-unique squadrons without Strategic at distance 1-5. Those squadrons gain Cloak until the end of the round."
             },
             // Support Team - 11
             {
@@ -1102,6 +1135,19 @@ export class UpgradeFactory {
                 id: 14005, name: 'Reinforced Blast Doors', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "At the start of the Ship Phase, you may discard this card to discard up to 3 of your facedown damage cards."
+            },
+            // Superweapon - 15
+            {
+                id: 15000, name: 'Magnite Crystal Tractor Beam Array', type: UpgradeType.Superweapon, faction: Faction.Rebels,
+                unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                shipRestriction: [121, 122],
+                text: "After the end of your activation, you may exhaust this card to choose 1 enemy ship at distance 1-5. That ship's speed is increased or decreased to match your speed. While your speed is 0, you cannot ready this card."
+            },
+            {
+                id: 15001, name: 'Orbital Bombardment Particle Cannons', type: UpgradeType.Superweapon, faction: Faction.Empire,
+                unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
+                shipRestriction: [23, 24],
+                text: "Ignition (Long). Ignition, Red Critical:  Each other ship at distance 1 of the defender suffers 2 damage, and each squadron at distance 1 of the defender suffers 1 damage."
             },
         ];
     }

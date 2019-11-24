@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Ship } from '../../domain/game/ship';
+import { Ship, IgnitionCapableShip } from '../../domain/game/ship';
 import { UpgradeType, sortUpgradeTypes } from '../../domain/game/upgradeType';
 import { Upgrade } from '../../domain/game/upgrade';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ship-editor.component.scss']
 })
 export class ShipEditorComponent implements OnInit {
-  public ship: Ship;
+  public ship: Ship | IgnitionCapableShip;
 
   public upgradeTypes = UpgradeType;
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }

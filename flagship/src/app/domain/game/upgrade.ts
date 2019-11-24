@@ -20,7 +20,8 @@ export interface UpgradeData {
   points: number;
   unique: boolean;
   upgradeClass: UpgradeClass,
-  sizeRestriction?: Size[]
+  sizeRestriction?: Size[],
+  shipRestriction?: number[]
 }
 
 export interface SlotGrantingUpgradeData extends UpgradeData {
@@ -32,7 +33,8 @@ export class Upgrade implements UpgradeData {
 
   constructor(public id: number, public name: string, public type: UpgradeType, 
     public faction: Faction, public text: string, public modification: boolean,
-    public points: number, public unique: boolean, public sizeRestriction: Size[] = null) {
+    public points: number, public unique: boolean, public sizeRestriction: Size[] = null,
+    public shipRestriction: number[] = null) {
 
     }
 
@@ -46,6 +48,10 @@ export class Upgrade implements UpgradeData {
       return false;
     }
 
+    if (this.shipRestriction && !this.shipRestriction.includes(ship.id)) {
+      return false;
+    }
+    
     // Can't equip if there is no available slot of the correct type
     const availableSlot = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === this.type && !u.isFilled());
     if (!availableSlot) {

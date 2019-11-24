@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ship } from '../../domain/game/ship';
+import { Ship, IgnitionCapableShip } from '../../domain/game/ship';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class ShipDetailComponent implements OnInit {
   isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
 
-  @Input() ship: Ship;
+  @Input() ship: Ship|IgnitionCapableShip;
   isCampaign = false;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) { }
