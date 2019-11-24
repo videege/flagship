@@ -77,6 +77,13 @@ export class Campaign {
         campaign.name = data.name;
         campaign.ownerUid = data.ownerUid;
         campaign.campaignUsers = data.campaignUsers || [];
+        if ((<any>data).campaignPlayers) {
+            for (let campaignUser of (<any>data).campaignPlayers) {
+                if (!campaign.campaignUsers.find(x => x.uid === campaignUser.uid)) {
+                    campaign.campaignUsers.push(campaignUser);
+                }
+            }
+        }
         campaign.playerUids = data.playerUids || [];
         campaign.inviteToken = data.inviteToken || null;
         campaign.type = data.type;

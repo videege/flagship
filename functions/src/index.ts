@@ -37,7 +37,7 @@ export const processCampaignInvite = functions.firestore.document('invites/{invi
                     const campaignId = oldData.campaignId;
                     console.log('New data: inserting ' + newUser.uid + ' to campaign ' + campaignId);
                     db.doc(`campaigns/${campaignId}`).update({
-                        campaignPlayers: admin.firestore.FieldValue.arrayUnion(newUser),
+                        campaignUsers: admin.firestore.FieldValue.arrayUnion(newUser),
                         playerUids: admin.firestore.FieldValue.arrayUnion(newUser.uid)
                     }).then((result) => {
                         resolve();

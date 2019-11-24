@@ -357,7 +357,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         this.defenderBattleResults[i].score > Math.max(200, this.attackerBattleResults[i].fleetPoints)) {
         this.issues.push({
           severity: IssueSeverity.Error,
-          text: `${battle.title}: Defender(s) score must be between 0 and 200 (or the defender's fleet point total).`
+          text: `${battle.title}: Defender(s) score must be between 0 and 200 (or the attacker's fleet point total).`
         });
         return;
       }
