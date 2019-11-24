@@ -345,19 +345,17 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         });
         return;
       }
-      if (this.attackerBattleResults[i].score === null || this.attackerBattleResults[i].score < 0 ||
-        this.attackerBattleResults[i].score > Math.max(200, this.defenderBattleResults[i].fleetPoints)) {
+      if (this.attackerBattleResults[i].score === null || this.attackerBattleResults[i].score < 0) {
         this.issues.push({
           severity: IssueSeverity.Error,
-          text: `${battle.title}: Attacker(s) score must be between 0 and 200 (or the defender's fleet point total).`
+          text: `${battle.title}: Attacker(s) score must be greater than or equal to 0.`
         });
         return;
       }
-      if (this.defenderBattleResults[i].score === null || this.defenderBattleResults[i].score < 0 ||
-        this.defenderBattleResults[i].score > Math.max(200, this.attackerBattleResults[i].fleetPoints)) {
+      if (this.defenderBattleResults[i].score === null || this.defenderBattleResults[i].score < 0) {
         this.issues.push({
           severity: IssueSeverity.Error,
-          text: `${battle.title}: Defender(s) score must be between 0 and 200 (or the attacker's fleet point total).`
+          text: `${battle.title}: Defender(s) score must be greater than or equal to 0.`
         });
         return;
       }
