@@ -1,2 +1,5 @@
 <button mat-button (click)="clone()" class="toolbar-button">Copy Fleet</button>
+<button mat-raised-button (click)="delete()" class="toolbar-button" color="warn" *ngIf="fleet.canEdit">
+    Delete Fleet
+</button>
 <span>{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</span>

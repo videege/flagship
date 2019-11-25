@@ -114,6 +114,28 @@ export class FleetService {
     return fleet;
   }
 
+  public cloneFleet(fleet: Fleet): Promise<Fleet> {
+    if (!this.user) return;
+
+    let serialized = fleet.serialize();
+    serialized.ownerUid = this.user.uid;
+    serialized.campaignId = null;
+    serialized.customCommander = null;
+    serialized.originalFleetId = fleet.id;
+    
+    return new Promise<Fleet>((resolve, reject) => {
+      this.db.collection('fleets')
+        .add(serialized)
+        .then(res => {
+          let newFleet = this.hydrateFleet(serialized, res.id);
+          newFleet.setId(res.id);
+          this.updateFleet(newFleet).then(() => {
+            resolve(newFleet);
+          }, (err) => reject(err))
+        }, err => reject(err))
+    });
+  }
+
   public updateFleet(fleet: Fleet): Promise<void> {
     let doc = this.db.doc<ISerializedFleet>(`fleets/${fleet.id}`);
     return doc.update(fleet.serialize());
@@ -133,6 +155,7 @@ export class FleetService {
     let fleet = new Fleet(id || serializedFleet.id,
       serializedFleet.name, serializedFleet.author, serializedFleet.faction,
       serializedFleet.pointLimit, serializedFleet.squadronPointLimit);
+    fleet.originalFleetId = serializedFleet.originalFleetId || null;
     let userUid = this.user ? this.user.uid : null;
     fleet.setOwnerUid(serializedFleet.ownerUid || userUid);
     fleet.canEdit = this.user ? this.user.uid === fleet.ownerUid : false;

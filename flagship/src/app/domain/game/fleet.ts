@@ -25,6 +25,8 @@ export interface ISerializedFleet {
   ownerUid: string;
   campaignId: string;
   customCommander: SerializedCustomCommander;
+
+  originalFleetId: string;
 }
 
 export class Fleet {
@@ -37,6 +39,8 @@ export class Fleet {
   public ships: Ship[];
   public squadrons: Squadron[];
   public objectives: Objective[];
+
+  public originalFleetId: string;
 
   canEdit: boolean = false;
 
@@ -93,7 +97,8 @@ export class Fleet {
       objectives: objectives,
       ownerUid: this.ownerUid,
       campaignId: this.campaignId || null,
-      customCommander: this.customCommander ? this.customCommander.serialize() : null
+      customCommander: this.customCommander ? this.customCommander.serialize() : null,
+      originalFleetId: this.originalFleetId
     };
   }
 
