@@ -4,11 +4,13 @@ import { FleetService } from './services/fleet.service';
 import { CampaignState } from '../domain/campaign/campaignState';
 import { BreadcrumbService } from './services/breadcrumb.service';
 import { SettingsService } from './services/settings.service';
+import { UserAvatarComponent } from './user-avatar/user-avatar.component';
+import { AppMaterialModule } from '../app-material/app-material.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [UserAvatarComponent],
   providers: [
     FleetService,
     CampaignState,
@@ -16,7 +18,11 @@ import { SettingsService } from './services/settings.service';
     SettingsService
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppMaterialModule
+  ], 
+  exports: [
+    UserAvatarComponent
   ]
 })
 export class CoreModule {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthProvider} from 'ngx-auth-firebaseui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'flagship-login',
@@ -14,13 +15,13 @@ export class LoginComponent implements OnInit {
     AuthProvider.Google
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   public onSuccess() {
-    
+    this.router.navigateByUrl('/fleets');
   }
 
   public onError() {
