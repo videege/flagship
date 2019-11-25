@@ -12,7 +12,6 @@ import { UpgradeSelectorComponent } from './upgrade-selector/upgrade-selector.co
 import { ShipSelectorComponent } from './ship-selector/ship-selector.component';
 import { FleetEditorComponent } from './fleet-editor/fleet-editor.component';
 import { SquadronSelectorComponent } from './squadron-selector/squadron-selector.component';
-import { SquadronDetailComponent } from './squadron-detail/squadron-detail.component';
 import { SquadronsListComponent } from './squadrons-list/squadrons-list.component';
 import { ObjectiveSelectorComponent } from './objective-selector/objective-selector.component';
 import { ObjectiveComponent } from './objective/objective.component';
@@ -40,7 +39,6 @@ import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom
     ShipSelectorComponent,
     FleetEditorComponent,
     SquadronSelectorComponent,
-    SquadronDetailComponent,
     SquadronsListComponent,
     ObjectiveSelectorComponent,
     ObjectiveComponent,

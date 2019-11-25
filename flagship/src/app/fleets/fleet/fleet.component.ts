@@ -30,7 +30,7 @@ export class FleetComponent implements OnInit {
   public defenseObjective: Objective = null;
   public navigationObjective: Objective = null;
   public objType = ObjectiveType;
-
+  
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute) {
     this.breakpointObserver

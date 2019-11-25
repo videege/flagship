@@ -76,8 +76,9 @@
       </mat-chip>
     </mat-chip-list>
   </mat-card-content>
-  <mat-card-actions fxLayout="column" fxLayout.gt-xs="row">
-    <button mat-button [routerLink]="['ships', ship.fleet.ships.indexOf(ship)]">
+  <mat-card-actions fxLayout="column" fxLayout.gt-xs="row"
+    *ngIf="ship.fleet.canEdit">
+    <button mat-button [routerLink]="['ships', ship.uid]">
       Edit Ship
     </button>
     <button mat-button *ngIf="isCampaign" color="warn" [disabled]="ship.isScarred" (click)="scar()">

@@ -60,7 +60,7 @@
     </flagship-objective>
   </div>
 </div>
-<eco-fab-speed-dial class="fab-lower-right">
+<eco-fab-speed-dial class="fab-lower-right" *ngIf="fleet.canEdit">
   <eco-fab-speed-dial-trigger [spin]="true">
     <button mat-fab color="primary">
       <mat-icon aria-label="Add Ship/Squadron" class="spin180">add</mat-icon>

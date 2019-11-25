@@ -44,7 +44,7 @@
         Veteran <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
-    <mat-action-row>
+    <mat-action-row *ngIf="fleet.canEdit">
       <div *ngIf="!distinctSquadrons[id].unique" fxLayout="row">
         <button mat-icon-button [disabled]="squadronCounts[id] === 1" (click)="decreaseSquadronCount(id)">
           <mat-icon aria-label="Remove One Squadron">remove</mat-icon>

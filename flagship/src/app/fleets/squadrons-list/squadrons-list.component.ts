@@ -74,10 +74,14 @@ export class SquadronsListComponent implements OnInit {
   }
 
   scar(id: number) {
+    if (!this.fleet.canEdit) return;
+
     this.distinctSquadrons[id].setIsScarred(true);
   }
   
   unscar(id: number) {
+    if (!this.fleet.canEdit) return;
+    
     this.distinctSquadrons[id].setIsScarred(false);
   }
 

@@ -34,7 +34,7 @@ export class ShipResolver implements Resolve<Ship> {
     resolve(route: ActivatedRouteSnapshot): Ship | Observable<Ship> {
         return this.fleetService.getFleetForUser(route.params.id)
             .pipe(
-                map(f => f.ships[route.params.shipId])
+                map(f => f.ships.find(x => x.uid === route.params.shipId))
             );
     }
 }
@@ -83,7 +83,7 @@ const FLEET_ROUTES: Routes = [
                 path: '', component: ShipStatisticsComponent, resolve: { ship: ShipResolver },
                 data: { nav: new FlagshipRouteData('Statistics', 'Ship', (data: Data) => {
                     let ship = data['ship'] as Ship;
-                    let shipId = ship.fleet.ships.indexOf(ship);
+                    let shipId = ship.uid;
                     return `/fleets/${ship.fleet.id}/ships/${shipId}`;
                 }) }
             },

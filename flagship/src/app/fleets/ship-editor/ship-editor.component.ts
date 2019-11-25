@@ -35,6 +35,8 @@ export class ShipEditorComponent implements OnInit {
   }
 
   selectUpgrade(slot: UpgradeSlot) {
+    if (!this.ship.fleet.canEdit) return;
+
     let ref = this.dialog.open(UpgradeSelectorComponent, {
       width: '650px',
       data: <UpgradeSelectorData>{ slot: slot, ship: this.ship }

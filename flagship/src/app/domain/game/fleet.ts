@@ -38,6 +38,8 @@ export class Fleet {
   public squadrons: Squadron[];
   public objectives: Objective[];
 
+  canEdit: boolean = false;
+
   constructor(public id: string, public name: string,
     public author: string, public faction: Faction, public pointLimit: number,
     public squadronPointLimit: number) {

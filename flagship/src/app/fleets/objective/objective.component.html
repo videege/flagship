@@ -6,7 +6,8 @@
   <div class="objective-body">
     <div *ngIf="!objective" style="text-align: center;" fxLayout="column">
       <p>No objective selected.</p>
-      <button mat-button (click)="selectObjective()">Select Objective</button>
+      <button mat-button (click)="selectObjective()"
+        *ngIf="fleet.canEdit">Select Objective</button>
     </div>
     <div *ngIf="objective" fxLayout="column">
       <p *ngIf="objective.setup">
@@ -24,8 +25,8 @@
       <p *ngIf="objective.points">
         <strong>Score: </strong> {{ objective.points }}
       </p>
-      <button mat-button (click)="selectObjective()">Select Objective</button>
-      <button mat-button (click)="removeObjective()">Remove Objective</button>
+      <button mat-button (click)="selectObjective()" *ngIf="fleet.canEdit">Select Objective</button>
+      <button mat-button (click)="removeObjective()" *ngIf="fleet.canEdit">Remove Objective</button>
     </div>
   </div>
 </div>

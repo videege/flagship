@@ -1,9 +1,6 @@
 <div class="content mat-typography" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
   <mat-card fxFlex.gt-sm="50">
     <mat-card-header>
-      <!-- <div mat-card-avatar>
-        <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
-      </div> -->
       <mat-card-title>
         <span style="margin-right:4px">{{ ship.name }}</span>
         <span fxFlex></span>
@@ -17,14 +14,8 @@
           Hull: {{ ship.hull }} | Command: {{ ship.command }} | Engineering: {{ ship.engineering }} | Squadron {{
               ship.squadron }}
         </span>
-        <!-- <span fxFlex></span>
-        <button mat-icon-button color="accent" (click)="viewShipCard()" style="margin-top: -12px;">
-          <mat-icon aria-label="View ship card">image</mat-icon>
-        </button> -->
       </mat-card-subtitle>
-
     </mat-card-header>
-
     <mat-card-content>
       <div fxLayout="column" fxLayout.gt-sm="row">
         <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">

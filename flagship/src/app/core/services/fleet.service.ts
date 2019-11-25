@@ -135,6 +135,7 @@ export class FleetService {
       serializedFleet.pointLimit, serializedFleet.squadronPointLimit);
     let userUid = this.user ? this.user.uid : null;
     fleet.setOwnerUid(serializedFleet.ownerUid || userUid);
+    fleet.canEdit = this.user ? this.user.uid === fleet.ownerUid : false;
     fleet.setCampaignId(serializedFleet.campaignId || null);
     if (serializedFleet.customCommander) {
       fleet.setCommander(CustomCommander.hydrate(serializedFleet.customCommander));
