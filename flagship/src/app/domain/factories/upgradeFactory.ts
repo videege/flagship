@@ -291,6 +291,16 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "Navigate: While executing a 0-speed maneuver, you can resolve clicks of yaw at the speed-0 joint, and are treated as having a yaw value of \"I\" for that maneuver."
             },
+            {
+                id: 2024, name: 'Cataclysm', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "After the start of the Ship Phase, you may spend 1 (Concentrate Fire Token) to place your targeting token within your special firing arc within the range specified by on of your Ignition keywords."
+            },
+            {
+                id: 2025, name: 'Sunder', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                text: "Blue or Black Critical: You may discard this card to choose and discard 1 offensive retrofit, defensive retrofit, ordnance, ion cannons, or turbolasers upgrade card equipped to the defender."
+            },
             // Rebel titles
             {
                 id: 2500, name: 'Gallant Haven', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -536,6 +546,11 @@ export class UpgradeFactory {
                 id: 4008, name: 'Caitken and Shollan', type: UpgradeType.WeaponsTeam, faction: Faction.Rebels,
                 unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: "While attacking, you may exhaust this card to reroll any number of dice of 1 color."
+            },
+            {
+                id: 4009, name: 'Gunnery Chief Varnillian', type: UpgradeType.WeaponsTeam, faction: Faction.Empire,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: "After you deploy, place 1 red die set to a blank face on this card. If you are the second player, set it to any face instead. While attacking a ship, you may spend 1 die from the attack pool to exchange it with the die on this card. Both dice remain set to their current faces."
             },
             // Offensive Retrofit - 5
             {
@@ -859,7 +874,7 @@ export class UpgradeFactory {
                 text: "While a friendly, non-swarm squadron at distance 1-3 is attacking a squadron, it may reroll 1 die of any color."
             },
             {
-                id: 10211, name: 'Director ISard', type: UpgradeType.Officer, faction: Faction.Empire,
+                id: 10211, name: 'Director Isard', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: "When you reveal a command, you may look at all command dials assigned to one enemy ship."
             },
@@ -911,9 +926,9 @@ export class UpgradeFactory {
                 text: "When you spend a command token, you may exhaust this card to gain one command token of the same type."
             },
             {
-                id: 10221, name: 'Commander Beck', type: UpgradeType.Officer, faction: Faction.Empire,
-                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
-                text: "During your activation, you may resolve a command as if you had spent a command token. If you do, gain 1 raid token of the matching type. You may resolve this effect twice per activation."
+                id: 10221, name: 'Reeva Demesne', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "After you are declared as the target of an attack, if the defending hull zone has at least 1 shield remaining, you may exhaust this card to ready 1 defense token."
             },
             // Rebel Officers
             {
@@ -1153,6 +1168,12 @@ export class UpgradeFactory {
                 unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
                 shipRestriction: [23, 24],
                 text: "Ignition (Long). Ignition, Red Critical:  Each other ship at distance 1 of the defender suffers 2 damage, and each squadron at distance 1 of the defender suffers 1 damage."
+            },
+            {
+                id: 15002, name: 'Superheavy Composite Beam Turbolasers', type: UpgradeType.Superweapon, faction: Faction.Empire,
+                unique: false, modification: true, points: 7, upgradeClass: UpgradeClass.Normal,
+                shipRestriction: [23, 24],
+                text: "Ignition (Medium). Ignition, Red Critical:  The defender suffers 1 damage. This occurs one for each red or blue critical icon in the pool."
             },
         ];
     }

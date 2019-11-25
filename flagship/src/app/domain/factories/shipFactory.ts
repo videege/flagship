@@ -20,7 +20,8 @@ export class ShipFactory {
     quasar: [2013, 2014, 2015],
     vsd: [2010],
     interdictor: [2012],
-    onager: [2023],
+    onager: [2023, 2024, 2025],
+    onagerSD: [2023, 2010, 2024, 2025],
     // rebels
     assaultFrigate: [2500, 2501],
     cr90: [2502, 2503, 2504, 2505],
@@ -413,6 +414,23 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
       allowedTitles: ShipFactory.titles.onager
+    },
+    {
+      id: 24, name: 'Onager-Class Star Destroyer', shipClass: ShipClass.IgnitionCapable, faction: Faction.Empire,
+      points: 110, hull: 10, command: 3, squadron: 2, engineering: 3, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
+      leftShields: 2, rightShields: 2, frontShields: 5, rearShields: 1,
+      frontArmament: new Armament(2, 2, 1), rearArmament: new Armament(2, 1, 0),
+      leftArmament: new Armament(3, 0, 1), rightArmament: new Armament(3, 0, 1),
+      ignitionArmament: new Armament(3, 2, 2),
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.Turbolaser),
+        new UpgradeSlot(UpgradeType.Superweapon)
+      ],
+      allowedTitles: ShipFactory.titles.onagerSD
     },
     // Rebel (Scum) 
     {
