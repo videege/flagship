@@ -9,6 +9,7 @@ import { UpgradeIconDirective } from './upgrade-icon/upgrade-icon.directive';
 import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DefenseTokenComponent } from './defense-token/defense-token.component';
+import { IssuesListComponent } from './issues-list/issues-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DefenseTokenComponent } from './defense-token/defense-token.component';
     UpgradeIconDirective,
     NumeralsPipe,
     ConfirmDialogComponent,
-    DefenseTokenComponent
+    DefenseTokenComponent,
+    IssuesListComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { DefenseTokenComponent } from './defense-token/defense-token.component';
     UpgradeIconDirective,
     NumeralsPipe,
     ConfirmDialogComponent,
-    DefenseTokenComponent
+    DefenseTokenComponent,
+    IssuesListComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

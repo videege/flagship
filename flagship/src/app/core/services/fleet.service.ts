@@ -41,6 +41,24 @@ export class FleetService {
     });
   }
 
+  public importFleet(fleet: Fleet): Promise<Fleet> {
+    if (!this.user) throw new Error("User not logged in.");
+
+    fleet.setOwnerUid(this.user.uid);
+    let serializedFleet = fleet.serialize();
+
+    return new Promise<Fleet>((resolve, reject) => {
+      this.db.collection('fleets')
+        .add(serializedFleet)
+        .then(res => {
+          fleet.setId(res.id);
+          this.updateFleet(fleet).then(() => {
+            resolve(fleet);
+          }, (err) => reject(err))
+        }, err => reject(err))
+    });
+  }
+
   public createFleet(name: string, author: string, faction: Faction,
     points: number, squadronPoints: number, campaignData: FleetCompaignData = null): Promise<Fleet> {
     if (!this.user) throw new Error("User not logged in.");

@@ -622,6 +622,10 @@ export class SquadronFactory {
         return SquadronFactory.squadronData.filter(x => x.faction === faction);
     }
 
+    getSquadronByName(name: string): SquadronData {
+        return SquadronFactory.squadronData.find(x => x.name.toLowerCase() === name.toLowerCase());
+    }
+
     instantiateSquadron(serializedSquadron: ISerializedSquadron | number): Squadron {
         let id = typeof serializedSquadron === 'number' ? serializedSquadron : serializedSquadron.id;
         let data = SquadronFactory.squadronData.find(x => x.id === id);

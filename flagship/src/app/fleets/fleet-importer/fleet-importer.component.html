@@ -1,4 +1,5 @@
 <div mat-dialog-content>
+    <flagship-issues-list [issues]="issues" *ngIf="issues.length"></flagship-issues-list>
     <p>Paste in your fleet from another fleet builder below and then click 'Import Fleet' to attempt the import.
         Note that Flagship currently only accepts imports from Armada Warlords.
     </p>

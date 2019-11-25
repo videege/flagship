@@ -1,5 +1,8 @@
-<button mat-button (click)="clone()" class="toolbar-button">Copy Fleet</button>
-<button mat-raised-button (click)="delete()" class="toolbar-button" color="warn" *ngIf="fleet.canEdit">
-    Delete Fleet
+<span class="center">{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</span>
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
 </button>
-<span>{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</span>
+<mat-menu #appMenu="matMenu">
+    <button mat-menu-item (click)="clone()">Copy Fleet</button>
+    <button mat-menu-item color="warn" *ngIf="fleet.canEdit" (click)="delete()">Delete Fleet</button>
+</mat-menu>

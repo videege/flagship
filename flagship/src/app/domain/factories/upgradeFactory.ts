@@ -8,7 +8,6 @@ import { CustomCommander } from '../campaign/customCommander';
 import { CustomCommanderUpgrade } from '../upgrades/customCommanderUpgrade';
 
 export class UpgradeFactory {
-
     upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
 
     instantiateUpgrade(id: number): Upgrade {
@@ -41,6 +40,12 @@ export class UpgradeFactory {
         let data = this.upgradeData.filter(ud => ud.type === type &&
             (ud.faction === faction || ud.faction === Faction.Any));
         return data.map(d => this.instantiateUpgrade(d.id));
+    }
+
+    getUpgradeMatchingCriteria(faction: Faction, name: string, points: number): Upgrade {
+        let data = this.upgradeData.find(x => (x.faction === faction || x.faction === Faction.Any) &&
+            x.points === points && x.name.toLowerCase() === name.toLowerCase());
+        return data ? this.instantiateUpgrade(data.id) : null;
     }
 
     getCustomCommanderUpgrade(customCommander: CustomCommander, faction: Faction) : CustomCommanderUpgrade {

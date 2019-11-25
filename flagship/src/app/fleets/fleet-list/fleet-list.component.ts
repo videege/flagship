@@ -8,6 +8,7 @@ import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-edi
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'flagship-fleet-list',
@@ -21,7 +22,7 @@ export class FleetListComponent implements OnInit {
   settings: UserSettings;
 
   constructor(private fleetService: FleetService, private dialog: MatDialog,
-    private settingsService: SettingsService) {}
+    private settingsService: SettingsService, private snackbar: MatSnackBar) {}
 
   public fleets: Fleet[];
   dataSource: MatTableDataSource<Fleet>;
@@ -89,7 +90,9 @@ export class FleetListComponent implements OnInit {
     }); 
     ref.afterClosed().subscribe((fleet: Fleet) => {
       if (fleet) {
-        
+        this.fleetService.importFleet(fleet).then(() => {
+          this.snackbar.open('Fleet successfully imported.', 'OK', { duration: 1500 });
+        });
       }
     });
   }

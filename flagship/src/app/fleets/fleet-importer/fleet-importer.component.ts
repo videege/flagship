@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AWFleetImporter } from 'src/app/domain/factories/fleetImporter';
+import { Issue } from 'src/app/domain/campaign/issue';
 
 @Component({
   selector: 'flagship-fleet-importer',
@@ -8,6 +10,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class FleetImporterComponent implements OnInit {
 
+  importedFleet: string = null;
+  issues: Issue[] = [];
+
   constructor(public dialogRef: MatDialogRef<FleetImporterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -15,6 +20,15 @@ export class FleetImporterComponent implements OnInit {
   }
 
   import() {
-    
+    if (!this.importedFleet) return;
+
+    let awImporter = new AWFleetImporter(this.importedFleet);
+    let result = awImporter.import();
+
+    if (result.issues && result.issues.length) {
+      this.issues = result.issues;
+    } else {
+      this.dialogRef.close(result.fleet);
+    }
   }
 }

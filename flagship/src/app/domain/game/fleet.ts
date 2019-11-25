@@ -40,7 +40,7 @@ export class Fleet {
   public squadrons: Squadron[];
   public objectives: Objective[];
 
-  public originalFleetId: string;
+  public originalFleetId: string = null;
 
   canEdit: boolean = false;
 

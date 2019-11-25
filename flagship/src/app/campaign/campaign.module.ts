@@ -13,7 +13,6 @@ import { InviteComponent } from './invite/invite.component';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import { CampaignLocationsComponent } from './campaign-locations/campaign-locations.component';
 import { CampaignSetupDialogComponent } from './campaign-setup-dialog/campaign-setup-dialog.component';
-import { IssuesListComponent } from './issues-list/issues-list.component';
 import { LocationControlDialogComponent } from './location-control-dialog/location-control-dialog.component';
 import { EventTimelineComponent } from './event-timeline/event-timeline.component';
 import { CampaignInfoComponent } from './campaign-info/campaign-info.component';
@@ -38,7 +37,6 @@ import { SetCampaignPointsDialogComponent } from './set-campaign-points-dialog/s
     InviteComponent, 
     CampaignLocationsComponent, 
     CampaignSetupDialogComponent, 
-    IssuesListComponent, 
     LocationControlDialogComponent, 
     EventTimelineComponent, 
     CampaignInfoComponent, 

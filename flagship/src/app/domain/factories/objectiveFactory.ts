@@ -452,4 +452,8 @@ export class ObjectiveFactory {
     getObjective(id: number) {
         return this.objectives.find(o => o.id === id);
     }
+
+    getObjectiveByName(name: string) {
+        return this.objectives.find(o => o.name.toLowerCase() === (name || '').toLowerCase());
+    }
 }

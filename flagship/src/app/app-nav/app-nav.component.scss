@@ -32,4 +32,6 @@ a.parent-link {
 .title-mobile {
   text-align: center;
   flex: 1 1 0%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
