@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
 import { DefaultToolbarComponent } from '../shared/default-toolbar/default-toolbar.component';
 import { FleetToolbarComponent } from './fleet-toolbar/fleet-toolbar.component';
 import { FlagshipRouteData } from "../app.route-data";
+import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.component';
 
 @Injectable()
 export class FleetResolver implements Resolve<Fleet> {
@@ -47,45 +48,68 @@ const FLEET_ROUTES: Routes = [
     {
         path: '', children: [
             {
-              path: '', component: FleetListComponent,
-              data: { nav: new FlagshipRouteData('My Fleets', null, null) }
+                path: '', component: FleetListComponent,
+                data: { nav: new FlagshipRouteData('My Fleets', null, null) }
             },
             defaultToolbar
         ]
     },
     {
         path: ':id', children: [
-            { path: '', component: FleetComponent, resolve: { fleet: FleetResolver },
-              data: { nav: new FlagshipRouteData((data: Data) => {
-                  return (data['fleet'] as Fleet).name;
-              }, 'Fleets', '/fleets')}
+            {
+                path: '', component: FleetComponent, resolve: { fleet: FleetResolver },
+                data: {
+                    nav: new FlagshipRouteData((data: Data) => {
+                        return (data['fleet'] as Fleet).name;
+                    }, 'Fleets', '/fleets')
+                }
+            },
+            fleetToolbar
+        ]
+    },
+    {
+        path: ':id/export', children: [
+            {
+                path: '', component: FleetExporterComponent, resolve: { fleet: FleetResolver },
+                data: {
+                    nav: new FlagshipRouteData('Export', (data: Data) => {
+                        return (data['fleet'] as Fleet).name;
+                    }, (data: Data) => {
+                        let fleet = data['fleet'] as Fleet;
+                        return `/fleets/${fleet.id}`;
+                    })
+                },
             },
             fleetToolbar
         ]
     },
     {
         path: ':id/ships/:shipId', children: [
-            { 
+            {
                 path: '', component: ShipEditorComponent, resolve: { ship: ShipResolver },
-                data: { nav: new FlagshipRouteData('Ship', (data: Data) => {
-                    return (data['ship'] as Ship).fleet.name;
-                }, (data: Data) => {
-                    let ship = data['ship'] as Ship;
-                    return `/fleets/${ship.fleet.id}`;
-                }) }
+                data: {
+                    nav: new FlagshipRouteData('Ship', (data: Data) => {
+                        return (data['ship'] as Ship).fleet.name;
+                    }, (data: Data) => {
+                        let ship = data['ship'] as Ship;
+                        return `/fleets/${ship.fleet.id}`;
+                    })
+                }
             },
             fleetToolbar
         ]
     },
     {
         path: ':id/ships/:shipId/statistics', children: [
-            { 
+            {
                 path: '', component: ShipStatisticsComponent, resolve: { ship: ShipResolver },
-                data: { nav: new FlagshipRouteData('Statistics', 'Ship', (data: Data) => {
-                    let ship = data['ship'] as Ship;
-                    let shipId = ship.uid;
-                    return `/fleets/${ship.fleet.id}/ships/${shipId}`;
-                }) }
+                data: {
+                    nav: new FlagshipRouteData('Statistics', 'Ship', (data: Data) => {
+                        let ship = data['ship'] as Ship;
+                        let shipId = ship.uid;
+                        return `/fleets/${ship.fleet.id}/ships/${shipId}`;
+                    })
+                }
             },
             fleetToolbar
         ]

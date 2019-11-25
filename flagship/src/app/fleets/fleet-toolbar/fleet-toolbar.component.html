@@ -4,5 +4,6 @@
 </button>
 <mat-menu #appMenu="matMenu">
     <button mat-menu-item (click)="clone()">Copy Fleet</button>
+    <a mat-menu-item [routerLink]="['export']">Export Fleet</a>
     <button mat-menu-item color="warn" *ngIf="fleet.canEdit" (click)="delete()">Delete Fleet</button>
 </mat-menu>

@@ -25,6 +25,7 @@ import { AppMaterialModule } from '../app-material/app-material.module';
 import { CustomCommanderComponent } from './custom-commander/custom-commander.component';
 import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom-ability-selector.component';
 import { FleetImporterComponent } from './fleet-importer/fleet-importer.component';
+import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { FleetImporterComponent } from './fleet-importer/fleet-importer.componen
     CustomCommanderComponent,
     CustomAbilitySelectorComponent,
     FleetImporterComponent,
+    FleetExporterComponent,
   ],
   imports: [
     CommonModule,
