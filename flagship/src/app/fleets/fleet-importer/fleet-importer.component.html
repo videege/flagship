@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+    <p>Paste in your fleet from another fleet builder below and then click 'Import Fleet' to attempt the import.
+        Note that Flagship currently only accepts imports from Armada Warlords.
+    </p>
+    <form fxLayout="column">
+        <mat-form-field style="width: 100%;">
+            <textarea matInput placeholder="Imported Fleet" name="importedFleet"
+                rows="8"
+                [(ngModel)]="importedFleet"></textarea>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button (click)="import()" [disabled]="!importedFleet || !importedFleet.length" 
+        color="primary">Import Fleet</button>
+</div>

@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-editor.component';
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
+import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
 
 @Component({
   selector: 'flagship-fleet-list',
@@ -78,6 +79,17 @@ export class FleetListComponent implements OnInit {
             //this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
             
           });
+      }
+    });
+  }
+
+  importFleet() {
+    let ref = this.dialog.open(FleetImporterComponent, {
+      width: '450px'
+    }); 
+    ref.afterClosed().subscribe((fleet: Fleet) => {
+      if (fleet) {
+        
       }
     });
   }

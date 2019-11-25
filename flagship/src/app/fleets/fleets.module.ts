@@ -24,6 +24,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { CustomCommanderComponent } from './custom-commander/custom-commander.component';
 import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom-ability-selector.component';
+import { FleetImporterComponent } from './fleet-importer/fleet-importer.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom
     MethodologyComponent,
     CustomCommanderComponent,
     CustomAbilitySelectorComponent,
+    FleetImporterComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,8 @@ import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom
     UpgradeSelectorComponent,
     FleetEditorComponent,
     ObjectiveSelectorComponent,
-    CustomAbilitySelectorComponent
+    CustomAbilitySelectorComponent,
+    FleetImporterComponent
   ],
 })
 export class FleetsModule { }
