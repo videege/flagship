@@ -117,26 +117,38 @@ export class AttackPool implements IAttackPool {
     }
 
     expectedDamage(): PoolStatistics {
-        let mean = this.dieRolls.map(x => x.expectedDamage())
-            .reduce((sum, current) => sum + current);
-        let variance = this.dieRolls.map(x => x.damageVariance())
-            .reduce((sum, current) => sum + current);
+        let mean = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.expectedDamage())
+                .reduce((sum, current) => sum + current)
+            : 0;
+        let variance = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.damageVariance())
+                .reduce((sum, current) => sum + current)
+            : 0;
         return new PoolStatistics(mean, variance);
     }
 
     expectedAccuracies(): PoolStatistics {
-        let mean = this.dieRolls.map(x => x.expectedAccuracies())
-            .reduce((sum, current) => sum + current);
-        let variance = this.dieRolls.map(x => x.accuracyVariance())
-            .reduce((sum, current) => sum + current);
+        let mean = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.expectedAccuracies())
+                .reduce((sum, current) => sum + current)
+            : 0;
+        let variance = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.accuracyVariance())
+                .reduce((sum, current) => sum + current)
+            : 0;
         return new PoolStatistics(mean, variance);
     }
 
     expectedCriticals(): PoolStatistics {
-        let mean = this.dieRolls.map(x => x.expectedCriticals())
-            .reduce((sum, current) => sum + current);
-        let variance = this.dieRolls.map(x => x.criticalVariance())
-            .reduce((sum, current) => sum + current);
+        let mean = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.expectedCriticals())
+                .reduce((sum, current) => sum + current)
+            : 0;
+        let variance = this.dieRolls.length 
+            ? this.dieRolls.map(x => x.criticalVariance())
+                .reduce((sum, current) => sum + current)
+            : 0;
         return new PoolStatistics(mean, variance);
     }
 

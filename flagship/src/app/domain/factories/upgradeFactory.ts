@@ -535,7 +535,7 @@ export class UpgradeFactory {
             {
                 id: 4006, name: 'Veteran Gunners', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "While attacking, you may exhaust this card to reroll all dice in your attack pool.."
+                text: "While attacking, you may exhaust this card to reroll all dice in your attack pool."
             },
             {
                 id: 4007, name: 'Weapons Battery Techs', type: UpgradeType.WeaponsTeam, faction: Faction.Any,

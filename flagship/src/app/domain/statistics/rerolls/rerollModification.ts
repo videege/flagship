@@ -37,7 +37,7 @@ export abstract class RerollModification implements IDieModification {
     }
 
     adjustProbability(die: DieRoll): DieRoll {
-        let probability = 0;
+        let cumulativeRerollProbability = 0;
 
         let rerolling = {
             blanks: this.isRerollingResult(RerollStrategy.Blanks),
@@ -47,41 +47,65 @@ export abstract class RerollModification implements IDieModification {
         };
         
         if (rerolling.blanks) {
-            probability += die.baseProbability.pBlank;
+            cumulativeRerollProbability += die.pBlank;
         }
         if (rerolling.accuracies) {
-            probability += die.baseProbability.pAccuracy;
+            cumulativeRerollProbability += die.pAccuracy;
         }
         if (rerolling.hits) {
-            probability += die.baseProbability.pHit;
+            cumulativeRerollProbability += die.pHit;
         }
 
         let d = die.clone();
-        if (probability === 0)
+        if (cumulativeRerollProbability === 0)
             return d;
 
         if (rerolling.blanks) {
-            d.pBlank = die.pBlank * die.baseProbability.pBlank;
+            let otherRerolledProbabilities = [];
+            if (rerolling.accuracies) otherRerolledProbabilities.push(die.pAccuracy);
+            if (rerolling.hits) otherRerolledProbabilities.push(die.pHit);
+
+            d.pBlank = this.calculateRerolledProbability(die.pBlank, die.baseProbability.pBlank,
+                otherRerolledProbabilities);
         } else {
-            d.pBlank = die.pBlank + (probability * die.baseProbability.pBlank)
+            d.pBlank = die.pBlank + (cumulativeRerollProbability * die.baseProbability.pBlank)
         }
         if (rerolling.accuracies) {
-            d.pAccuracy = die.pAccuracy * die.baseProbability.pAccuracy;
+            let otherRerolledProbabilities = [];
+            if (rerolling.blanks) otherRerolledProbabilities.push(die.pBlank);
+            if (rerolling.hits) otherRerolledProbabilities.push(die.pHit);
+
+            d.pAccuracy = this.calculateRerolledProbability(die.pAccuracy, die.baseProbability.pAccuracy,
+                otherRerolledProbabilities);
         } else {
-            d.pAccuracy = die.pAccuracy + (probability * die.baseProbability.pAccuracy);
+            d.pAccuracy = die.pAccuracy + (cumulativeRerollProbability * die.baseProbability.pAccuracy);
         }
 
         if (rerolling.hits) {
-            d.pHit = die.pHit * die.baseProbability.pHit
+            let otherRerolledProbabilities = [];
+            if (rerolling.accuracies) otherRerolledProbabilities.push(die.pAccuracy);
+            if (rerolling.blanks) otherRerolledProbabilities.push(die.pBlank);
+
+            d.pHit = this.calculateRerolledProbability(die.pHit, die.baseProbability.pHit,
+                otherRerolledProbabilities);
         } else {
-            d.pHit = die.pHit + (probability * die.baseProbability.pHit);
+            d.pHit = die.pHit + (cumulativeRerollProbability * die.baseProbability.pHit);
         }
 
         // Other events not accounted for by reroll strategy (i.e., you wouldn't reroll these dice)
-        d.pCrit = die.pCrit + (probability * die.baseProbability.pCrit);
-        d.pDoubleHit = die.pDoubleHit + (probability * die.baseProbability.pDoubleHit);
-        d.pHitCrit = die.pHitCrit + (probability * die.baseProbability.pHitCrit);
+        d.pCrit = die.pCrit + (cumulativeRerollProbability * die.baseProbability.pCrit);
+        d.pDoubleHit = die.pDoubleHit + (cumulativeRerollProbability * die.baseProbability.pDoubleHit);
+        d.pHitCrit = die.pHitCrit + (cumulativeRerollProbability * die.baseProbability.pHitCrit);
 
         return d;
+    }
+
+    calculateRerolledProbability(currentProbability: number, baseProbability: number,
+        otherRerolledProbabilities: number[]): number {
+        let newProb = currentProbability * baseProbability;
+        for (const rerollProbability of otherRerolledProbabilities) {
+            newProb += baseProbability * rerollProbability;
+        }
+        return newProb;
     }
 }
