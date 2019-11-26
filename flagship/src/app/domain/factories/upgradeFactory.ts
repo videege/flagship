@@ -586,7 +586,7 @@ export class UpgradeFactory {
                 text: "When you activate, you may exhaust this card to choose 1 enemy ship of your size class or smaller at distance 1-5. That ship must spend a Navigate token or reduce its speed by 1 to a minimum of 1."
             },
             {
-                id: 5006, name: 'Point-Defense Rerout', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                id: 5006, name: 'Point-Defense Reroute', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "While attacking a squadron at close range, you may reroll your critical icons."
             },
@@ -1011,7 +1011,7 @@ export class UpgradeFactory {
             {
                 id: 11000, name: 'Auxiliary Shields Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
-                text: ": You may treat the maximum shield values of your right and left hull zones as increased by 1 when you recover or move shields to those zones. If you do, the number of shields in those zones cannot exceed a maximum of \"4\"."
+                text: "Engineering: You may treat the maximum shield values of your right and left hull zones as increased by 1 when you recover or move shields to those zones. If you do, the number of shields in those zones cannot exceed a maximum of \"4\"."
             },
             {
                 id: 11001, name: 'Engine Techs', type: UpgradeType.SupportTeam, faction: Faction.Any,
