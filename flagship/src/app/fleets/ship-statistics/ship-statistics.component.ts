@@ -161,7 +161,6 @@ export class ShipStatisticsComponent implements OnInit {
     this.calculator = new Calculator(this.armament, this.modifications, this.selectedArc);
     this.calculator.applyModifications();
     this.updateStatistics();
-    console.log('applied');
   }
 
   reorderModificationDown(modification: IDieModification) {

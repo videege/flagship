@@ -28,13 +28,16 @@
                 </button>
               </div>
             </div>
-            <div fxFlex fxLayout="column" >
+            <div fxFlex fxLayout="column">
               <flagship-reroll-modification *ngIf="modification.type === modTypes.Reroll" [modification]="modification"
                 (change)="modificationChanged($event)">
               </flagship-reroll-modification>
               <flagship-addition-modification *ngIf="modification.type === modTypes.Addition"
                 [modification]="modification" (change)="modificationChanged($event)">
               </flagship-addition-modification>
+              <flagship-replacement-modification *ngIf="modification.type === modTypes.Replacement"
+                [modification]="modification" (change)="modificationChanged($event)">
+              </flagship-replacement-modification>
             </div>
           </div>
           <mat-divider *ngIf="!isLast"></mat-divider>
@@ -44,8 +47,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar class="stats-toolbar">
-      <mat-select (selectionChange)="selectArc(selectedArc)" [(value)]="selectedArc" 
-        ngStyle.gt-xs="width: 150px;" style="width: 100px;">
+      <mat-select (selectionChange)="selectArc(selectedArc)" [(value)]="selectedArc" ngStyle.gt-xs="width: 150px;"
+        style="width: 100px;">
         <mat-option [value]="arcs.Front">Front Arc</mat-option>
         <mat-option [value]="arcs.Left">Side Arc</mat-option>
         <mat-option [value]="arcs.LeftAux" *ngIf="isHuge">Auxiliary Arc</mat-option>
@@ -97,8 +100,7 @@
                   [gradient]="longRange.gradient" [xAxis]="longRange.showXAxis" [yAxis]="longRange.showYAxis"
                   [legend]="longRange.showLegend" [showXAxisLabel]="longRange.showXAxisLabel"
                   [showYAxisLabel]="longRange.showYAxisLabel" [xAxisLabel]="longRange.xAxisLabel"
-                  [yAxisLabel]="longRange.yAxisLabel" [yScaleMax]="longRange.yScaleMax"
-                  [noBarWhenZero]="false">
+                  [yAxisLabel]="longRange.yAxisLabel" [yScaleMax]="longRange.yScaleMax" [noBarWhenZero]="false">
                 </ngx-charts-bar-vertical>
               </div>
             </div>
@@ -108,8 +110,7 @@
                   [gradient]="mediumRange.gradient" [xAxis]="mediumRange.showXAxis" [yAxis]="mediumRange.showYAxis"
                   [legend]="mediumRange.showLegend" [showXAxisLabel]="mediumRange.showXAxisLabel"
                   [showYAxisLabel]="mediumRange.showYAxisLabel" [xAxisLabel]="mediumRange.xAxisLabel"
-                  [yAxisLabel]="mediumRange.yAxisLabel" [yScaleMax]="mediumRange.yScaleMax"
-                  [noBarWhenZero]="false">
+                  [yAxisLabel]="mediumRange.yAxisLabel" [yScaleMax]="mediumRange.yScaleMax" [noBarWhenZero]="false">
                 </ngx-charts-bar-vertical>
               </div>
             </div>
@@ -119,8 +120,7 @@
                   [gradient]="closeRange.gradient" [xAxis]="closeRange.showXAxis" [yAxis]="closeRange.showYAxis"
                   [legend]="closeRange.showLegend" [showXAxisLabel]="closeRange.showXAxisLabel"
                   [showYAxisLabel]="closeRange.showYAxisLabel" [xAxisLabel]="closeRange.xAxisLabel"
-                  [yAxisLabel]="closeRange.yAxisLabel" [yScaleMax]="closeRange.yScaleMax"
-                  [noBarWhenZero]="false">
+                  [yAxisLabel]="closeRange.yAxisLabel" [yScaleMax]="closeRange.yScaleMax" [noBarWhenZero]="false">
                 </ngx-charts-bar-vertical>
               </div>
             </div>

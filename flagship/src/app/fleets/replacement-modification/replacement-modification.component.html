@@ -1,0 +1,20 @@
+<div fxLayout="row">
+    <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+    <span fxFlex></span>
+    <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)"
+         matTooltip="Enabled">
+    </mat-slide-toggle>
+</div>
+<div fxLayout="row" fxLayoutGap="4px">
+    <span fxFlex style="line-height: 24px;">Prefer:&nbsp;</span>
+    <mat-select [(value)]="selectedPreference" (selectionChange)="preferenceChanged($event)">
+        <mat-select-trigger>
+            <i class="ffi ffi-swa-d8"
+                [ngClass]="{ 'black': selectedPreference === types.Black, 'blue': selectedPreference === types.Blue, 'red': selectedPreference === types.Red }"></i>
+        </mat-select-trigger>
+        <mat-option *ngFor="let preference of preferences" [value]="preference">
+            <i class="ffi ffi-swa-d8"
+                [ngClass]="{ 'black': preference === types.Black, 'blue': preference === types.Blue, 'red': preference === types.Red }"></i>
+        </mat-option>
+    </mat-select>
+</div>

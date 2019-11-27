@@ -15,7 +15,8 @@ export class VeteranGunnersModification extends RerollModification {
     probabilityOfEffect(pool: IAttackPool): number {
         // probability of veteran gunners is p(> 50% blanks) in the pool
         if (!pool) return 0;
-        return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, Math.ceil(pool.poolSize() / 2));
+        return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, Math.floor(pool.poolSize() / 2)) +
+            pool.probabilityOfResult(DieType.Black, AttackPoolResultType.Blank, 2);
     }
 
     apply(pool: AttackPool): IAttackPool {

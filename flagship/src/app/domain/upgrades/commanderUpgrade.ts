@@ -30,7 +30,7 @@ export class CommanderUpgrade extends Upgrade {
         for (const shipInFleet of ship.fleet.ships) {
             if (shipInFleet !== ship) {
                 let commanderSlot = shipInFleet.upgradeSlots.find((u: UpgradeSlot) => u.type === UpgradeType.Commander);
-                if (commanderSlot !== null) {
+                if (commanderSlot) {
                     commanderSlot.isEnabled = true;
                 }
             }
@@ -42,7 +42,7 @@ export class CommanderUpgrade extends Upgrade {
         for (const shipInFleet of ship.fleet.ships) {
             if (shipInFleet !== ship) {
                 let commanderSlot = shipInFleet.upgradeSlots.find((u: UpgradeSlot) => u.type === UpgradeType.Commander);
-                if (commanderSlot !== null) {
+                if (commanderSlot) {
                     commanderSlot.isEnabled = false;
                 }
             }

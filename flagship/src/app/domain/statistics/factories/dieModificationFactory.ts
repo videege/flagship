@@ -8,6 +8,7 @@ import { VeteranGunnersModification } from '../rerolls/veteranGunners';
 import { GenericRerollModification } from '../rerolls/genericRerollModification';
 import { DieType } from '../dieRoll';
 import { Range } from '../attackPool';
+import { ReplacementModification } from '../replacements/replacementModification';
 
 export enum ModificationClass {
     GenericReroll,
@@ -53,10 +54,12 @@ export class DieModificationFactory {
 
     private orders = {
         armamentAddition: 0,
+        replacement: 5,
         addition: 10,
         existingAddition: 15,
         reroll: 20,
-        expensiveReroll: 25
+        expensiveReroll: 25,
+        modification: 30
     };
 
     private concentrateFireModification = new AdditionModification('Concentrate Fire Dial', 1,
@@ -92,11 +95,17 @@ export class DieModificationFactory {
                         false, this.orders.armamentAddition, AdditionRestriction.Red, FiringArc.Front | FiringArc.Rear)
                 }
             },
+            // replacement
+            {
+                id: 1502, factory: () => {
+                    return new ReplacementModification('Commander Sato', 2, false, this.orders.replacement)
+                }
+            },
             // pool additions
             {
                 id: 2022, factory: () => {
                     return new AdditionModification('Ravager (Concentrate Token)', 1,
-                        true, this.orders.addition, AdditionRestriction.Existing)
+                        true, this.orders.existingAddition, AdditionRestriction.Existing)
                 }
             },
             {

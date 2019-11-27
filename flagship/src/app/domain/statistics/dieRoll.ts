@@ -55,7 +55,7 @@ export class DieRoll implements IDieRoll {
     validate() {
         let totalProbability = this.pBlank + this.pAccuracy +
             this.pCrit + this.pDoubleHit + this.pHit + this.pHitCrit;
-        
+
         if (totalProbability !== 1) {
             console.log(`Die validation error! ${this.type} die got P = ${totalProbability}`);
         }
@@ -74,9 +74,9 @@ export class DieRoll implements IDieRoll {
         let single = Math.pow(1 - mean, 2);
         let double = Math.pow(2 - mean, 2);
         return (this.pHit * single) +
-               (this.pCrit * single) +
-               (this.pHitCrit * double) +
-               (this.pDoubleHit * double); 
+            (this.pCrit * single) +
+            (this.pHitCrit * double) +
+            (this.pDoubleHit * double);
     }
 
     expectedAccuracies(): number {
@@ -94,6 +94,15 @@ export class DieRoll implements IDieRoll {
     criticalVariance(): number {
         let single = Math.pow(1 - this.expectedCriticals(), 2);
         return (this.pCrit * single) + (this.pHitCrit * single);
+    }
+
+    modificationScore(): number {
+        return Math.abs(this.pAccuracy - this.baseProbability.pAccuracy) +
+            Math.abs(this.pHit - this.baseProbability.pHit) +
+            Math.abs(this.pCrit - this.baseProbability.pCrit) + 
+            Math.abs(this.pBlank - this.baseProbability.pBlank) +
+            Math.abs(this.pDoubleHit - this.baseProbability.pDoubleHit) +
+            Math.abs(this.pHitCrit - this.baseProbability.pHitCrit);
     }
 
     static RedDieRoll(): DieRoll {

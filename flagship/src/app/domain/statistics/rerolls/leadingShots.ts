@@ -15,7 +15,8 @@ export class LeadingShotsModification extends RerollModification {
         // probability of leading shots is P(more than two blank any die)
         // could get more sophisticated but this is probably a good baseline
         if (!pool) return 0;
-        return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, 2);
+        return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, 2) +
+            pool.probabilityOfResult(DieType.Blue, AttackPoolResultType.Accuracy, 2);
     }
 
     canBeApplied(pool: AttackPool): boolean {
@@ -32,9 +33,7 @@ export class LeadingShotsModification extends RerollModification {
         let candidate = minModifiedBlues[0];
         let candidateScore = null;
         for (const die of minModifiedBlues) {
-            let probabilityDifference = Math.abs(die.pAccuracy - die.baseProbability.pAccuracy) +
-                Math.abs(die.pHit - die.baseProbability.pHit) + 
-                Math.abs(die.pCrit - die.baseProbability.pCrit);
+            let probabilityDifference = die.modificationScore();
             if (candidateScore == null || probabilityDifference < candidateScore) {
                 candidate = die;
                 candidateScore = probabilityDifference;

@@ -22,7 +22,8 @@ export class MethodologyComponent implements OnInit {
   hasAdditionalNotes(): boolean {
     return this.modifications.filter(m => {
       return m.name === "Leading Shots" ||
-        m.name === "Veteran Gunners";
+        m.name === "Veteran Gunners" ||
+        m.name === "Commander Sato";
     }).length > 0; 
   }
 }

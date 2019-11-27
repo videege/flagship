@@ -26,6 +26,7 @@ import { CustomCommanderComponent } from './custom-commander/custom-commander.co
 import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom-ability-selector.component';
 import { FleetImporterComponent } from './fleet-importer/fleet-importer.component';
 import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.component';
+import { ReplacementModificationComponent } from './replacement-modification/replacement-modification.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.componen
     CustomAbilitySelectorComponent,
     FleetImporterComponent,
     FleetExporterComponent,
+    ReplacementModificationComponent,
   ],
   imports: [
     CommonModule,
