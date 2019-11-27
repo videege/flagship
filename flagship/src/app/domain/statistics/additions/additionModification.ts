@@ -1,6 +1,6 @@
 import { IDieModification, ModificationType, ICalculatedProbabilities } from '../dieModification';
 import { AttachSession } from 'protractor/built/driverProviders';
-import { AttackPool, IAttackPool } from '../attackPool';
+import { AttackPool, IAttackPool, Range } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
 import { FiringArc } from '../firingArc';
 
@@ -36,6 +36,7 @@ export class AdditionModification implements IDieModification {
         public order: number,
         public restriction: AdditionRestriction,
         public firingArcRestriction: FiringArc = null,
+        public rangeRestriction: Range = null,
         public preferredTypes: DieType[] = null,
         public type: ModificationType = ModificationType.Addition) {
         if (!this.preferredTypes || !this.preferredTypes.length) {
@@ -56,6 +57,9 @@ export class AdditionModification implements IDieModification {
         // In general these effects are assumed to be always able to be used
         // if they are included in the calculation.
         if (this.firingArcRestriction && (pool.firingArc & this.firingArcRestriction) == 0) {
+            return false;
+        }
+        if (this.rangeRestriction && (pool.range & this.rangeRestriction) == 0) {
             return false;
         }
         return this.enabled;

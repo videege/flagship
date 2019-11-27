@@ -1,7 +1,7 @@
 import { DieRoll } from '../dieRoll';
 import { RerollStrategy } from './rerollStrategy';
 import { IDieModification, ModificationType, ICalculatedProbabilities } from '../dieModification';
-import { AttackPool, IAttackPool } from '../attackPool';
+import { AttackPool, IAttackPool, Range } from '../attackPool';
 
 export abstract class RerollModification implements IDieModification {
     abstract name: string;
@@ -11,7 +11,8 @@ export abstract class RerollModification implements IDieModification {
 
     public enabled = true;
     public orderable = true;
-    constructor(public strategy: RerollStrategy, public order: number, public type: ModificationType = ModificationType.Reroll) {
+    constructor(public strategy: RerollStrategy, public order: number, 
+        public rangeRestriction: Range = null, public type: ModificationType = ModificationType.Reroll) {
 
     }
 

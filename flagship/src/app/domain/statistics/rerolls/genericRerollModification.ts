@@ -1,5 +1,5 @@
 import { IDieModification, ModificationType } from '../dieModification';
-import { AttackPool, IAttackPool } from '../attackPool';
+import { AttackPool, IAttackPool, Range } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
 import { RerollStrategy } from './rerollStrategy';
 import { RerollModification } from './rerollModification';
@@ -9,13 +9,18 @@ export class GenericRerollModification extends RerollModification {
 
     constructor(strategy: RerollStrategy, public name: string, public order: number,
         private numberOfDice: number, private dieType: DieType,
-        public type: ModificationType = ModificationType.Reroll) {
-        super(strategy, order, type);
+        rangeRestriction: Range = null,
+        type: ModificationType = ModificationType.Reroll) {
+        super(strategy, order, rangeRestriction, type);
     }
 
     canBeApplied(pool: AttackPool): boolean {
         // In general these effects are assumed to be always able to be used
         // if they are included in the calculation.
+
+        if (this.rangeRestriction && (pool.range & this.rangeRestriction) == 0) {
+            return false;
+        }
         return this.enabled;
     }
 
@@ -43,6 +48,6 @@ export class GenericRerollModification extends RerollModification {
         }
         // Reroll the selected dice
         let rerolledDice = this.rerollDice(rerollableRolls);
-        return new AttackPool(nonRerolledDice.concat(rerolledDice), pool.firingArc);
+        return new AttackPool(nonRerolledDice.concat(rerolledDice), pool.firingArc, pool.range);
     }
 }

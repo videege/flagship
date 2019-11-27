@@ -1,5 +1,5 @@
 import { IDieModification, ModificationType } from '../dieModification';
-import { AttackPool, IAttackPool, WeightedAttackPool, ConditionalAttackPool, AttackPoolResultType } from '../attackPool';
+import { AttackPool, IAttackPool, WeightedAttackPool, ConditionalAttackPool, AttackPoolResultType, Range } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
 import { RerollModification } from './rerollModification';
 import { RerollStrategy } from "./rerollStrategy";
@@ -7,8 +7,8 @@ import { RerollStrategy } from "./rerollStrategy";
 export class LeadingShotsModification extends RerollModification {
     name: string = "Leading Shots";   
 
-    constructor(strategy: RerollStrategy, public order: number, public type: ModificationType = ModificationType.Reroll) {
-        super(strategy, order, type);
+    constructor(strategy: RerollStrategy, public order: number) {
+        super(strategy, order, null, ModificationType.Reroll);
     }
     
     probabilityOfEffect(pool: IAttackPool): number {

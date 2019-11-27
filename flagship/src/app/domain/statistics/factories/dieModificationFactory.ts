@@ -7,6 +7,7 @@ import { FiringArc } from '../firingArc';
 import { RerollModification } from '../rerolls/rerollModification';
 import { GenericRerollModification } from '../rerolls/genericRerollModification';
 import { DieType } from '../dieRoll';
+import { Range } from '../attackPool';
 
 export enum ModificationClass {
     GenericReroll,
@@ -98,6 +99,34 @@ export class DieModificationFactory {
                         true, this.orders.addition, AdditionRestriction.Existing)
                 }
             },
+            {
+                id: 1012, factory: () => {
+                    return new AdditionModification('General Romodi', 1,
+                        true, this.orders.addition, AdditionRestriction.Red)
+                }
+            },
+            {
+                id: 1500, factory: () => {
+                    return new AdditionModification('Admiral Ackbar', 2,
+                        true, this.orders.addition, AdditionRestriction.Red, FiringArc.Left | FiringArc.Right)
+                }
+            },
+            {
+                id: 2516, factory: () => {
+                    return new AdditionModification('Defiance', 1,
+                        true, this.orders.addition, AdditionRestriction.Any)
+                }
+            },
+            {
+                id: 7003, factory: () => {
+                    return new AdditionModification('External Racks', 2,
+                        true, this.orders.addition, AdditionRestriction.Black, null,
+                        Range.Close)
+                }
+            },
+            //TODO; devastator (variable # up to 5)
+            //todo: Quad turbolaser cannons (P(at least one red accuracy) split into same pool, other pool with an additional red acc)
+
             // Rerolls
             { id: 3001, factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
             {
@@ -120,17 +149,19 @@ export class DieModificationFactory {
             },
             //todo: veteran gunners custom class (total reroll if p(x) < avg?)
             //todo: caitken and shollan (variable reroll of one color)
-            //TODO: take into account range restrictions on krennic etc.
+            //todo: dual turbolaser turrets (red die replacement fresh roll)
             {
                 id: 10212, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
-                        'Director Krennic (Dial)', this.orders.reroll, 0, DieType.Red);
+                        'Director Krennic (Dial)', this.orders.reroll, 0, DieType.Red,
+                        Range.Long);
                 }
             },
             {
                 id: 10212, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
-                        'Director Krennic (Token)', this.orders.reroll, 2, DieType.Red);
+                        'Director Krennic (Token)', this.orders.reroll, 2, DieType.Red,
+                        Range.Long);
                 }
             },
             {

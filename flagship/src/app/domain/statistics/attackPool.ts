@@ -6,9 +6,9 @@ import { FiringArc } from './firingArc';
 import { PoissonBinomialCalculator } from './poissonBinomialCalculator';
 
 export enum Range {
-    Long = 1,
-    Medium = 2,
-    Close = 3
+    Long = 1 << 0,
+    Medium = 1 << 1,
+    Close = 1 << 2
 }
 
 export enum AttackPoolResultType {
@@ -22,6 +22,7 @@ export interface IAttackPool {
     expectedDamage(): PoolStatistics;
     expectedAccuracies(): PoolStatistics;
     expectedCriticals(): PoolStatistics;
+    range: Range;
 
     probabilityOfResult(dieType: DieType, result: AttackPoolResultType, minSuccesses: number): number;
     modify(modification: IDieModification): IAttackPool;
@@ -29,8 +30,9 @@ export interface IAttackPool {
 }
 
 export class ConditionalAttackPool implements IAttackPool {
+    public range: Range;
     constructor(public pools: IAttackPool[]) {
-
+        this.range = this.pools[0].range;
     }
 
     poolSize(): number {
@@ -67,6 +69,8 @@ export class ConditionalAttackPool implements IAttackPool {
 }
 
 export class WeightedAttackPool implements IAttackPool {
+    public range: Range;
+
     poolSize(): number {
         return this.pool.poolSize();
     }
@@ -96,12 +100,11 @@ export class WeightedAttackPool implements IAttackPool {
     }
 
     constructor(public pool: IAttackPool, public probability: number) {
-
+        this.range = pool.range;
     }
 }
 
 export class AttackPool implements IAttackPool {
-
     poolSize(): number {
         return this.dieRolls.length;
     }
@@ -180,7 +183,7 @@ export class AttackPool implements IAttackPool {
         return this.dieRolls.filter(r => r.type === type);
     }
 
-    constructor(public dieRolls: DieRoll[], public firingArc: FiringArc) {
+    constructor(public dieRolls: DieRoll[], public firingArc: FiringArc, public range: Range) {
         if (!dieRolls) {
             this.dieRolls = [];
         }
@@ -188,11 +191,11 @@ export class AttackPool implements IAttackPool {
 
     clone(): AttackPool {
         let rolls = this.dieRolls.map(x => x.clone());
-        return new AttackPool(rolls, this.firingArc);
+        return new AttackPool(rolls, this.firingArc, this.range);
     }
 
     static FromNumberOfDice(redDice: number, blueDice: number, blackDice: number,
-        firingArc: FiringArc): AttackPool {
+        firingArc: FiringArc, range: Range): AttackPool {
         let rolls = [];
         for (let i = 0; i < redDice; i++) {
             rolls.push(DieRoll.RedDieRoll());
@@ -203,7 +206,7 @@ export class AttackPool implements IAttackPool {
         for (let i = 0; i < blackDice; i++) {
             rolls.push(DieRoll.BlackDieRoll());
         }
-        return new AttackPool(rolls, firingArc);
+        return new AttackPool(rolls, firingArc, range);
     }
 
 

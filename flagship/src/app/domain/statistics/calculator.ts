@@ -1,5 +1,5 @@
 import { Armament } from '../game/armament';
-import { AttackPool, IAttackPool } from './attackPool';
+import { AttackPool, IAttackPool, Range } from './attackPool';
 import { IDieModification, ICalculatedProbabilities } from './dieModification';
 import { FiringArc } from './firingArc';
 
@@ -10,9 +10,9 @@ export class Calculator {
 
     constructor(private armament: Armament, private modifications: IDieModification[], 
         private firingArc: FiringArc) {
-        this.closeRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, armament.blackDice, firingArc);
-        this.mediumRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, 0, firingArc);
-        this.longRangePool = AttackPool.FromNumberOfDice(armament.redDice, 0, 0, firingArc);
+        this.closeRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, armament.blackDice, firingArc, Range.Close);
+        this.mediumRangePool = AttackPool.FromNumberOfDice(armament.redDice, armament.blueDice, 0, firingArc, Range.Medium);
+        this.longRangePool = AttackPool.FromNumberOfDice(armament.redDice, 0, 0, firingArc, Range.Long);
     }
 
     applyModifications() {

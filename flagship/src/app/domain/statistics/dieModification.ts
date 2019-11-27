@@ -1,4 +1,4 @@
-import { AttackPool, IAttackPool } from './attackPool';
+import { AttackPool, IAttackPool, Range } from './attackPool';
 
 export enum ModificationType {
     Addition,
@@ -14,6 +14,8 @@ export interface ICalculatedProbabilities {
 export interface IDieModification {
     name: string;
     type: ModificationType;
+    rangeRestriction: Range;
+    
     apply(pool: AttackPool): IAttackPool;
     canBeApplied(pool: AttackPool): boolean;
     probabilityOfEffect(pool: IAttackPool): number;
