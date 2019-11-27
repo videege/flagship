@@ -4,7 +4,7 @@ import { RerollStrategy } from '../rerolls/rerollStrategy';
 import { Ship } from '../../game/ship';
 import { AdditionModification, AdditionRestriction } from '../additions/additionModification';
 import { FiringArc } from '../firingArc';
-import { RerollModification } from '../rerolls/rerollModification';
+import { VeteranGunnersModification } from '../rerolls/veteranGunners';
 import { GenericRerollModification } from '../rerolls/genericRerollModification';
 import { DieType } from '../dieRoll';
 import { Range } from '../attackPool';
@@ -129,6 +129,7 @@ export class DieModificationFactory {
 
             // Rerolls
             { id: 3001, factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
+            { id: 4006, factory: () => { return new VeteranGunnersModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
             {
                 id: 1009, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
@@ -147,7 +148,6 @@ export class DieModificationFactory {
                         'Ordnance Experts', this.orders.reroll, 0, DieType.Black);
                 }
             },
-            //todo: veteran gunners custom class (total reroll if p(x) < avg?)
             //todo: caitken and shollan (variable reroll of one color)
             //todo: dual turbolaser turrets (red die replacement fresh roll)
             {

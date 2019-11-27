@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RerollModification } from '../../domain/statistics/rerolls/rerollModification';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { RerollStrategy } from '../../domain/statistics/rerolls/rerollStrategy';
+import { IAttackPool } from 'src/app/domain/statistics/attackPool';
 
 @Component({
   selector: 'flagship-reroll-modification',
@@ -10,6 +11,7 @@ import { RerollStrategy } from '../../domain/statistics/rerolls/rerollStrategy';
 })
 export class RerollModificationComponent implements OnInit {
   @Input() modification: RerollModification;
+
   @Output() change = new EventEmitter();
   @Output() reorder = new EventEmitter();
 

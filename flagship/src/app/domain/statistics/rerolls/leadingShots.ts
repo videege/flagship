@@ -14,6 +14,7 @@ export class LeadingShotsModification extends RerollModification {
     probabilityOfEffect(pool: IAttackPool): number {
         // probability of leading shots is P(more than two blank any die)
         // could get more sophisticated but this is probably a good baseline
+        if (!pool) return 0;
         return pool.probabilityOfResult(DieType.Any, AttackPoolResultType.Blank, 2);
     }
 
