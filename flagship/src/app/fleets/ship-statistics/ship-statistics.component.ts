@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Ship, HugeShip, IgnitionCapableShip, ShipClass } from '../../domain/game/ship';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { DieModificationFactory } from '../../domain/statistics/factories/dieModificationFactory';
+import { AttackEffectFactory } from '../../domain/statistics/factories/attackEffectFactory';
 import { IDieModification, ModificationType } from '../../domain/statistics/dieModification';
 import { Armament } from '../../domain/game/armament';
 import { Calculator } from '../../domain/statistics/calculator';
@@ -73,7 +73,7 @@ export class ShipStatisticsComponent implements OnInit {
   public arcs = FiringArc;
   public modTypes = ModificationType;
 
-  private modificationFactory: DieModificationFactory = new DieModificationFactory();
+  private modificationFactory: AttackEffectFactory = new AttackEffectFactory();
   public modifications: IDieModification[] = [];
   public armament: Armament;
   public selectedStat: string = "DMG";

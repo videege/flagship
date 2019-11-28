@@ -32,7 +32,7 @@ export class ReplacementModificationComponent implements OnInit {
     this.change.emit(this.modification);
   }
 
-  preferenceChanged() {
+  preferenceChanged(event: any) {
     this.modification.preferredType = this.selectedPreference;
     this.change.emit(this.modification);
   }

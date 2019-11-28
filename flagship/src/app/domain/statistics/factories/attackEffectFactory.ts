@@ -9,6 +9,8 @@ import { GenericRerollModification } from '../rerolls/genericRerollModification'
 import { DieType } from '../dieRoll';
 import { Range } from '../attackPool';
 import { ReplacementModification } from '../replacements/replacementModification';
+import { QuadTurbolaserCannonsModification } from '../additions/quadTurbolaserCannons';
+import { GenericModification, FaceRestriction } from '../modifications/genericModification';
 
 export enum ModificationClass {
     GenericReroll,
@@ -20,7 +22,7 @@ export interface IModificationData {
     factory(): IDieModification;
 }
 
-export class DieModificationFactory {
+export class AttackEffectFactory {
     data: IModificationData[];
 
     hasDieModification(upgradeId: number): boolean {
@@ -133,6 +135,11 @@ export class DieModificationFactory {
                         Range.Close)
                 }
             },
+            {
+                id: 12006, factory: () => {
+                    return new QuadTurbolaserCannonsModification(this.orders.modification + 1)
+                }
+            },
             //TODO; devastator (variable # up to 5)
             //todo: Quad turbolaser cannons (P(at least one red accuracy) split into same pool, other pool with an additional red acc)
 
@@ -177,6 +184,59 @@ export class DieModificationFactory {
                 id: 12004, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
                         'Linked Turbolaser Turrets', this.orders.reroll, 1, DieType.Red);
+                }
+            },
+            // Modifications
+            {
+                id: 12002, factory: () => {
+                    return new GenericModification('H9 Turbolasers', this.orders.modification,
+                    true, DieType.Any, [FaceRestriction.Hit, FaceRestriction.Crit],
+                    [FaceRestriction.Accuracy], 0, [], [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.Accuracy)
+                }
+            },
+            {
+                id: 12009, factory: () => {
+                    return new GenericModification('Turbolaser Reroute Circuits', this.orders.modification,
+                    true, DieType.Red, [],
+                    [FaceRestriction.DoubleHit, FaceRestriction.Crit], 0, [], 
+                    [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.DoubleHit)
+                }
+            },
+            {
+                id: 1007, factory: () => {
+                    return new GenericModification('Admiral Screed', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Crit], 1, [DieType.Red, DieType.Black, DieType.Blue], 
+                    [DieType.Black, DieType.Red, DieType.Blue], FaceRestriction.Crit)
+                }
+            },
+            {
+                id: 4005, factory: () => {
+                    return new GenericModification('Sensor Team', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Accuracy], 1, [DieType.Red, DieType.Black, DieType.Blue], 
+                    [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.Accuracy)
+                }
+            },
+            {
+                id: 2517, factory: () => {
+                    return new GenericModification('Home One', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Accuracy], 0, [], [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.Accuracy)
+                }
+            },
+            {
+                id: 4007, factory: () => {
+                    return new GenericModification('Weapons Battery Techs', this.orders.modification,
+                    true, DieType.Any, [FaceRestriction.Accuracy],
+                    [FaceRestriction.Crit], 0, [], [DieType.Blue, DieType.Red, DieType.Black], FaceRestriction.Crit)
+                }
+            },
+            {
+                id: 8002, factory: () => {
+                    return new GenericModification('Intensify Firepower!', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Hit], 0, [], [DieType.Red, DieType.Black, DieType.Blue], FaceRestriction.Hit)
                 }
             },
         ];

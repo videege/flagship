@@ -15,7 +15,8 @@ export enum AttackPoolResultType {
     Critical,
     Accuracy,
     Blank,
-    NonBlank
+    NonBlank,
+    Hit
 }
 
 export interface IAttackPool {
@@ -168,6 +169,8 @@ export class AttackPool implements IAttackPool {
             probabilities = dice.map(d => d.pBlank);
         } else if (result == AttackPoolResultType.NonBlank) {
             probabilities = dice.map(d => 1 - d.pBlank);
+        } else if (result == AttackPoolResultType.Hit) {
+            probabilities = dice.map(d => d.pHit);
         } else {
             return 0;
         }

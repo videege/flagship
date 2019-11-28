@@ -38,6 +38,9 @@
               <flagship-replacement-modification *ngIf="modification.type === modTypes.Replacement"
                 [modification]="modification" (change)="modificationChanged($event)">
               </flagship-replacement-modification>
+              <flagship-change-modification *ngIf="modification.type === modTypes.Modification"
+                [modification]="modification" (change)="modificationChanged($event)">
+              </flagship-change-modification>
             </div>
           </div>
           <mat-divider *ngIf="!isLast"></mat-divider>

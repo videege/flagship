@@ -3,7 +3,8 @@ import { AttackPool, IAttackPool, Range } from './attackPool';
 export enum ModificationType {
     Addition,
     Reroll,
-    Replacement
+    Replacement,
+    Modification
 }
 
 export interface ICalculatedProbabilities {

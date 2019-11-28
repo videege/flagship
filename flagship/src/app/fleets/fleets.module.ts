@@ -27,6 +27,7 @@ import { CustomAbilitySelectorComponent } from './custom-ability-selector/custom
 import { FleetImporterComponent } from './fleet-importer/fleet-importer.component';
 import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.component';
 import { ReplacementModificationComponent } from './replacement-modification/replacement-modification.component';
+import { ChangeModificationComponent } from './change-modification/change-modification.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { ReplacementModificationComponent } from './replacement-modification/rep
     FleetImporterComponent,
     FleetExporterComponent,
     ReplacementModificationComponent,
+    ChangeModificationComponent,
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,15 @@
     [disabled]="!modification.orderable" matTooltip="Enabled">
   </mat-slide-toggle>
 </div>
+<div fxLayout="column"
+    *ngIf="modification.calculatedProbabilities && (modification.calculatedProbabilities.long < 1 || modification.calculatedProbabilities.medium < 1 || modification.calculatedProbabilities.close < 1)">
+    <span>Probability: (L/M/C)</span>
+    <span>
+        {{ modification.calculatedProbabilities.long * 100 | number:'1.0-1'}}% /
+        {{ modification.calculatedProbabilities.medium * 100 | number:'1.0-1'}}% /
+        {{ modification.calculatedProbabilities.close * 100 | number:'1.0-1'}}%
+    </span>
+</div>
 <div fxLayout="row" fxLayoutGap="4px" *ngIf="modification.orderable">
   <span fxFlex style="line-height: 24px;">Prefer:&nbsp;</span>
   <mat-select [(value)]="selectedPreference" (selectionChange)="preferenceChanged($event)">
