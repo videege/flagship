@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, filter, mergeMap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FlagshipRouteData } from "../app.route-data";
 import { BreadcrumbService } from '../core/services/breadcrumb.service';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'flagship-app-nav',
@@ -14,11 +15,15 @@ import { BreadcrumbService } from '../core/services/breadcrumb.service';
   styleUrls: ['./app-nav.component.scss']
 })
 export class AppNavComponent implements OnInit {
+  @ViewChild('drawer', {static: false}) sidenav: MatSidenav;
 
-
+  private isHandset = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches)
+      map(result => {
+        this.isHandset = result.matches;
+        return this.isHandset;
+      })
     );
 
   public title: string;
@@ -34,6 +39,12 @@ export class AppNavComponent implements OnInit {
   private getChildRoute(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) { route = route.firstChild; }
     return route;
+  }
+
+  public navLinkClicked() {
+    if (this.isHandset) {
+      this.sidenav.close().then();
+    }
   }
 
   ngOnInit(): void {

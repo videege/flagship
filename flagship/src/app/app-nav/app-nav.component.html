@@ -7,11 +7,11 @@
       <img src="assets/img/logo.png" class="logo" alt="Flagship" />
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['fleets']">
+      <a mat-list-item [routerLink]="['fleets']" (click)="navLinkClicked()">
         Fleets
       </a>
-      <a mat-list-item [routerLink]="['campaigns']">Campaigns</a>
-      <a mat-list-item [routerLink]="['settings']">Settings</a>
+      <a mat-list-item [routerLink]="['campaigns']" (click)="navLinkClicked()">Campaigns</a>
+      <a mat-list-item [routerLink]="['settings']" (click)="navLinkClicked()">Settings</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
