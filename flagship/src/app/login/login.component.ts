@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
   public allowedProviders = [
     AuthProvider.ANONYMOUS,
     AuthProvider.EmailAndPassword,
-    AuthProvider.Google
+    AuthProvider.Google,
+    AuthProvider.Facebook
   ];
 
   constructor(private router: Router) { }
