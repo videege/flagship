@@ -10,14 +10,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./ship-detail.component.scss']
 })
 export class ShipDetailComponent implements OnInit {
-  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
+  isExtraSmall: Observable<BreakpointState>;
 
   @Input() ship: Ship|IgnitionCapableShip|HugeShip;
   hugeShip: HugeShip;
   ignitionShip: IgnitionCapableShip;
   isCampaign = false;
 
-  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) { }
+  constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) { 
+    this.isExtraSmall = this.breakpointObserver.observe(Breakpoints.HandsetPortrait);
+  }
 
   ngOnInit() {
     this.isCampaign = !!this.ship.fleet.campaignId;

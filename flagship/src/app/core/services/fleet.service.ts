@@ -60,12 +60,13 @@ export class FleetService {
   }
 
   public createFleet(name: string, author: string, faction: Faction,
-    points: number, squadronPoints: number, campaignData: FleetCompaignData = null): Promise<Fleet> {
+    points: number, squadronPoints: number, campaignData: FleetCompaignData = null,
+    isPublic = true): Promise<Fleet> {
     if (!this.user) throw new Error("User not logged in.");
 
     let fleet = new Fleet(null, name, author, faction, points, squadronPoints);
     fleet.setOwnerUid(this.user.uid);
-
+    fleet.isPublic = isPublic;
     if (campaignData) {
       fleet.setCampaignId(campaignData.campaignId);
       fleet.customCommander = new CustomCommander();
@@ -174,6 +175,7 @@ export class FleetService {
       serializedFleet.name, serializedFleet.author, serializedFleet.faction,
       serializedFleet.pointLimit, serializedFleet.squadronPointLimit);
     fleet.originalFleetId = serializedFleet.originalFleetId || null;
+    fleet.isPublic = serializedFleet.isPublic || false;
     let userUid = this.user ? this.user.uid : null;
     fleet.setOwnerUid(serializedFleet.ownerUid || userUid);
     fleet.canEdit = this.user ? this.user.uid === fleet.ownerUid : false;

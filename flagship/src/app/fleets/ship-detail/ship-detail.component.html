@@ -1,10 +1,7 @@
 <mat-card fxFlex>
   <mat-card-header>
-    <!-- <div mat-card-avatar>
-      <i class="ffi ffi-imperial" [ngClass]="{ 'flagship': ship.isFlagship() }"></i>
-    </div> -->
-    <flagship-ship-icon [ship]="ship" mat-card-avatar></flagship-ship-icon>
-    <!-- <img mat-card-avatar src="https://vignette.wikia.nocookie.net/starwars-armada/images/2/2e/ISDTitle-icon.png/revision/latest?cb=20171107173206&format=original" /> -->
+    <flagship-ship-icon [ship]="ship" mat-card-avatar
+      *ngIf="!(isExtraSmall | async).matches"></flagship-ship-icon>
     <mat-card-title>
       <span style="margin-right:4px">{{ ship.name }}</span>
       <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
@@ -76,20 +73,27 @@
       </mat-chip>
     </mat-chip-list>
   </mat-card-content>
-  <mat-card-actions fxLayout="column" fxLayout.gt-xs="row"
-    *ngIf="ship.fleet.canEdit">
-    <button mat-button [routerLink]="['ships', ship.uid]">
-      Edit Ship
-    </button>
-    <button mat-button *ngIf="isCampaign" color="warn" [disabled]="ship.isScarred" (click)="scar()">
-      Scar Ship
-    </button>
-    <button mat-button *ngIf="isCampaign" color="accent" [disabled]="ship.isVeteran" (click)="promote()">
-      Promote to Veteran
-    </button>
-    <span fxFlex *ngIf="!(isExtraSmall | async)"></span>
-    <button mat-button (click)="deleteShip()" color="warn">
-      Delete Ship
-    </button>
+  <mat-card-actions *ngIf="ship.fleet.canEdit" fxLayout="column">
+    <div fxLayout="row">
+      <button mat-button *ngIf="isCampaign" color="warn" [disabled]="ship.isScarred" (click)="scar()">
+        Mark Scarred
+      </button>
+      <span fxFlex></span>
+      <button mat-button *ngIf="isCampaign" color="accent" [disabled]="ship.isVeteran" (click)="promote()">
+        Mark Veteran
+      </button>
+    </div>
+    <div fxLayout="row">
+      <button mat-button [routerLink]="['ships', ship.uid]">
+        Edit
+      </button>
+      <button mat-button color="accent" [routerLink]="['ships', ship.uid, 'statistics']">
+        View Stats
+      </button>
+      <span fxFlex></span>
+      <button mat-button (click)="deleteShip()" color="warn">
+        Delete
+      </button>
+    </div>
   </mat-card-actions>
 </mat-card>

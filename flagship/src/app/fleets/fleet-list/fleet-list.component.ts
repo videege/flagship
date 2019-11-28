@@ -9,6 +9,7 @@ import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
 import { MatSnackBar } from '@angular/material';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'flagship-fleet-list',
@@ -18,11 +19,26 @@ import { MatSnackBar } from '@angular/material';
 export class FleetListComponent implements OnInit {
   faction = Faction;
 
-  displayedColumns = ['faction', 'name', 'commander', 'points', 'campaign', 'actions'];
+  private mobileColumns = ['faction', 'name', 'actions'];
+  private fullColumns = ['faction', 'name', 'commander', 'points', 'campaign', 'actions'];
+  displayedColumns: string[];
   settings: UserSettings;
 
   constructor(private fleetService: FleetService, private dialog: MatDialog,
-    private settingsService: SettingsService, private snackbar: MatSnackBar) {}
+    private settingsService: SettingsService, private snackbar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver) {
+      this.displayedColumns = this.fullColumns;
+      this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.displayedColumns = this.mobileColumns;
+        }
+        else {
+          this.displayedColumns = this.fullColumns;
+        }
+      });
+    }
 
   public fleets: Fleet[];
   dataSource: MatTableDataSource<Fleet>;

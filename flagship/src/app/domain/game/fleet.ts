@@ -27,6 +27,7 @@ export interface ISerializedFleet {
   customCommander: SerializedCustomCommander;
 
   originalFleetId: string;
+  isPublic: boolean;
 }
 
 export class Fleet {
@@ -41,6 +42,7 @@ export class Fleet {
   public objectives: Objective[];
 
   public originalFleetId: string = null;
+  public isPublic: boolean = true;
 
   canEdit: boolean = false;
 
@@ -98,7 +100,8 @@ export class Fleet {
       ownerUid: this.ownerUid,
       campaignId: this.campaignId || null,
       customCommander: this.customCommander ? this.customCommander.serialize() : null,
-      originalFleetId: this.originalFleetId
+      originalFleetId: this.originalFleetId,
+      isPublic: this.isPublic
     };
   }
 
