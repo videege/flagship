@@ -44,6 +44,16 @@
       to specify whether or not you would reroll accuracies, single hits, and/or black hits.  Blank dice are always assumed
       to be rerolled if possible.  Note: not all reroll strategies are applicable to all reroll effects.
     </p>
+    <h3>Modification Preferences</h3>
+    <p>
+      Modification effects (such as H9 Turbolasers or Turbolaser Reroute Circuits) allow you to specify a preference
+      regarding the color of the die to be modified and, if more than one modification outcome is possible, 
+      a preference regarding the modification outcome.  Flagship will choose the least modified die which is capable
+      of performing the modification in order of your color preferences.  Modifications will also generally show the
+      probability of the effect being used at each range (typically, this is the probability of at least 1 die
+      in the pool having the outcome required to perform the modification, or, if any outcome is permissible, the 
+      probability of having at least one blank in the pool.)
+    </p>
     <div *ngIf="hasAdditionalNotes()">
       <h3>Specific Effect Methodologies</h3>
       <mat-accordion>
