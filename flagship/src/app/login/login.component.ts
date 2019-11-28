@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
     AuthProvider.ANONYMOUS,
     AuthProvider.EmailAndPassword,
     AuthProvider.Google,
-    AuthProvider.Facebook
+    AuthProvider.Facebook,
+    //AuthProvider.Twitter
   ];
 
   constructor(private router: Router) { }
