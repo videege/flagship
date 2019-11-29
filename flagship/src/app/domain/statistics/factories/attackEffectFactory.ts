@@ -17,21 +17,28 @@ export enum ModificationClass {
     LeadingShots
 }
 
-export interface IModificationData {
+export interface IEffectData {
     id: number;
     factory(): IDieModification;
 }
 
 export class AttackEffectFactory {
-    data: IModificationData[];
+    shipEffectData: IEffectData[];
+    squadronEffectData: IEffectData[];
 
-    hasDieModification(upgradeId: number): boolean {
-        let idx = this.data.findIndex(x => x.id === upgradeId);
+    hasShipEffect(upgradeId: number): boolean {
+        let idx = this.shipEffectData.findIndex(x => x.id === upgradeId);
         return idx >= 0;
     }
 
-    instantiateDieModifications(id: number): IDieModification[] {
-        let data = this.data.filter(x => x.id === id);
+    hasSquadronEffect(squadronId: number): boolean {
+        let idx = this.squadronEffectData.findIndex(x => x.id === squadronId);
+        return idx >= 0;
+    }
+
+    instantiateEffect(id: number, isShipEffect: boolean): IDieModification[] {
+        let data = (isShipEffect ? this.shipEffectData : this.squadronEffectData)
+            .filter(x => x.id === id);
         if (!data || !data.length)
             return [];
 
@@ -42,9 +49,12 @@ export class AttackEffectFactory {
         let concentrate: IDieModification[] = [this.concentrateFireModification, this.concentrateFireTokenReroll];
         // Find all upgrades attached to this ship 
         let shipMods = ship.upgradeSlots.filter(x => x.isEnabled && x.isFilled()).map(x => x.upgrade.id)
-            .filter(x => this.hasDieModification(x)).map(x => this.instantiateDieModifications(x));
-        
-        let finalMods = concentrate.concat([].concat(...shipMods));
+            .filter(x => this.hasShipEffect(x)).map(x => this.instantiateEffect(x, true));
+        let squadronMods = ship.fleet.squadrons.map(x => x.id).filter((value, index, self) => {
+            return self.indexOf(value) === index;
+        }).filter(x => this.hasSquadronEffect(x)).map(x => this.instantiateEffect(x, false));
+
+        let finalMods = concentrate.concat([].concat(...shipMods)).concat([].concat(...squadronMods));
         //todo: search fleet for upgrades that affect multiple ships (e.g., Darth Vader)
         finalMods = finalMods.sort((a, b) => {
             if (a.order > b.order) return 1;
@@ -71,7 +81,24 @@ export class AttackEffectFactory {
     constructor() {
         this.concentrateFireModification.enabled = false;
         this.concentrateFireTokenReroll.enabled = false;
-        this.data = [
+        this.squadronEffectData = [
+            {
+                id: 7, factory: () => {
+                    return new GenericModification('Captain Jonus', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Accuracy], 0, [], [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.Accuracy)
+                }
+            },
+            {
+                id: 116, factory: () => {
+                    return new GenericModification('Malee Hurra', this.orders.modification,
+                    true, DieType.Any, [],
+                    [FaceRestriction.Crit], 1, [DieType.Red, DieType.Blue, DieType.Black], 
+                    [DieType.Black, DieType.Red, DieType.Blue], FaceRestriction.Crit)
+                }
+            },
+        ];
+        this.shipEffectData = [
             // armament additions
             {
                 id: 12001, factory: () => {
