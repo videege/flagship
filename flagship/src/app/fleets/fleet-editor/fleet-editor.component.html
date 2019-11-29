@@ -6,10 +6,11 @@
       <input matInput formControlName="name" />
       <mat-error *ngIf="fleetForm.get('name').invalid">You must enter a name for the fleet.</mat-error>
     </mat-form-field>
+    <mat-checkbox formControlName="isPublic">Allow other users to view fleet</mat-checkbox>
     <mat-form-field>
-      <mat-label>Author</mat-label>
-      <input matInput formControlName="author" />
-    </mat-form-field>
+        <mat-label>Author</mat-label>
+        <input matInput formControlName="author" />
+      </mat-form-field>
     <mat-radio-group aria-label="Faction" formControlName="faction"
       [disabled]="data.mode !== 0">
       <mat-radio-button value="0" fxFlex>Galactic Empire</mat-radio-button>

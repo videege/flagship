@@ -20,6 +20,11 @@ export const APP_ROUTES: Routes = [
         canActivate: [LoggedInGuard]
     },
     { 
+        path: 'search', 
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+        canActivate: [LoggedInGuard]
+    },
+    { 
         path: 'campaigns', 
         loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule),
         canActivate: [LoggedInGuard]

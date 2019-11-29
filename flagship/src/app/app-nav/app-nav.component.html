@@ -8,8 +8,11 @@
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['fleets']" (click)="navLinkClicked()">
-        Fleets
+        My Fleets
       </a>
+      <a mat-list-item [routerLink]="['search']" (click)="navLinkClicked()">
+          Search Fleets
+        </a>
       <a mat-list-item [routerLink]="['campaigns']" (click)="navLinkClicked()">Campaigns</a>
       <a mat-list-item [routerLink]="['settings']" (click)="navLinkClicked()">Settings</a>
     </mat-nav-list>

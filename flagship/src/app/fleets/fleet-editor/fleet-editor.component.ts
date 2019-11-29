@@ -14,6 +14,7 @@ export enum FleetEditorMode {
 export class FleetEditorData {
   mode: FleetEditorMode;
   name: string;
+  isPublic: boolean;
   faction: Faction;
   author: string;
   pointLimit: number;
@@ -23,6 +24,7 @@ export class FleetEditorData {
     return {
       mode: FleetEditorMode.New,
       name: null,
+      isPublic: settings && settings.defaultPublic ? true : false,
       faction: settings && settings.faction != null ? settings.faction : Faction.Empire,
       author: settings && settings.author ? settings.author : null,
       pointLimit: 400,
@@ -34,6 +36,7 @@ export class FleetEditorData {
     return {
       mode: FleetEditorMode.Edit,
       name: f.name,
+      isPublic: f.isPublic,
       faction: f.faction,
       author: f.author,
       pointLimit: f.pointLimit,
@@ -59,6 +62,7 @@ export class FleetEditorComponent implements OnInit {
   fleetForm = new FormGroup({
     name: new FormControl('', Validators.required),
     author: new FormControl(''),
+    isPublic: new FormControl(true),
     faction: new FormControl('', Validators.required),
     pointLimit: new FormControl(0, [Validators.required, Validators.min(1)]),
     squadronPointLimit: new FormControl(0, [Validators.required, Validators.min(1)])
@@ -70,6 +74,7 @@ export class FleetEditorComponent implements OnInit {
     this.fleetForm.patchValue({
       name: this.data.name,
       author: this.data.author,
+      isPublic: this.data.isPublic,
       faction: this.data.faction.toString(),
       pointLimit: this.data.pointLimit,
       squadronPointLimit: this.data.squadronPointLimit
@@ -80,6 +85,7 @@ export class FleetEditorComponent implements OnInit {
     return {
       mode: this.data.mode,
       name: this.fleetForm.get('name').value,
+      isPublic: this.fleetForm.get('isPublic').value,
       faction: +this.fleetForm.get('faction').value,
       pointLimit: +this.fleetForm.get('pointLimit').value,
       squadronPointLimit: +this.fleetForm.get('squadronPointLimit').value,
