@@ -24,7 +24,7 @@ service cloud.firestore {
         return resource.data.campaignId != null && 
           request.auth.uid == get(/databases/$(database)/documents/campaigns/$(resource.data.campaignId)).data.ownerUid;
       }
-      allow read: if true;
+      allow read: if resource.data.isPublic || request.auth.uid == resource.data.ownerUid || isUserOnCampaign();
       allow update: if request.auth.uid == resource.data.ownerUid || isUserOnCampaign();
       allow delete: if request.auth.uid == resource.data.ownerUid || isUserOwnerOnCampaign();
       allow create: if request.auth.uid != null;
