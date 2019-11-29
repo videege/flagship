@@ -1,1 +1,42 @@
-<p>fleet-search works!</p>
+<div class="content mat-typography" ngStyle.gt-md="max-width: 75%;" style="padding-bottom: 100px;" fxFlex
+    fxLayout="column" fxLayoutGap="16px">
+    <mat-card>
+        <mat-card-title>Search Fleets</mat-card-title>
+        <mat-card-subtitle>Find fleets by faction, etc.</mat-card-subtitle>
+        <mat-card-content>
+            <form fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px" [formGroup]="searchForm">
+                <mat-form-field fxFlex.gt-xs>
+                    <input matInput type="text" formControlName="name" placeholder="Fleet Name (Exact Match)">
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs>
+                    <input matInput type="text" formControlName="author" placeholder="Author (Exact Match)">
+                </mat-form-field>
+                <mat-form-field fxFlex.gt-xs>
+                    <mat-label>Ships Filter</mat-label>
+                    <mat-select formControlName="ships" multiple>
+                        <mat-optgroup *ngFor="let group of shipGroups" [label]="group.label"
+                            [disabled]="group.disabled$ | async">
+                            <mat-option *ngFor="let ship of group.ships" [value]="ship.id">
+                                {{ ship.name }}
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Search Results</mat-card-title>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <mat-card-content>
+            <div *ngIf="results$ | async as results;">
+                <p *ngIf="!results || !results.length">
+                    No fleets found with your current search criteria.
+                </p>
+                <div *ngFor="let fleet of results">
+                    {{ fleet | json }}
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -13,7 +13,7 @@ import { SearchRoutingModule } from './search-routing.module';
     CommonModule,
     SharedModule,
     AppMaterialModule,
-    SearchRoutingModule
+    //SearchRoutingModule //todo: working on this
   ]
 })
 export class SearchModule { }

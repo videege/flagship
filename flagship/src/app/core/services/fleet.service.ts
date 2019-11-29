@@ -170,10 +170,33 @@ export class FleetService {
     return doc.delete();
   }
 
+  public searchFleets(name: string, author: string, ships: number[], squadrons: number[]): Observable<ISerializedFleet[]> {
+    return this.db.collection<ISerializedFleet>('fleets', (query: firestore.CollectionReference | firestore.Query) => {
+      if (!name && !author && (!ships || !ships.length) && (!squadrons || !squadrons.length)) {
+        query = query.where('id', '==', '-doesnotexist-');
+        return query;
+      }
+      if (name) {
+        query = query.where('name', '==', name);
+      }
+      if (author) {
+        query = query.where('author', '==', author);
+      }
+      for (const shipId of ships.slice(0, 9)) {
+        query = query.where('shipIds', 'array-contains', shipId);
+      }
+      for (const squadronId of squadrons.slice(0, 9)) {
+        query = query.where('squadronIds', 'array-contains', squadronId);
+      }
+      return query.orderBy('lastUpdated', 'desc').limit(100);
+    }).valueChanges();
+  }
+
   private hydrateFleet(serializedFleet: ISerializedFleet, id: string = null): Fleet {
     let fleet = new Fleet(id || serializedFleet.id,
       serializedFleet.name, serializedFleet.author, serializedFleet.faction,
       serializedFleet.pointLimit, serializedFleet.squadronPointLimit);
+    
     fleet.originalFleetId = serializedFleet.originalFleetId || null;
     fleet.isPublic = serializedFleet.isPublic || false;
     let userUid = this.user ? this.user.uid : null;

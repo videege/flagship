@@ -19,7 +19,9 @@ export interface ISerializedFleet {
   squadronPointLimit: number;
 
   ships: ISerializedShip[];
+  shipIds: number[];
   squadrons: ISerializedSquadron[];
+  squadronIds: number[];
   objectives: number[];
 
   ownerUid: string;
@@ -28,6 +30,7 @@ export interface ISerializedFleet {
 
   originalFleetId: string;
   isPublic: boolean;
+  lastUpdated: number;
 }
 
 export class Fleet {
@@ -95,13 +98,16 @@ export class Fleet {
       pointLimit: this.pointLimit,
       squadronPointLimit: this.squadronPointLimit,
       ships: ships,
+      shipIds: ships.map(x => x.id),
       squadrons: squadrons,
+      squadronIds: squadrons.map(x => x.id),
       objectives: objectives,
       ownerUid: this.ownerUid,
       campaignId: this.campaignId || null,
       customCommander: this.customCommander ? this.customCommander.serialize() : null,
       originalFleetId: this.originalFleetId,
-      isPublic: this.isPublic
+      isPublic: this.isPublic,
+      lastUpdated: new Date().getTime()
     };
   }
 
