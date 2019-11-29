@@ -20,13 +20,13 @@ export class FleetEditorData {
   pointLimit: number;
   squadronPointLimit: number;
 
-  static newFleet(settings: UserSettings): FleetEditorData {
+  static newFleet(settings: UserSettings, username: string): FleetEditorData {
     return {
       mode: FleetEditorMode.New,
       name: null,
       isPublic: settings && settings.defaultPublic ? true : false,
       faction: settings && settings.faction != null ? settings.faction : Faction.Empire,
-      author: settings && settings.author ? settings.author : null,
+      author: settings && settings.author ? settings.author : username,
       pointLimit: 400,
       squadronPointLimit: 134
     }
@@ -61,7 +61,7 @@ export class FleetEditorComponent implements OnInit {
 
   fleetForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    author: new FormControl(''),
+    author: new FormControl('', Validators.required),
     isPublic: new FormControl(true),
     faction: new FormControl('', Validators.required),
     pointLimit: new FormControl(0, [Validators.required, Validators.min(1)]),

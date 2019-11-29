@@ -10,6 +10,7 @@ import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
 import { MatSnackBar } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'flagship-fleet-list',
@@ -24,11 +25,13 @@ export class FleetListComponent implements OnInit {
   displayedColumns: string[];
   settings: UserSettings;
 
+  user: firebase.User;
+
   constructor(private fleetService: FleetService, private dialog: MatDialog,
     private settingsService: SettingsService, private snackbar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver) {
-      this.displayedColumns = this.fullColumns;
-      this.breakpointObserver
+    private breakpointObserver: BreakpointObserver, private afAuth: AngularFireAuth) {
+    this.displayedColumns = this.fullColumns;
+    this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
@@ -38,7 +41,10 @@ export class FleetListComponent implements OnInit {
           this.displayedColumns = this.fullColumns;
         }
       });
-    }
+    this.afAuth.user.subscribe((user) => {
+      this.user = user;
+    })
+  }
 
   public fleets: Fleet[];
   dataSource: MatTableDataSource<Fleet>;
@@ -71,14 +77,14 @@ export class FleetListComponent implements OnInit {
     let ref = this.dialog.open(FleetEditorComponent, {
       width: '450px',
       data: FleetEditorData.fromFleet(fleet)
-    }); 
+    });
     ref.afterClosed().subscribe((data: FleetEditorData) => {
       if (data) {
         fleet.name = data.name;
         fleet.author = data.author;
         fleet.pointLimit = data.pointLimit;
         fleet.squadronPointLimit = data.squadronPointLimit;
-        
+
       }
     });
   }
@@ -86,15 +92,15 @@ export class FleetListComponent implements OnInit {
   addFleet() {
     let ref = this.dialog.open(FleetEditorComponent, {
       width: '450px',
-      data: FleetEditorData.newFleet(this.settings)
-    }); 
+      data: FleetEditorData.newFleet(this.settings, this.user ? this.user.displayName : 'Unknown')
+    });
     ref.afterClosed().subscribe((data: FleetEditorData) => {
       if (data) {
         this.fleetService.createFleet(data.name, data.author,
           data.faction, data.pointLimit, data.squadronPointLimit)
           .then(() => {
             //this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
-            
+
           });
       }
     });
@@ -103,7 +109,7 @@ export class FleetListComponent implements OnInit {
   importFleet() {
     let ref = this.dialog.open(FleetImporterComponent, {
       width: '450px'
-    }); 
+    });
     ref.afterClosed().subscribe((fleet: Fleet) => {
       if (fleet) {
         this.fleetService.importFleet(fleet).then(() => {

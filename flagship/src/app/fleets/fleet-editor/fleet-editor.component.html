@@ -10,6 +10,7 @@
     <mat-form-field>
         <mat-label>Author</mat-label>
         <input matInput formControlName="author" />
+        <mat-error *ngIf="fleetForm.get('author').invalid">You must enter the author for this fleet.</mat-error>
       </mat-form-field>
     <mat-radio-group aria-label="Faction" formControlName="faction"
       [disabled]="data.mode !== 0">
