@@ -98,7 +98,7 @@ export class CampaignLocationFactory {
         },
         {
             id: 13, name: 'Mandalore', objectives: [309], effects: [StrategicEffectType.Ally, StrategicEffectType.RepairYards],
-            baseAssaultBonus: 2, sectors: [2], rewards: [LocationReward.upgradeReward(UpgradeType.Officer, 10),
+            baseAssaultBonus: 2, sectors: [1], rewards: [LocationReward.upgradeReward(UpgradeType.Officer, 10),
             LocationReward.upgradeReward(UpgradeType.Ordnance, 10)]
         },
         {
