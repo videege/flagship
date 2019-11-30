@@ -731,7 +731,7 @@ export class ShipFactory {
     },
     {
       id: 120, name: 'Nebulon-B Support Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
-      points: 57, hull: 5, command: 2, squadron: 2, engineering: 3, size: Size.Small,
+      points: 51, hull: 5, command: 2, squadron: 2, engineering: 3, size: Size.Small,
       defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Brace],
       leftShields: 1, rightShields: 1, frontShields: 3, rearShields: 2,
       frontArmament: new Armament(3, 0, 0), rearArmament: new Armament(2, 0, 0),

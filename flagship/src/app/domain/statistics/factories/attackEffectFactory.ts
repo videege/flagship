@@ -168,8 +168,6 @@ export class AttackEffectFactory {
                 }
             },
             //TODO; devastator (variable # up to 5)
-            //todo: Quad turbolaser cannons (P(at least one red accuracy) split into same pool, other pool with an additional red acc)
-
             // Rerolls
             { id: 3001, factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
             { id: 4006, factory: () => { return new VeteranGunnersModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
