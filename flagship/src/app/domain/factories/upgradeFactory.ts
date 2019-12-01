@@ -1098,7 +1098,7 @@ export class UpgradeFactory {
             {
                 id: 12010, name: 'XI7 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
-                text: "While attacking, if the defender spends a token, it cannot suffer more than 1 damage on hull zones other than the defending hull zone."
+                text: "While attacking, if the defender spends a redirect token, it cannot suffer more than 1 damage on hull zones other than the defending hull zone."
             },
             {
                 id: 12011, name: 'XX-9 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
