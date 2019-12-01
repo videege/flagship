@@ -77,7 +77,7 @@ export class CampaignLocationFactory {
         },
         {
             id: 8, name: 'Felucia', objectives: [310], effects: [StrategicEffectType.Resources],
-            baseAssaultBonus: 1, sectors: [1], rewards: [LocationReward.upgradeReward(UpgradeType.Officer, 10)]
+            baseAssaultBonus: 1, sectors: [2], rewards: [LocationReward.upgradeReward(UpgradeType.Officer, 10)]
         },
         {
             id: 9, name: 'Geonosis', objectives: [308], effects: [],
