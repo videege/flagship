@@ -181,7 +181,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         let mod = new FleetModification();
         let fleet = this.campaign.fleets[participant.fleetId];
         mod.eligibleShipsForScarring = fleet.ships.filter(x => !x.isScarred);
-        mod.eligibleSquadronsForScarring = fleet.squadrons.filter(x => !x.isScarred && x.unique);
+        mod.eligibleSquadronsForScarring = fleet.squadrons.filter(x => !x.isScarred);
         mod.eligibleShipsForVeteran = fleet.ships.filter(x => !x.isVeteran);
         mod.eligibleSquadronsForVeteran = fleet.squadrons.filter(x => !x.isVeteran && x.unique);
         mod.maxVeterans = 1 + (this.campaign.getFactionOfPlayer(participant.playerId) === Faction.Empire

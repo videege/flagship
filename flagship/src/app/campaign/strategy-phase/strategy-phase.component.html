@@ -91,11 +91,20 @@
                 Defender Spends Ally Token
             </mat-checkbox>
         </div>
-        <div *ngIf=" battle.attackingConditions.length">
+        <div *ngIf="battle.attackingConditions.length">
             <label>{{ battle.attackingPlayer.name }} will gain: </label>
             <mat-radio-group [(ngModel)]="battle.chosenAttackingCondition" name="{{ 'attacker-condition-' + index }}"
                 (change)="formChanged()">
                 <mat-radio-button *ngFor="let condition of battle.attackingConditions" [value]="condition">
+                    {{ condition }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div *ngIf="battle.defendingConditions.length">
+            <label>{{ battle.defendingPlayer.name }} will gain: </label>
+            <mat-radio-group [(ngModel)]="battle.chosenDefendingCondition" name="{{ 'defender-condition-' + index }}"
+                (change)="formChanged()">
+                <mat-radio-button *ngFor="let condition of battle.defendingConditions" [value]="condition">
                     {{ condition }}
                 </mat-radio-button>
             </mat-radio-group>
@@ -117,8 +126,8 @@
         </span>
         <mat-form-field fxFlex.gt-xs *ngIf="rebelSkilledSpacersMax > 0">
             <mat-label>Rebel Skilled Spacers</mat-label>
-            <input matInput [(ngModel)]="rebelSkilledSpacersSpent" (ngModelChange)="formChanged()" name="rss"
-                required type="number" min="0" [max]="rebelSkilledSpacersMax" />
+            <input matInput [(ngModel)]="rebelSkilledSpacersSpent" (ngModelChange)="formChanged()" name="rss" required
+                type="number" min="0" [max]="rebelSkilledSpacersMax" />
         </mat-form-field>
         <span *ngIf="rebelSkilledSpacersMax === 0" fxFlex.gt-xs>
             The Rebel team does not have any Skilled Spacers tokens.
