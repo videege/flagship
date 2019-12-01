@@ -26,6 +26,7 @@ export interface UpgradeData {
 
 export interface SlotGrantingUpgradeData extends UpgradeData {
   grantedType: UpgradeType;
+  canEquipToShipWithMatchingSlot: boolean;
 }
 
 export class Upgrade implements UpgradeData {

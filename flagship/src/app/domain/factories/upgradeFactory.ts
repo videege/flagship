@@ -25,8 +25,8 @@ export class UpgradeFactory {
             let slotData = <SlotGrantingUpgradeData>data;
             return new SlotGrantingUpgrade(slotData.id, slotData.name, slotData.type,
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
-                slotData.unique, slotData.grantedType, data.sizeRestriction,
-                data.shipRestriction);
+                slotData.unique, slotData.grantedType, slotData.canEquipToShipWithMatchingSlot,
+                data.sizeRestriction, data.shipRestriction);
         }
         if (data.upgradeClass === UpgradeClass.Normal)
             return new Upgrade(data.id, data.name, data.type, data.faction,
@@ -178,7 +178,8 @@ export class UpgradeFactory {
             },
             {
                 id: 2001, name: 'Chimaera', type: UpgradeType.Title, faction: Faction.Empire,
-                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.FleetCommand, canEquipToShipWithMatchingSlot: false,
                 text: "You gain 1 Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. At the start of the Command Phase, you may discard 1 Fleet Command upgrade card you have equipped and replace it with another Fleet Command upgrade card."
             },
             {
@@ -325,7 +326,7 @@ export class UpgradeFactory {
             {
                 id: 2504, name: 'Liberator', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting,
-                grantedType: UpgradeType.FleetCommand,
+                grantedType: UpgradeType.FleetCommand, canEquipToShipWithMatchingSlot: false,
                 text: "You gain 1 additional Fleet Command icon in your upgrade bar. You cannot equip this card if you have a Fleet Command icon in your upgrade bar. You cannot spend a command token to resolve a Fleet Command card's effect."
             },
             {
@@ -426,7 +427,7 @@ export class UpgradeFactory {
             {
                 id: 2524, name: 'Vanguard', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.SlotGranting,
-                grantedType: UpgradeType.WeaponsTeam,
+                grantedType: UpgradeType.WeaponsTeam,  canEquipToShipWithMatchingSlot: true,
                 text: "You gain one additional Weapons Team icon in your upgrade bar. At the start of the first round, you may replace 1 of your defense tokens with an evade defense token."
             },
             {
@@ -437,7 +438,7 @@ export class UpgradeFactory {
             {
                 id: 2526, name: 'Phoenix Home', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.SlotGranting,
-                grantedType: UpgradeType.Officer,
+                grantedType: UpgradeType.Officer,  canEquipToShipWithMatchingSlot: true,
                 text: "You gain 1 additional Officer icon in your upgrade bar. You can be assigned up to 4 command tokens instead of a number of command tokens equal to your command value."
             },
             {
@@ -907,7 +908,7 @@ export class UpgradeFactory {
             {
                 id: 10217, name: 'Minister Tua', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.SlotGranting,
-                grantedType: UpgradeType.DefensiveRetrofit,
+                grantedType: UpgradeType.DefensiveRetrofit,  canEquipToShipWithMatchingSlot: false, //special case in class
                 text: "You gain 1 additional Defensive Retrofit icon in your upgrade bar. You cannot equip this card to a medium or large ship with a Defensive Retrofit in its upgrade bar."
             },
             {

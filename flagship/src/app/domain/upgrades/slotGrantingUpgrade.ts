@@ -7,7 +7,8 @@ import { Size } from '../game/size';
 
 export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeData {
     constructor(id: number, name: string, type: UpgradeType, faction: Faction, text: string, modification: boolean,
-        points: number, unique: boolean, public grantedType: UpgradeType, sizeRestriction: Size[] = null,
+        points: number, unique: boolean, public grantedType: UpgradeType, 
+        public canEquipToShipWithMatchingSlot: boolean = false, sizeRestriction: Size[] = null,
         shipRestriction: number[] = null) {
         super(id, name, type, faction, text, modification, points, unique, sizeRestriction, shipRestriction);
     }
@@ -22,6 +23,7 @@ export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeD
             return false;
         }
         // Can't equip if the ship already has a slot of the granted type
+        
         const matchingUpgrade = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === this.grantedType);
         if (matchingUpgrade) {
             // Handle Minister Tua special case here
@@ -29,7 +31,7 @@ export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeD
                 // minister tua can equip to small ships even if they have a defensive retrofit
                 return true;
             }
-            return false;
+            return this.canEquipToShipWithMatchingSlot;
         }
 
         return true;
