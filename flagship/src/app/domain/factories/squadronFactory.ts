@@ -570,7 +570,7 @@ export class SquadronFactory {
         },
         {
             id: 131, name: 'VCX-100 Freighter', shipName: 'VCX-100 Freighter',
-            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 16,
+            faction: Faction.Rebels, unique: false, shipUnique: false, irregular: true, points: 15,
             speed: 3, hull: 8, defenseTokens: [],
             antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 1, 0),
             keywords: [new Keyword(KeywordType.Heavy), new Keyword(KeywordType.Relay, 1), new Keyword(KeywordType.Strategic)],

@@ -84,7 +84,11 @@ export class FleetListComponent implements OnInit {
         fleet.author = data.author;
         fleet.pointLimit = data.pointLimit;
         fleet.squadronPointLimit = data.squadronPointLimit;
-
+        this.fleetService.updateFleet(fleet).then(() => {
+          this.snackbar.open(`${fleet.name} updated.`, 'OK', { duration: 1500 });
+        }, (error) => {
+          this.snackbar.open(`Sorry, something went wrong. Please try again later.`, 'OK', { duration: 3500 });
+        })
       }
     });
   }
@@ -99,8 +103,9 @@ export class FleetListComponent implements OnInit {
         this.fleetService.createFleet(data.name, data.author,
           data.faction, data.pointLimit, data.squadronPointLimit)
           .then(() => {
-            //this.dataSource = new MatTableDataSource<Fleet>(this.fleets);
-
+            this.snackbar.open(`${data.name} created.`, 'OK', { duration: 1500 });
+          }, (error) => {
+            this.snackbar.open(`Sorry, something went wrong. Please try again later.`, 'OK', { duration: 3500 });
           });
       }
     });
@@ -114,6 +119,8 @@ export class FleetListComponent implements OnInit {
       if (fleet) {
         this.fleetService.importFleet(fleet).then(() => {
           this.snackbar.open('Fleet successfully imported.', 'OK', { duration: 1500 });
+        }, (error) => {
+          this.snackbar.open(`Sorry, something went wrong. Please try again later.`, 'OK', { duration: 3500 });
         });
       }
     });
