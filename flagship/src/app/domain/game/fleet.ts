@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { Objective } from './objective';
 import { CustomCommander, SerializedCustomCommander } from '../campaign/customCommander';
 import { CustomCommanderAbilityCategory } from '../campaign/customCommanderAbilityCategory';
+import { ShipFactory } from '../factories/shipFactory';
+import { UpgradeFactory } from '../factories/upgradeFactory';
 
 export interface ISerializedFleet {
   id: string;
@@ -214,6 +216,22 @@ export class Fleet {
       }
       this.subject.next(this.id);
     }
+  }
+
+  duplicateShip(ship: Ship): void {
+    let shipFactory = new ShipFactory();
+    let upgradeFactory = new UpgradeFactory();
+    let newShip = shipFactory.instantiateShip(ship.id);
+    newShip.fleet = this;
+    for (const upgrade of ship.upgradeSlots
+        .filter(x => x.isEnabled && x.isFilled()).map(x => x.upgrade)) {
+      let newUpgrade = upgradeFactory.instantiateUpgrade(upgrade.id);
+      if (newShip.canEquipUpgrade(newUpgrade)) {
+        newShip.equipUpgrade(newUpgrade);
+      }
+    }
+
+    this.addShip(newShip);
   }
 
   addSquadron(squadron: Squadron): void {

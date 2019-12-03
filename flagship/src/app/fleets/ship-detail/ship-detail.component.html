@@ -1,11 +1,11 @@
 <mat-card fxFlex>
   <mat-card-header>
-    <flagship-ship-icon [ship]="ship" mat-card-avatar
-      *ngIf="!(isExtraSmall | async).matches"></flagship-ship-icon>
+    <flagship-ship-icon [ship]="ship" mat-card-avatar *ngIf="!(isExtraSmall | async).matches"></flagship-ship-icon>
     <mat-card-title>
       <span style="margin-right:4px">{{ ship.name }}</span>
       <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
       <span fxFlex></span>
+
       {{ ship.points }}&nbsp;
       <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
         (+{{ ship.currentPointsFromUpgrades() }})
@@ -83,9 +83,12 @@
         Mark Veteran
       </button>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="!(isExtraSmall | async).matches">
       <button mat-button [routerLink]="['ships', ship.uid]">
         Edit
+      </button>
+      <button mat-button (click)="duplicateShip()">
+        Duplicate
       </button>
       <button mat-button color="accent" [routerLink]="['ships', ship.uid, 'statistics']">
         View Stats
@@ -93,6 +96,21 @@
       <span fxFlex></span>
       <button mat-button (click)="deleteShip()" color="warn">
         Delete
+      </button>
+    </div>
+    <div fxLayout="row" *ngIf="(isExtraSmall | async).matches">
+      <button mat-icon-button [routerLink]="['ships', ship.uid]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="duplicateShip()">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" [routerLink]="['ships', ship.uid, 'statistics']">
+        <mat-icon>insert_chart_outlined</mat-icon>
+      </button>
+      <span fxFlex></span>
+      <button mat-icon-button (click)="deleteShip()" color="warn">
+        <mat-icon>delete</mat-icon>
       </button>
     </div>
   </mat-card-actions>

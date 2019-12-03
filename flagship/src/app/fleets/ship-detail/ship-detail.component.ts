@@ -31,6 +31,10 @@ export class ShipDetailComponent implements OnInit {
     this.ship.fleet.deleteShip(this.ship);
   }
 
+  duplicateShip() {
+    this.ship.fleet.duplicateShip(this.ship);
+  }
+
   scar() {
     this.ship.setIsScarred(true);
   }
