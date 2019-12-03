@@ -4,9 +4,11 @@
       <mat-card-title>
         <span style="margin-right:4px">{{ ship.name }}</span>
         <span fxFlex></span>
-        {{ ship.points }}&nbsp;
-        <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
-          (+{{ ship.currentPointsFromUpgrades() }})
+        <span class="points">
+          {{ ship.currentPoints() }}&nbsp;
+          <span *ngIf="ship.currentPointsFromUpgrades() > 0" class="point-math">
+            ({{ ship.points }} + {{ ship.currentPointsFromUpgrades() }})
+          </span>
         </span>
       </mat-card-title>
       <mat-card-subtitle>
@@ -42,8 +44,8 @@
             <strong>Defense Tokens</strong>
           </div>
           <div>
-              <flagship-defense-token *ngFor="let token of ship.defenseTokens" [type]="token" [size]="27"
-                class="defense-token"></flagship-defense-token>
+            <flagship-defense-token *ngFor="let token of ship.defenseTokens" [type]="token" [size]="27"
+              class="defense-token"></flagship-defense-token>
           </div>
         </div>
         <div fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm fxLayout="column">

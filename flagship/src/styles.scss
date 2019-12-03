@@ -230,3 +230,25 @@ i.superweapon:before {
 .chart-wrapper>.stat-selector {
     margin-bottom: 8px;
 }
+
+.small-ship-header {
+    > .mat-card-header-text {
+        margin: 0;
+        > .mat-card-title {
+            font-size: 16px;
+
+            .points {
+                font-size: 12px;
+            }
+        }
+    }
+}
+.points {
+    font-size: 16px;
+    text-align: end;
+    min-width: 90px;
+
+    .point-math {
+        color: hsla(0, 0%, 47%, 0.75)
+    }
+}

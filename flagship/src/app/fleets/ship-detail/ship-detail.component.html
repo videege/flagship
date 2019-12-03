@@ -1,15 +1,19 @@
 <mat-card fxFlex>
-  <mat-card-header>
+  <mat-card-header [ngClass]="{'small-ship-header': (isExtraSmall | async).matches }">
     <flagship-ship-icon [ship]="ship" mat-card-avatar *ngIf="!(isExtraSmall | async).matches"></flagship-ship-icon>
-    <mat-card-title>
-      <span style="margin-right:4px">{{ ship.name }}</span>
-      <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
-      <span fxFlex></span>
-
-      {{ ship.points }}&nbsp;
-      <span *ngIf="ship.currentPointsFromUpgrades() >= 0">
-        (+{{ ship.currentPointsFromUpgrades() }})
+    <mat-card-title fxLayout="row">
+      <span>
+        <span style="margin-right:4px">{{ ship.name }}</span>
+        <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
       </span>
+      <span fxFlex></span>
+      <span class="points">
+        {{ ship.currentPoints() }}&nbsp;
+        <span *ngIf="ship.currentPointsFromUpgrades() > 0" class="point-math">
+          ({{ ship.points }} + {{ ship.currentPointsFromUpgrades() }})
+        </span>
+      </span>
+
 
     </mat-card-title>
     <mat-card-subtitle>
