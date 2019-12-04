@@ -1077,7 +1077,7 @@ export class UpgradeFactory {
             },
             {
                 id: 12005, name: 'Quad Battery Turrets', type: UpgradeType.Turbolaser, faction: Faction.Any,
-                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "While attacking a ship with higher speed than yours, you may add 1 blue die to your attack pool."
             },
             {
@@ -1092,7 +1092,7 @@ export class UpgradeFactory {
             },
             {
                 id: 12008, name: 'Spinal Armament', type: UpgradeType.Turbolaser, faction: Faction.Any,
-                unique: false, modification: false, points: 9, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: true, points: 9, upgradeClass: UpgradeClass.Normal,
                 text: "The battery armaments for your front and rear hull zones are increased by 1 red die."
             },
             {
