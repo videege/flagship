@@ -33,3 +33,25 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+if (!Array.prototype.flat)
+{
+    Object.defineProperty(Array.prototype, 'flat',
+    {
+        value: function(depth = 1, stack = [])
+        {
+            for (let item of this)
+            {
+                if (item instanceof Array && depth > 0)
+                {
+                    (<any>item).flat(depth - 1, stack);
+                }
+                else {
+                    stack.push(item);
+                }
+            }
+
+            return stack;
+        }
+    });
+}
