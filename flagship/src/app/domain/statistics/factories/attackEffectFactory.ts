@@ -194,6 +194,12 @@ export class AttackEffectFactory {
                 }
             },
             {
+                id: 10222, appliesToFleet: true, factory: () => {
+                    return new GenericRerollModification(RerollStrategy.Blanks,
+                        'Darth Vader (Officer)', this.orders.reroll, 0, DieType.Any);
+                }
+            },
+            {
                 id: 2510, appliesToFleet: false, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
                         'Task Force Organa', this.orders.reroll, 2, DieType.Any);

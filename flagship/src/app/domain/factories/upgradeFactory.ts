@@ -931,6 +931,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "After you are declared as the target of an attack, if the defending hull zone has at least 1 shield remaining, you may exhaust this card to ready 1 defense token."
             },
+            {
+                id: 10222, name: 'Darth Vader', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
+                text: "While a friendly ship at distance 1-5 attacking a ship, it may discard 1 of its commander or officer cards (other than Darth Vader) to reroll any number of dice in its attack pool."
+            },
             // Rebel Officers
             {
                 id: 10500, name: 'Adar Tallon', type: UpgradeType.Officer, faction: Faction.Rebels,
