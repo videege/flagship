@@ -31,7 +31,12 @@ export class UpgradeSelectorComponent implements OnInit {
     let allUpgrades = type === UpgradeType.CustomCommander 
       ? [this.upgradeFactory.getCustomCommanderUpgrade(this.data.ship.fleet.customCommander, this.data.ship.faction)]
       : this.upgradeFactory.getUpgradesOfType(type, this.data.ship.faction);
-    this.upgrades = allUpgrades.filter(u => this.data.ship.isUpgradeSelectable(u, this.data.slot));
+    this.upgrades = allUpgrades.filter(u => this.data.ship.isUpgradeSelectable(u, this.data.slot))
+      .sort((a, b) => {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+      });
   } 
 
   selectUpgrade(upgrade: Upgrade) {
