@@ -25,8 +25,10 @@ export class SquadronSelectorComponent implements OnInit {
 
     // filter out unique squadrons that are already in the fleet
     let selectedUniques = this.data.fleet.getEquippedUniqueNames();
+    let selectedUniqueSquadronShips = this.data.fleet.squadrons.filter(x => x.shipUnique).map(x => x.shipName);
     this.squadrons = this.squadrons
         .filter(s => !s.unique || selectedUniques.indexOf(s.name) === -1)
+        .filter(s => !s.shipUnique || selectedUniqueSquadronShips.indexOf(s.shipName) === -1)
         .sort((a, b) => { 
           if (a.name < b.name) return -1;
           else if (a.name > b.name) return 1;
