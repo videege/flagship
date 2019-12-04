@@ -52,7 +52,7 @@ export function appNameFactory() {
     AppMaterialModule,
     MatProgressButtonsModule.forRoot(),
     //UIRouterModule.forRoot({ states: STATES, config: uiRouterConfig }),
-    RouterModule.forRoot(APP_ROUTES, { enableTracing: true }),
+    RouterModule.forRoot(APP_ROUTES, { enableTracing: !environment.production }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireFunctionsModule,
