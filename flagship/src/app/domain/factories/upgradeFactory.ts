@@ -111,11 +111,6 @@ export class UpgradeFactory {
                 text: "During a friendly ship's Determine Course step, it may suffer 1 damage to change the first yaw value of its current speed to \"II\" until the end of its activation."
             },
             {
-                id: 1011, name: 'Emperor Palpatine', type: UpgradeType.Commander, faction: Faction.Empire,
-                unique: true, modification: false, points: 35, upgradeClass: UpgradeClass.Commander,
-                text: "After deploying fleets, place 1 defense token of each type on this card. At the start of each Ship Phase you may discard 1 of those tokens. If you do, until the end of the round, if an enemy ship or squadron spends a matching token during its Spend Defense Token step, discard that token."
-            },
-            {
                 id: 1012, name: 'General Romodi', type: UpgradeType.Commander, faction: Faction.Empire,
                 unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
                 text: "While a friendly ship is attacking a ship, if the attack is obstructed by a ship or obstacle, the attacker does not remove a die (even if the attack is also obstructed by a card effect), and may add 1 red die to the attack pool."
@@ -301,6 +296,27 @@ export class UpgradeFactory {
                 id: 2025, name: 'Sunder', type: UpgradeType.Title, faction: Faction.Empire,
                 unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
                 text: "Blue or Black Critical: You may discard this card to choose and discard 1 offensive retrofit, defensive retrofit, ordnance, ion cannons, or turbolasers upgrade card equipped to the defender."
+            },
+            {
+                id: 2026, name: 'Harrow', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.SupportTeam, canEquipToShipWithMatchingSlot: true,
+                text: "You gain 1 additional support team icon in your upgrade bar. When you execute a speed-1 maneuver, during your Determine Course step, you may change your first yaw value to \"II\" until the end of your activation."
+            },
+            {
+                id: 2027, name: 'Corrupter', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: "Squadron: the speed of each squadron with Bomber you activate is increased by 1 until the end of its activation."
+            },
+            {
+                id: 2028, name: 'Warlord', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking you may change 1 die face with an accuracy icon to a face with a hit icon."
+            },
+            {
+                id: 2029, name: 'Dominator', type: UpgradeType.Title, faction: Faction.Empire,
+                unique: true, modification: false, points: 12, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking at close-medium range, you may spend up to 2 shields from any of your hull zones to add the same number of blue dice to your attack pool."
             },
             // Rebel titles
             {
@@ -935,6 +951,11 @@ export class UpgradeFactory {
                 id: 10222, name: 'Darth Vader', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 1, upgradeClass: UpgradeClass.Normal,
                 text: "While a friendly ship at distance 1-5 attacking a ship, it may discard 1 of its commander or officer cards (other than Darth Vader) to reroll any number of dice in its attack pool."
+            },
+            {
+                id: 10223, name: 'Emperor Palpatine', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: "When an enemy ship or unique squadron declares you as the target of an attack, it must spend 1 of its defense tokens (if able)."
             },
             // Rebel Officers
             {

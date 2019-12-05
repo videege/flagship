@@ -177,6 +177,13 @@ export class AttackEffectFactory {
                 }
             },
             {
+                id: 2029, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Dominator', 2,
+                        true, this.orders.addition, AdditionRestriction.Blue, null,
+                        Range.Close | Range.Medium)
+                }
+            },
+            {
                 id: 12006, appliesToFleet: false, factory: () => {
                     return new QuadTurbolaserCannonsModification(this.orders.modification + 1)
                 }
@@ -284,6 +291,13 @@ export class AttackEffectFactory {
                     return new GenericModification('Intensify Firepower!', this.orders.modification,
                         true, DieType.Any, [],
                         [FaceRestriction.Hit], 0, [], [DieType.Red, DieType.Black, DieType.Blue], FaceRestriction.Hit)
+                }
+            },
+            {
+                id: 2028, appliesToFleet: false, factory: () => {
+                    return new GenericModification('Warlord', this.orders.modification,
+                        true, DieType.Any, [FaceRestriction.Accuracy],
+                        [FaceRestriction.Hit, FaceRestriction.DoubleHit], 0, [], [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.DoubleHit)
                 }
             },
         ];
