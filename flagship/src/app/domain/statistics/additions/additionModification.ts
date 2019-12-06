@@ -38,7 +38,9 @@ export class AdditionModification implements IDieModification {
         public firingArcRestriction: FiringArc = null,
         public rangeRestriction: Range = null,
         public preferredTypes: DieType[] = null,
-        public type: ModificationType = ModificationType.Addition) {
+        public type: ModificationType = ModificationType.Addition,
+        public isVariableAmount: boolean = false,
+        public currentDieCount: number = null) {
         if (!this.preferredTypes || !this.preferredTypes.length) {
             this.preferredTypes = this.defaultPreferences;
         }
@@ -106,7 +108,8 @@ export class AdditionModification implements IDieModification {
     apply(pool: AttackPool): IAttackPool {
         let p = pool.clone();
         let factory = this.getDieFactory(p);
-        for (let i = 0; i < this.dieCount; i++) {
+        let numDice = this.isVariableAmount ? this.currentDieCount : this.dieCount;
+        for (let i = 0; i < numDice; i++) {
             let roll = factory();
             if (roll) {
                 p.dieRolls.push(roll);

@@ -39,6 +39,10 @@ export class AdditionModificationComponent implements OnInit {
     this.modification.preferredTypes = this.selectedPreference;
     this.change.emit(this.modification);
   }
+
+  dieCountChanged() {
+    this.change.emit(this.modification);
+  }
 }
 
 

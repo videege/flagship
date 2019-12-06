@@ -33,5 +33,10 @@
 
     </mat-option>
   </mat-select>
-
+</div>
+<div fxLayout="row" fxLayoutGap="4px" *ngIf="modification.isVariableAmount">
+  <mat-form-field>
+    <input matInput type="number" min="1" [max]="modification.dieCount" [(ngModel)]="modification.currentDieCount" 
+      placeholder="# of Dice" name="dieCount" (change)="dieCountChanged()" />
+  </mat-form-field>
 </div>

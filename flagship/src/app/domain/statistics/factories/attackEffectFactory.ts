@@ -180,12 +180,21 @@ export class AttackEffectFactory {
                 id: 2029, appliesToFleet: false, factory: () => {
                     return new AdditionModification('Dominator', 2,
                         true, this.orders.addition, AdditionRestriction.Blue, null,
-                        Range.Close | Range.Medium)
+                        Range.Close | Range.Medium, null, ModificationType.Addition,
+                        true, 1)
                 }
             },
             {
                 id: 12006, appliesToFleet: false, factory: () => {
                     return new QuadTurbolaserCannonsModification(this.orders.modification + 1)
+                }
+            },
+            {
+                id: 2002, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Devastator', 5,
+                        true, this.orders.addition, AdditionRestriction.Blue, FiringArc.Front,
+                        null, [DieType.Blue, DieType.Red, DieType.Black], ModificationType.Addition,
+                        true, 1)
                 }
             },
             //TODO; devastator (variable # up to 5)
