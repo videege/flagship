@@ -197,7 +197,6 @@ export class AttackEffectFactory {
                         true, 1)
                 }
             },
-            //TODO; devastator (variable # up to 5)
             // Rerolls
             { id: 3001, appliesToFleet: false, 
                 factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },

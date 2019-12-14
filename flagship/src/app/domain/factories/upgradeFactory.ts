@@ -569,6 +569,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: "After you deploy, place 1 red die set to a blank face on this card. If you are the second player, set it to any face instead. While attacking a ship, you may spend 1 die from the attack pool to exchange it with the die on this card. Both dice remain set to their current faces."
             },
+            {
+                id: 4010, name: 'Location Fire Control', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "After you deploy, you must replace one of your defense tokens with a Salvo defense token."
+            },
             // Offensive Retrofit - 5
             {
                 id: 5000, name: 'Advanced Transponder Net', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
@@ -626,6 +631,12 @@ export class UpgradeFactory {
                 id: 5010, name: 'Reserve Hangar Deck', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: "After a non-unique squadron with SWARM at distance 1-5 is destroyed, you may discard this card. If you do, you may set that squadron's hull points to \"2\" and place that squadron at distance 1 with its activation slider toggled to the activated side and not engaged."
+            },
+            {
+                id: 5011, name: 'Flag Bridge', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: true, points: 0, upgradeClass: UpgradeClass.SlotGranting,
+                sizeRestriction: [Size.Medium, Size.Large], grantedType: UpgradeType.FleetCommand,
+                text: "Medium or Large ship only. Flagship only. You gain one fleet command icon in your upgrade bar. You may not spend command tokens to resolve a fleet command upgrade's effect."
             },
             // Boarding Team - 6
             {
@@ -1130,6 +1141,11 @@ export class UpgradeFactory {
                 id: 12011, name: 'XX-9 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: "Critical: The first 2 damage cards dealt to the defender by this attack are dealt faceup."
+            },
+            {
+                id: 12012, name: 'Heavy Fire Zone', type: UpgradeType.Turbolaser, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: "While attacking a squadron, before you gather dice, if the defender is not engaged with a friendly squadron, you may replace all of the blue dice in your anti-squadron armament with red dice."
             },
             // Experimental Retrofit - 13
             {
