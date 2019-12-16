@@ -165,6 +165,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
                 text: "When a friendly ship resolves the evade token effect, it can cancel 1 die at medium range or reroll 1 die at close range or distance 1."
             },
+            {
+                id: 1510, name: 'Leia Organa', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 38, upgradeClass: UpgradeClass.Commander,
+                text: "When a friendly ship resolves a command by spending a command dial, if it has not resolved another command this round, it may resolve that command as if it spent a matching command token. If it does, that ship may not resolve additional commands this round."
+            },
             // Titles
             {
                 id: 2000, name: 'Avenger', type: UpgradeType.Title, faction: Faction.Empire,
