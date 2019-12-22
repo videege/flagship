@@ -766,7 +766,7 @@ export class UpgradeFactory {
             {
                 id: 9004, name: 'Slicer Tools', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die."
+                text: "After you execute a maneuver, you may exhaust this card to choose an enemy ship at distance 1-3. You may choose a new command on its top command dial."
             },
             // Officer - 10
             {

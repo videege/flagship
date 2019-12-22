@@ -451,7 +451,7 @@ export class ShipFactory {
     },
     {
       id: 102, name: 'Assault Frigate Mark II B', shipClass: ShipClass.Normal, faction: Faction.Rebels,
-      points: 72, hull: 6, command: 3, squadron: 2, engineering: 4, size: Size.Medium,
+      points: 72, hull: 6, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
       defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
       leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2,
       frontArmament: new Armament(2, 0, 0), rearArmament: new Armament(2, 0, 0),
