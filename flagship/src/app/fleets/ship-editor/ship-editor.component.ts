@@ -7,6 +7,7 @@ import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.componen
 import { UpgradeSlot } from '../../domain/game/upgradeSlot';
 import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'flagship-ship-editor',
@@ -16,10 +17,11 @@ import { ActivatedRoute } from '@angular/router';
 export class ShipEditorComponent implements OnInit {
   public ship: Ship | IgnitionCapableShip | HugeShip;
   hugeShip: HugeShip;
-  ignitionShip : IgnitionCapableShip;
+  ignitionShip: IgnitionCapableShip;
 
   public upgradeTypes = UpgradeType;
-  constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private dialog: MatDialog, private route: ActivatedRoute,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.ship = this.route.snapshot.data.ship;
@@ -49,7 +51,9 @@ export class ShipEditorComponent implements OnInit {
         if (slot.isFilled()) {
           this.ship.unequipUpgrade(slot);
         }
-        this.ship.equipUpgrade(upgrade, slot);
+        if (!this.ship.equipUpgrade(upgrade, slot)) {
+          this.snackbar.open("Cannot equip upgrade.", "OK", { duration: 1500 });
+        }
       }
     });
   }

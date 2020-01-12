@@ -198,10 +198,10 @@ export class Ship implements ShipData {
     return true;
   }
 
-  equipUpgrade(upgrade: Upgrade, slot?: UpgradeSlot): void {
+  equipUpgrade(upgrade: Upgrade, slot?: UpgradeSlot): boolean {
     if (!this.canEquipUpgrade(upgrade)) {
       console.log('Cannot equip upgrade.');
-      return;
+      return false;
     }
 
     slot = slot || this.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === upgrade.type && !u.isFilled());
@@ -231,6 +231,7 @@ export class Ship implements ShipData {
       }
     }
     this.subject.next(this.id);
+    return true;
   }
 
   unequipUpgrade(slot: UpgradeSlot) {
