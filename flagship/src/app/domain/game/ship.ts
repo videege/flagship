@@ -166,6 +166,14 @@ export class Ship implements ShipData {
       }
     }
 
+    // Can't equip if this card has a size restriction and the ship size doesn't match
+    if (upgrade.sizeRestriction) {
+      let matchingSize = upgrade.sizeRestriction.find(x => x === this.size);
+      if (!matchingSize) {
+        return false;
+      }
+    }
+
     return true;
   }
 
