@@ -504,11 +504,6 @@ export class UpgradeFactory {
                 text: 'Blue Critical: Choose and exhaust 1 of the defender\'s upgrade cards.'
             },
             {
-                id: 3005, name: 'High-Capacity Ion Turbines', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: 'The battery armaments for your left and right hull zones are increased by 1 blue die.'
-            },
-            {
                 id: 3006, name: 'NK-7 Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
                 text: 'Blue Critical: You may exhaust this card to force the defender to choose and discard one of his defense tokens.'
