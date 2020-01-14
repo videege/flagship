@@ -968,6 +968,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: "When an enemy ship or unique squadron declares you as the target of an attack, it must spend 1 of its defense tokens (if able)."
             },
+            {
+                id: 10224, name: 'Admiral Ozzel', type: UpgradeType.Officer, faction: Faction.Empire,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: "At the start of the first round, you may execute a speed-1 maneuver."
+            },
             // Rebel Officers
             {
                 id: 10500, name: 'Adar Tallon', type: UpgradeType.Officer, faction: Faction.Rebels,
