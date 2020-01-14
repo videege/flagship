@@ -38,7 +38,7 @@ export class ObjectiveFactory {
             Then the second player places the 2 purrgil in the setup area. Each purrgil must be placed beyond distance 1 of all obstacles and beyond 5 
             of both player's edges.`,
             `Each ship has the following critical effect:
-            Critical: If this attack is at close-medium range, remove all objective tokens from enemy ships. Then assign an objective token to the attacker.
+            \"Critical: If this attack is at close-medium range, remove all objective tokens from enemy ships. Then assign an objective token to the defender.\"
             After a player moves a purrgil, if that purrgil is at distance 1 of a ship with an objective token, that player may choose and discard 1 objective token. 
             Then that ship suffers 1 facedown damage and the opposing fleet's owner gains 1 victory token.`,
             null, null, 15),
