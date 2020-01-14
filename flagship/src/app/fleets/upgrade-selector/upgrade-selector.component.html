@@ -4,7 +4,7 @@
   </p>
   <mat-action-list dense>
     <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)"
-      class="height-auto">
+      class="height-auto selector-list-item">
       <h3 matLine>
         {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}</h3>
       <p matLine style="white-space: normal">

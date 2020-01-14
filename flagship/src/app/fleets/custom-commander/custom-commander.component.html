@@ -23,7 +23,7 @@
         </p>
     </mat-card-content>
     <mat-list *ngIf="!isEditing && commander.abilities.length">
-        <mat-list-item *ngFor="let ability of commander.abilities" class="height-auto">
+        <mat-list-item *ngFor="let ability of commander.abilities" class="height-auto selector-list-item">
             <h3 mat-line>{{ ability.name }}</h3>
             <p matLine style="white-space: normal">
                 <span style="font-style: italic; font-size: .8em;">{{ ability.text }}</span>

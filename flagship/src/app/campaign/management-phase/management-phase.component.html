@@ -151,7 +151,7 @@
             </p>
             <mat-list dense>
                 <mat-list-item *ngFor="let conditionStatus of upkeep.conditionStatuses; let li = index;"
-                    class="height-auto">
+                    class="height-auto selector-list-item">
                     <h3 matLine>{{ conditionStatus.player.name }} - {{ conditionStatus.condition }}</h3>
                     <p matLine *ngIf="conditionStatus.canRemoveForFree" style="white-space: normal">
                         This condition will be automatically removed due to the player playing a battle this round

@@ -48,6 +48,17 @@ body {
     height: auto !important;
 }
 
+.selector-list-item {
+    &:not(:first-child) {
+        > .mat-list-item-content {
+            padding-top: 8px !important;
+        }
+    }
+    > .mat-list-item-content {
+        padding-bottom: 8px !important;        
+    }
+}
+
 .mat-card-header-text {
     width: 100%;
 }

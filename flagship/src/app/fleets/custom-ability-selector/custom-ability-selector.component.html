@@ -1,7 +1,7 @@
 <div mat-dialog-content>
     <mat-action-list dense>
         <mat-list-item *ngFor="let ability of abilities; last as last" (click)="selectAbility(ability)"
-            class="height-auto">
+            class="height-auto selector-list-item">
             <h3 matLine>
                 {{ ability.name }}
             </h3>
