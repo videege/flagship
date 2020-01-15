@@ -701,7 +701,7 @@ export class ShipFactory {
     },
     {
       id: 118, name: 'Modified Pelta-Class Command Ship', shipClass: ShipClass.Normal, faction: Faction.Rebels,
-      points: 60, hull: 5, command: 2, squadron: 1, engineering: 4, size: Size.Small,
+      points: 60, hull: 5, command: 2, squadron: 3, engineering: 4, size: Size.Small,
       defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
       leftShields: 2, rightShields: 2, frontShields: 3, rearShields: 1,
       frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(2, 0, 0),
