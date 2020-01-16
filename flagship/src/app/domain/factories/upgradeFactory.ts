@@ -10,7 +10,16 @@ import { CustomCommanderUpgrade } from '../upgrades/customCommanderUpgrade';
 export class UpgradeFactory {
     upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
 
+
+    private correctOldIds(id: number): number {
+        if (id === 3005) { return 3002; }
+        return id;
+    }
+
     instantiateUpgrade(id: number): Upgrade {
+        // corrections for old ids
+        id = this.correctOldIds(id);
+
         let data = this.upgradeData.find(ud => ud.id === id);
 
         if (!data)
