@@ -167,7 +167,7 @@ export class UpgradeFactory {
             {
                 id: 1508, name: 'Kyrsta Agate', type: UpgradeType.Commander, faction: Faction.Rebels,
                 unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
-                text: "After you deploy, gain 1 non-scatter defense token. During your \"Spend Defense Tokens\" step, if your speed is not 0, you may discard 1 defense token to resolve the effect of that defense token. You cannot resolve the effect of each type of dense token more than once per attack."
+                text: "After you deploy, gain 1 non-scatter defense token. During your \"Spend Defense Tokens\" step, if your speed is not 0, you may discard 1 defense token to resolve the effect of that defense token. You cannot resolve the effect of each type of defense token more than once per attack."
             },
             {
                 id: 1509, name: 'Mon Mothma', type: UpgradeType.Commander, faction: Faction.Rebels,
