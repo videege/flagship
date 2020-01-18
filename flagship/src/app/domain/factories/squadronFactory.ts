@@ -414,7 +414,7 @@ export class SquadronFactory {
             speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
             antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 2, 0),
             keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Grit), new Keyword(KeywordType.Rogue)],
-            text: 'While an enemey squadron is at distance 1, its speed is reduced by 2 to a minimum of 1.'
+            text: 'While an enemy squadron is at distance 1, its speed is reduced by 2 to a minimum of 1.'
         },
         {
             id: 112, name: 'Keyan Farlander', shipName: 'B-Wing Squadron',
