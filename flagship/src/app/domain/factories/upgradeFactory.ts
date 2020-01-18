@@ -579,7 +579,7 @@ export class UpgradeFactory {
                 text: "After you deploy, place 1 red die set to a blank face on this card. If you are the second player, set it to any face instead. While attacking a ship, you may spend 1 die from the attack pool to exchange it with the die on this card. Both dice remain set to their current faces."
             },
             {
-                id: 4010, name: 'Location Fire Control', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
+                id: 4010, name: 'Local Fire Control', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "After you deploy, you must replace one of your defense tokens with a Salvo defense token."
             },
@@ -1117,7 +1117,7 @@ export class UpgradeFactory {
                 text: "While attacking, the brace defense effect cannot reduce the damage total by more than 1 unless it is the only defense token spent by the defender during the attack."
             },
             {
-                id: 12004, name: 'Linked Turbolaser Turrets', type: UpgradeType.Turbolaser, faction: Faction.Any,
+                id: 12004, name: 'Linked Turbolaser Towers', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
                 text: "You may reroll 1 red die in your attack pool.  While attacking the first squadron during your activation, you may add 2 dice of any color to your attack pool. If you do, you cannot declare additional squadron targets for that attack."
             },

@@ -283,7 +283,7 @@ export class ObjectiveFactory {
             location. If he is the second player, he moves it so it is at distance 1-4 of its current location.`,
             null, null,
             15),
-        new Objective(210, ObjectiveType.Navigation, "Solor Corona",
+        new Objective(210, ObjectiveType.Navigation, "Solar Corona",
             `The first player must deploy all of his ships and squadrons before the second player. After the second player deploys ships and 
             squadrons, the second player must choose 1 of the 3' edges of the play area to be the Corona.`,
             `While a ship is attacking, before resolving any attack effects, if any portion of the Corona is inside the attacking hull zone's 
