@@ -458,7 +458,7 @@ export class UpgradeFactory {
                 id: 2524, name: 'Vanguard', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.SlotGranting,
                 grantedType: UpgradeType.WeaponsTeam,  canEquipToShipWithMatchingSlot: true,
-                text: "You gain one additional Weapons Team icon in your upgrade bar. At the start of the first round, you may replace 1 of your defense tokens with an evade defense token."
+                text: "You gain one additional Weapons Team icon in your upgrade bar. At the start of the first round, you may replace 1 of your defense tokens with a redirect defense token."
             },
             {
                 id: 2525, name: 'Yavaris', type: UpgradeType.Title, faction: Faction.Rebels,
