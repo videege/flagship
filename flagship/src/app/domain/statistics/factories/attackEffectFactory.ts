@@ -197,6 +197,12 @@ export class AttackEffectFactory {
                         true, 1)
                 }
             },
+            {
+                id: 2501, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Paragon', 1,
+                        true, this.orders.addition, AdditionRestriction.Black)
+                }
+            },
             // Rerolls
             { id: 3001, appliesToFleet: false, 
                 factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
