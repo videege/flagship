@@ -1,0 +1,7 @@
+<div fxLayout="row">
+    <h3 style="margin-bottom: 0;">{{ modification.name }}</h3>
+    <span fxFlex></span>
+    <mat-slide-toggle color="primary" [checked]="modification.enabled" (change)="enabledToggled($event)"
+         matTooltip="Enabled">
+    </mat-slide-toggle>
+</div>

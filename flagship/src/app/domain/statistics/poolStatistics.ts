@@ -4,7 +4,7 @@ export class PoolStatistics {
     public cv: number;
     public distribution: number[];
 
-    constructor(public mean: number, variance: number) {
+    constructor(public mean: number, public variance: number) {
         this.deviation = Math.sqrt(variance);
         this.cv = (this.deviation / this.mean) * 100;
         this.distribution = [

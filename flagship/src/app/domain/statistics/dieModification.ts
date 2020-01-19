@@ -4,7 +4,8 @@ export enum ModificationType {
     Addition,
     Reroll,
     Replacement,
-    Modification
+    Modification,
+    Special
 }
 
 export interface ICalculatedProbabilities {

@@ -11,6 +11,8 @@ import { Range } from '../attackPool';
 import { ReplacementModification } from '../replacements/replacementModification';
 import { QuadTurbolaserCannonsModification } from '../additions/quadTurbolaserCannons';
 import { GenericModification, FaceRestriction } from '../modifications/genericModification';
+import { SW7Modification } from '../special/sw7';
+import { SalvationModification } from '../special/salvation';
 
 export enum ModificationClass {
     GenericReroll,
@@ -314,6 +316,17 @@ export class AttackEffectFactory {
                         [FaceRestriction.Hit, FaceRestriction.DoubleHit], 0, [], [DieType.Red, DieType.Blue, DieType.Black], FaceRestriction.DoubleHit)
                 }
             },
+            // Specials
+            {
+                id: 3008, appliesToFleet: false, factory: () => {
+                    return new SW7Modification();
+                }
+            },
+            {
+                id: 2523, appliesToFleet: false, factory: () => {
+                    return new SalvationModification();
+                }
+            }
         ];
     }
 }

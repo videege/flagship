@@ -28,6 +28,7 @@ import { FleetImporterComponent } from './fleet-importer/fleet-importer.componen
 import { FleetExporterComponent } from './fleet-exporter/fleet-exporter.component';
 import { ReplacementModificationComponent } from './replacement-modification/replacement-modification.component';
 import { ChangeModificationComponent } from './change-modification/change-modification.component';
+import { SpecialModificationComponent } from './special-modification/special-modification.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { ChangeModificationComponent } from './change-modification/change-modifi
     FleetExporterComponent,
     ReplacementModificationComponent,
     ChangeModificationComponent,
+    SpecialModificationComponent,
   ],
   imports: [
     CommonModule,
