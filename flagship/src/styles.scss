@@ -48,6 +48,14 @@ body {
     height: auto !important;
 }
 
+.mat-drawer-end {
+    &.mat-drawer-opened {
+        &.mat-drawer-end {
+            right: 16px !important;
+        }
+    }
+}
+
 .selector-list-item {
     &:not(:first-child) {
         > .mat-list-item-content {
