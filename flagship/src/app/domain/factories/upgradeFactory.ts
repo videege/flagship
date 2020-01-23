@@ -824,7 +824,7 @@ export class UpgradeFactory {
                 text: "Before you reveal a command, you may discard this card to discard your top command dial."
             },
             {
-                id: 10010, name: 'Strategic Advisor', type: UpgradeType.Officer, faction: Faction.Any,
+                id: 10010, name: 'Strategic Adviser', type: UpgradeType.Officer, faction: Faction.Any,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: "Large ship only. When it is your turn to activate, you may exhaust this card to pass your turn (your opponent activates a ship instead).",
                 sizeRestriction: [Size.Large]
