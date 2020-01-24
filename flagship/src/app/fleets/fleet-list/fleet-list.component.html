@@ -1,6 +1,6 @@
-<table mat-table [dataSource]="dataSource">
+<table mat-table matSort [dataSource]="dataSource">
   <ng-container matColumnDef="faction">
-    <th mat-header-cell *matHeaderCellDef>Faction</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef>Faction</th>
     <td mat-cell *matCellDef="let fleet">
       <i class="ffi"
         [ngClass]="{'ffi-imperial': fleet.faction == faction.Empire, 'ffi-rebel': fleet.faction == faction.Rebels}"
@@ -8,7 +8,7 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let fleet">
       <a [routerLink]="[fleet.id]">{{ fleet.name }}</a></td>
     <!-- <a [routerLink]="['', { outlets: { primary: ['fleets', fleet.id], toolbar: ['fleets', fleet.id] } }]">
@@ -16,11 +16,11 @@
       </a> -->
   </ng-container>
   <ng-container matColumnDef="commander">
-    <th mat-header-cell *matHeaderCellDef>Commander</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef>Commander</th>
     <td mat-cell *matCellDef="let fleet">{{ fleet.getCommanderName() }}</td>
   </ng-container>
   <ng-container matColumnDef="points">
-    <th mat-header-cell *matHeaderCellDef>Points</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef>Points</th>
     <td mat-cell *matCellDef="let fleet">{{ fleet.currentPoints() }} / {{ fleet.pointLimit }}</td>
   </ng-container>
   <ng-container matColumnDef="actions">
@@ -32,7 +32,7 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="campaign">
-    <th mat-header-cell *matHeaderCellDef>Campaign</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef>Campaign</th>
     <td mat-cell *matCellDef="let fleet">
       <a [routerLink]="['/campaigns', fleet.campaignId]" *ngIf="fleet.customCommander">
         Yes

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FleetService } from '../../core/services/fleet.service';
 import { Fleet } from '../../domain/game/fleet';
 import { Faction } from '../../domain/game/faction';
@@ -8,7 +8,7 @@ import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-edi
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSort } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -20,6 +20,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class FleetListComponent implements OnInit {
   faction = Faction;
 
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   private mobileColumns = ['faction', 'name', 'actions'];
   private fullColumns = ['faction', 'name', 'commander', 'points', 'campaign', 'actions'];
   displayedColumns: string[];
@@ -51,26 +52,42 @@ export class FleetListComponent implements OnInit {
 
   ngOnInit() {
     this.fleets = [];
+
     this.fleetService.getFleetsForUser().subscribe((fleets: Fleet[]) => {
       this.fleets = fleets;
-      this.dataSource = new MatTableDataSource<Fleet>(this.fleets
-        .filter(f => {
-          if (this.settings && !this.settings.displayCampaignFleets) {
-            return !f.campaignId;
-          }
-          return true;
-        }));
+      this.initializeDataSource();
     });
     this.settingsService.settings$.subscribe(settings => {
       this.settings = settings;
-      this.dataSource = new MatTableDataSource<Fleet>(this.fleets
-        .filter(f => {
-          if (this.settings && !this.settings.displayCampaignFleets) {
-            return !f.campaignId;
-          }
-          return true;
-        }));
+      this.initializeDataSource();
     });
+  }
+
+  private initializeDataSource() {
+    this.dataSource = new MatTableDataSource<Fleet>(this.fleets
+      .filter(f => {
+        if (this.settings && !this.settings.displayCampaignFleets) {
+          return !f.campaignId;
+        }
+        return true;
+      }));
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (fleet: Fleet, property: string) => {
+      switch (property) {
+        case 'faction':
+          return fleet.faction;
+        case 'name':
+          return fleet.name;
+        case 'commander':
+          return fleet.getCommanderName();
+        case 'points':
+          return fleet.currentPoints();
+        case 'campaign':
+          return fleet.hasCustomCommander() ? 1 : 0;
+        default:
+          break;
+      }
+    }
   }
 
   editFleet(fleet: Fleet) {
