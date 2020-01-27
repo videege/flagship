@@ -706,7 +706,7 @@ export class ShipFactory {
       leftShields: 2, rightShields: 2, frontShields: 3, rearShields: 1,
       frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(2, 0, 0),
       leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
-      antiSquadronArmament: new Armament(1, 1, 0),
+      antiSquadronArmament: new Armament(0, 1, 0),
       navigationChart: new NavigationChart(2, [1, 1], null, null),
       upgradeSlots: [
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),

@@ -337,7 +337,7 @@ export class SquadronFactory {
             text: ''
         },
         {
-            id: 102, name: 'Dagger Squadron', shipName: 'E-Wing Squadron',
+            id: 102, name: 'Dagger Squadron', shipName: 'B-Wing Squadron',
             faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 15,
             speed: 2, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
             antiSquadronArmament: new Armament(0, 2, 1), batteryArmament: new Armament(0, 1, 1),
