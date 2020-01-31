@@ -125,6 +125,11 @@ export class UpgradeFactory {
                 text: "While a friendly ship is attacking a ship, if the attack is obstructed by a ship or obstacle, the attacker does not remove a die (even if the attack is also obstructed by a card effect), and may add 1 red die to the attack pool."
             },
             {
+                id: 1013, name: 'General Tagge', type: UpgradeType.Commander, faction: Faction.Empire,
+                unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
+                text: "At the start of the third round and the fifth round, each friendly ship may recover 1 of its discarded defense tokens."
+            },
+            {
                 id: 1500, name: 'Admiral Ackbar', type: UpgradeType.Commander, faction: Faction.Rebels,
                 unique: true, modification: false, points: 38, upgradeClass: UpgradeClass.Commander,
                 text: "Before a friendly ship's Attack Step, it may choose to attack from only its left and right hull zones this round. If it does, it may add 2 red dice to its attack pool while attacking a ship."
