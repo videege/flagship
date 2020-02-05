@@ -8,7 +8,7 @@ import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-edi
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
-import { MatSnackBar, MatSort } from '@angular/material';
+import { MatSnackBar, MatSort, MatSortable } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -56,6 +56,7 @@ export class FleetListComponent implements OnInit {
     this.fleetService.getFleetsForUser().subscribe((fleets: Fleet[]) => {
       this.fleets = fleets;
       this.initializeDataSource();
+      this.sort.sort({ id: 'name', start: 'asc' } as MatSortable)
     });
     this.settingsService.settings$.subscribe(settings => {
       this.settings = settings;
@@ -77,7 +78,7 @@ export class FleetListComponent implements OnInit {
         case 'faction':
           return fleet.faction;
         case 'name':
-          return fleet.name;
+          return fleet.name.toLowerCase();
         case 'commander':
           return fleet.getCommanderName();
         case 'points':
