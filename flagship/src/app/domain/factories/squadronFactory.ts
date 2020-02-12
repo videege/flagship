@@ -64,7 +64,7 @@ export class SquadronFactory {
             text: 'While a friendly ship is attacking a ship at distance 1 of you, it may change 1 die to a face with an accuracy icon.'
         },
         {
-            id: 8, name: 'Ciena Rae', shipName: 'TIE Interceptor Squadron',
+            id: 8, name: 'Ciena Ree', shipName: 'TIE Interceptor Squadron',
             faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 17,
             speed: 5, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
             antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 1, 0),
