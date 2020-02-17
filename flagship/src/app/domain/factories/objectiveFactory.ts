@@ -44,7 +44,7 @@ export class ObjectiveFactory {
             null, null, 15),
         new Objective(6, ObjectiveType.Assault, "Most Wanted",
             `After deploying fleets, the second player chooses 1 of his ships and 1 of the first player's ships to be the objective ships.`,
-            `While attacking an objective ship, the attacker may add 1 die of any color that is already in its attack pool to its attack pool.`,
+            `While a ship is attacking an objective ship, it may add 1 die of any color that is already in its attack pool to its attack pool.`,
             null,
             `The fleet point cost of a destroyed objective ship is doubled. Do not double the cost of its upgrade cards.`,
             null),
@@ -208,9 +208,8 @@ export class ObjectiveFactory {
             null, null,
             15),
         new Objective(202, ObjectiveType.Navigation, "Doomed Station",
-            `The second player places the gravity rift in the center of the setup area. Then, starting with the first player, the players 
-            alternate placing the remaining obstacles, excluding the station in the setup area beyond distance 1 of all obstacles and 
-            beyond distance 5 of both player's edges.`,
+            `The second player places the gravity rift in the center of the setup area. Then, starting with the first player, the players alternate placing the remaining obstacles, 
+            excluding the station. Then the second player places the station in the setup area beyond distance 1 of all obstacles and beyond distance 5 of both player's edges.`,
             null,
             `Starting with the second player and alternating, each player chooses 1 obstacle that does not have an objective token on it 
             and moves it to (sic) within distance 1-2 of its current location toward the gravity rift (which cannot be chosen). Then that 

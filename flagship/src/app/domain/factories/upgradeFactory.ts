@@ -137,7 +137,7 @@ export class UpgradeFactory {
             {
                 id: 1501, name: 'Admiral Raddus', type: UpgradeType.Commander, faction: Faction.Rebels,
                 unique: true, modification: false, points: 26, upgradeClass: UpgradeClass.Commander,
-                text: "Before deploying fleets, you may set aside 1 other friendly ship. At the start of any round, you may deploy that ship at distance 1 of a friendly ship. That ship cannot be deployed overlapping squadrons and cannot be the first ship to activate that round."
+                text: "Before deploying fleets, you may set aside 1 other friendly ship with a command value of 3 or less. At the start of any round, you may deploy that ship at distance 1-2 of you. That ship cannot be deployed overlapping squadrons and cannot be the first ship to activate that round."
             },
             {
                 id: 1502, name: 'Commander Sato', type: UpgradeType.Commander, faction: Faction.Rebels,
@@ -188,7 +188,7 @@ export class UpgradeFactory {
             {
                 id: 2000, name: 'Avenger', type: UpgradeType.Title, faction: Faction.Empire,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "While attacking, you may exhaust this card. If you do, the defender cannot spend exhausted defense tokens."
+                text: "While attacking, you may exhaust this card. If you do, the defender cannot spend exhausted defense tokens during this attack."
             },
             {
                 id: 2001, name: 'Chimaera', type: UpgradeType.Title, faction: Faction.Empire,
@@ -341,7 +341,7 @@ export class UpgradeFactory {
             {
                 id: 2500, name: 'Gallant Haven', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: "Before a friendly squadron at distance 1 suffers damage from an attack, reduce the total damage by one."
+                text: "Before a friendly squadron at distance 1 suffers damage from an attack, reduce the total damage by 1, to a minimum of 1."
             },
             {
                 id: 2501, name: 'Paragon', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -468,7 +468,7 @@ export class UpgradeFactory {
             {
                 id: 2525, name: 'Yavaris', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "Squadron: Each squadron you activate can attack twice if it does not move."
+                text: "Squadron: Each squadron you activate can attack twice if it does not move during your activation."
             },
             {
                 id: 2526, name: 'Phoenix Home', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -755,7 +755,7 @@ export class UpgradeFactory {
             {
                 id: 9000, name: 'Bomber Command Center', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die."
+                text: "While a friendly squadron with Bomber at distance 1-5 is attacking a ship, it may reroll 1 die. A squadron cannot resolve more than 1 'Bomber Command Center' card per attack."
             },
             {
                 id: 9001, name: 'Comms Net', type: UpgradeType.FleetSupport, faction: Faction.Any,
@@ -765,7 +765,7 @@ export class UpgradeFactory {
             {
                 id: 9002, name: 'Jamming Field', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
-                text: "While a squadron at distance 1-2 is attacking or defending against a squadron, the attack is treated as obstructed."
+                text: "While a squadron at distance 1–2 is attacking a squadron or defending against a squadron, the attack must be treated as obstructed."
             },
             {
                 id: 9003, name: 'Repair Crews', type: UpgradeType.FleetSupport, faction: Faction.Any,
@@ -892,7 +892,7 @@ export class UpgradeFactory {
             },
             {
                 id: 10206, name: 'Commandant Aresko', type: UpgradeType.Officer, faction: Faction.Empire,
-                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
                 text: "When another friendly ship at distance 1-3 reveals a command, you may exhaust this card to gain 1 command token of the same type."
             },
             {
@@ -1149,7 +1149,7 @@ export class UpgradeFactory {
             {
                 id: 12009, name: 'Turbolaser Reroute Circuits', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: "While attacking, you may spend 1 evade defense token to change 1 red die to a face with a critical or 2 hit icons."
+                text: "While attacking, you may exhaust this card and spend 1 evade defense token to change 1 red die to a face with a critical or 2 hit icons."
             },
             {
                 id: 12010, name: 'XI7 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
