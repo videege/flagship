@@ -77,7 +77,7 @@ export class CampaignState {
         state.turn = data.turn;
         state.phase = data.phase;
         state.act = data.act;
-        state.initiativeFaction = data.initiativeFaction || Faction.Rebels;
+        state.initiativeFaction = data.initiativeFaction == undefined ? Faction.Rebels : data.initiativeFaction;
         state.events = data.events.map(x => {
             switch (x.eventType) {
                 case CampaignEventType.Battle:

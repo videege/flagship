@@ -231,7 +231,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       let location = this.campaign.locations.find(x => x.id === battle.locationId);
       outcome.location = location;
       let objective = objectiveFactory.getObjective(outcome.battle.objectiveId);
-      outcome.rewardsCanBeUnique = objective.type === ObjectiveType.Campaign || objective.type === ObjectiveType.Special;
+      outcome.rewardsCanBeUnique = objective && (objective.type === ObjectiveType.Campaign || objective.type === ObjectiveType.Special);
 
       let afterLocation = CampaignLocation.newLocation(location.id, location.name,
         location.objectives, location.strategicEffects, location.baseAssaultBonus, location.sectors,
