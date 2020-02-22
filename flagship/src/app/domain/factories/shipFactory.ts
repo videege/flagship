@@ -404,7 +404,7 @@ export class ShipFactory {
       defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
       leftShields: 2, rightShields: 2, frontShields: 5, rearShields: 1,
       frontArmament: new Armament(1, 2, 1), rearArmament: new Armament(1, 1, 0),
-      leftArmament: new Armament(1, 1, 1), rightArmament: new Armament(1, 1, 1),
+      leftArmament: new Armament(2, 1, 0), rightArmament: new Armament(2, 1, 0),
       ignitionArmament: new Armament(4, 0, 3),
       antiSquadronArmament: new Armament(0, 0, 1),
       navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
