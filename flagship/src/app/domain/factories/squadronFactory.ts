@@ -169,7 +169,7 @@ export class SquadronFactory {
         },
         {
             id: 21, name: 'Soontir Fel', shipName: 'TIE Interceptor Squadron',
-            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 19,
+            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 18,
             speed: 5, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
             antiSquadronArmament: new Armament(0, 4, 0), batteryArmament: new Armament(0, 1, 0),
             keywords: [new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Swarm)],
