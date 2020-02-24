@@ -21,7 +21,7 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
-            <h5>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }} (Resources:
+            <h5>{{ getNameOfFaction(upkeep.faction) }} (Resources:
                 {{ upkeep.currentResourceTokens }})</h5>
             <mat-form-field
                 *ngIf="upkeep.eligibleBaseLocations.length && upkeep.currentResourceTokens >= 2; else noBases">
@@ -48,7 +48,7 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
-            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
             <div *ngFor="let location of upkeep.tokenLocations; let li = index;">
                 <mat-form-field>
                     <mat-label>Token for {{ location.name }}</mat-label>
@@ -82,35 +82,70 @@
                             up to a {{ reward.winnerPoints }} point {{ reward.upgradeType }} upgrade
                         </span>
                         <span *ngIf="!last">, or </span>
-                        <span *ngIf="last && !outcome.rewardsCanBeUnique">
-                            . This reward <strong>cannot</strong> be unique.</span>
-                        <span *ngIf="last && outcome.rewardsCanBeUnique">
-                            . This reward <strong>can</strong> be unique.
+                    </span>
+                    . {{ player.name }} may instead select a base reward if no other {{ getNameOfFaction(outcome.winningFaction) }} player does this round. Available base rewards: 
+                    <span *ngFor="let base of getBases(outcome.winningFaction); let last = last;">
+                        {{ base.name }}: 
+                        <span *ngFor="let reward of base.rewards; let lastReward = last;">
+                            <span *ngIf="reward.isSquadronReward()">
+                                up to {{ reward.winnerPoints }} points of squadrons
+                            </span>
+                            <span *ngIf="!reward.isSquadronReward()">
+                                up to a {{ reward.winnerPoints }} point {{ reward.upgradeType }} upgrade
+                            </span>
+                            <span *ngIf="!lastReward">, or </span>
                         </span>
+                        <span *ngIf="!last">; or </span>
+                    </span>
+                    <span *ngIf="!outcome.rewardsCanBeUnique">
+                        . This reward <strong>cannot</strong> be unique.</span>
+                    <span *ngIf="outcome.rewardsCanBeUnique">
+                        . This reward <strong>can</strong> be unique.
                     </span>
                 </li>
                 <li *ngFor="let player of outcome.losingPlayers">
                     {{ player.name }} may select
                     <span *ngFor="let reward of outcome.location.rewards; let last = last;">
+                        up to
+                        <span *ngIf="!reward.isSquadronReward()">
+                            a
+                        </span>
+                        {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
+                        ({{ reward.loserPoints}} +
+                        {{ reward.understrengthBonus(outcome.loserFleetDifference) }} understrength bonus)
                         <span *ngIf="reward.isSquadronReward()">
-                            up to
-                            {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
-                            ({{ reward.loserPoints}} + reward.understrengthBonus(outcome.loserFleetDifference) }}
-                            understrength bonus)
                             points of squadrons
                         </span>
                         <span *ngIf="!reward.isSquadronReward()">
-                            up to a {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
-                            ({{ reward.loserPoints}} +
-                            {{ reward.understrengthBonus(outcome.loserFleetDifference) }} understrength bonus)
                             point {{ reward.upgradeType }} upgrade
                         </span>
-                        <span *ngIf="!last"> or </span>
-                        <span *ngIf="last && !outcome.rewardsCanBeUnique">
-                            &mdash; this reward <strong>cannot</strong> be unique.</span>
-                        <span *ngIf="last && outcome.rewardsCanBeUnique">
-                            &mdash; this reward <strong>can</strong> be unique.
+                        <span *ngIf="!last">, or </span>
+                    </span>
+                    . {{ player.name }} may instead select a base reward if no other {{ getNameOfFaction(oppositeFaction(outcome.winningFaction)) }} player does this round. Available base rewards: 
+                    <span *ngFor="let base of getBases(oppositeFaction(outcome.winningFaction)); let last = last;">
+                        {{ base.name }}: 
+                        <span *ngFor="let reward of base.rewards; let lastReward = last;">
+                            up to
+                            <span *ngIf="!reward.isSquadronReward()">
+                                a
+                            </span>
+                            {{ reward.loserPoints + reward.understrengthBonus(outcome.loserFleetDifference) }}
+                            ({{ reward.loserPoints}} +
+                            {{ reward.understrengthBonus(outcome.loserFleetDifference) }} understrength bonus)
+                            <span *ngIf="reward.isSquadronReward()">
+                                points of squadrons
+                            </span>
+                            <span *ngIf="!reward.isSquadronReward()">
+                                point {{ reward.upgradeType }} upgrade
+                            </span>
+                            <span *ngIf="!lastReward">, or </span>
                         </span>
+                        <span *ngIf="!last">; or </span>
+                    </span>
+                    <span *ngIf="!outcome.rewardsCanBeUnique">
+                        . This reward <strong>cannot</strong> be unique.</span>
+                    <span *ngIf="outcome.rewardsCanBeUnique">
+                        . This reward <strong>can</strong> be unique.
                     </span>
                 </li>
             </ul>
@@ -126,7 +161,7 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxLayout="column">
-            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
             <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens > 0">
                 <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens }})</mat-label>
                 <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()"
@@ -145,7 +180,7 @@
 
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
-            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
             <p *ngIf="!upkeep.conditionStatuses.length">
                 No players have conditions to remove.
             </p>

@@ -9,7 +9,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { BattleReward } from 'src/app/domain/campaign/battleReward';
 import { BattleType } from 'src/app/domain/campaign/battleType';
@@ -91,6 +91,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   factions = Faction;
   phases = Phase;
+  oppositeFaction = oppositeFaction
 
   effects = StrategicEffects;
   currentState: CampaignState;
@@ -123,12 +124,20 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   }
 
   public getUnscarringLimit(upkeep: Upkeep): string {
-    let bases = this.campaign.locations.filter(x => x.controllingFaction === upkeep.faction &&
-      x.controlType === LocationControlType.Base).length;
+    let bases = this.getBases(upkeep.faction).length;
     let newBases = upkeep.newBases.length;
     let repairYards = upkeep.repairTokensSpent;
     let total = bases + newBases + repairYards;
     return `${total} (${bases} bases + ${newBases} new bases + ${repairYards} Repair Yard Tokens)`;
+  }
+
+  public getBases(faction: Faction): CampaignLocation[] {
+    return this.campaign.locations.filter(x => x.controllingFaction === faction &&
+      x.controlType === LocationControlType.Base);
+  }
+
+  public getNameOfFaction(faction: Faction): string {
+    return faction === Faction.Empire ? "Empire" : "Rebels"
   }
 
   completePhase() {
