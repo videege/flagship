@@ -44,6 +44,7 @@ class Upkeep {
   currentResourceTokens: number;
   currentRepairTokens: number;
   currentSkilledSpacersTokens: number;
+  repairTokensGained: number = 0;
   repairTokensSpent: number = 0;
   conditionStatuses: ConditionStatus[] = [];
 
@@ -150,13 +151,14 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
         team.removeToken(StrategicEffectType.Resources, 2);
       }
 
-      if (upkeep.repairTokensSpent > 0) {
-        team.removeToken(StrategicEffectType.RepairYards, upkeep.repairTokensSpent);
-      }
-
+      // Tokens spent can include tokens previously earned and those just gained this round, so add new tokens before removing spent tokens
       for (const tokenLocation of upkeep.tokenLocations) {
         const effect = upkeep.tokenChoices[tokenLocation.id];
         team.addToken(effect, 1);
+      }
+
+      if (upkeep.repairTokensSpent > 0) {
+        team.removeToken(StrategicEffectType.RepairYards, upkeep.repairTokensSpent);
       }
 
       for (const condition of upkeep.conditionStatuses) {
@@ -221,6 +223,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     this.rebelUpkeep.currentResourceTokens = this.campaign.rebels.tokensOfType(StrategicEffectType.Resources);
     this.rebelUpkeep.currentRepairTokens = this.campaign.rebels.tokensOfType(StrategicEffectType.RepairYards);
     this.rebelUpkeep.currentSkilledSpacersTokens = this.campaign.rebels.tokensOfType(StrategicEffectType.SkilledSpacers);
+    this.updateTokensGained();
 
     let objectiveFactory = new ObjectiveFactory();
     for (const battle of battles) {
@@ -314,6 +317,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   public formChanged() {
     this.determineValidity();
+    this.updateTokensGained();
     this.validityChange.emit(this.isValid());
   }
 
@@ -322,6 +326,23 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     this.completeButtonOptions.disabled = !valid;
     // this.determineResults();
     return valid;
+  }
+
+  private updateTokensGained() {
+    this.rebelUpkeep.repairTokensGained = 0;
+    this.empireUpkeep.repairTokensGained = 0;
+    for (let locationId in this.rebelUpkeep.tokenChoices) {
+      let token = this.rebelUpkeep.tokenChoices[locationId];
+      if (token === StrategicEffectType.RepairYards) {
+        this.rebelUpkeep.repairTokensGained += 1;
+      }
+    }
+    for (let locationId in this.empireUpkeep.tokenChoices) {
+      let token = this.empireUpkeep.tokenChoices[locationId];
+      if (token === StrategicEffectType.RepairYards) {
+        this.empireUpkeep.repairTokensGained += 1;
+      }
+    }
   }
 
   private determineValidity() {
