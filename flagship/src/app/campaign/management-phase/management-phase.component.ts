@@ -140,6 +140,55 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     return faction === Faction.Empire ? "Empire" : "Rebels"
   }
 
+  public getRewardText(player: CampaignPlayer, outcome: BattleOutcome): string {
+    let faction = this.campaign.getFactionOfPlayer(player.id);
+    let factionName = this.getNameOfFaction(faction);
+    let winner = outcome.winningPlayers.includes(player);
+    let bases = this.getBases(faction);
+    let locationRewards = outcome.location.rewards;
+
+    // Location rewards
+    var rewardText = `${player.name} may select `;
+    let numLocationRewards = locationRewards.length;
+    locationRewards.forEach((reward, rewardIndex) => {
+      let isSquadronReward = reward.isSquadronReward();
+      let optionalA = isSquadronReward ? `` : `a `;
+      let rewardDescription = isSquadronReward ? `points of squadrons` : `point ${reward.upgradeType} upgrade`;
+      let loserPoints = reward.loserPoints;
+      let understrengthBonus = reward.understrengthBonus(outcome.loserFleetDifference);
+      let totalLoserPoints = loserPoints + understrengthBonus;
+      let rewardPointText = winner ? `${reward.winnerPoints}` : `${totalLoserPoints} (${loserPoints} + ${understrengthBonus} understrength bonus)`
+      rewardText += `up to ${optionalA} ${rewardPointText} ${rewardDescription}`
+      if (rewardIndex !== (numLocationRewards - 1)) {
+        rewardText += `, or `;
+      }
+    });
+
+    // Base rewards
+    rewardText += `. ${player.name} may instead select a base reward if no other ${factionName} player does this round. Available base rewards: `;
+    let numBases = bases.length;
+    bases.forEach((base, baseIndex) => {
+      rewardText += `${base.name}: `
+      let numRewards = base.rewards.length;
+      base.rewards.forEach((reward, rewardIndex) => {
+        let rewardPoints = winner ? reward.winnerPoints : reward.loserPoints;
+        if (reward.isSquadronReward()) {
+          rewardText += `up to ${rewardPoints} points of squadrons`;
+        } else {
+          rewardText += `up to a ${rewardPoints} point ${reward.upgradeType} upgrade`;
+        }
+        if (rewardIndex !== (numRewards - 1)) {
+          rewardText += `, or `;
+        }
+      });
+      if (baseIndex !== (numBases - 1)) {
+        rewardText += `; or `;
+      }
+    });
+    rewardText += `.`;
+    return rewardText;
+  }
+
   completePhase() {
     this.completeButtonOptions.active = true;
 
