@@ -127,12 +127,12 @@
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxLayout="column">
             <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
-            <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens > 0">
-                <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens }})</mat-label>
+            <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens + upkeep.repairTokensGained > 0">
+                <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens + upkeep.repairTokensGained }})</mat-label>
                 <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()"
-                    name="{{ 'ry-' + index }}" required type="number" min="0" [max]="upkeep.currentRepairTokens" />
+                    name="{{ 'ry-' + index }}" required type="number" min="0" [max]="upkeep.currentRepairTokens + upkeep.repairTokensGained" />
             </mat-form-field>
-            <span *ngIf="upkeep.currentRepairTokens === 0" fxFlex.gt-xs>
+            <span *ngIf="upkeep.currentRepairTokens + upkeep.repairTokensGained === 0" fxFlex.gt-xs>
                 The team does not have any Repair Yard tokens.
             </span>
             <p>
