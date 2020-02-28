@@ -103,7 +103,7 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxLayout="column">
-            <h4>{{ upkeep.faction === factions.Empire ? "Empire" : "Rebels" }}</h4>
+            <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
             <mat-form-field fxFlex.gt-xs *ngIf="upkeep.currentRepairTokens + upkeep.repairTokensGained > 0">
                 <mat-label>Spent Repair Yard Tokens (Max: {{ upkeep.currentRepairTokens + upkeep.repairTokensGained }})</mat-label>
                 <input matInput [(ngModel)]="upkeep.repairTokensSpent" (ngModelChange)="formChanged()"
@@ -113,7 +113,7 @@
                 The team does not have any Repair Yard tokens.
             </span>
             <p>
-                The {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} team's players may unscar
+                The {{ getNameOfFaction(upkeep.faction) }} team's players may unscar
                 up to {{ getUnscarringLimit(upkeep) }} scarred ships or squadrons.
             </p>
         </div>

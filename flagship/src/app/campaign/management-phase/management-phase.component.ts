@@ -158,8 +158,8 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       let loserPoints = reward.loserPoints;
       let understrengthBonus = reward.understrengthBonus(outcome.loserFleetDifference);
       let totalLoserPoints = loserPoints + understrengthBonus;
-      let rewardPointText = winner ? `${reward.winnerPoints}` : `${totalLoserPoints} (${loserPoints} + ${understrengthBonus} understrength bonus)`
-      rewardText += `up to ${optionalA} ${rewardPointText} ${rewardDescription}`
+      let rewardPointText = winner ? `${reward.winnerPoints}` : `${totalLoserPoints} (${loserPoints} + ${understrengthBonus} understrength bonus)`;
+      rewardText += `up to ${optionalA} ${rewardPointText} ${rewardDescription}`;
       if (rewardIndex !== (numLocationRewards - 1)) {
         rewardText += `, or `;
       }
@@ -169,7 +169,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     rewardText += `. ${player.name} may instead select a base reward if no other ${factionName} player does this round. Available base rewards: `;
     let numBases = bases.length;
     bases.forEach((base, baseIndex) => {
-      rewardText += `${base.name}: `
+      rewardText += `${base.name}: `;
       let numRewards = base.rewards.length;
       base.rewards.forEach((reward, rewardIndex) => {
         let rewardPoints = winner ? reward.winnerPoints : reward.loserPoints;
