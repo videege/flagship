@@ -9,7 +9,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { BattleReward } from 'src/app/domain/campaign/battleReward';
 import { BattleType } from 'src/app/domain/campaign/battleType';
@@ -92,6 +92,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   factions = Faction;
   phases = Phase;
+  oppositeFaction = oppositeFaction
 
   effects = StrategicEffects;
   currentState: CampaignState;
@@ -124,12 +125,69 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   }
 
   public getUnscarringLimit(upkeep: Upkeep): string {
-    let bases = this.campaign.locations.filter(x => x.controllingFaction === upkeep.faction &&
-      x.controlType === LocationControlType.Base).length;
+    let bases = this.getBases(upkeep.faction).length;
     let newBases = upkeep.newBases.length;
     let repairYards = upkeep.repairTokensSpent;
     let total = bases + newBases + repairYards;
     return `${total} (${bases} bases + ${newBases} new bases + ${repairYards} Repair Yard Tokens)`;
+  }
+
+  public getBases(faction: Faction): CampaignLocation[] {
+    return this.campaign.locations.filter(x => x.controllingFaction === faction &&
+      x.controlType === LocationControlType.Base);
+  }
+
+  public getNameOfFaction(faction: Faction): string {
+    return faction === Faction.Empire ? "Empire" : "Rebels"
+  }
+
+  public getRewardText(player: CampaignPlayer, outcome: BattleOutcome): string {
+    let faction = this.campaign.getFactionOfPlayer(player.id);
+    let factionName = this.getNameOfFaction(faction);
+    let winner = outcome.winningPlayers.includes(player);
+    let bases = this.getBases(faction);
+    let locationRewards = outcome.location.rewards;
+
+    // Location rewards
+    var rewardText = `${player.name} may select `;
+    let numLocationRewards = locationRewards.length;
+    locationRewards.forEach((reward, rewardIndex) => {
+      let isSquadronReward = reward.isSquadronReward();
+      let optionalA = isSquadronReward ? `` : `a `;
+      let rewardDescription = isSquadronReward ? `points of squadrons` : `point ${reward.upgradeType} upgrade`;
+      let loserPoints = reward.loserPoints;
+      let understrengthBonus = reward.understrengthBonus(outcome.loserFleetDifference);
+      let totalLoserPoints = loserPoints + understrengthBonus;
+      let rewardPointText = winner ? `${reward.winnerPoints}` : `${totalLoserPoints} (${loserPoints} + ${understrengthBonus} understrength bonus)`
+      rewardText += `up to ${optionalA} ${rewardPointText} ${rewardDescription}`
+      if (rewardIndex !== (numLocationRewards - 1)) {
+        rewardText += `, or `;
+      }
+    });
+
+    // Base rewards
+    rewardText += `. ${player.name} may instead select a base reward if no other ${factionName} player does this round. Available base rewards: `;
+    let numBases = bases.length;
+    bases.forEach((base, baseIndex) => {
+      rewardText += `${base.name}: `
+      let numRewards = base.rewards.length;
+      base.rewards.forEach((reward, rewardIndex) => {
+        let rewardPoints = winner ? reward.winnerPoints : reward.loserPoints;
+        if (reward.isSquadronReward()) {
+          rewardText += `up to ${rewardPoints} points of squadrons`;
+        } else {
+          rewardText += `up to a ${rewardPoints} point ${reward.upgradeType} upgrade`;
+        }
+        if (rewardIndex !== (numRewards - 1)) {
+          rewardText += `, or `;
+        }
+      });
+      if (baseIndex !== (numBases - 1)) {
+        rewardText += `; or `;
+      }
+    });
+    rewardText += `.`;
+    return rewardText;
   }
 
   completePhase() {
