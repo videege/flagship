@@ -387,19 +387,22 @@ export class PivotalBattlePhaseComponent implements OnInit {
       }
     } else if (this.pivotalObjective === PivotalObjective.Evacuation) {
       let reward = <EvacuationReward>this.reward;
-      if (!reward.chosenLocation) {
-        this.issues.push({
-          severity: IssueSeverity.Error,
-          text: `You haven't selected the new location for the winning team's base.`
-        });
-        return;
-      }
-      if (reward.chosenLocation.hasEffects() && reward.chosenToken === null) {
-        this.issues.push({
-          severity: IssueSeverity.Warning,
-          text: `You haven't selected the a token for the new location.`
-        });
-        return;
+      if (!reward.attackersWon) {
+        // Defenders won
+        if (!reward.chosenLocation) {
+          this.issues.push({
+            severity: IssueSeverity.Error,
+            text: `You haven't selected the new location for the defending team's base.`
+          });
+          return;
+        }
+        if (reward.chosenLocation.hasEffects() && reward.chosenToken === null) {
+          this.issues.push({
+            severity: IssueSeverity.Warning,
+            text: `You haven't selected a token from the new base location.`
+          });
+          return;
+        }
       }
     }
   }
