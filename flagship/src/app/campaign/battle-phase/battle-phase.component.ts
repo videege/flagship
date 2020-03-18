@@ -101,6 +101,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     this.completeButtonOptions.active = true;
     this.removeSpentTokens(this.empireTokens, this.campaign.empire);
     this.removeSpentTokens(this.rebelTokens, this.campaign.rebels);
+    let currentState = this.campaign.currentState();
     
     for (let i = 0; i < this.battles.length; i++) {
       let battle = this.battles[i];
@@ -129,8 +130,10 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         this.applyFleetMods(fleet);
         this.fleetService.updateFleet(fleet).then(() => { }, (errors) => { alert(errors); });
       }
+      currentState.updateBattle(battle);
     }
-    this.campaign.currentState().setPhase(Phase.Management);
+    
+    currentState.setPhase(Phase.Management);
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit();
     }, (errors) => {

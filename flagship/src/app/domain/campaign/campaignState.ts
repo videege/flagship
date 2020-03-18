@@ -58,6 +58,14 @@ export class CampaignState {
             .map(x => x as Battle);
     }
 
+    public updateBattle(battle: Battle) {
+        let battleToUpdate = this.getBattles().find(x => x.locationId === battle.locationId);
+        battleToUpdate.attackerResult = battle.attackerResult;
+        battleToUpdate.defenderResult = battle.defenderResult;
+        battleToUpdate.objectiveId = battle.objectiveId;
+        battleToUpdate.state = battle.state;
+    }
+
     public serialize(): SerializedCampaignState {
         return {
             turn: this.turn,
