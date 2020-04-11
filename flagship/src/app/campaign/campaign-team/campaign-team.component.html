@@ -10,7 +10,9 @@
         </mat-card-content>
         <mat-list *ngIf="team.players.length">
             <mat-list-item *ngFor="let player of team.players">
-                <img matListAvatar [src]="playerMap[player.id]?.photoURL" [alt]="playerMap[player.id]?.displayName"
+                <img matListAvatar
+                    [src]='playerMap[player.id]?.photoURL ? playerMap[player.id]?.photoURL : "https://ui-avatars.com/api/?name=" + playerMap[player.id]?.displayName'
+                    [alt]="playerMap[player.id]?.displayName"
                     matTooltip="Controlled by {{ playerMap[player.id]?.displayName }}"
                     *ngIf="!(isHandsetPortrait$ | async) && playerMap[player.id]">
                 <h3 mat-line>{{ player.name }}</h3>
