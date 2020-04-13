@@ -1,8 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Location } from '@angular/common';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatSnackBar, MatTabChangeEvent } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { ClipboardService } from 'ngx-clipboard';
@@ -18,7 +19,7 @@ import { FlagshipRouteData } from 'src/app/app.route-data';
   styleUrls: ['./campaign-dashboard.component.scss']
 })
 export class CampaignDashboardComponent implements OnInit {
-
+  public selectedSubNavIndex: number;
   public campaign: Campaign;
   public currentState: CampaignState;
 
@@ -29,7 +30,7 @@ export class CampaignDashboardComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute, private clipboardService: ClipboardService,
     private snackbar: MatSnackBar, private campaignService: CampaignService,
-    private breadcrumbService: BreadcrumbService) {
+    private breadcrumbService: BreadcrumbService, private router: Router, private location: Location) {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
@@ -42,13 +43,33 @@ export class CampaignDashboardComponent implements OnInit {
       });
   }
 
+  getSubNavIndex(data) {
+    switch (data.subNav) {
+      case 'roster': return 1;
+      case 'locations': return 2;
+      case 'timeline': return 3;
+      default: return 0;
+    }
+  }
+
   ngOnInit() {
     let campaignId = this.route.snapshot.params.id;
+    this.selectedSubNavIndex = this.getSubNavIndex(this.route.snapshot.data);
     this.campaignService.getCampaignForUser(campaignId).subscribe((campaign) => {
       this.campaign = campaign;
       this.breadcrumbService.setBreadcrumb(new FlagshipRouteData(campaign.name, 'Campaigns', '/campaigns'));
       this.currentState = this.campaign.currentState();
       this.loading = false;
     });
+  }
+
+  onSelectedTabChange(event: MatTabChangeEvent) {
+    const subNavPath = event.tab.textLabel.toLowerCase();
+    const url = this
+      .router
+      .createUrlTree([`../../${subNavPath}`], { relativeTo: this.route })
+      .toString();
+
+    this.location.go(url);
   }
 }
