@@ -67,7 +67,7 @@ export class CampaignDashboardComponent implements OnInit {
     const subNavPath = event.tab.textLabel.toLowerCase();
     const url = this
       .router
-      .createUrlTree([`../${subNavPath}`], { relativeTo: this.route })
+      .createUrlTree(['/campaigns', this.campaign.id, subNavPath])
       .toString();
 
     this.location.go(url);
