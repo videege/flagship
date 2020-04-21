@@ -49,7 +49,7 @@
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
             <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
-            <div *ngFor="let location of upkeep.tokenLocations; let li = index;">
+            <div *ngFor="let location of upkeep.tokenLocations.concat(upkeep.newBases); let li = index;">
                 <mat-form-field>
                     <mat-label>Token for {{ location.name }}</mat-label>
                     <mat-select [(ngModel)]="upkeep.tokenChoices[location.id]"
@@ -79,7 +79,7 @@
                     </span>
                     <span *ngIf="outcome.rewardsCanBeUnique">
                         This reward <strong>can</strong> be unique.
-                    </span>    
+                    </span>
                 </li>
                 <li *ngFor="let player of outcome.losingPlayers">
                     {{ getRewardText(player, outcome) }}
@@ -88,7 +88,7 @@
                     </span>
                     <span *ngIf="outcome.rewardsCanBeUnique">
                         This reward <strong>can</strong> be unique.
-                    </span> 
+                    </span>
                 </li>
             </ul>
         </li>
@@ -164,11 +164,11 @@
             reached the end of Act III).
         </p>
         <div *ngIf="canBeClimactic">
-            <p> 
-                <strong>Heads up!</strong> Because the 
+            <p>
+                <strong>Heads up!</strong> Because the
                 {{ losingFaction === factions.Empire ? "Imperial" : "Rebel" }} team is losing by at least
                 5 campaign points, that team may choose that the upcoming Pivotal Battle will instead be
-                the <strong>Climactic Battle</strong>.  If you choose this option, the campaign will end 
+                the <strong>Climactic Battle</strong>. If you choose this option, the campaign will end
                 after the battle.
             </p>
             <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()" 
