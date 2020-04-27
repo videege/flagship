@@ -213,7 +213,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     let friendlyBorderLocations = this.campaign.locations.filter(x => x.controllingFaction === faction &&
       x.isBorderLocation() && x.isInSameArea(location));
     for (const friendlyBorderLocation of friendlyBorderLocations) {
-      let adjacentArea = friendlyBorderLocation.sectors.find(x => x !== location.sectors[0])[0];
+      let adjacentArea = friendlyBorderLocation.sectors.find(x => x !== location.sectors[0]);
       let friendlyBasesInNeighboringRegion = this.campaign.locations.filter(x => x.controllingFaction === faction &&
         x.controlType === LocationControlType.Base && x.sectors.includes(adjacentArea));
       if (friendlyBasesInNeighboringRegion.length)
@@ -223,7 +223,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     let fleet = this.campaign.fleets[player.fleetId];
     if (fleet && fleet.hasCustomCommander() &&
       ((!isAttacker && fleet.customCommander.isReadyDefender()) ||
-      (isAttacker && fleet.customCommander.isIndependentRaider()))) {
+        (isAttacker && fleet.customCommander.isIndependentRaider()))) {
       return false;
     }
     return true;

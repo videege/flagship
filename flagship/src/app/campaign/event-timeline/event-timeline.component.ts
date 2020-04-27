@@ -7,6 +7,7 @@ import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { BattleState } from 'src/app/domain/campaign/battleState';
 import { Faction } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
+import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
 
 interface TimelineEvent {
   title: string;
@@ -34,6 +35,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
 
   events: TimelineEvent[] = [];
   players: { [id: string]: CampaignPlayer; };
+  public objectiveFactory = new ObjectiveFactory();
 
   constructor() { }
 
@@ -72,7 +74,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
           }
         });
       }
-      
+
       this.events.push(...state.events.map(x => this.createTimelineEvent(state, x)));
       lastState = state;
 
@@ -135,12 +137,14 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       let battle = <Battle>event;
       let attackers = battle.attackingPlayers.map(x => this.players[x.playerId].name).join(", ");
       let defenders = battle.defendingPlayers.map(x => this.players[x.playerId].name).join(", ");
+      //battle.objectiveId
+      const playedObjective = this.objectiveFactory.getObjective(battle.objectiveId);
       if (battle.state === BattleState.Declared) {
         return `This battle has been declared but not yet fought.`;
       } else if (battle.state === BattleState.AttackersWon) {
-        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.attackerResult.score} to ${battle.defenderResult.score}.`
+        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.attackerResult.score} to ${battle.defenderResult.score} playing ${playedObjective.name}.`
       } else {
-        return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score}.`
+        return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score} playing ${playedObjective.name}.`
       }
     }
     return `Action performed by ${this.campaign.campaignUsers.find(x => x.uid === event.userUid).displayName}.`;

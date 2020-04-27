@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
+import { Objective } from 'src/app/domain/game/objective';
 import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { Faction } from 'src/app/domain/game/faction';
@@ -62,7 +63,20 @@ export class CampaignLocationsComponent implements OnInit, OnChanges {
   public getObjectiveNames(objectives: number[]): string {
     if (!objectives) return 'None';
 
-    return this.objectiveFactory.getObjectiveNamesForIds(objectives).join(', ');
+    return this
+      .objectiveFactory
+      .getObjectivesByIds(objectives)
+      .map(objective => {
+        return objective.name + (this.isLocationCampaignObjectUsed(objective) ? ' [Already Played]' : '')
+      })
+      .join(', ');
+  }
+
+  private isLocationCampaignObjectUsed(objective: Objective): boolean {
+    return !!this
+      .campaign
+      .locations
+      .find(location => location.playedCampaignObjectives.includes(objective.id));
   }
 
   public getStrategicEffects(effects: StrategicEffectType[]): string {

@@ -43,26 +43,82 @@ const CAMPAIGN_ROUTES: Routes = [
     {
         path: '', children: [
             {
-              path: '', component: CampaignListComponent,
-              data: { nav: new FlagshipRouteData('My Campaigns', null, null) }
+                path: '', component: CampaignListComponent,
+                data: { nav: new FlagshipRouteData('My Campaigns', null, null) }
             },
             defaultToolbar
         ]
     },
     {
         path: ':id', children: [
-            { path: '', component: CampaignDashboardComponent, //resolve: { campaign: CampaignResolver },
-              data: { nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns')}
+            {
+                path: '', component: CampaignDashboardComponent, //resolve: { campaign: CampaignResolver },
+                data: { nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns') }
+            },
+            defaultToolbar
+        ]
+    },
+    {
+        path: ':id/manager', children: [
+            {
+                path: '',
+                component: CampaignDashboardComponent,
+                data: {
+                    nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns'),
+                    subNav: 'manager'
+                }
+            },
+            defaultToolbar
+        ]
+    },
+    {
+        path: ':id/roster', children: [
+            {
+                path: '',
+                component: CampaignDashboardComponent,
+                data: {
+                    nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns'),
+                    subNav: 'roster'
+                }
+            },
+            defaultToolbar
+        ]
+    },
+    {
+        path: ':id/locations', children: [
+            {
+                path: '',
+                component: CampaignDashboardComponent,
+                data: {
+                    nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns'),
+                    subNav: 'locations'
+                }
+            },
+            defaultToolbar
+        ]
+    },
+    {
+        path: ':id/timeline', children: [
+            {
+                path: '',
+                component: CampaignDashboardComponent,
+                data: {
+                    nav: new FlagshipRouteData('Loading...', 'Campaigns', '/campaigns'),
+                    subNav: 'timeline'
+                }
             },
             defaultToolbar
         ]
     },
     {
         path: ':id/invitation', children: [
-            { path: '', component: InviteComponent, resolve: { invite: InviteResolver },
-              data: { nav: new FlagshipRouteData((data: Data) => {
-                  return 'Invite to ' + (data['invite'] as Invite).campaignName;
-              }, 'Campaigns', '/campaigns')}
+            {
+                path: '', component: InviteComponent, resolve: { invite: InviteResolver },
+                data: {
+                    nav: new FlagshipRouteData((data: Data) => {
+                        return 'Invite to ' + (data['invite'] as Invite).campaignName;
+                    }, 'Campaigns', '/campaigns')
+                }
             },
             defaultToolbar
         ]

@@ -210,7 +210,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       }
 
       // Tokens spent can include tokens previously earned and those just gained this round, so add new tokens before removing spent tokens
-      for (const tokenLocation of upkeep.tokenLocations) {
+      for (const tokenLocation of upkeep.tokenLocations.concat(upkeep.newBases)) {
         const effect = upkeep.tokenChoices[tokenLocation.id];
         team.addToken(effect, 1);
       }
@@ -300,6 +300,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       if (outcome.winningFaction !== location.controllingFaction) {
         afterLocation.setPresence(outcome.winningFaction);
         outcome.locationChanged = true;
+        this.getUpkeepFor(outcome.winningFaction).eligibleBaseLocations.push(afterLocation);
       } else {
         outcome.locationChanged = false;
       }
@@ -341,6 +342,10 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       this.determineValidity();
       this.validityChange.emit(this.isValid());
     }
+  }
+
+  private getUpkeepFor(faction: Faction) {
+    return faction === Faction.Empire ? this.empireUpkeep : this.rebelUpkeep;
   }
 
   private setupConditionStatuses(upkeep: Upkeep, team: Team) {
