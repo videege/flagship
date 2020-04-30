@@ -5,7 +5,7 @@
   "hosting": [
     {
       "target": "dev",
-      "public": "flagship/dist/flagship-dev",
+      "public": "/",
       "ignore": [
         "firebase.json",
         "**/.*",
