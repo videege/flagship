@@ -134,7 +134,8 @@ export class EventTimelineComponent implements OnInit, OnChanges {
 
   getContent(event: CampaignEvent): string {
     if (event.eventType === CampaignEventType.Battle) {
-      let battle = <Battle>event;
+      let battle = <Battle>event; 
+      // map players
       let attackers = battle.attackingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");
       let defenders = battle.defendingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");
       //battle.objectiveId
