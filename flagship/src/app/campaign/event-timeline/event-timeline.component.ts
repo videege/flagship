@@ -138,14 +138,20 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       // map players
       let attackers = battle.attackingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");
       let defenders = battle.defendingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");
-      //battle.objectiveId
-      const playedObjective = this.objectiveFactory.getObjective(battle.objectiveId);
+      let objectiveName = ``;
+      if (battle.objectiveId) {
+        const playedObjective = this.objectiveFactory.getObjective(battle.objectiveId);
+        objectiveName = playedObjective.name;
+      } else if (battle.pivotalObjective) {
+        objectiveName = battle.pivotalObjective;
+      }
+      const playedObjectiveText = objectiveName ? ` playing ${objectiveName}` : ``;
       if (battle.state === BattleState.Declared) {
         return `This battle has been declared but not yet fought.`;
       } else if (battle.state === BattleState.AttackersWon) {
-        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.attackerResult.score} to ${battle.defenderResult.score} playing ${playedObjective.name}.`
+        return `Attacker(s) win: ${attackers} defeats ${defenders} ${battle.attackerResult.score} to ${battle.defenderResult.score}${playedObjectiveText}.`
       } else {
-        return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score} playing ${playedObjective.name}.`
+        return `Defender(s) win: ${defenders} defeats ${attackers} ${battle.defenderResult.score} to ${battle.attackerResult.score}${playedObjectiveText}.`
       }
     }
     return `Action performed by ${this.campaign.campaignUsers.find(x => x.uid === event.userUid).displayName}.`;
