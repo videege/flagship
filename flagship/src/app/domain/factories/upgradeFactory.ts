@@ -955,7 +955,7 @@ export class UpgradeFactory {
             {
                 id: 10218, name: 'Taskmaster Grint', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: "After deploying fleets, chhose and place 1 command token on this card. When you reveal a command matching that token, you may gain 1 matching command token without spending the command dial."
+                text: "After deploying fleets, chose and place 1 command token on this card. When you reveal a command matching that token, you may gain 1 matching command token without spending the command dial."
             },
             {
                 id: 10219, name: 'The Grand Inquisitor', type: UpgradeType.Officer, faction: Faction.Empire,
@@ -1022,7 +1022,7 @@ export class UpgradeFactory {
             {
                 id: 10506, name: 'Lando Calrissian', type: UpgradeType.Officer, faction: Faction.Rebels,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
-                text: "While defending, during the Spend Defense Tokens Step, you may discard this card to force the attacker 1 or more dice of your choice."
+                text: "While defending, during the Spend Defense Tokens Step, you may discard this card to force the attacker to reroll 1 or more dice of your choice."
             },
             {
                 id: 10507, name: 'Leia Organa', type: UpgradeType.Officer, faction: Faction.Rebels,

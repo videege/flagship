@@ -371,7 +371,7 @@ export class SquadronFactory {
         {
             id: 106, name: 'Green Squadron', shipName: 'A-Wing Squadron',
             faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 12,
-            speed: 3, hull: 6, defenseTokens: [],
+            speed: 5, hull: 4, defenseTokens: [],
             antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(0, 0, 1),
             keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Counter, 1)],
             text: ''
