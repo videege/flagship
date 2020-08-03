@@ -56,6 +56,10 @@ export class ShipIconComponent implements OnInit {
       case 22:
         this.iconUrl = '/assets/img/ship-icons/sd.png';
         break;
+      case 23:
+      case 24:
+        this.iconUrl = '/assets/img/ship-icons/onager.png';
+        break;
       case 101:
       case 102:
         this.iconUrl = '/assets/img/ship-icons/af.png';
