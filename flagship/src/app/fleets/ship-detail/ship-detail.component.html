@@ -63,7 +63,8 @@
         <flagship-defense-token *ngFor="let token of ship.defenseTokens" [type]="token" [size]="18"
           class="defense-token"></flagship-defense-token>
       </span>
-    </div>
+    </div>    
+    <div *ngIf="traits" class="traits">{{ traits }}</div>
     <div>
       <flagship-upgrade-summary *ngFor="let upgrade of ship.sortedUpgrades(); let isLast=last;" [upgrade]="upgrade"
         [isLast]="isLast"></flagship-upgrade-summary>

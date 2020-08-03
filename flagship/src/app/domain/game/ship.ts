@@ -49,6 +49,7 @@ export interface ShipData {
   rightArmament: Armament;
   rearArmament: Armament;
   navigationChart: NavigationChart;
+  traits: string[];
 }
 
 export interface HugeShipData extends ShipData {
@@ -79,7 +80,8 @@ export class Ship implements ShipData {
     public antiSquadronArmament: Armament, public frontArmament: Armament,
     public leftArmament: Armament, public rightArmament: Armament,
     public rearArmament: Armament, public navigationChart: NavigationChart,
-    public upgradeSlots: UpgradeSlot[], public allowedTitles: number[]) {
+    public upgradeSlots: UpgradeSlot[], public allowedTitles: number[],
+    public traits: string[]) {
     this.subject = new Subject<number>();
   }
 
@@ -290,6 +292,7 @@ export class HugeShip extends Ship implements HugeShipData {
     leftArmament: Armament, rightArmament: Armament,
     rearArmament: Armament, navigationChart: NavigationChart,
     upgradeSlots: UpgradeSlot[], allowedTitles: number[],
+    traits: string[],
     public leftAuxShields: number, public rightAuxShields: number,
     public leftAuxArmament: Armament, public rightAuxArmament: Armament) {
       super(uid, id, name, shipClass, faction, size, hull,
@@ -297,7 +300,7 @@ export class HugeShip extends Ship implements HugeShipData {
         frontShields, leftShields,
         rightShields, rearShields, antiSquadronArmament, frontArmament,
         leftArmament, rightArmament, rearArmament,
-        navigationChart, upgradeSlots, allowedTitles);
+        navigationChart, upgradeSlots, allowedTitles, traits);
   }
 }
 
@@ -313,12 +316,13 @@ export class IgnitionCapableShip extends Ship implements IgnitionCapableShipData
     leftArmament: Armament, rightArmament: Armament,
     rearArmament: Armament, navigationChart: NavigationChart,
     upgradeSlots: UpgradeSlot[], allowedTitles: number[],
+    traits: string[],
     public ignitionArmament: Armament) {
       super(uid, id, name, shipClass, faction, size, hull,
         command, squadron, engineering, points, defenseTokens,
         frontShields, leftShields,
         rightShields, rearShields, antiSquadronArmament, frontArmament,
         leftArmament, rightArmament, rearArmament,
-        navigationChart, upgradeSlots, allowedTitles);
+        navigationChart, upgradeSlots, allowedTitles, traits);
   }
 }

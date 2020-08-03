@@ -12,11 +12,18 @@
         <input matInput formControlName="author" />
         <mat-error *ngIf="fleetForm.get('author').invalid">You must enter the author for this fleet.</mat-error>
       </mat-form-field>
-    <mat-radio-group aria-label="Faction" formControlName="faction"
+    <!-- <mat-radio-group aria-label="Faction" formControlName="faction"
       [disabled]="data.mode !== 0">
       <mat-radio-button value="0" fxFlex>Galactic Empire</mat-radio-button>
       <mat-radio-button value="1" fxFlex>Rebel Alliance</mat-radio-button>
-    </mat-radio-group>
+    </mat-radio-group> -->
+    <mat-form-field hintLabel="Select a faction">
+      <mat-select formControlName="faction" [disabled]="data.mode !== 0">
+        <mat-option [value]="f.value" *ngFor="let f of factions">
+          {{ f.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field hintLabel="Select a format or enter point values manually">
       <mat-select (selectionChange)="formatChange($event)">
         <mat-option [value]="format.value" *ngFor="let format of formats">

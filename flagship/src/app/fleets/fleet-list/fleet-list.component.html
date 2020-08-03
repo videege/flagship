@@ -2,9 +2,10 @@
   <ng-container matColumnDef="faction">
     <th mat-header-cell mat-sort-header *matHeaderCellDef>Faction</th>
     <td mat-cell *matCellDef="let fleet">
-      <i class="ffi"
+      <!-- <i class="ffi"
         [ngClass]="{'ffi-imperial': fleet.faction == faction.Empire, 'ffi-rebel': fleet.faction == faction.Rebels}"
-        style="font-size:36px;"></i>
+        style="font-size:36px;"></i> -->
+        <flagship-faction-icon [faction]="fleet.faction"></flagship-faction-icon>
     </td>
   </ng-container>
   <ng-container matColumnDef="name">

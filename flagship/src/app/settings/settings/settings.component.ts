@@ -17,7 +17,9 @@ export class SettingsComponent implements OnInit {
   loaded = false;
   factions = [
     { val: Faction.Empire, name: "Empire" },
-    { val: Faction.Rebels, name: "Rebels" }
+    { val: Faction.Rebels, name: "Rebels" },
+    { val: Faction.Republic, name: "Republic" },
+    { val: Faction.Separatists, name: "Separatists" }
   ];
 
   authorChanged$ = new Subject<string>();

@@ -68,12 +68,10 @@
   </eco-fab-speed-dial-trigger>
   <eco-fab-speed-dial-actions>
     <button mat-mini-fab (click)="addShip()" matTooltip="Add Ship" matTooltipPosition="left">
-      <i class="swg mini-fab-icon"
-        [ngClass]="{'swg-deathstar': fleet.faction === 0, 'swg-jedistarfight': fleet.faction === 1}"></i>
+      <i class="swg mini-fab-icon" [ngClass]="addShipIcon"></i>
     </button>
     <button mat-mini-fab (click)="addSquadron()" matTooltip="Add Squadron" matTooltipPosition="left">
-      <i class="swg mini-fab-icon"
-        [ngClass]="{'swg-tie-2': fleet.faction === 0, 'swg-xwing-2': fleet.faction === 1}"></i>
+      <i class="swg mini-fab-icon" [ngClass]="addSquadronIcon"></i>
     </button>
   </eco-fab-speed-dial-actions>
 </eco-fab-speed-dial>
