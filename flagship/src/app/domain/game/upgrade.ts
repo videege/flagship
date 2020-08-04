@@ -47,6 +47,14 @@ export class Upgrade implements UpgradeData {
   getText(): string { 
     return this.text;
   }
+
+  displayTraitRestrictions(): string {
+    if (!this.traitRestriction) {
+      return '';
+    }
+
+    return this.traitRestriction.join(', ') + ' only.';
+  }
   
   canEquipToShip(ship: Ship): boolean {
     // Can't equip if wrong faction

@@ -6,9 +6,25 @@
     <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)"
       class="height-auto selector-list-item">
       <h3 matLine>
-        {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}</h3>
+        {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}
+        <span class="small-italics" *ngIf="upgrade.traitRestriction">
+          [{{ upgrade.displayTraitRestrictions() }}]
+        </span>
+      </h3>
       <p matLine style="white-space: normal">
-        <span style="font-style: italic; font-size: .8em;">{{ upgrade.getText() }}</span>
+        <span class="small-italics">{{ upgrade.getText() }}</span>
+      </p>
+      <p matLine  *ngIf="upgrade.startingResources">
+        Starts with {{ upgrade.startingResources.quantity }} of 
+        <span *ngFor="let type of upgrade.startingResources.types">
+          todo
+        </span>
+      </p>
+      <p matLine style="white-space: normal;" *ngIf="upgrade.resupplyResources">
+        Refresh with {{ upgrade.resupplyResources.quantity }} of 
+        <span *ngFor="let type of upgrade.resupplyResources.types">
+          todo
+        </span>
       </p>
       <span style="margin-left: 8px;">{{ upgrade.points }}</span>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>

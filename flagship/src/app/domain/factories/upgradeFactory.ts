@@ -31,7 +31,8 @@ export class UpgradeFactory {
         if (data.upgradeClass === UpgradeClass.Commander) {
             return new CommanderUpgrade(data.id, data.name, data.faction,
                 data.text, data.modification, data.points, data.sizeRestriction,
-                data.shipRestriction, data.traitRestriction);
+                data.shipRestriction, data.traitRestriction,
+                data.startingResources, data.resupplyResources);
         }
 
         if (data.upgradeClass === UpgradeClass.SlotGranting) {
@@ -39,12 +40,14 @@ export class UpgradeFactory {
             return new SlotGrantingUpgrade(slotData.id, slotData.name, slotData.type,
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
                 slotData.unique, slotData.grantedType, slotData.canEquipToShipWithMatchingSlot,
-                data.sizeRestriction, data.shipRestriction, data.traitRestriction);
+                data.sizeRestriction, data.shipRestriction, data.traitRestriction,
+                data.startingResources, data.resupplyResources);
         }
         if (data.upgradeClass === UpgradeClass.Normal) {
             return new Upgrade(data.id, data.name, data.type, data.faction,
                 data.text, data.modification, data.points, data.unique,
-                data.sizeRestriction, data.shipRestriction, data.traitRestriction);
+                data.sizeRestriction, data.shipRestriction, data.traitRestriction,
+                data.startingResources, data.resupplyResources);
         }
 
         return null;

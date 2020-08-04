@@ -861,7 +861,8 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(1, 0, 0),
       navigationChart: new NavigationChart(1, [1, 2], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.FleetSupport), 
+        new UpgradeSlot(UpgradeType.SupportTeam), 
       ],
       allowedTitles: ShipFactory.titles.munificent, 
       traits: [Traits.droid, Traits.transport]

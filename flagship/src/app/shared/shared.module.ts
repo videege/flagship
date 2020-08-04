@@ -11,6 +11,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { DefenseTokenComponent } from './defense-token/defense-token.component';
 import { IssuesListComponent } from './issues-list/issues-list.component';
 import { FactionIconComponent } from './faction-icon/faction-icon.component';
+import { ResourceIconComponent } from './resource-icon/resource-icon.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FactionIconComponent } from './faction-icon/faction-icon.component';
     ConfirmDialogComponent,
     DefenseTokenComponent,
     IssuesListComponent,
-    FactionIconComponent
+    FactionIconComponent,
+    ResourceIconComponent
   ],
   imports: [
     CommonModule,
