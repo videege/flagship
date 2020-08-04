@@ -12,7 +12,8 @@ export enum KeywordType {
   Cloak,
   Relay,
   Snipe,
-  Strategic
+  Strategic,
+  AIAntiSquadron
 }
 
 export class Keyword {
@@ -21,11 +22,20 @@ export class Keyword {
   }
 
   displayText(): string {
-    let name = KeywordType[this.type];
+    const name = this.getName();
     if (this.value) {
       return `${name} ${this.value}`;
     }
     return name;
+  }
+
+  private getName(): string {
+    switch (this.type) {
+      case KeywordType.AIAntiSquadron:
+        return 'AI: Anti-Squadron';
+      default:
+        return KeywordType[this.type];
+    }
   }
 
   

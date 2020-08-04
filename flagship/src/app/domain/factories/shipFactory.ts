@@ -8,6 +8,7 @@ import { UpgradeSlot } from '../game/upgradeSlot';
 import { UpgradeType } from '../game/upgradeType';
 import { CustomCommander } from '../campaign/customCommander';
 import { Guid } from 'guid-typescript';
+import { Traits } from '../game/traits';
 
 export class ShipFactory {
   private static titles = {
@@ -36,15 +37,12 @@ export class ShipFactory {
     starhawkMarkI: [2527, 2528, 2529],
     starhawkMarkII: [2529],
     // republic
-    acclamator: []
+    acclamator: [2800],
+    consular: [],
     // separatists
+    munificent: [2700],
+    hardcell: []
   };
-
-  static traits = {
-    clone: 'Clone',
-    transport: 'Transport',
-    bombard: 'Bombard'
-  }
 
   static shipData: (ShipData|IgnitionCapableShipData|HugeShipData)[] = [
     {
@@ -802,7 +800,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.acclamator, traits: [ShipFactory.traits.clone, ShipFactory.traits.transport]
+      allowedTitles: ShipFactory.titles.acclamator, traits: [Traits.clone, Traits.transport]
     },
     {
       id: 201, name: 'Acclamator II-class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -819,9 +817,87 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.acclamator, 
-      traits: [ShipFactory.traits.clone, ShipFactory.traits.bombard, ShipFactory.traits.transport]
-    }
+      traits: [Traits.clone, Traits.bombard, Traits.transport]
+    },
+    {
+      id: 202, name: 'Consular-class Charger C70', shipClass: ShipClass.Normal, faction: Faction.Republic,
+      points: 45, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 2, rightShields: 2, frontShields: 2, rearShields: 1,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 0, 0), rightArmament: new Armament(2, 0, 0),
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(2, [2, 1], [1, 1, 1], [1, 0, 1, 1]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.consular, 
+      traits: [Traits.clone]
+    },
     // Separatists
+    {
+      id: 300, name: 'Munificent-class Comms Frigate', shipClass: ShipClass.Normal, faction: Faction.Separatists,
+      points: 1, hull: 6, command: 2, squadron: 3, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
+      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      antiSquadronArmament: new Armament(1, 0, 0),
+      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), 
+      ],
+      allowedTitles: ShipFactory.titles.munificent, 
+      traits: [Traits.droid]
+    },
+    {
+      id: 301, name: 'Munificent-class Star Frigate', shipClass: ShipClass.Normal, faction: Faction.Separatists,
+      points: 1, hull: 6, command: 2, squadron: 2, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
+      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      antiSquadronArmament: new Armament(1, 0, 0),
+      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), 
+      ],
+      allowedTitles: ShipFactory.titles.munificent, 
+      traits: [Traits.droid, Traits.transport]
+    },
+    {
+      id: 302, name: 'Hardcell-class Battle Refit', shipClass: ShipClass.Normal, faction: Faction.Separatists,
+      points: 52, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Brace],
+      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      antiSquadronArmament: new Armament(1, 0, 0),
+      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit), 
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),  
+      ],
+      allowedTitles: ShipFactory.titles.hardcell, 
+      traits: [Traits.droid, Traits.transport]
+    },
+    {
+      id: 303, name: 'Hardcell-class Transport', shipClass: ShipClass.Normal, faction: Faction.Separatists,
+      points: 52, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Brace],
+      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      antiSquadronArmament: new Armament(1, 0, 0),
+      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit), 
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),  
+      ],
+      allowedTitles: ShipFactory.titles.hardcell, 
+      traits: [Traits.droid, Traits.transport]
+    }
   ];
 
   constructor() {
