@@ -41,7 +41,8 @@ import { ResourceIconComponent } from './resource-icon/resource-icon.component';
     ConfirmDialogComponent,
     DefenseTokenComponent,
     IssuesListComponent,
-    FactionIconComponent
+    FactionIconComponent,
+    ResourceIconComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
