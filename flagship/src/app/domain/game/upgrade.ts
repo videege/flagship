@@ -3,6 +3,7 @@ import { UpgradeType } from './upgradeType';
 import { Ship } from './ship';
 import { UpgradeSlot } from './upgradeSlot';
 import { Size } from './size';
+import { Resources } from './resource';
 
 export enum UpgradeClass {
   Normal,
@@ -21,7 +22,10 @@ export interface UpgradeData {
   unique: boolean;
   upgradeClass: UpgradeClass,
   sizeRestriction?: Size[],
-  shipRestriction?: number[]
+  shipRestriction?: number[],
+  traitRestriction?: string[],
+  startingResources?: Resources,
+  resupplyResources?: Resources
 }
 
 export interface SlotGrantingUpgradeData extends UpgradeData {
@@ -35,12 +39,21 @@ export class Upgrade implements UpgradeData {
   constructor(public id: number, public name: string, public type: UpgradeType, 
     public faction: Faction, public text: string, public modification: boolean,
     public points: number, public unique: boolean, public sizeRestriction: Size[] = null,
-    public shipRestriction: number[] = null) {
+    public shipRestriction: number[] = null, public traitRestriction: string[] = null,
+    public startingResources: Resources = null, public resupplyResources: Resources = null) {
 
     }
 
   getText(): string { 
     return this.text;
+  }
+
+  displayTraitRestrictions(): string {
+    if (!this.traitRestriction) {
+      return '';
+    }
+
+    return this.traitRestriction.join(', ') + ' only.';
   }
   
   canEquipToShip(ship: Ship): boolean {
@@ -70,6 +83,19 @@ export class Upgrade implements UpgradeData {
       let matchingSize = this.sizeRestriction.find(x => x === ship.size);
       if (!matchingSize) {
         return false;
+      }
+    }
+
+    // Can't equip to ships not matching the trait restriction(s), if any
+    if (this.traitRestriction) {
+      if (!ship.traits) { 
+        return false;
+      }
+      for (const trait of this.traitRestriction) {
+        let matchingTrait = ship.traits.find(t => t === trait);
+        if (!matchingTrait) {
+          return false;
+        }
       }
     }
     

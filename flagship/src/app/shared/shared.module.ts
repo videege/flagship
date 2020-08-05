@@ -10,6 +10,8 @@ import { NumeralsPipe } from './pipes/numerals/numerals.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DefenseTokenComponent } from './defense-token/defense-token.component';
 import { IssuesListComponent } from './issues-list/issues-list.component';
+import { FactionIconComponent } from './faction-icon/faction-icon.component';
+import { ResourceIconComponent } from './resource-icon/resource-icon.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { IssuesListComponent } from './issues-list/issues-list.component';
     NumeralsPipe,
     ConfirmDialogComponent,
     DefenseTokenComponent,
-    IssuesListComponent
+    IssuesListComponent,
+    FactionIconComponent,
+    ResourceIconComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import { IssuesListComponent } from './issues-list/issues-list.component';
     NumeralsPipe,
     ConfirmDialogComponent,
     DefenseTokenComponent,
-    IssuesListComponent
+    IssuesListComponent,
+    FactionIconComponent,
+    ResourceIconComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

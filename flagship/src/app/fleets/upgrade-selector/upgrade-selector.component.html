@@ -6,9 +6,29 @@
     <mat-list-item *ngFor="let upgrade of upgrades; last as last" (click)="selectUpgrade(upgrade)"
       class="height-auto selector-list-item">
       <h3 matLine>
-        {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}</h3>
+        {{ upgrade.unique ? "&#9679;&nbsp;" : ""}}{{ upgrade.name }}{{upgrade.modification ? "&nbsp;(M)" : "" }}
+        <span class="small-italics" *ngIf="upgrade.traitRestriction">
+          [{{ upgrade.displayTraitRestrictions() }}]
+        </span>
+      </h3>
       <p matLine style="white-space: normal">
-        <span style="font-style: italic; font-size: .8em;">{{ upgrade.getText() }}</span>
+        <span class="small-italics">{{ upgrade.getText() }}</span>
+      </p>
+      <p matLine *ngIf="upgrade.startingResources || upgrade.resupplyResources" style="white-space: normal;">
+        <span class="small" *ngIf="upgrade.startingResources">
+          Starts with {{ upgrade.startingResources.quantity }} of 
+          <span *ngFor="let type of upgrade.startingResources.types; last as isLast">
+            <flagship-resource-icon [type]="type" size="13"></flagship-resource-icon>
+            {{ !isLast ? " | " : "" }}
+          </span>.
+        </span>
+        <span class="small" *ngIf="upgrade.resupplyResources">
+          Refresh with {{ upgrade.resupplyResources.quantity }} of 
+          <span *ngFor="let type of upgrade.resupplyResources.types; last as isLast">
+            <flagship-resource-icon [type]="type" size="13"></flagship-resource-icon>
+            {{ !isLast ? " | " : "" }}
+          </span>.
+        </span>
       </p>
       <span style="margin-left: 8px;">{{ upgrade.points }}</span>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>

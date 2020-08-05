@@ -71,6 +71,7 @@
         </div>
       </div>
 
+      <div *ngIf="traits" class="traits">{{ traits }}</div>
 
     </mat-card-content>
     <mat-action-list class="upgrade-list">
@@ -88,7 +89,23 @@
           <span *ngIf="slot.type !== upgradeTypes.CustomCommander">{{ slot.upgrade.text }}</span>
           <span *ngIf="slot.type === upgradeTypes.CustomCommander">{{ slot.upgrade.text$ | async }}</span>
         </p>
-
+        <p matLine *ngIf="slot.upgrade && (slot.upgrade.startingResources || slot.upgrade.resupplyResources)" 
+          style="white-space: normal; font-size: .8em;">
+          <span class="small" *ngIf="slot.upgrade.startingResources">
+            Starts with {{ slot.upgrade.startingResources.quantity }} of 
+            <span *ngFor="let type of slot.upgrade.startingResources.types; last as isLast">
+              <flagship-resource-icon [type]="type" size="13"></flagship-resource-icon>
+              {{ !isLast ? " | " : "" }}
+            </span>.
+          </span>
+          <span class="small" *ngIf="slot.upgrade.resupplyResources">
+            Refresh with {{ slot.upgrade.resupplyResources.quantity }} of 
+            <span *ngFor="let type of slot.upgrade.resupplyResources.types; last as isLast">
+              <flagship-resource-icon [type]="type" size="13"></flagship-resource-icon>
+              {{ !isLast ? " | " : "" }}
+            </span>.
+          </span>
+        </p>
         <span style="margin-left: 8px;" *ngIf="slot.upgrade">{{ slot.upgrade.points }}</span>
 
         <mat-divider [inset]="true" *ngIf="!last"></mat-divider>

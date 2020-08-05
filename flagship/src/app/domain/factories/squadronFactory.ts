@@ -616,6 +616,24 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Swarm)],
             text: ''
         },
+        // SEPARATISTS
+        {
+            id: 200, name: 'Vulture-class Droid Fighter Squadron', shipName: 'Vulture-class Droid Fighter Squadron',
+            faction: Faction.Separatists, unique: false, shipUnique: false, irregular: false, points: 8,
+            speed: 4, hull: 3, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 1, 1), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Swarm)],
+            text: ''
+        },
+        // REPUBLIC
+        {
+            id: 300, name: 'V-19 Torrent Squadron', shipName: 'V-19 Torrent Squadron',
+            faction: Faction.Republic, unique: false, shipUnique: false, irregular: false, points: 12,
+            speed: 3, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
+            text: ''
+        },
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {

@@ -13,6 +13,7 @@ import { AlertType } from '../../shared/alert/alert.component';
 import { ObjectiveType, Objective } from '../../domain/game/objective';
 import { ObjectiveSelectorComponent } from '../objective-selector/objective-selector.component';
 import { ActivatedRoute } from '@angular/router';
+import { Faction } from 'src/app/domain/game/faction';
 
 @Component({
   selector: 'flagship-fleet',
@@ -30,6 +31,9 @@ export class FleetComponent implements OnInit {
   public defenseObjective: Objective = null;
   public navigationObjective: Objective = null;
   public objType = ObjectiveType;
+
+  public addShipIcon: string = null;
+  public addSquadronIcon: string = null;
   
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private route: ActivatedRoute) {
@@ -54,6 +58,17 @@ export class FleetComponent implements OnInit {
       this.setObjectives();
     });
     this.setObjectives();
+    this.setIcons();
+  }
+
+  setIcons() {
+    if (this.fleet.faction === Faction.Empire || this.fleet.faction === Faction.Republic) {
+      this.addShipIcon = 'swg-deathstar';
+      this.addSquadronIcon = 'swg-tie-2';
+    } else {
+      this.addShipIcon = 'swg-jedistarfight';
+      this.addSquadronIcon = 'swg-xwing-2';
+    }
   }
 
   setObjectives() {

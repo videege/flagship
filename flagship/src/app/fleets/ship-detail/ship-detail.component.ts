@@ -16,6 +16,7 @@ export class ShipDetailComponent implements OnInit {
   hugeShip: HugeShip;
   ignitionShip: IgnitionCapableShip;
   isCampaign = false;
+  traits: string;
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) { 
     this.isExtraSmall = this.breakpointObserver.observe(Breakpoints.HandsetPortrait);
@@ -25,6 +26,9 @@ export class ShipDetailComponent implements OnInit {
     this.isCampaign = !!this.ship.fleet.campaignId;
     this.hugeShip = this.ship.shipClass === ShipClass.Huge ? <HugeShip>this.ship : null;
     this.ignitionShip = this.ship.shipClass === ShipClass.IgnitionCapable ? <IgnitionCapableShip>this.ship : null;
+    if (this.ship.traits.length) {
+      this.traits = this.ship.traits.join(', ') + '.';
+    }
   }
 
   deleteShip() {

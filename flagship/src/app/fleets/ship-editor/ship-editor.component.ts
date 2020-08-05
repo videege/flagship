@@ -18,6 +18,7 @@ export class ShipEditorComponent implements OnInit {
   public ship: Ship | IgnitionCapableShip | HugeShip;
   hugeShip: HugeShip;
   ignitionShip: IgnitionCapableShip;
+  traits: string;
 
   public upgradeTypes = UpgradeType;
   constructor(private dialog: MatDialog, private route: ActivatedRoute,
@@ -27,6 +28,9 @@ export class ShipEditorComponent implements OnInit {
     this.ship = this.route.snapshot.data.ship;
     this.hugeShip = this.ship.shipClass === ShipClass.Huge ? <HugeShip>this.ship : null;
     this.ignitionShip = this.ship.shipClass === ShipClass.IgnitionCapable ? <IgnitionCapableShip>this.ship : null;
+    if (this.ship.traits.length) {
+      this.traits = this.ship.traits.join(', ') + '.';
+    }
   }
 
   viewShipCard() {

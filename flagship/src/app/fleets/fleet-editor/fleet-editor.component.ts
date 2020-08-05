@@ -59,6 +59,13 @@ class Format {
 })
 export class FleetEditorComponent implements OnInit {
 
+  public factions = [
+    { name: 'Galactic Empire', value: Faction.Empire },
+    { name: 'Rebel Alliance', value: Faction.Rebels },
+    { name: 'Republic', value: Faction.Republic },
+    { name: 'Separatists', value: Faction.Separatists }
+  ];
+
   fleetForm = new FormGroup({
     name: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
@@ -75,7 +82,7 @@ export class FleetEditorComponent implements OnInit {
       name: this.data.name,
       author: this.data.author,
       isPublic: this.data.isPublic,
-      faction: this.data.faction.toString(),
+      faction: this.data.faction,
       pointLimit: this.data.pointLimit,
       squadronPointLimit: this.data.squadronPointLimit
     });
