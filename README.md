@@ -6,8 +6,20 @@ and campaign management features designed to support playing FFG's Star Wars Arm
 
 ### Release Notes
 
+#### v0.1 (8/4/2020)
+- Numerous bug fixes, initial addition of Clone Wars factions.
+
 #### Alpha (11/29/2019)
 - Released first version to public containing fleet builder, analytics, and RitR campaign management.
+
+### Contributors
+
+Thanks to the many contributors helping improve Flagship.  I'll do my best to keep this section up to date, but please feel free to notify me or submit a PR if you've been omitted.
+
+- @ande2965
+- @rythos42
+- @rkbodenner
+- @plester1
 
 ### Disclaimer
 
