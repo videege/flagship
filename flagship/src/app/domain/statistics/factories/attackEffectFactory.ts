@@ -183,12 +183,12 @@ export class AttackEffectFactory {
                     return new AdditionModification('Dominator', 2,
                         true, this.orders.addition, AdditionRestriction.Blue, null,
                         Range.Close | Range.Medium, null, ModificationType.Addition,
-                        true, 1)
+                        true, 1);
                 }
             },
             {
                 id: 12006, appliesToFleet: false, factory: () => {
-                    return new QuadTurbolaserCannonsModification(this.orders.modification + 1)
+                    return new QuadTurbolaserCannonsModification(this.orders.modification + 1);                    
                 }
             },
             {
@@ -196,13 +196,21 @@ export class AttackEffectFactory {
                     return new AdditionModification('Devastator', 5,
                         true, this.orders.addition, AdditionRestriction.Blue, FiringArc.Front,
                         null, [DieType.Blue, DieType.Red, DieType.Black], ModificationType.Addition,
-                        true, 1)
+                        true, 1);
                 }
             },
             {
                 id: 2501, appliesToFleet: false, factory: () => {
                     return new AdditionModification('Paragon', 1,
-                        true, this.orders.addition, AdditionRestriction.Black)
+                        true, this.orders.addition, AdditionRestriction.Black);
+                }
+            },
+            {
+                id: 4011, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Clone Gunners', 1,
+                        true, this.orders.addition, AdditionRestriction.Blue, null,
+                        null, [DieType.Blue], ModificationType.Addition,
+                        false, null, FaceRestriction.Accuracy);
                 }
             },
             // Rerolls

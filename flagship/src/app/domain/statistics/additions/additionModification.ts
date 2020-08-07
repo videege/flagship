@@ -3,6 +3,7 @@ import { AttachSession } from 'protractor/built/driverProviders';
 import { AttackPool, IAttackPool, Range } from '../attackPool';
 import { DieType, DieRoll } from '../dieRoll';
 import { FiringArc } from '../firingArc';
+import { FaceRestriction } from '../modifications/genericModification';
 
 // effects
 // ackbar 2 red die
@@ -31,7 +32,7 @@ export class AdditionModification implements IDieModification {
     public enabled = true;
 
     private defaultPreferences: DieType[] = [DieType.Black, DieType.Blue, DieType.Red];
-    constructor(public name: string, public dieCount: number, 
+    constructor(public name: string, public dieCount: number,
         public orderable: boolean,
         public order: number,
         public restriction: AdditionRestriction,
@@ -40,7 +41,8 @@ export class AdditionModification implements IDieModification {
         public preferredTypes: DieType[] = null,
         public type: ModificationType = ModificationType.Addition,
         public isVariableAmount: boolean = false,
-        public currentDieCount: number = null) {
+        public currentDieCount: number = null,
+        public presetFace: FaceRestriction = null) {
         if (!this.preferredTypes || !this.preferredTypes.length) {
             this.preferredTypes = this.defaultPreferences;
         }
@@ -50,7 +52,7 @@ export class AdditionModification implements IDieModification {
     setCalculatedProbabilities(probabilities: ICalculatedProbabilities) {
         this.calculatedProbabilities = probabilities;
     }
-    
+
     probabilityOfEffect(pool: IAttackPool): number {
         return 1;
     }
@@ -105,6 +107,28 @@ export class AdditionModification implements IDieModification {
         return this.nullDieFactory;
     }
 
+    private setDieToFace(roll: DieRoll): DieRoll {
+        switch (this.presetFace) {
+            case FaceRestriction.Accuracy:
+                roll.pAccuracy = 1;
+                roll.pBlank = roll.pCrit = roll.pDoubleHit = roll.pHit = roll.pHitCrit = 0;
+                break;
+            case FaceRestriction.Crit:
+                roll.pCrit = 1;
+                roll.pBlank = roll.pAccuracy = roll.pDoubleHit = roll.pHit = roll.pHitCrit = 0;
+                break;
+            case FaceRestriction.DoubleHit:
+                roll.pDoubleHit = 1;
+                roll.pBlank = roll.pCrit = roll.pAccuracy = roll.pHit = roll.pHitCrit = 0;
+                break;
+            case FaceRestriction.Hit:
+                roll.pHit = 1;
+                roll.pBlank = roll.pCrit = roll.pDoubleHit = roll.pAccuracy = roll.pHitCrit = 0;
+                break;
+        }
+        return roll;
+    }
+
     apply(pool: AttackPool): IAttackPool {
         let p = pool.clone();
         let factory = this.getDieFactory(p);
@@ -112,6 +136,9 @@ export class AdditionModification implements IDieModification {
         for (let i = 0; i < numDice; i++) {
             let roll = factory();
             if (roll) {
+                if (this.presetFace) {
+                    roll = this.setDieToFace(roll);
+                }
                 p.dieRolls.push(roll);
             }
         }

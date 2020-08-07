@@ -10,7 +10,7 @@ export class QuadTurbolaserCannonsModification implements IDieModification {
     public orderable = true;
     public firingArcRestriction: FiringArc = null;
     public rangeRestriction: Range = null;
-    public type: ModificationType = ModificationType.Addition
+    public type: ModificationType = ModificationType.Addition;
 
     constructor(public order: number) {
       
