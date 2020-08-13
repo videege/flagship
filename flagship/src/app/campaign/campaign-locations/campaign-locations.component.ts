@@ -60,23 +60,16 @@ export class CampaignLocationsComponent implements OnInit, OnChanges {
 
 
 
-  public getObjectiveNames(objectives: number[]): string {
+  public getObjectiveNames(location: CampaignLocation, objectives: number[]): string {
     if (!objectives) return 'None';
 
     return this
       .objectiveFactory
       .getObjectivesByIds(objectives)
       .map(objective => {
-        return objective.name + (this.isLocationCampaignObjectUsed(objective) ? ' [Already Played]' : '')
+        return objective.name + (location.playedCampaignObjectives.includes(objective.id) ? ' [Already Played]' : '')
       })
       .join(', ');
-  }
-
-  private isLocationCampaignObjectUsed(objective: Objective): boolean {
-    return !!this
-      .campaign
-      .locations
-      .find(location => location.playedCampaignObjectives.includes(objective.id));
   }
 
   public getStrategicEffects(effects: StrategicEffectType[]): string {
