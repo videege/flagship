@@ -49,7 +49,7 @@
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <div *ngFor="let upkeep of [empireUpkeep, rebelUpkeep]; let index = index;" fxFlex>
             <h4>{{ getNameOfFaction(upkeep.faction) }}</h4>
-            <div *ngFor="let location of upkeep.tokenLocations.concat(upkeep.newBases); let li = index;">
+            <div *ngFor="let location of getTokenLocations(upkeep); let li = index;">
                 <mat-form-field>
                     <mat-label>Token for {{ location.name }}</mat-label>
                     <mat-select [(ngModel)]="upkeep.tokenChoices[location.id]"

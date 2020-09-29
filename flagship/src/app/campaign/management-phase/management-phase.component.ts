@@ -190,6 +190,17 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     return rewardText;
   }
 
+  getTokenLocations(upkeep: Upkeep) {
+    const locationIdSet = new Set();
+    return upkeep.tokenLocations.concat(upkeep.newBases).filter(location => {
+      if (!locationIdSet.has(location.id)) {
+        locationIdSet.add(location.id);
+        return true;
+      }
+      return false;
+    });
+  }
+
   completePhase() {
     this.completeButtonOptions.active = true;
 
@@ -210,7 +221,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       }
 
       // Tokens spent can include tokens previously earned and those just gained this round, so add new tokens before removing spent tokens
-      for (const tokenLocation of upkeep.tokenLocations.concat(upkeep.newBases)) {
+      for (const tokenLocation of this.getTokenLocations(upkeep)) {
         const effect = upkeep.tokenChoices[tokenLocation.id];
         team.addToken(effect, 1);
       }
