@@ -37,16 +37,17 @@
                 </p>
                 <p>
                     <strong>Objective(s): </strong>
-                    {{ getObjectiveNames(location.objectives) }}
+                    {{ getObjectiveNames(location, location.objectives) }}
                 </p>
                 <p>
                     <strong>Strategic Effect(s): </strong>
                     {{ getStrategicEffects(location.strategicEffects) }}
                 </p>
 
-                <p *ngIf="location.controlType === controlTypes.Base && viewableFactions.includes(location.controllingFaction)">
+                <p
+                    *ngIf="location.controlType === controlTypes.Base && viewableFactions.includes(location.controllingFaction)">
                     <strong>Secret Objective:</strong>
-                    {{ getObjectiveNames([location.chosenObjective]) }}
+                    {{ getObjectiveNames(location, [location.chosenObjective]) }}
                 </p>
             </div>
             <div fxFlex>
