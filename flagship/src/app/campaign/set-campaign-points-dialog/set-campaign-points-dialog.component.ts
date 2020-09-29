@@ -5,9 +5,7 @@ export class SetCampaignPointsDialogData {
   constructor(public act: number,
     public empireScore: number,
     public rebelScore: number) {
-
-    }
-
+  }
 }
 
 @Component({
@@ -16,26 +14,26 @@ export class SetCampaignPointsDialogData {
   styleUrls: ['./set-campaign-points-dialog.component.scss']
 })
 export class SetCampaignPointsDialogComponent implements OnInit {
-
+  public isForCampaign = false;
   public empireScore = null;
   public rebelScore = null;
 
   constructor(public dialogRef: MatDialogRef<SetCampaignPointsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SetCampaignPointsDialogData) { 
-    }
+    @Inject(MAT_DIALOG_DATA) public data: SetCampaignPointsDialogData) {
+  }
 
   ngOnInit() {
     this.rebelScore = this.data.rebelScore;
     this.empireScore = this.data.empireScore;
+    this.isForCampaign = this.data.act === null;
   }
 
   cancel() {
     this.dialogRef.close(null);
   }
-  
+
   setScore() {
     this.dialogRef.close(new SetCampaignPointsDialogData(this.data.act,
       this.empireScore, this.rebelScore));
   }
-
 }

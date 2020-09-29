@@ -25,11 +25,11 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
   user: firebase.User;
 
   constructor(private dialog: MatDialog, private campaignService: CampaignService,
-    private afAuth: AngularFireAuth) { 
-      this.afAuth.user.subscribe((user) => {
-        this.user = user;
-      })
-    }
+    private afAuth: AngularFireAuth) {
+    this.afAuth.user.subscribe((user) => {
+      this.user = user;
+    })
+  }
 
   ngOnInit() {
     this.setup();
@@ -63,7 +63,7 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
           `Imperial Point Score Change from ${this.currentState.imperialPointsScored} to ${data.empireScore}.`,
           this.user.uid, new Date()));
         this.currentState.imperialPointsScored = data.empireScore;
-        
+
       }
       if (this.currentState.rebelPointsScored !== data.rebelScore) {
         let difference = this.currentState.rebelPointsScored - data.rebelScore;
@@ -80,6 +80,35 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
         currentState.imperialPointsScored += winningFaction === Faction.Empire ? winningResult.earnedPoints : losingResult.earnedPoints;
         currentState.rebelPointsScored += winningFaction === Faction.Empire ? losingResult.earnedPoints : winningResult.earnedPoints;
 */
+    });
+  }
+
+  setCampaignScore() {
+    let ref = this.dialog.open(SetCampaignPointsDialogComponent, {
+      data: new SetCampaignPointsDialogData(null, this.campaign.empire.campaignPoints, this.campaign.rebels.campaignPoints),
+      maxWidth: '350px'
+    });
+    ref.afterClosed().subscribe((data: SetCampaignPointsDialogData) => {
+      if (!data) return;
+
+      if (this.campaign.empire.campaignPoints !== data.empireScore) {
+        this.currentState.addEvent(new CampaignEvent(
+          CampaignEventType.ManualScoreChange,
+          `Imperial Campaign Point Score Change from ${this.campaign.empire.campaignPoints} to ${data.empireScore}.`,
+          this.user.uid,
+          new Date()));
+        this.campaign.empire.campaignPoints = data.empireScore;
+      }
+
+      if (this.campaign.rebels.campaignPoints !== data.rebelScore) {
+        this.currentState.addEvent(new CampaignEvent(
+          CampaignEventType.ManualScoreChange,
+          `Rebel Campaign Point Score Change from ${this.currentState.rebelPointsScored} to ${data.rebelScore}.`,
+          this.user.uid,
+          new Date()));
+        this.campaign.rebels.campaignPoints = data.rebelScore;
+      }
+      this.campaignService.updateCampaign(this.campaign).then();
     });
   }
 }

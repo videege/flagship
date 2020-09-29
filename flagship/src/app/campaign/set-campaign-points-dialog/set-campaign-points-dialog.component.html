@@ -1,5 +1,6 @@
 <div mat-dialog-content>
-    <h3>Set Campaign Score for Act {{ data.act | numerals }}</h3>
+    <h3 *ngIf="isForCampaign">Set Campaign Score</h3>
+    <h3 *ngIf="!isForCampaign">Set Campaign Score for Act {{ data.act | numerals }}</h3>
     <p>
         You can manually set the score for the current act below.
         Note that Flagship will automatically record campaign points earned as
@@ -9,12 +10,12 @@
     </p>
     <form fxLayout="column">
         <mat-form-field>
-            <input placeholder="Empire Score"
-                matInput type="number" [(ngModel)]="empireScore" required min="0" name="empireScore"/>
+            <input placeholder="Empire Score" matInput type="number" [(ngModel)]="empireScore" required min="0"
+                name="empireScore" />
         </mat-form-field>
         <mat-form-field>
-            <input placeholder="Rebel Score"
-                matInput type="number" [(ngModel)]="rebelScore" required min="0" name="rebelScore"/>
+            <input placeholder="Rebel Score" matInput type="number" [(ngModel)]="rebelScore" required min="0"
+                name="rebelScore" />
         </mat-form-field>
     </form>
 </div>
@@ -22,6 +23,8 @@
     <button mat-button (click)="cancel()">Cancel</button>
     <span fxFlex></span>
     <button mat-button (click)="setScore()"
-        [disabled]="empireScore === null || empireScore < 0 || rebelScore === null || rebelScore < 0"
-        color="primary">Update Score for Current Act</button>
+        [disabled]="empireScore === null || empireScore < 0 || rebelScore === null || rebelScore < 0" color="primary">
+        <span *ngIf="isForCampaign">Update Score for Campaign</span>
+        <span *ngIf="!isForCampaign">Update Score for Current Act</span>
+    </button>
 </div>
