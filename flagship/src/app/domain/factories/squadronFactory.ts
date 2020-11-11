@@ -634,6 +634,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
             text: ''
         },
+        {
+            id: 301, name: '"Axe"', shipName: 'V-19 Torrent Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 17,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Evade],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
+            text: 'Before another friendly squadron at distance 1 suffers damage during an attack, you may spend 1 defense token to reduce the total damage by 1.'
+        },
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {

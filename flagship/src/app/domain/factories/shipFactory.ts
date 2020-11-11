@@ -37,7 +37,7 @@ export class ShipFactory {
     starhawkMarkI: [2527, 2528, 2529],
     starhawkMarkII: [2529],
     // republic
-    acclamator: [2800],
+    acclamator: [2800, 2801],
     consular: [],
     // separatists
     munificent: [2700],
@@ -796,7 +796,7 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 0, 2),
       navigationChart: new NavigationChart(1, [1, 0], [0, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
@@ -804,10 +804,10 @@ export class ShipFactory {
     },
     {
       id: 201, name: 'Acclamator II-class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Republic,
-      points: 66, hull: 7, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
+      points: 71, hull: 7, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
       leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
-      frontArmament: new Armament(3, 0, 2), rearArmament: new Armament(1, 0, 1),
+      frontArmament: new Armament(3, 1, 2), rearArmament: new Armament(1, 1, 0),
       leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(1, [1, 0], [0, 1, 0], null),
