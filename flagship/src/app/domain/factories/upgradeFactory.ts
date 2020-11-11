@@ -516,16 +516,23 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
                 text: 'After you deploy, gain 1 Redirect defense token. While attacking a squadron, if the defender is engaged with a friendly squadron without the printed Heavy keyword, you may reroll 1 die.'
             },
+            // Separatist titles
             {
                 id: 2700, name: 'Tide of Progress XII', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
                 text: 'Before you are dealt a faceup damage card with the "Ship" trait, you may exhaust this card to discard that damage card (without resolving its effect).',
                 resupplyResources: { quantity: 1, types: [ ResourceType.Engineering ]}
             },
+            // Republic titles
             {
                 id: 2800, name: 'Implacable', type: UpgradeType.Title, faction: Faction.Republic,
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'Before a friendly ship or squadron at distance 1-2 suffers damage from an attack, you may exhaust this card and spend up to 2 shields from your front hull zone to reduce the total damage by that amount.'
+            },
+            {
+                id: 2801, name: 'Nevoota Bee', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'Squadron: Each non-unique squadron that you activate gains Swarm until the end of its activation.  Each squadron with Swarm that you activate may reroll 1 die while attacking a ship.'
             },
             // Ion Cannons
             {
@@ -693,6 +700,11 @@ export class UpgradeFactory {
                 unique: false, modification: true, points: 0, upgradeClass: UpgradeClass.SlotGranting,
                 sizeRestriction: [Size.Medium, Size.Large], grantedType: UpgradeType.FleetCommand,
                 text: 'Medium or Large ship only. Flagship only. You gain one fleet command icon in your upgrade bar. You may not spend command tokens to resolve a fleet command upgrade\'s effect.'
+            }, 
+            {
+                id: 5012, name: 'Hyperspace Rings', type: UpgradeType.OffensiveRetrofit, faction: Faction.Republic,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,               
+                text: 'Before deploying fleets, you may choose a number of friendly, non-Rogue squadrons up to your squadron value.  Those squadrons gain Scout.'
             },
             // Boarding Team - 6
             {
@@ -1133,6 +1145,13 @@ export class UpgradeFactory {
                 startingResources: { quantity: 1, types: [ ResourceType.Navigation ]},
                 resupplyResources: { quantity: 1, types: [ ResourceType.Any ]}
             },
+            {
+                id: 10801, name: 'Clone Captain Zak', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'While attacking from your side or rear hull zones, you may exhaust this card to add 1 die to your attack pool of a color already in your attack pool (you cannot add dice to a salvo attack).  You can spend tokens from this card to ready it.',
+                startingResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
+                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]}
+            },
             // Support Team - 11
             {
                 id: 11000, name: 'Auxiliary Shields Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
@@ -1241,6 +1260,18 @@ export class UpgradeFactory {
                 id: 12012, name: 'Heavy Fire Zone', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking a squadron, before you gather dice, if the defender is not engaged with a friendly squadron, you may replace all of the blue dice in your anti-squadron armament with red dice.'
+            },
+            {
+                id: 12013, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Separatists,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
+                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
+                text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
+            },
+            {
+                id: 12014, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Republic,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
+                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
+                text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
             // Experimental Retrofit - 13
             {
