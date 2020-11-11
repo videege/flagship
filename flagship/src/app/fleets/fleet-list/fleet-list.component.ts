@@ -8,7 +8,8 @@ import { FleetEditorData, FleetEditorComponent } from '../fleet-editor/fleet-edi
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { FleetImporterComponent } from '../fleet-importer/fleet-importer.component';
-import { MatSnackBar, MatSort, MatSortable } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { AngularFireAuth } from '@angular/fire/auth';
 

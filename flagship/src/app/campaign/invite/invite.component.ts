@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Invite } from 'src/app/domain/campaign/invite';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CampaignService } from 'src/app/core/services/campaign.service';

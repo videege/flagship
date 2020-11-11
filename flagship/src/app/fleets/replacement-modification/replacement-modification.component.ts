@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReplacementModification } from 'src/app/domain/statistics/replacements/replacementModification';
 import { DieType } from 'src/app/domain/statistics/dieRoll';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'flagship-replacement-modification',

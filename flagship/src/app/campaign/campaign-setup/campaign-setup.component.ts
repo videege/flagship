@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CampaignSetupDialogData, CampaignSetupDialogComponent } from '../campaign-setup-dialog/campaign-setup-dialog.component';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { ClipboardService } from 'ngx-clipboard';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CampaignService } from 'src/app/core/services/campaign.service';
 
 @Component({

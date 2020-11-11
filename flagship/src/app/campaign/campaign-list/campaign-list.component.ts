@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CampaignService } from 'src/app/core/services/campaign.service';
-import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { CampaignEditorComponent, CampaignEditorData } from '../campaign-editor/campaign-editor.component';
 import { CampaignType } from 'src/app/domain/campaign/campaignType';

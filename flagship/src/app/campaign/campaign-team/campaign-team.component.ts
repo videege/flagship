@@ -2,7 +2,9 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { Team } from 'src/app/domain/campaign/team';
 import { Faction } from 'src/app/domain/game/faction';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
-import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { PlayerCreatorDialogComponent, PlayerCreatorDialogData } from '../player-creator-dialog/player-creator-dialog.component';
 import { Campaign } from 'src/app/domain/campaign/campaign';

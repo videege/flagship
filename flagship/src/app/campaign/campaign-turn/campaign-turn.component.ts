@@ -4,7 +4,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Faction } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper } from '@angular/material/stepper';
 import { StrategyPhaseComponent } from '../strategy-phase/strategy-phase.component';
 import { ManagementCompletedEvent } from '../management-phase/management-phase.component';
 import { CampaignService } from 'src/app/core/services/campaign.service';

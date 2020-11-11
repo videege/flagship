@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FlagshipRouteData } from "../app.route-data";
 import { BreadcrumbService } from '../core/services/breadcrumb.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'flagship-app-nav',

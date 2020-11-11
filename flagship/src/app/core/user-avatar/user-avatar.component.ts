@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 // This class is a modification of the ngx-auth avatar component

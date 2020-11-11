@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GenericModification, FaceRestriction } from 'src/app/domain/statistics/modifications/genericModification';
 import { DieType } from 'src/app/domain/statistics/dieRoll';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'flagship-change-modification',
