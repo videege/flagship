@@ -1264,13 +1264,13 @@ export class UpgradeFactory {
             {
                 id: 12013, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Separatists,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]}
+                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
                 text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
             {
                 id: 12014, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Republic,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]}
+                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
                 text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
             // Experimental Retrofit - 13
