@@ -42,7 +42,7 @@ export class UserAvatarComponent implements OnInit {
 
   async signOut() {
     try {
-      await this.afa.auth.signOut();
+      await this.afa.signOut();
       this.router.navigateByUrl('/login');
     } catch (e) {
       // An error happened.

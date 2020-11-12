@@ -25,18 +25,17 @@ export class CampaignService {
   }
 
   public getCampaignsForUser(): Observable<Campaign[]> {
-    if (!this.user) return null;
-
-    return this.db.collection<SerializedCampaign>('campaigns', ref => ref.where('playerUids', 'array-contains', this.user.uid))
+    return this.afAuth.authState.pipe(
+      switchMap((user) => this.db.collection<SerializedCampaign>('campaigns', ref => ref.where('playerUids', 'array-contains', user.uid))
       .snapshotChanges()
       .pipe(
         map(actions => {
           return actions.map(a => {
-            let data = a.payload.doc.data();
+            const data = a.payload.doc.data();
             return Campaign.hydrate(data);
           });
         })
-      );
+      )));
   }
 
   public getCampaignForUser(id: string): Observable<Campaign> {

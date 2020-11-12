@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
           }
           if (!d || diffDays >= 7) {
             this.bottomSheet.open(AppleInstallPromptComponent);
-            this.localStorage.setItemSubscribe('lastIosPromptDate', new Date());
+            this.localStorage.setItem('lastIosPromptDate', new Date()).subscribe();
           }
         });
     }
