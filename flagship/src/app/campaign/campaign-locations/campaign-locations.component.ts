@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { Objective } from 'src/app/domain/game/objective';
-import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { Faction } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';

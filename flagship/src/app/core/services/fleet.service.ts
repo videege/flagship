@@ -4,7 +4,7 @@ import { Faction } from '../../domain/game/faction';
 import { Observable, of, combineLatest } from 'rxjs';
 
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { ShipFactory } from '../../domain/factories/shipFactory';
 import { UpgradeFactory } from '../../domain/factories/upgradeFactory';
 import { SquadronFactory } from '../../domain/factories/squadronFactory';
@@ -98,16 +98,18 @@ export class FleetService {
   }
 
   public getFleetsForUser(): Observable<Fleet[]> {
-    if (!this.user) return null;
+    // if (!this.user) return null;
 
-    //TODO: this is weird and affecting the wrong things.
-    return this.db.collection('fleets', ref => ref.where('ownerUid', '==', this.user.uid))
+    // TODO: this is weird and affecting the wrong things.
+    return this.afAuth.authState.pipe(
+      switchMap((user) => this.db.collection('fleets', ref => ref.where('ownerUid', '==', this.user.uid))
       .valueChanges()
       .pipe(
         map((fleets: ISerializedFleet[]) => {
           return fleets.map(f => this.hydrateFleet(f, f.id));
         })
-      );
+      ))
+    );
   }
 
   public getFleetForUser(id: string): Observable<Fleet> {

@@ -7,7 +7,7 @@ import { ShipCardComponent, ShipCardData } from '../ship-card/ship-card.componen
 import { UpgradeSlot } from '../../domain/game/upgradeSlot';
 import { UpgradeSelectorData, UpgradeSelectorComponent } from '../upgrade-selector/upgrade-selector.component';
 import { ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'flagship-ship-editor',

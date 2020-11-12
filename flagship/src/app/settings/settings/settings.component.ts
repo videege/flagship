@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { UserSettings } from 'src/app/domain/settings/userSettings';
 import { Faction } from 'src/app/domain/game/faction';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 

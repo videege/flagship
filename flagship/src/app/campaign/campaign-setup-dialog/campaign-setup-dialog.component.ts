@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Campaign } from 'src/app/domain/campaign/campaign';
 import { RITRValidator, Validator } from 'src/app/domain/campaign/validator';
 import { CampaignType } from 'src/app/domain/campaign/campaignType';

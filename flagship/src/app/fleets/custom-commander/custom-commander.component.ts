@@ -3,7 +3,7 @@ import { CustomCommander } from 'src/app/domain/campaign/customCommander';
 import { CustomCommanderAbility } from 'src/app/domain/campaign/customCommanderAbility';
 import { CustomAbilityFactory } from 'src/app/domain/factories/customAbilityFactory';
 import { CustomAbilitySelectorComponent, CustomAbilitySelectorData } from '../custom-ability-selector/custom-ability-selector.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Ship } from 'src/app/domain/game/ship';
 import { Fleet } from 'src/app/domain/game/fleet';
 import { Size } from 'src/app/domain/game/size';

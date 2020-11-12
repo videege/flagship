@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Ship } from '../../domain/game/ship';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FleetService } from 'src/app/core/services/fleet.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent, ConfirmDialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({

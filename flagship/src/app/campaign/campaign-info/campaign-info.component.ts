@@ -3,7 +3,7 @@ import { Campaign } from 'src/app/domain/campaign/campaign';
 import { CampaignUser } from 'src/app/domain/campaign/campaignUser';
 import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { SetCampaignPointsDialogComponent, SetCampaignPointsDialogData } from '../set-campaign-points-dialog/set-campaign-points-dialog.component';
 import { CampaignService } from 'src/app/core/services/campaign.service';
 import { CampaignEvent, CampaignEventType } from 'src/app/domain/campaign/campaignEvent';

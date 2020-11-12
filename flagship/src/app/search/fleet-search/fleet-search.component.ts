@@ -8,7 +8,7 @@ import { FleetService } from 'src/app/core/services/fleet.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ShipData } from 'src/app/domain/game/ship';
 import { Faction } from 'src/app/domain/game/faction';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 
 interface ShipGroup {
   label: string;

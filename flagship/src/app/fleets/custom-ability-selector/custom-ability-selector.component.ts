@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CustomCommander } from 'src/app/domain/campaign/customCommander';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Objective } from 'src/app/domain/game/objective';
 import { CustomAbilityFactory } from 'src/app/domain/factories/customAbilityFactory';
 import { CustomCommanderAbility } from 'src/app/domain/campaign/customCommanderAbility';
