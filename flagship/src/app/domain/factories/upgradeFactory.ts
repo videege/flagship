@@ -193,11 +193,19 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship resolves a command by spending a command dial, if it has not resolved another command this round, it may resolve that command as if it spent a matching command token. If it does, that ship may not resolve additional commands this round.'
             },
+            // SEPARATIST
             {
                 id: 1700, name: 'Kraken', type: UpgradeType.Commander, faction: Faction.Separatists,
                 unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
                 text: 'Once per activation, while a friendly ship is attacking a ship, if another friendly ship is at close-medium range of the defender, the attacker may change 1 die to a face with any 1 icon (and no other icons).'
             },
+            {
+                id: 1701, name: 'Count Dooku', type: UpgradeType.Commander, faction: Faction.Separatists,
+                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                text: 'You must choose at least two types of command tokens for this card. At the start of each Ship Phase, you may discard 1 command token from this card.  If you do, each enemy ship gains a raid token matching that command token.',
+                startingResources: { quantity: 3, types: [ResourceType.Any] }
+            },
+            // REPUBLIC
             {
                 id: 1800, name: 'Obi-Wan Kenobi', type: UpgradeType.Commander, faction: Faction.Republic,
                 unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
@@ -523,6 +531,11 @@ export class UpgradeFactory {
                 text: 'Before you are dealt a faceup damage card with the "Ship" trait, you may exhaust this card to discard that damage card (without resolving its effect).',
                 resupplyResources: { quantity: 1, types: [ ResourceType.Engineering ]}
             },
+            {
+                id: 2701, name: 'Sa Naloar', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'While defending, if you are at speed 2 or higher, you may spend a defense token to resolve the Evade defense effect instead of that token\'s effect.  You cannot resolve the Evade defense effect more than once per attack.'
+            },
             // Republic titles
             {
                 id: 2800, name: 'Implacable', type: UpgradeType.Title, faction: Faction.Republic,
@@ -703,8 +716,14 @@ export class UpgradeFactory {
             }, 
             {
                 id: 5012, name: 'Hyperspace Rings', type: UpgradeType.OffensiveRetrofit, faction: Faction.Republic,
-                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,               
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'Before deploying fleets, you may choose a number of friendly, non-Rogue squadrons up to your squadron value.  Those squadrons gain Scout.'
+            },
+            {
+                id: 5013, name: 'Hyperwave Signal Boost', type: UpgradeType.OffensiveRetrofit, faction: Faction.Separatists,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'During the Squadron Phase, when it is your turn to activate squadrons, you may exhaust this card to choose a number of unactivated, friendly squadrons at close-long range up to your squadron value. This turn, activate each of those squadrons. While attacking, each of those squadrons with AI are treated as if activated by a squadron command.',
+                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering, ResourceType.Squadron ]}
             },
             // Boarding Team - 6
             {
