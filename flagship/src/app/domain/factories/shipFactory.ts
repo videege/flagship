@@ -838,34 +838,37 @@ export class ShipFactory {
     // Separatists
     {
       id: 300, name: 'Munificent-class Comms Frigate', shipClass: ShipClass.Normal, faction: Faction.Separatists,
-      points: 1, hull: 6, command: 2, squadron: 3, engineering: 4, size: Size.Medium,
+      points: 70, hull: 6, command: 2, squadron: 3, engineering: 4, size: Size.Medium,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
-      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
-      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
-      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(3, 0, 0), rightArmament: new Armament(3, 0, 0),
       antiSquadronArmament: new Armament(1, 0, 0),
       navigationChart: new NavigationChart(1, [1, 2], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.Officer),  new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit),  new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.munificent, 
-      traits: [Traits.droid]
+      allowedTitles: ShipFactory.titles.munificent,
+      traits: [Traits.droid, Traits.bombard, Traits.comms]
     },
     {
       id: 301, name: 'Munificent-class Star Frigate', shipClass: ShipClass.Normal, faction: Faction.Separatists,
-      points: 1, hull: 6, command: 2, squadron: 2, engineering: 4, size: Size.Medium,
+      points: 73, hull: 6, command: 2, squadron: 2, engineering: 4, size: Size.Medium,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
-      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
-      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
-      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
-      antiSquadronArmament: new Armament(1, 0, 0),
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(3, 0, 0), rightArmament: new Armament(3, 0, 0),
+      antiSquadronArmament: new Armament(1, 0, 1),
       navigationChart: new NavigationChart(1, [1, 2], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.FleetSupport), 
-        new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.Officer),  new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit),  new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.munificent, 
-      traits: [Traits.droid, Traits.transport]
+      allowedTitles: ShipFactory.titles.munificent,
+      traits: [Traits.droid, Traits.bombard, Traits.transport]
     },
     {
       id: 302, name: 'Hardcell-class Battle Refit', shipClass: ShipClass.Normal, faction: Faction.Separatists,

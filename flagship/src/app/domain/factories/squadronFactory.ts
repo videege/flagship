@@ -625,6 +625,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Swarm)],
             text: ''
         },
+        {
+            id: 201, name: 'Haor Chall Prototypes', shipName: 'Vulture-class Droid Fighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 16,
+            speed: 4, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 1, 1), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Swarm)],
+            text: 'Before an enemy ship or squadron at distance 1 moves, you may perform an attack against that ship or squadron even if you are engaged.'
+        },
         // REPUBLIC
         {
             id: 300, name: 'V-19 Torrent Squadron', shipName: 'V-19 Torrent Squadron',
