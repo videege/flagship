@@ -40,7 +40,7 @@ export class ShipFactory {
     acclamator: [2800, 2801],
     consular: [],
     // separatists
-    munificent: [2700],
+    munificent: [2700, 2701],
     hardcell: []
   };
 
