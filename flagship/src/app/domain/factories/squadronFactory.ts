@@ -650,6 +650,86 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
             text: 'Before another friendly squadron at distance 1 suffers damage during an attack, you may spend 1 defense token to reduce the total damage by 1.'
         },
+        {
+            id: 302, name: 'Delta-7 Aethersprite Squadron', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: false, shipUnique: false, irregular: false, points: 17,
+            speed: 4, hull: 4, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 3, 1), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 1), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Dodge, 1)],
+            text: ''
+        },
+        {
+            id: 303, name: 'Luminara Unduli', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 23,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 1), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 1), new Keyword(KeywordType.Counter, 2)],
+            text: 'While an enemy squadron at distance 1 is attacking a non-unique, friendly squadron, the attack is treated as obstructed.'
+        },
+        {
+            id: 304, name: 'Plo Koon', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 24,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 1), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Counter, 2)],
+            text: 'Non-unique, friendly squadrons without Counter at distance 1 gain Counter 1.'
+        },
+        {
+            id: 305, name: 'Ahsoka Tano', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 23,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 3, 1), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 1), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Grit)],
+            text: 'After you move, you may choose another friendly squadron at distance 1. That squadron performs an attack against an enemy squadron at distance 1 with an anti-squadron armament of 2 blue dice (even if it is already activated).'
+        },
+        {
+            id: 306, name: 'Kit Fisto', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 26,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 1), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Intel)],
+            text: 'When you spend a defense token, you may discard it. If you do, reduce the total damage by 3 instead of resolving that token\'s effect.'
+        },
+        {
+            id: 307, name: 'ARC-170 Starfighter Squadron', shipName: 'ARC-170 Starfighter Squadron',
+            faction: Faction.Republic, unique: false, shipUnique: false, irregular: false, points: 15,
+            speed: 2, hull: 7, defenseTokens: [],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Counter, 1)],
+            text: ''
+        },
+        {
+            id: 308, name: '"Odd Ball"', shipName: 'ARC-170 Starfighter Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 15,
+            speed: 2, hull: 7, defenseTokens: [DefenseToken.Brace, DefenseToken.Evade],
+            antiSquadronArmament: new Armament(0, 2, 1), batteryArmament: new Armament(0, 2, 0),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Counter, 1)],
+            text: 'While attacking, if you moved during this activation, you may reroll up to 2 dice.'
+        },
+        {
+            id: 309, name: 'BTL-B Y-Wing Squadron', shipName: 'BTL-B Y-Wing Squadron',
+            faction: Faction.Republic, unique: false, shipUnique: false, irregular: false, points: 10,
+            speed: 3, hull: 6, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 1, 1), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: ''
+        },
+        {
+            id: 310, name: 'Anakin Skywalker', shipName: 'BTL-B Y-Wing Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 19,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 3, 0), batteryArmament: new Armament(1, 1, 0),
+            keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: 'During your activation, you may spend 1 defense token to ignore engagement until the end of your activation.'
+        },
+        {
+            id: 311, name: '"Kickback"', shipName: 'V-19 Torrent Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 16,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
+            text: 'After you perform an attack, you may move up to distance 1, even if you are engaged.'
+        }
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {

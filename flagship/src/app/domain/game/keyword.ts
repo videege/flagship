@@ -13,7 +13,9 @@ export enum KeywordType {
   Relay,
   Snipe,
   Strategic,
-  AIAntiSquadron
+  AIAntiSquadron,
+  Adept,
+  Dodge
 }
 
 export class Keyword {
