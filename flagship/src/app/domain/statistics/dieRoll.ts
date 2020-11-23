@@ -73,10 +73,13 @@ export class DieRoll implements IDieRoll {
         let mean = this.expectedDamage();
         let single = Math.pow(1 - mean, 2);
         let double = Math.pow(2 - mean, 2);
+        let miss = Math.pow(0 - mean, 2);
         return (this.pHit * single) +
             (this.pCrit * single) +
             (this.pHitCrit * double) +
-            (this.pDoubleHit * double);
+            (this.pDoubleHit * double) +
+            (this.pBlank * miss) +
+            (this.pAccuracy * miss);
     }
 
     expectedAccuracies(): number {
