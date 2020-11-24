@@ -38,7 +38,7 @@ export class ShipFactory {
     starhawkMarkII: [2529],
     // republic
     acclamator: [2800, 2801],
-    consular: [],
+    consular: [2802, 2803],
     // separatists
     munificent: [2700, 2701],
     hardcell: []
@@ -834,6 +834,22 @@ export class ShipFactory {
       ],
       allowedTitles: ShipFactory.titles.consular, 
       traits: [Traits.clone]
+    },
+    {
+      id: 203, name: 'Consular-class Armed Cruiser', shipClass: ShipClass.Normal, faction: Faction.Republic,
+      points: 37, hull: 4, command: 1, squadron: 1, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Redirect, DefenseToken.Contain],
+      leftShields: 2, rightShields: 2, frontShields: 2, rearShields: 1,
+      frontArmament: new Armament(0, 2, 1), rearArmament: new Armament(0, 1, 0),
+      leftArmament: new Armament(0, 1, 1), rightArmament: new Armament(0, 1, 1),
+      antiSquadronArmament: new Armament(0, 2, 0),
+      navigationChart: new NavigationChart(2, [2, 1], [1, 1, 1], [1, 0, 1, 1]),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
+      ],
+      allowedTitles: ShipFactory.titles.consular, 
+      traits: [Traits.senate, Traits.clone]
     },
     // Separatists
     {

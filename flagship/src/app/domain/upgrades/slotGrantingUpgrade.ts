@@ -11,7 +11,8 @@ export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeD
         points: number, unique: boolean, public grantedType: UpgradeType, 
         public canEquipToShipWithMatchingSlot: boolean = false, sizeRestriction: Size[] = null,
         shipRestriction: number[] = null, traitRestriction: string[] = null,
-        startingResources: Resources = null, resupplyResources: Resources = null) {
+        startingResources: Resources = null, resupplyResources: Resources = null,
+        public removedTypes: UpgradeType[] = null) {
         super(id, name, type, faction, text, modification, points, unique, 
             sizeRestriction, shipRestriction, traitRestriction,
             startingResources, resupplyResources);
@@ -44,13 +45,34 @@ export class SlotGrantingUpgrade extends Upgrade implements SlotGrantingUpgradeD
     onUpgradeEquipped(ship: Ship) {
         super.onUpgradeEquipped(ship);
 
-        let slot = new UpgradeSlot(this.grantedType);
+        const slot = new UpgradeSlot(this.grantedType);
         ship.upgradeSlots.push(slot);
+
+        if (this.removedTypes) {
+            for (const type of this.removedTypes) {
+                const matchingSlots = ship.upgradeSlots.filter(x => x.type === type);
+                for (const matchingSlot of matchingSlots) {
+                    if (matchingSlot.isFilled()) {
+                        matchingSlot.unequipUpgrade(ship);
+                    }
+                    matchingSlot.isEnabled = false;
+                }
+            }
+        }
     }
 
     onUpgradeUnequipped(ship: Ship) {
         super.onUpgradeUnequipped(ship);
-        let matchingUpgrade = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === this.grantedType);
+        const matchingUpgrade = ship.upgradeSlots.find((u: UpgradeSlot) => u.isEnabled && u.type === this.grantedType);
         ship.upgradeSlots.splice(ship.upgradeSlots.indexOf(matchingUpgrade, 1));
+
+        if (this.removedTypes) {
+            for (const type of this.removedTypes) {
+                const matchingSlots = ship.upgradeSlots.filter(x => x.type === type);
+                for (const matchingSlot of matchingSlots) {
+                    matchingSlot.isEnabled = true;
+                }
+            }
+        }
     }
 }

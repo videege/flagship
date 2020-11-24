@@ -5,4 +5,5 @@ export class Traits {
     static bombard = 'Bombard';
     static droid = 'Droid';
     static comms = "Comms";
+    static senate = "Senate";
 }

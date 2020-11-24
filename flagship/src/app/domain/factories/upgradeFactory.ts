@@ -41,7 +41,7 @@ export class UpgradeFactory {
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
                 slotData.unique, slotData.grantedType, slotData.canEquipToShipWithMatchingSlot,
                 data.sizeRestriction, data.shipRestriction, data.traitRestriction,
-                data.startingResources, data.resupplyResources);
+                data.startingResources, data.resupplyResources, slotData.removedTypes);
         }
         if (data.upgradeClass === UpgradeClass.Normal) {
             return new Upgrade(data.id, data.name, data.type, data.faction,
@@ -547,6 +547,17 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'Squadron: Each non-unique squadron that you activate gains Swarm until the end of its activation.  Each squadron with Swarm that you activate may reroll 1 die while attacking a ship.'
             },
+            {
+                id: 2802, name: 'Radiant VII', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 1, upgradeClass: UpgradeClass.SlotGranting,
+                text: 'You gain 1 Fleet Support icon in your upgrade bar. You cannot equip Turbolaser or Ordnance upgrades.',
+                grantedType: UpgradeType.FleetSupport, removedTypes: [UpgradeType.Turbolaser, UpgradeType.Ordnance]
+            },
+            {
+                id: 2803, name: 'Swift Return', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'During your Determine Course step, if you are at distance 1-2 of an obstacle, you may change your speed by 1 or increase 1 yaw value by 1.'
+            },
             // Ion Cannons
             {
                 id: 3000, name: 'Heavy Ion Emplacements', type: UpgradeType.IonCannons, faction: Faction.Any,
@@ -759,8 +770,8 @@ export class UpgradeFactory {
             // Ordnance - 7
             {
                 id: 7000, name: 'Assault Concussion Missiles', type: UpgradeType.Ordnance, faction: Faction.Any,
-                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: 'Black Critical: Each hull zone adjacent to the defending hull zone suffers 1 damage.'
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'Black Critical: Exhaust this card. Each hull zone adjacent to the defending hull zone suffers 1 damage.'
             },
             {
                 id: 7001, name: 'Assault Proton Torpedoes', type: UpgradeType.Ordnance, faction: Faction.Any,
@@ -856,6 +867,13 @@ export class UpgradeFactory {
                 text: 'After your Reveal Command Dial step, you may exhaust this card and discard any number of concentrate fire tokens from it to choose that many friendly ships at distance 1-5. Assign each chosen ship a concentrate fire token.',
                 startingResources: { quantity: 5, types: [ ResourceType.ConcentrateFire ]},
                 resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire, ResourceType.Engineering, ResourceType.Navigation ]}
+            },
+            {
+                id: 9006, name: 'Parts Resupply', type: UpgradeType.FleetSupport, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'After your Reveal Command Dial step, you may exhaust this card and discard any number of engineering tokens from it to choose that many friendly ships at distance 1-5. Assign each chosen ship an engineering token.',
+                startingResources: { quantity: 5, types: [ ResourceType.Engineering ]},
+                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering, ResourceType.Navigation, ResourceType.Squadron ]}
             },
             // Officer - 10
             {
