@@ -25,6 +25,7 @@ export class FleetComponent implements OnInit {
   public colSpan = 1;
   public fleetAlertOpen = false;
   public squadronAlertOpen = false;
+  public squadronUniquesAlertOpen = false;
   public alertType = AlertType;
   
   public assaultObjective: Objective = null;
@@ -54,7 +55,7 @@ export class FleetComponent implements OnInit {
     this.fleet.subject.subscribe(f => {
       this.fleetAlertOpen = this.fleet.currentPoints() > this.fleet.pointLimit;
       this.squadronAlertOpen = this.fleet.currentPointsFromSquadrons() > this.fleet.squadronPointLimit;
-
+      this.squadronUniquesAlertOpen = this.fleet.exceedsUniqueSquadronLimit();
       this.setObjectives();
     });
     this.setObjectives();

@@ -35,7 +35,7 @@ export interface ISerializedFleet {
   lastUpdated: number;
 }
 
-export class Fleet {
+export class Fleet {  
   public subject: Subject<string>;
 
   public ownerUid: string;
@@ -85,6 +85,11 @@ export class Fleet {
 
   public hasCustomCommander(): boolean {
     return !!this.customCommander;
+  }
+
+  public exceedsUniqueSquadronLimit(): boolean {
+    const limit = Math.floor(this.pointLimit / 100);
+    return this.squadrons.filter(s => s.unique).length > limit;
   }
 
   serialize(): ISerializedFleet {

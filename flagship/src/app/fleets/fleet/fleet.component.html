@@ -39,7 +39,10 @@
   </div>
   <mat-divider></mat-divider>
   <flagship-alert [(isOpen)]="squadronAlertOpen" [type]="alertType.WARN">
-    <strong>Heads up!</strong> You have more squadron points added than your fleet maximum allows.
+    <strong>Heads up!</strong> You have more squadron points added than your fleet point maximum allows.
+  </flagship-alert>
+  <flagship-alert [(isOpen)]="squadronUniquesAlertOpen" [type]="alertType.WARN">
+    <strong>Heads up!</strong> You have more unique squadrons than your fleet point maximum allows.
   </flagship-alert>
   <p *ngIf="!fleet.squadrons.length" style="margin-top: 8px;">You haven't added any squadrons.</p>
   <div class="squadron-list" fxLayout="column" fxLayoutGap="4px" style="margin-top: 8px;">
