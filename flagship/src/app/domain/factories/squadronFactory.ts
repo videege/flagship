@@ -633,6 +633,78 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Swarm)],
             text: 'Before an enemy ship or squadron at distance 1 moves, you may perform an attack against that ship or squadron even if you are engaged.'
         },
+        {
+            id: 202, name: 'DFS-311', shipName: 'Vulture-class Droid Fighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 18,
+            speed: 4, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(1, 0, 1), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Intel), new Keyword(KeywordType.Swarm)],
+            text: 'While you are defending, if the attack is obstructed, you may force the attacker to reroll 1 die of your choice.'
+        },
+        {
+            id: 203, name: 'Hyena-class Droid Bomber Squadron', shipName: 'Hyena-class Droid Bomber Squadron',
+            faction: Faction.Separatists, unique: false, shipUnique: false, irregular: false, points: 11,
+            speed: 4, hull: 4, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIBattery, 1), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: ''
+        },
+        {
+            id: 204, name: 'Baktoid Prototypes', shipName: 'Hyena-class Droid Bomber Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 16,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIBattery, 1), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: 'While attacking a ship, if another friendly squadron with Bomber is at distance 1 of the defender, you may change 1 die to a face with an accuracy icon.'
+        },
+        {
+            id: 205, name: 'DBS-404', shipName: 'Hyena-class Droid Bomber Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 17,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 2, 0), batteryArmament: new Armament(1, 0, 0),
+            keywords: [new Keyword(KeywordType.AIBattery, 1), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: 'While attacking, if you are touching the defender, you may suffer 1 damage to add 1 die to your attack pool of a color that is already in your attack pool.'
+        },
+        {
+            id: 206, name: 'Droid Tri-Fighter Squadron', shipName: 'Droid Tri-Fighter Squadron',
+            faction: Faction.Separatists, unique: false, shipUnique: false, irregular: false, points: 11,
+            speed: 5, hull: 3, defenseTokens: [],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Swarm)],
+            text: ''
+        },
+        {
+            id: 207, name: 'DIS-T81', shipName: 'Droid Tri-Fighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 17,
+            speed: 5, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(1, 1, 1), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Snipe, 3), new Keyword(KeywordType.Swarm)],
+            text: 'Your attacks cannot be obstructed.'
+        },
+        {
+            id: 208, name: 'Phlac-Arphocc Prototypes', shipName: 'Droid Tri-Fighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 19,
+            speed: 5, hull: 3, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(1, 1, 1), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.AIAntiSquadron, 1), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Swarm)],
+            text: 'After an enemy squadron ends its activation at distance 1, that squadron suffers 1 damage.'
+        },
+        {
+            id: 209, name: 'Belbullab-22 Starfighter Squadron', shipName: 'Belbullab-22 Starfighter Squadron',
+            faction: Faction.Separatists, unique: false, shipUnique: false, irregular: false, points: 15,
+            speed: 4, hull: 5, defenseTokens: [],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Relay, 1), new Keyword(KeywordType.Screen)],
+            text: ''
+        },
+        {
+            id: 210, name: 'General Grievous', shipName: 'Belbullab-22 Starfighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 22,
+            speed: 4, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Relay, 2), new Keyword(KeywordType.Screen)],
+            text: 'While attacking a ship or squadron with no readied defense tokens, each of your critical icons adds 1 to the damage total.'
+        },
         // REPUBLIC
         {
             id: 300, name: 'V-19 Torrent Squadron', shipName: 'V-19 Torrent Squadron',

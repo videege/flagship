@@ -14,8 +14,10 @@ export enum KeywordType {
   Snipe,
   Strategic,
   AIAntiSquadron,
+  AIBattery,
   Adept,
-  Dodge
+  Dodge,
+  Screen
 }
 
 export class Keyword {
@@ -35,6 +37,8 @@ export class Keyword {
     switch (this.type) {
       case KeywordType.AIAntiSquadron:
         return 'AI: Anti-Squadron';
+      case KeywordType.AIBattery:
+        return 'AI: Battery';
       default:
         return KeywordType[this.type];
     }
