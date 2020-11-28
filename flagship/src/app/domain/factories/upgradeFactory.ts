@@ -74,7 +74,7 @@ export class UpgradeFactory {
             // Commanders
             {
                 id: 1000, name: 'Grand Moff Tarkin', type: UpgradeType.Commander, faction: Faction.Empire,
-                unique: true, modification: false, points: 38, upgradeClass: UpgradeClass.Commander,
+                unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
                 text: 'At the start of each Ship Phase, you may choose 1 command. Each friendly ship gains a command token matching that command.',
             },
             {
@@ -86,7 +86,7 @@ export class UpgradeFactory {
             {
                 id: 1002, name: 'Admiral Konstantine', type: UpgradeType.Commander, faction: Faction.Empire,
                 unique: true, modification: false, points: 23, upgradeClass: UpgradeClass.Commander,
-                text: 'At the start of each Status Phase, for each enemy ship at distance 1-5 of at least 2 friendly medium or large ships, you may increase or decrease that enemy\'s ship speed by 1 to a minimum of 1.'
+                text: 'At the start of each Status Phase, you may choose any number of enemy ships at distance 1-5 of at least 2 friendly non-flotilla ships, 1 of which must be medium or larger size class. For each chosen ship, you may discard 1 Navigate token from it or increase or decrease its speed by 1 to a minimum of speed 1.'
             },
             {
                 id: 1004, name: 'Admiral Motti', type: UpgradeType.Commander, faction: Faction.Empire,
@@ -150,7 +150,7 @@ export class UpgradeFactory {
             },
             {
                 id: 1502, name: 'Commander Sato', type: UpgradeType.Commander, faction: Faction.Rebels,
-                unique: true, modification: false, points: 32, upgradeClass: UpgradeClass.Commander,
+                unique: true, modification: false, points: 27, upgradeClass: UpgradeClass.Commander,
                 text: 'While a friendly ship is attacking a ship at distance 1 of a friendly squadron, before rolling attack dice, the attacker may replace up to 2 dice in its attack pool with an equal number of dice of any colors or color.'
             },
             {
@@ -175,7 +175,7 @@ export class UpgradeFactory {
             },
             {
                 id: 1507, name: 'General Rieekan', type: UpgradeType.Commander, faction: Faction.Rebels,
-                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                unique: true, modification: false, points: 34, upgradeClass: UpgradeClass.Commander,
                 text: 'Once per round, when a friendly ship or friendly unique squadron is destroyed, it remains in the play area and is treated as if it was not destroyed until the end of the Status Phase.'
             },
             {
@@ -185,7 +185,7 @@ export class UpgradeFactory {
             },
             {
                 id: 1509, name: 'Mon Mothma', type: UpgradeType.Commander, faction: Faction.Rebels,
-                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                unique: true, modification: false, points: 27, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship resolves the evade token effect, it can cancel 1 die at medium range or reroll 1 die at close range or distance 1.'
             },
             {
@@ -221,7 +221,7 @@ export class UpgradeFactory {
             {
                 id: 2000, name: 'Avenger', type: UpgradeType.Title, faction: Faction.Empire,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: 'While attacking, you may exhaust this card. If you do, the defender cannot spend exhausted defense tokens during this attack.'
+                text: 'While attacking, you may exhaust this card. If you do, the defender cannot spend more than 1 exhausted defense token during this attack.'
             },
             {
                 id: 2001, name: 'Chimaera', type: UpgradeType.Title, faction: Faction.Empire,
@@ -252,7 +252,7 @@ export class UpgradeFactory {
             {
                 id: 2006, name: 'Demolisher', type: UpgradeType.Title, faction: Faction.Empire,
                 unique: true, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
-                text: 'During your activation, you can perform 1 of your attacks after you execute your first maneuver.'
+                text: 'During your Attack step, you can perform only 1 attack. You can perform 1 of your attacks after you execute your maneuver during your activation.'
             },
             {
                 id: 2007, name: 'Insidious', type: UpgradeType.Title, faction: Faction.Empire,
@@ -430,7 +430,7 @@ export class UpgradeFactory {
             {
                 id: 2511, name: 'Admonition', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: 'While defending, during the Spend Defense Tokens Step, you may discard a defense token to cancel 1 attack die.'
+                text: 'While defending, during the Spend Defense Tokens Step, you may discard a readied defense token to cancel 1 attack die.'
             },
             {
                 id: 2512, name: 'Foresight', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -479,8 +479,8 @@ export class UpgradeFactory {
             },
             {
                 id: 2521, name: 'Mon Karren', type: UpgradeType.Title, faction: Faction.Rebels,
-                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: 'While attacking a ship, the defender cannot spend more than 1 defense token.'
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'Concentrate Fire: While attacking a ship, the defender cannot spend more than 1 defense token during this attack.'
             },
             {
                 id: 2522, name: 'Redemption', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -501,7 +501,7 @@ export class UpgradeFactory {
             {
                 id: 2525, name: 'Yavaris', type: UpgradeType.Title, faction: Faction.Rebels,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: 'Squadron: Each squadron you activate can attack twice if it does not move during your activation.'
+                text: 'Squadron: Each squadron you activate may choose to only attack during your activation. If it does, while attacking, it may add 1 die to its attack pool of a color already in its attack pool.'
             },
             {
                 id: 2526, name: 'Phoenix Home', type: UpgradeType.Title, faction: Faction.Rebels,
@@ -529,12 +529,22 @@ export class UpgradeFactory {
                 id: 2700, name: 'Tide of Progress XII', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
                 text: 'Before you are dealt a faceup damage card with the "Ship" trait, you may exhaust this card to discard that damage card (without resolving its effect).',
-                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering ]}
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering] }
             },
             {
                 id: 2701, name: 'Sa Naloar', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'While defending, if you are at speed 2 or higher, you may spend a defense token to resolve the Evade defense effect instead of that token\'s effect.  You cannot resolve the Evade defense effect more than once per attack.'
+            },
+            {
+                id: 2702, name: 'Beast of Burden', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'When you activate, you may exhaust this card and spend 1 or more of your defense tokens to choose up to that many defense tokens on friendly ships at distance 1-3 and ready those defense tokens.'
+            },
+            {
+                id: 2703, name: 'Foreman\'s Labor', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'Before you suffer damage from an attack, if the defending hull zone has at least 1 shield remaining, you may exhaust this card to reduce the total damage by 1.'
             },
             // Republic titles
             {
@@ -603,7 +613,7 @@ export class UpgradeFactory {
             {
                 id: 4000, name: 'Gunnery Team', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: 'You can attack from the same hull zone more than once per activation. That hull zone cannot target the same ship or squadron more than once during that activation.'
+                text: 'Concentrate Fire: the next attack you perform this activation can be performed from this hull zone. Each of your hull zones cannot target the same ship or squadron more than once during your activation.'
             },
             {
                 id: 4001, name: 'Ordnance Experts', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
@@ -724,7 +734,7 @@ export class UpgradeFactory {
                 unique: false, modification: true, points: 0, upgradeClass: UpgradeClass.SlotGranting,
                 sizeRestriction: [Size.Medium, Size.Large], grantedType: UpgradeType.FleetCommand,
                 text: 'Medium or Large ship only. Flagship only. You gain one fleet command icon in your upgrade bar. You may not spend command tokens to resolve a fleet command upgrade\'s effect.'
-            }, 
+            },
             {
                 id: 5012, name: 'Hyperspace Rings', type: UpgradeType.OffensiveRetrofit, faction: Faction.Republic,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
@@ -734,7 +744,7 @@ export class UpgradeFactory {
                 id: 5013, name: 'Hyperwave Signal Boost', type: UpgradeType.OffensiveRetrofit, faction: Faction.Separatists,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'During the Squadron Phase, when it is your turn to activate squadrons, you may exhaust this card to choose a number of unactivated, friendly squadrons at close-long range up to your squadron value. This turn, activate each of those squadrons. While attacking, each of those squadrons with AI are treated as if activated by a squadron command.',
-                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering, ResourceType.Squadron ]}
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering, ResourceType.Squadron] }
             },
             // Boarding Team - 6
             {
@@ -775,8 +785,8 @@ export class UpgradeFactory {
             },
             {
                 id: 7001, name: 'Assault Proton Torpedoes', type: UpgradeType.Ordnance, faction: Faction.Any,
-                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: 'Black Critical: Deal 1 faceup damage card to the defender.'
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'Black Critical: Exhaust this card to deal 1 faceup damage card to the defender.'
             },
             {
                 id: 7002, name: 'Expanded Launchers', type: UpgradeType.Ordnance, faction: Faction.Any,
@@ -865,15 +875,15 @@ export class UpgradeFactory {
                 id: 9005, name: 'Munitions Resupply', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'After your Reveal Command Dial step, you may exhaust this card and discard any number of concentrate fire tokens from it to choose that many friendly ships at distance 1-5. Assign each chosen ship a concentrate fire token.',
-                startingResources: { quantity: 5, types: [ ResourceType.ConcentrateFire ]},
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire, ResourceType.Engineering, ResourceType.Navigation ]}
+                startingResources: { quantity: 5, types: [ResourceType.ConcentrateFire] },
+                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire, ResourceType.Engineering, ResourceType.Navigation] }
             },
             {
                 id: 9006, name: 'Parts Resupply', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'After your Reveal Command Dial step, you may exhaust this card and discard any number of engineering tokens from it to choose that many friendly ships at distance 1-5. Assign each chosen ship an engineering token.',
-                startingResources: { quantity: 5, types: [ ResourceType.Engineering ]},
-                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering, ResourceType.Navigation, ResourceType.Squadron ]}
+                startingResources: { quantity: 5, types: [ResourceType.Engineering] },
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering, ResourceType.Navigation, ResourceType.Squadron] }
             },
             // Officer - 10
             {
@@ -980,7 +990,7 @@ export class UpgradeFactory {
             },
             {
                 id: 10204, name: 'Captain Brunson', type: UpgradeType.Officer, faction: Faction.Empire,
-                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                unique: true, modification: false, points: 9, upgradeClass: UpgradeClass.Normal,
                 text: 'While defending at distance 1-2 of an obstacle, during the Spend Defense Tokens step, you may exhaust this card to choose and cancel 1 attack die.'
             },
             {
@@ -1172,22 +1182,22 @@ export class UpgradeFactory {
                 id: 10701, name: 'T-Series Tactical Droid', type: UpgradeType.Officer, faction: Faction.Separatists,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'When you spend only an engineering, navigation, or concentrate fire command token to resolve a command, you may exhaust this card. If you do, resolve that command as if you had spent a dial of the same type instead.',
-                resupplyResources: { quantity: 1, types: [ ResourceType.Any ]}
+                resupplyResources: { quantity: 1, types: [ResourceType.Any] }
             },
             // Republic Officers
             {
                 id: 10800, name: 'Clone Navigation Officer', type: UpgradeType.Officer, faction: Faction.Republic,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'When you reveal a concentrate fire, navigate, or squadron command, you may exhaust this card to choose a friendly ship at distance 1-5. That ship may gain 1 command token matching your command. You can spend tokens from this card to ready it.',
-                startingResources: { quantity: 1, types: [ ResourceType.Navigation ]},
-                resupplyResources: { quantity: 1, types: [ ResourceType.Any ]}
+                startingResources: { quantity: 1, types: [ResourceType.Navigation] },
+                resupplyResources: { quantity: 1, types: [ResourceType.Any] }
             },
             {
                 id: 10801, name: 'Clone Captain Zak', type: UpgradeType.Officer, faction: Faction.Republic,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking from your side or rear hull zones, you may exhaust this card to add 1 die to your attack pool of a color already in your attack pool (you cannot add dice to a salvo attack).  You can spend tokens from this card to ready it.',
-                startingResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]}
+                startingResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
+                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] }
             },
             // Support Team - 11
             {
@@ -1229,8 +1239,8 @@ export class UpgradeFactory {
                 id: 11007, name: 'Battle Droid Reserves', type: UpgradeType.SupportTeam, faction: Faction.Separatists,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'Engineering: You may exhaust this card. If you do: flip any number of your faceup damage cards with the "Crew" trait facedown, and/or discarding facedown damage cards costs 1 fewer engineering point.',
-                traitRestriction: [ Traits.droid ],
-                resupplyResources: { quantity: 1, types: [ ResourceType.Engineering ]}
+                traitRestriction: [Traits.droid],
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering] }
             },
             // Turbolaser - 12
             {
@@ -1301,13 +1311,13 @@ export class UpgradeFactory {
             {
                 id: 12013, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Separatists,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
+                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
                 text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
             {
                 id: 12014, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Republic,
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                resupplyResources: { quantity: 1, types: [ ResourceType.ConcentrateFire ]},
+                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
                 text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
             // Experimental Retrofit - 13
@@ -1350,7 +1360,8 @@ export class UpgradeFactory {
             {
                 id: 14003, name: 'Electronic Countermeasures', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: 'While defending, you may exhaust this card to spend 1 defense token that your opponent targeted with an accuracy result.	'
+                text: 'While defending, you may exhaust this card to spend 1 defense token that your opponent targeted with an accuracy result.	',
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering] }
             },
             {
                 id: 14004, name: 'Redundant Shields', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,

@@ -41,7 +41,7 @@ export class ShipFactory {
     consular: [2802, 2803],
     // separatists
     munificent: [2700, 2701],
-    hardcell: []
+    hardcell: [2702, 2703]
   };
 
   static shipData: (ShipData|IgnitionCapableShipData|HugeShipData)[] = [
@@ -888,13 +888,13 @@ export class ShipFactory {
     },
     {
       id: 302, name: 'Hardcell-class Battle Refit', shipClass: ShipClass.Normal, faction: Faction.Separatists,
-      points: 52, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.Small,
-      defenseTokens: [DefenseToken.Brace],
-      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
-      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
-      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
-      antiSquadronArmament: new Armament(1, 0, 0),
-      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      points: 52, hull: 5, command: 1, squadron: 1, engineering: 3, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 1, rightShields: 1, frontShields: 3, rearShields: 2,
+      frontArmament: new Armament(3, 0, 0), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(1, 0, 0), rightArmament: new Armament(1, 0, 0),
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
       upgradeSlots: [
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit), 
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),  
@@ -904,16 +904,16 @@ export class ShipFactory {
     },
     {
       id: 303, name: 'Hardcell-class Transport', shipClass: ShipClass.Normal, faction: Faction.Separatists,
-      points: 52, hull: 3, command: 1, squadron: 2, engineering: 2, size: Size.Small,
-      defenseTokens: [DefenseToken.Brace],
-      leftShields: 2, rightShields: 2, frontShields: 4, rearShields: 2,
-      frontArmament: new Armament(2, 2, 0), rearArmament: new Armament(1, 1, 0),
-      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
-      antiSquadronArmament: new Armament(1, 0, 0),
-      navigationChart: new NavigationChart(1, [1, 2], null, null),
+      points: 47, hull: 5, command: 1, squadron: 2, engineering: 2, size: Size.Small,
+      defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
+      leftShields: 1, rightShields: 1, frontShields: 3, rearShields: 2,
+      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(0, 1, 0), rightArmament: new Armament(0, 1, 0),
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit), 
-        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),  
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.FleetSupport),  
       ],
       allowedTitles: ShipFactory.titles.hardcell, 
       traits: [Traits.droid, Traits.transport]
