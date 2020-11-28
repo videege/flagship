@@ -213,6 +213,24 @@ export class AttackEffectFactory {
                         false, null, FaceRestriction.Accuracy);
                 }
             },
+            {
+                id: 10801, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Clone Captain Zak', 1,
+                    true, this.orders.addition, AdditionRestriction.Existing, FiringArc.Left | FiringArc.Right | FiringArc.Rear)
+                }
+            },
+            {
+                id: 12013, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Swivel-Mount Batteries', 1,
+                    true, this.orders.addition, AdditionRestriction.Any)
+                }
+            },
+            {
+                id: 12014, appliesToFleet: false, factory: () => {
+                    return new AdditionModification('Swivel-Mount Batteries', 1,
+                    true, this.orders.addition, AdditionRestriction.Any)
+                }
+            },
             // Rerolls
             { id: 3001, appliesToFleet: false, 
                 factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },
@@ -239,7 +257,7 @@ export class AttackEffectFactory {
             {
                 id: 4001, appliesToFleet: false, factory: () => {
                     return new GenericRerollModification(RerollStrategy.Blanks,
-                        'Ordnance Experts', this.orders.reroll, 0, DieType.Black);
+                        'Ordnance Experts', this.orders.reroll, 2, DieType.Black);
                 }
             },
             //todo: caitken and shollan (variable reroll of one color)
@@ -265,6 +283,15 @@ export class AttackEffectFactory {
                 }
             },
             // Modifications
+            {
+                id: 1700, appliesToFleet: true, factory: () => {
+                    return new GenericModification('Kraken', this.orders.modification,
+                        true, DieType.Any, [],
+                        [FaceRestriction.Accuracy, FaceRestriction.Crit, FaceRestriction.Hit], 0, 
+                        [], [DieType.Red, DieType.Blue, DieType.Black],
+                        FaceRestriction.Crit)
+                }
+            },
             {
                 id: 12002, appliesToFleet: false, factory: () => {
                     return new GenericModification('H9 Turbolasers', this.orders.modification,
