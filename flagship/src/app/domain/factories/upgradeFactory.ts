@@ -136,7 +136,7 @@ export class UpgradeFactory {
             {
                 id: 1013, name: 'General Tagge', type: UpgradeType.Commander, faction: Faction.Empire,
                 unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
-                text: 'At the start of the third round and the fifth round, each friendly ship may recover 1 of its discarded defense tokens.'
+                text: 'After deploying fleets, place 2 non-consecutive round tokens on this card. At the start of the Ship Phase during each round matching 1 of those tokens, each friendly ship may recover 1 of its discarded defense tokens.'
             },
             {
                 id: 1500, name: 'Admiral Ackbar', type: UpgradeType.Commander, faction: Faction.Rebels,
@@ -156,7 +156,7 @@ export class UpgradeFactory {
             {
                 id: 1503, name: 'Garm Bel Iblis', type: UpgradeType.Commander, faction: Faction.Rebels,
                 unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
-                text: 'At the start of the first round and the fifth round, each friendly ship may gain a number of command tokens equal to its command value.'
+                text: 'After deploying fleets, place 2 non-consecutive round tokens on this card. At the start of the Ship Phase during each round matching 1 of those tokens, each friendly ship may gain a number of command tokens equal to its command value.'
             },
             {
                 id: 1504, name: 'General Cracken', type: UpgradeType.Commander, faction: Faction.Rebels,
@@ -186,7 +186,7 @@ export class UpgradeFactory {
             {
                 id: 1509, name: 'Mon Mothma', type: UpgradeType.Commander, faction: Faction.Rebels,
                 unique: true, modification: false, points: 27, upgradeClass: UpgradeClass.Commander,
-                text: 'When a friendly ship resolves the evade token effect, it can cancel 1 die at medium range or reroll 1 die at close range or distance 1.'
+                text: 'When a friendly ship resolves the evade token effect, it can cancel 1 die at medium range or reroll 1 additional die at close range or distance 1.'
             },
             {
                 id: 1510, name: 'Leia Organa', type: UpgradeType.Commander, faction: Faction.Rebels,
@@ -429,7 +429,7 @@ export class UpgradeFactory {
             },
             {
                 id: 2511, name: 'Admonition', type: UpgradeType.Title, faction: Faction.Rebels,
-                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: 'While defending, during the Spend Defense Tokens Step, you may discard a readied defense token to cancel 1 attack die.'
             },
             {
@@ -618,7 +618,7 @@ export class UpgradeFactory {
             {
                 id: 4001, name: 'Ordnance Experts', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
-                text: 'While attacking, you may reroll any number of your black dice.'
+                text: 'While attacking, you may reroll up to 2 black dice.'
             },
             {
                 id: 4002, name: 'Fire-Control Team', type: UpgradeType.WeaponsTeam, faction: Faction.Any,
@@ -795,7 +795,7 @@ export class UpgradeFactory {
             },
             {
                 id: 7003, name: 'External Racks', type: UpgradeType.Ordnance, faction: Faction.Any,
-                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'When attacking at close range, you may discard this card to add 2 black dice to your attack pool.'
             },
             {
@@ -869,7 +869,8 @@ export class UpgradeFactory {
             {
                 id: 9004, name: 'Slicer Tools', type: UpgradeType.FleetSupport, faction: Faction.Any,
                 unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: 'After you execute a maneuver, you may exhaust this card to choose an enemy ship at distance 1-3. You may choose a new command on its top command dial.'
+                text: 'This card begins the game exhausted. After you execute a maneuver, you may exhaust this card to choose an enemy ship at distance 1-3. You may choose a new command on its top command dial.',
+                resupplyResources: { quantity: 1, types: [ResourceType.Engineering]}
             },
             {
                 id: 9005, name: 'Munitions Resupply', type: UpgradeType.FleetSupport, faction: Faction.Any,
@@ -1063,7 +1064,8 @@ export class UpgradeFactory {
             {
                 id: 10218, name: 'Taskmaster Grint', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: 'After deploying fleets, chose and place 1 command token on this card. When you reveal a command matching that token, you may gain 1 matching command token without spending the command dial.'
+                text: 'Choose the command token for this card after deploying fleets. When you reveal a command matching the token on this card, you may gain 1 matching command token without spending the command dial.',
+                startingResources: { quantity: 1, types: [ResourceType.Any] }
             },
             {
                 id: 10219, name: 'The Grand Inquisitor', type: UpgradeType.Officer, faction: Faction.Empire,
@@ -1208,7 +1210,7 @@ export class UpgradeFactory {
             {
                 id: 11001, name: 'Engine Techs', type: UpgradeType.SupportTeam, faction: Faction.Any,
                 unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
-                text: 'Navigate: After you execute a maneuver, you may exhaust this card to execute a 1-speed maneuver.'
+                text: 'Navigate: After you execute a maneuver, you may exhaust this card to execute a 1-speed maneuver. After you execute a maneuver, if you overlapped a ship, exhaust this card.'
             },
             {
                 id: 11002, name: 'Engineering Team', type: UpgradeType.SupportTeam, faction: Faction.Any,
@@ -1246,7 +1248,7 @@ export class UpgradeFactory {
             {
                 id: 12000, name: 'Dual Turbolaser Turrets', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: true, points: 5, upgradeClass: UpgradeClass.Normal,
-                text: 'While attacking, you may exhaust this card to add 1 red die to your attack pool. If you do, remove 1 die from the attack pool.'
+                text: 'While attacking, you may exhaust this card to add 1 red die to your attack pool. If you do, choose and cancel 1 attack die.'
             },
             {
                 id: 12001, name: 'Enhanced Armament', type: UpgradeType.Turbolaser, faction: Faction.Any,
@@ -1255,7 +1257,7 @@ export class UpgradeFactory {
             },
             {
                 id: 12002, name: 'H9 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
-                unique: false, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking, you may change 1 die face with a hit or critical icon to a face with an accuracy icon.'
             },
             {
@@ -1275,7 +1277,7 @@ export class UpgradeFactory {
             },
             {
                 id: 12006, name: 'Quad Turbolaser Cannons', type: UpgradeType.Turbolaser, faction: Faction.Any,
-                unique: false, modification: false, points: 10, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: true, points: 10, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking, if at least 1 red die face has an accuracy icon. add 1 red die set to the accuracy icon to your attack pool.'
             },
             {
@@ -1296,7 +1298,7 @@ export class UpgradeFactory {
             {
                 id: 12010, name: 'XI7 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
                 unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
-                text: 'While attacking, if the defender spends a redirect token, it cannot suffer more than 1 damage on hull zones other than the defending hull zone.'
+                text: 'While attacking, if the defender spends a redirect token, it cannot suffer more than 1 damage on each hull zone other than the defending hull zone when it resolves the redirect defense effect.'
             },
             {
                 id: 12011, name: 'XX-9 Turbolasers', type: UpgradeType.Turbolaser, faction: Faction.Any,
