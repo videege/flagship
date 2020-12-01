@@ -1186,6 +1186,12 @@ export class UpgradeFactory {
                 text: 'When you spend only an engineering, navigation, or concentrate fire command token to resolve a command, you may exhaust this card. If you do, resolve that command as if you had spent a dial of the same type instead.',
                 resupplyResources: { quantity: 1, types: [ResourceType.Any] }
             },
+            {
+                id: 10702, name: 'Rune Haako', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'When you reveal a command, you may choose another friendly ship at distance 1-5. If you do, discard any number of command tokens from that ship, this card, or both, to gain 1 matching command token for each discarded token.',
+                startingResources: { quantity: 2, types: [ResourceType.Any] }
+            },
             // Republic Officers
             {
                 id: 10800, name: 'Clone Navigation Officer', type: UpgradeType.Officer, faction: Faction.Republic,
