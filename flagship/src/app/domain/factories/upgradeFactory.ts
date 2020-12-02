@@ -576,7 +576,7 @@ export class UpgradeFactory {
             },
             {
                 id: 3001, name: 'Leading Shots', type: UpgradeType.IonCannons, faction: Faction.Any,
-                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                unique: false, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking, you may spend 1 blue die to reroll any number of dice in your attack pool.'
             },
             {
