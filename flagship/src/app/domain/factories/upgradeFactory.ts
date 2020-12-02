@@ -1035,7 +1035,7 @@ export class UpgradeFactory {
                 text: 'Concentrate Fire: While attacking at medium-long range, if you spent a concentrate fire dial, you may also reroll any number of red dice in your attack pool. If you spent a concentrate fire token, you may also reroll up to 2 red dice in your attack pool.'
             },
             {
-                id: 10213, name: 'Governor Price', type: UpgradeType.Officer, faction: Faction.Empire,
+                id: 10213, name: 'Governor Pryce', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
                 text: 'Medium or large ship only. After deploying fleets, you may place 1 round token on this card. If you do, during the round matching that round token, you must activate at the end of the Ship Phase (after all other ships have activated).',
                 sizeRestriction: [Size.Medium, Size.Large]
