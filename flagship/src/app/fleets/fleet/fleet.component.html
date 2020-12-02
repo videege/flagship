@@ -3,6 +3,9 @@
   <flagship-alert [(isOpen)]="fleetAlertOpen" [type]="alertType.WARN">
     <strong>Heads up!</strong> You have more points added than your fleet maximum allows.
   </flagship-alert>
+  <flagship-alert [(isOpen)]="bannedUpgradesAlertOpen" [type]="alertType.WARN">
+    <strong>Heads up!</strong> You have added one or more upgrades that are banned in competitive play.
+  </flagship-alert>
   <div *ngIf="fleet.customCommander" style="margin-bottom: 16px;">
     <div fxLayout="row" fxLayoutGap="8px">
       <span class="mat-headline" style="margin-bottom: 4px;">Custom Commander</span>

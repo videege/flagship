@@ -35,7 +35,8 @@ export interface ISerializedFleet {
   lastUpdated: number;
 }
 
-export class Fleet {  
+export class Fleet {
+  
   public subject: Subject<string>;
 
   public ownerUid: string;
@@ -276,6 +277,22 @@ export class Fleet {
       return true;
     }
 
+    return false;
+  }
+
+  containsBannedUpgrades(): boolean {
+    const bannedUpgrades = new Set([
+      10010, // Strategic Adviser
+      10502, // Bail Organa
+      10213  // Gov Price
+    ]);
+    const equippedUpgrades =  this.ships.map(s => s.upgradeSlots).flat()
+      .filter(u => u.isEnabled && u.isFilled()).map(u => u.upgrade.id);
+    for (const upgrade of equippedUpgrades) {
+      if (bannedUpgrades.has(upgrade)) {
+        return true;
+      }
+    }
     return false;
   }
 }
