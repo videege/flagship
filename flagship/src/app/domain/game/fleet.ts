@@ -90,7 +90,7 @@ export class Fleet {
 
   public exceedsUniqueSquadronLimit(): boolean {
     const limit = Math.floor(this.pointLimit / 100);
-    return this.squadrons.filter(s => s.unique).length > limit;
+    return this.squadrons.filter(s => s.unique && s.defenseTokens.length > 0).length > limit;
   }
 
   serialize(): ISerializedFleet {
