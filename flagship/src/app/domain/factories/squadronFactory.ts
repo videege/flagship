@@ -772,7 +772,7 @@ export class SquadronFactory {
         },
         {
             id: 308, name: '"Odd Ball"', shipName: 'ARC-170 Starfighter Squadron',
-            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 15,
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 23,
             speed: 2, hull: 7, defenseTokens: [DefenseToken.Brace, DefenseToken.Evade],
             antiSquadronArmament: new Armament(0, 2, 1), batteryArmament: new Armament(0, 2, 0),
             keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Counter, 1)],
