@@ -80,7 +80,18 @@ export class AWFleetImporter implements FleetImporter {
     private getFaction(): Faction {
         let factionLine = this.lines.find(x => x.startsWith('Faction:'));
         if (factionLine) {
-            return factionLine.includes('Rebel') ? Faction.Rebels : Faction.Empire;
+            if (factionLine.includes('Rebel')) {
+                return Faction.Rebels;
+            }
+            if (factionLine.includes('Empire')) {
+                return Faction.Empire;
+            }
+            if (factionLine.includes('Sep')) {
+                return Faction.Separatists;
+            }
+            if (factionLine.includes('Rep')) {
+                return Faction.Republic;
+            }
         }
         throw new ImportError('Could not determine faction for imported fleet.');
     }
@@ -100,14 +111,15 @@ export class AWFleetImporter implements FleetImporter {
             let squadron = this.getSquadron(line, fleet);
             if (squadron) {
                 let count = +(line.substring(0, line.indexOf(' ')));
-                for (let i = 0; i < count; i++)
+                for (let i = 0; i < count; i++) {
                     fleet.addSquadron(squadron);
+                }
             }
         }
     }
 
     private getSquadron(line: string, fleet: Fleet): Squadron {
-        if (!line || !line.match(/^\d/)) return null;
+        if (!line || !line.match(/^\d/)) { return null; }
 
         let name = line.substring(line.indexOf(' ') + 1, line.indexOf('(')).trim();
         let data = this.squadronFactory.getSquadronByName(name);
@@ -133,8 +145,8 @@ export class AWFleetImporter implements FleetImporter {
     }
 
     private getUpgrade(line: string, fleet: Fleet): Upgrade {
-        if (!line) return null;
-        if (!line.startsWith('-')) return null;
+        if (!line) { return null; }
+        if (!line.startsWith('-')) { return null; }
 
         let name = line.substring(line.indexOf('-') + 1, line.indexOf('(')).trim();
         let points = +(line.substring(line.indexOf('(') + 1, line.indexOf('p', line.indexOf('('))).trim());
@@ -143,10 +155,10 @@ export class AWFleetImporter implements FleetImporter {
     }
 
     private getShip(line: string, fleet: Fleet): Ship {
-        if (!line) return null;
+        if (!line) { return null; }
         let ships = this.shipFactory.getShips(fleet.faction);
         let shipData = ships.find(x => line.includes(x.name));
-        if (!shipData) return null;
+        if (!shipData) { return null; }
 
         return this.shipFactory.instantiateShip(shipData.id);
     }
@@ -168,7 +180,7 @@ export class AWFleetImporter implements FleetImporter {
     }
 
     private getObjective(line: string): Objective {
-        if (!line) return null;
+        if (!line) { return null; }
 
         let name = line.substring(line.indexOf(':') + 1).trim();
         return this.objectiveFactory.getObjectiveByName(name);

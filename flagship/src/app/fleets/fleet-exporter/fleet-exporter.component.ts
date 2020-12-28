@@ -27,7 +27,7 @@ export class FleetExporterComponent implements OnInit {
     const newline = '\r\n';
     text += `${this.fleet.name}${newline}${newline}`;
     text += `Author: ${this.fleet.author}${newline}`;
-    text += `Faction: ${this.fleet.faction === Faction.Empire ? 'Empire' : 'Rebels'}${newline}`;
+    text += this.factionText();
     text += `Commander: ${this.fleet.getCommanderName()}${newline}${newline}`;
 
     text += this.addObjectives();
@@ -35,6 +35,20 @@ export class FleetExporterComponent implements OnInit {
     text += this.addSquadrons();
 
     this.exportedText = text;
+  }
+
+  factionText(): string {
+    switch (this.fleet.faction) {
+      case Faction.Empire:
+        return 'Faction: Galactic Empire\r\n';
+      case Faction.Rebels:
+        return 'Faction: Rebel Alliance\r\n';
+      case Faction.Separatists:
+        return 'Faction: Separatist Alliance\r\n';
+      case Faction.Republic:
+        return 'Faction: Galactic Republic\r\n';
+    }
+    return 'Faction: Unknown\r\n';
   }
 
   addSquadrons(): string {
@@ -76,7 +90,7 @@ export class FleetExporterComponent implements OnInit {
     let text = '';
 
     text += `${ship.isFlagship() ? '[flagship] ' : ''}${ship.name} (${ship.points})${newline}`;
-    
+
     for (const upgrade of ship.sortedUpgrades()) {
       text += `- ${upgrade.name} (${upgrade.points})${newline}`;
     }

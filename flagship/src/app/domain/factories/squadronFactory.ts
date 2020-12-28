@@ -3,6 +3,7 @@ import { Faction } from '../game/faction';
 import { Armament } from '../game/armament';
 import { Keyword, KeywordType } from '../game/keyword';
 import { DefenseToken } from '../game/defenseToken';
+import * as levenshtein from 'fast-levenshtein';
 
 export class SquadronFactory {
     static squadronData: SquadronData[] = [
@@ -809,7 +810,12 @@ export class SquadronFactory {
     }
 
     getSquadronByName(name: string): SquadronData {
-        return SquadronFactory.squadronData.find(x => x.name.toLowerCase() === name.toLowerCase());
+        const exact = SquadronFactory.squadronData.find(x => x.name.toLowerCase() === name.toLowerCase());
+        if (exact) { return exact; }
+        const l1 = SquadronFactory.squadronData.find(x => levenshtein.get(x.name.toLowerCase(), name.toLowerCase()) === 1);
+        if (l1) { return l1; }
+        const l2 = SquadronFactory.squadronData.find(x => levenshtein.get(x.name.toLowerCase(), name.toLowerCase()) === 2);
+        return l2;
     }
 
     instantiateSquadron(serializedSquadron: ISerializedSquadron | number): Squadron {
