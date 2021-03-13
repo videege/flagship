@@ -6,6 +6,9 @@ and campaign management features designed to support playing FFG's Star Wars Arm
 
 ### Release Notes
 
+#### v0.2 (3/13/2021)
+- Added Wave 10 content and new release notes feature in app.
+
 #### v0.1 (8/4/2020)
 - Numerous bug fixes, initial addition of Clone Wars factions.
 
