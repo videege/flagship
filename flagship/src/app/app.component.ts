@@ -4,6 +4,9 @@ import { AppleInstallPromptComponent } from './apple-install-prompt/apple-instal
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { SwUpdate } from '@angular/service-worker';
 import { UpdatePromptComponent } from './update-prompt/update-prompt.component';
+import { NotesService } from './core/services/notes.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NotesComponent } from './core/notes/notes.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +14,7 @@ import { UpdatePromptComponent } from './update-prompt/update-prompt.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
   ngOnInit(): void {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
@@ -34,10 +37,20 @@ export class AppComponent implements OnInit {
           }
         });
     }
+    this.localStorage.getItem('lastReadNotes')
+      .subscribe((v: string) => {
+        let currentNotes = this.notesService.getNotes();
+        if (!v || v !== currentNotes.version) {
+          this.dialog.open(NotesComponent).afterClosed().subscribe(() => {
+            this.localStorage.setItem('lastReadNotes', currentNotes.version).subscribe();
+          });
+        }
+      });
   }
 
   constructor(private bottomSheet: MatBottomSheet, private localStorage: LocalStorage,
-    private swUpdate: SwUpdate) {
+    private swUpdate: SwUpdate, private notesService: NotesService,
+    private dialog: MatDialog) {
     
   }
 

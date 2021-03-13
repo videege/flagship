@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Flagship Updates</h2>
+<mat-dialog-content class="mat-typography">
+    <div *ngFor="let note of notes.notes">
+        <h3>{{ note.date | date }}<span *ngIf="note.title">&mdash; {{ note.title }}</span></h3>
+        <ul>
+            <li *ngFor="let item of note.content">{{ item }}</li>
+        </ul>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>OK</button>
+</mat-dialog-actions>
