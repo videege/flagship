@@ -6,23 +6,30 @@ import { BreadcrumbService } from './services/breadcrumb.service';
 import { SettingsService } from './services/settings.service';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { AppMaterialModule } from '../app-material/app-material.module';
+import { NotesService } from './services/notes.service';
+import { NotesComponent } from './notes/notes.component';
 
 
 
 @NgModule({
-  declarations: [UserAvatarComponent],
+  declarations: [
+    UserAvatarComponent, 
+    NotesComponent
+  ],
   providers: [
     FleetService,
     CampaignState,
     BreadcrumbService,
-    SettingsService
+    SettingsService,
+    NotesService
   ],
   imports: [
     CommonModule,
     AppMaterialModule
   ], 
   exports: [
-    UserAvatarComponent
+    UserAvatarComponent,
+    NotesComponent
   ]
 })
 export class CoreModule {
