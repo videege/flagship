@@ -205,6 +205,11 @@ export class UpgradeFactory {
                 text: 'You must choose at least two types of command tokens for this card. At the start of each Ship Phase, you may discard 1 command token from this card.  If you do, each enemy ship gains a raid token matching that command token.',
                 startingResources: { quantity: 3, types: [ResourceType.Any] }
             },
+            {
+                id: 1702, name: 'General Grievous', type: UpgradeType.Commander, faction: Faction.Separatists,
+                unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
+                text: 'When a friendly ship or squadron is destroyed, you may choose 1 friendly ship or unique squadron at distance 1-5 of the destroyed ship or squadron. If you do, the chosen ship or unique squadron may either ready 1 of its defense tokens or recover 1 of its discarded defense tokens and then exhaust that token.'
+            },
             // REPUBLIC
             {
                 id: 1800, name: 'Obi-Wan Kenobi', type: UpgradeType.Commander, faction: Faction.Republic,
@@ -216,6 +221,17 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship reveals a command, you may discard up to 1 token of each type from this card. For each token you discard, that ship gains 1 additional command dial matching that token\'s type.',
                 startingResources: { quantity: 5, types: [ResourceType.Navigation, ResourceType.Engineering] }
+            },
+            {
+                id: 1802, name: 'Admiral Tarkin', type: UpgradeType.Commander, faction: Faction.Republic,
+                unique: true, modification: false, points: 30, upgradeClass: UpgradeClass.Commander,
+                text: 'At the start of each Ship Phase, you may discard 1 command token from this card. If you do, either you gain 1 matching command dial, or each friendly ship gains 1 matching command token.',
+                startingResources: { quantity: 6, types: [ResourceType.Any] }
+            },
+            {
+                id: 1803, name: 'Luminara Unduli', type: UpgradeType.Commander, faction: Faction.Republic,
+                unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
+                text: 'While a friendly ship or unique squadron is defending, after the Spend Defense Tokens step, if it spent fewer than 2 defense tokens, it may either ready 1 of its defense tokens it did not spend, or choose another friendly ship at distance 1-5 and ready 1 of that ship\'s defense tokens.'
             },
             // Titles
             {
@@ -545,6 +561,11 @@ export class UpgradeFactory {
                 id: 2703, name: 'Foreman\'s Labor', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'Before you suffer damage from an attack, if the defending hull zone has at least 1 shield remaining, you may exhaust this card to reduce the total damage by 1.'
+            },            
+            {
+                id: 2704, name: 'Invisible Hand', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 9, upgradeClass: UpgradeClass.Normal,
+                text: 'While deploying fleets, if you are in the play area, while you would deploy a squadron with Swarm, you may set that squadron aside next to your ship instead. You may set aside up to 5 squadrons in this way. Squadron: For each squadron you would activate with this command, you may place 1 of your set-aside squadrons within distance 3. It cannot move this activation, and if it has AI, increase its AI value by 1.'
             },
             // Republic titles
             {
@@ -1192,6 +1213,11 @@ export class UpgradeFactory {
                 text: 'When you reveal a command, you may choose another friendly ship at distance 1-5. If you do, discard any number of command tokens from that ship, this card, or both, to gain 1 matching command token for each discarded token.',
                 startingResources: { quantity: 2, types: [ResourceType.Any] }
             },
+            {
+                id: 10703, name: 'Shu Mai', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'After deploying fleets, you may place 2 non-consecutive round tokens on this card. During each round matching 1 of those tokens, while attacking a ship, you may reroll up to 3 dice.'
+            },
             // Republic Officers
             {
                 id: 10800, name: 'Clone Navigation Officer', type: UpgradeType.Officer, faction: Faction.Republic,
@@ -1206,6 +1232,11 @@ export class UpgradeFactory {
                 text: 'While attacking from your side or rear hull zones, you may exhaust this card to add 1 die to your attack pool of a color already in your attack pool (you cannot add dice to a salvo attack).  You can spend tokens from this card to ready it.',
                 startingResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
                 resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] }
+            },
+            {
+                id: 10802, name: 'Barriss Offee', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'While defending, after the attacker declares the defending hull zone, you may spend 1 Redirect token.  If you do, at the start of the Resolve Damage step, choose a different hull zone to be the defending hull zone for this attack.'
             },
             // Support Team - 11
             {

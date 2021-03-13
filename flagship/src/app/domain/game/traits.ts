@@ -6,4 +6,6 @@ export class Traits {
     static droid = 'Droid';
     static comms = "Comms";
     static senate = "Senate";
+    static medical = "Medical";
+    static jedi = "Jedi";
 }
