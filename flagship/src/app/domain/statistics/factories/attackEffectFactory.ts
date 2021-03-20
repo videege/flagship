@@ -231,6 +231,12 @@ export class AttackEffectFactory {
                     true, this.orders.addition, AdditionRestriction.Any)
                 }
             },
+            {
+                id: 1703, appliesToFleet: true, factory: () => {
+                    return new AdditionModification('Mar Tuuk', 1,
+                    true, this.orders.addition, AdditionRestriction.Red)
+                }
+            },
             // Rerolls
             { id: 3001, appliesToFleet: false, 
                 factory: () => { return new LeadingShotsModification(RerollStrategy.Blanks, this.orders.expensiveReroll); } },

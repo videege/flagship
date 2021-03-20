@@ -210,6 +210,17 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 20, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship or squadron is destroyed, you may choose 1 friendly ship or unique squadron at distance 1-5 of the destroyed ship or squadron. If you do, the chosen ship or unique squadron may either ready 1 of its defense tokens or recover 1 of its discarded defense tokens and then exhaust that token.'
             },
+            {
+                id: 1703, name: 'Mar Tuuk', type: UpgradeType.Commander, faction: Faction.Separatists,
+                unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
+                text: 'While a friendly ship is attacking, if the defending hull zone has at least 1 shield remaining, the attacker may add 1 red die to its attack pool. While a friendly ship is attacking a ship that has no shields remaining, after rolling attack dice, the attacker must cancel 1 attack die.'
+            },
+            {
+                id: 1704, name: 'Admiral Trench', type: UpgradeType.Commander, faction: Faction.Separatists,
+                unique: true, modification: false, points: 36, upgradeClass: UpgradeClass.Commander,
+                text: 'At the start of each Ship Phase, you may reveal and discard 1 command dial from this card. If you do, until the end of the round, when a friendly ship spends only a matching command token to resolve a command, that ship resolves that command as if it had spent a dial and a token of the same type instead.',
+                startingResources: { quantity: 4, types: [ResourceType.Any] }
+            },
             // REPUBLIC
             {
                 id: 1800, name: 'Obi-Wan Kenobi', type: UpgradeType.Commander, faction: Faction.Republic,
@@ -232,6 +243,16 @@ export class UpgradeFactory {
                 id: 1803, name: 'Luminara Unduli', type: UpgradeType.Commander, faction: Faction.Republic,
                 unique: true, modification: false, points: 25, upgradeClass: UpgradeClass.Commander,
                 text: 'While a friendly ship or unique squadron is defending, after the Spend Defense Tokens step, if it spent fewer than 2 defense tokens, it may either ready 1 of its defense tokens it did not spend, or choose another friendly ship at distance 1-5 and ready 1 of that ship\'s defense tokens.'
+            },
+            {
+                id: 1804, name: 'Plo Koon', type: UpgradeType.Commander, faction: Faction.Republic,
+                unique: true, modification: false, points: 26, upgradeClass: UpgradeClass.Commander,
+                text: 'While a friendly squadron is attacking a ship that is at distance 1-3 of a friendly ship, the attacker may add 1 blue die set to an accuracy icon to its attack pool. That die cannot be rerolled or changed. Friendly squadrons without Adept gain Grit while they are at distance 1 of a friendly squadron with Adept.'
+            },
+            {
+                id: 1805, name: 'Admiral Yularen', type: UpgradeType.Commander, faction: Faction.Republic,
+                unique: true, modification: false, points: 24, upgradeClass: UpgradeClass.Commander,
+                text: 'When a friendly ship resolves a squadron command, if it spent a squadron token, it may activate 1 additional squadron. When a friendly ship resolves an engineering command, it may spend engineering points on the following repair effect: Repair Squadron: Spend 2 points to choose a friendly squadron at distance 1-3. That squadron recovers 1 hull point.'
             },
             // Titles
             {
@@ -1218,6 +1239,27 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'After deploying fleets, you may place 2 non-consecutive round tokens on this card. During each round matching 1 of those tokens, while attacking a ship, you may reroll up to 3 dice.'
             },
+            {
+                id: 10704, name: 'TI-99', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'While a friendly unactivated squadron is at distance 1-3, it gains Counter 3 or, if it has the printed Counter keyword, gains an additional counter 1. After it performs a Counter attack, toggle its activation slider to the activated side.'
+            },
+            {
+                id: 10705, name: 'Tikkes', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 2, upgradeClass: UpgradeClass.Normal,
+                text: 'When you reveal a command, you may place a matching command token on this card. If you do, gain a command token of your choice. During the Command Phase, if you have a command token on this card, you must choose that command on each command dial that is to be assigned to you and show those dials to your opponent. Then discard that command token.'
+            },
+            {
+                id: 10706, name: 'Passel Argente', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'When you reveal a command, you may place a matching command token on this card. Then, if you have at least 1 navigate, 1 squadron, 1 concentrate fire, and 1 engineering command token on this card, you may gain 1 additional command dial of your choice.'
+            },
+            {
+                id: 10707, name: 'San Hill', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'At the start of the Squadron Phase, you may discard any number of tokens from this card. For each token you discard in this way, 1 additional squadron at close-long range of you may be activated during each of your fleet\'s turns to activate squadrons this phase.',
+                startingResources: { quantity: 2, types: [ResourceType.Squadron]}
+            },
             // Republic Officers
             {
                 id: 10800, name: 'Clone Navigation Officer', type: UpgradeType.Officer, faction: Faction.Republic,
@@ -1237,6 +1279,30 @@ export class UpgradeFactory {
                 id: 10802, name: 'Barriss Offee', type: UpgradeType.Officer, faction: Faction.Republic,
                 unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: 'While defending, after the attacker declares the defending hull zone, you may spend 1 Redirect token.  If you do, at the start of the Resolve Damage step, choose a different hull zone to be the defending hull zone for this attack.'
+            },
+            {
+                id: 10803, name: 'Clone Commander Wolffe', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'Squadron: You may exhaust this card. If you do: each of up to 3 squadrons that you activate without Adept gain Assault until the end of its activation, and each squadron that you activate with the printed Assault keyword can spend a die with a hit or accuracy icon to resolve the Assault effect. You can spend tokens from this card to ready it.',
+                startingResources: { quantity: 1, types: [ResourceType.Squadron] },
+                resupplyResources: { quantity: 1, types: [ResourceType.Squadron] }
+            },
+            {
+                id: 10804, name: 'Ahsoka Tano', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'Squadron: Each of up to 3 non-unique squadrons that you activate gain Snipe 1 for each die in their anti-squadron armament, to a maximum of Snipe 3, until the end of its activation.'
+            },
+            {
+                id: 10805, name: 'Adi Gallia', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'While defending, when you suffer damage from an attack, you may suffer up to 1 of that damage on the shields of a hull zone adjacent to the defending hull zone for each defense token you spent during the Spend Defense Tokens step. If you do, suffer any remaining damage on the defending hull zone.'
+            },
+            {
+                id: 10806, name: 'Clone Captain Silver', type: UpgradeType.Officer, faction: Faction.Republic,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'When you execute a maneuver, during your Determine Course step, if you have not resolved a navigate command during this activation, you may exhaust this card to increase or decrease your speed by up to 3. If you do, you cannot resolve a navigation command during this activation. You can spend tokens from this card to ready it.',
+                startingResources: { quantity: 1, types: [ResourceType.Navigation] },
+                resupplyResources: { quantity: 1, types: [ResourceType.Navigation] }
             },
             // Support Team - 11
             {

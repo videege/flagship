@@ -22,8 +22,13 @@ export class NotesService {
 
   // tslint:disable-next-line:member-ordering
   static _notes: Notes = {
-    version: '0.0.1',
+    version: '0.0.2',
     notes: [
+      {
+        title: 'Additional Wave 10 Upgrades',
+        date: new Date('2021-03-20'),
+        content: [`Added additional spoiled wave 10 content for Separatists and Republic.`]
+      },
       {
         title: 'Wave 10 Spoiled Content',
         date: new Date('2021-03-13'),
