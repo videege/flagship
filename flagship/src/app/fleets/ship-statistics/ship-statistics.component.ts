@@ -10,6 +10,8 @@ import { IAttackPool } from '../../domain/statistics/attackPool';
 import { PoolStatistics } from '../../domain/statistics/poolStatistics';
 import { FiringArc } from '../../domain/statistics/firingArc';
 import { ActivatedRoute } from '@angular/router';
+import { IgnitionGrantingUpgradeData, Upgrade, UpgradeClass } from 'src/app/domain/game/upgrade';
+import { IgnitionGrantingUpgrade } from 'src/app/domain/upgrades/ignitionGrantingUpgrade';
 
 
 export interface IModificationReorderEvent {
@@ -146,7 +148,9 @@ export class ShipStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.ship = this.route.snapshot.data.ship;
-    this.isIgnition = this.ship.shipClass === ShipClass.IgnitionCapable;
+    let upgrades = this.ship.sortedUpgrades();
+    this.isIgnition = this.ship.shipClass === ShipClass.IgnitionCapable || 
+      !!this.ship.sortedUpgrades().find((x: Upgrade) => x.upgradeClass === UpgradeClass.IgnitionGranting);
     this.isHuge = this.ship.shipClass === ShipClass.Huge;
 
     this.showingEffects = !this.breakpointObserver.isMatched([
@@ -191,7 +195,11 @@ export class ShipStatisticsComponent implements OnInit {
     } else if (arc === FiringArc.Rear) {
       this.armament = this.ship.rearArmament;
     } else if (arc === FiringArc.Superweapon) {
-      this.armament = (<IgnitionCapableShip>this.ship).ignitionArmament;
+      const armament = this.ship.shipClass === ShipClass.IgnitionCapable 
+        ? (<IgnitionCapableShip>this.ship).ignitionArmament
+        : (<IgnitionGrantingUpgrade>this.ship.sortedUpgrades().find((x: Upgrade) => 
+            x.upgradeClass === UpgradeClass.IgnitionGranting)).ignitionArmament;
+      this.armament = armament;
     }
   }
 

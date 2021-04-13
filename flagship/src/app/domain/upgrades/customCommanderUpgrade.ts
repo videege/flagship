@@ -7,7 +7,7 @@ import { UpgradeSlot } from '../game/upgradeSlot';
 import { Ship } from '../game/ship';
 
 export class CustomCommanderUpgrade extends Upgrade {
-    constructor(private commander: CustomCommander, faction: Faction) {
+    constructor(private commander: CustomCommander, faction: Faction | Faction[]) {
         super(-1, commander.name, UpgradeType.CustomCommander, faction, null, false, 0, true, null);
         this.text$ = new BehaviorSubject<string>(this.commander.getText());
         this.commander.subject.subscribe(() => {

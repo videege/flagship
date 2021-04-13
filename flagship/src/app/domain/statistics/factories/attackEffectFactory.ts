@@ -216,25 +216,26 @@ export class AttackEffectFactory {
             {
                 id: 10801, appliesToFleet: false, factory: () => {
                     return new AdditionModification('Clone Captain Zak', 1,
-                    true, this.orders.addition, AdditionRestriction.Existing, FiringArc.Left | FiringArc.Right | FiringArc.Rear)
+                    true, this.orders.addition, AdditionRestriction.Existing, FiringArc.Left | FiringArc.Right | FiringArc.Rear);
                 }
             },
             {
                 id: 12013, appliesToFleet: false, factory: () => {
                     return new AdditionModification('Swivel-Mount Batteries', 1,
-                    true, this.orders.addition, AdditionRestriction.Any)
-                }
-            },
-            {
-                id: 12014, appliesToFleet: false, factory: () => {
-                    return new AdditionModification('Swivel-Mount Batteries', 1,
-                    true, this.orders.addition, AdditionRestriction.Any)
+                    true, this.orders.addition, AdditionRestriction.Any);
                 }
             },
             {
                 id: 1703, appliesToFleet: true, factory: () => {
                     return new AdditionModification('Mar Tuuk', 1,
-                    true, this.orders.addition, AdditionRestriction.Red)
+                    true, this.orders.addition, AdditionRestriction.Red);
+                }
+            },
+            {
+                id: 1705, appliesToFleet: true, factory: () => {
+                    return new AdditionModification('TF-1726', 2,
+                    true, this.orders.addition, AdditionRestriction.Black, null, null, null, ModificationType.Addition,
+                    true, 1);
                 }
             },
             // Rerolls

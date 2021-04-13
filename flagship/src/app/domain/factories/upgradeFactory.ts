@@ -1,4 +1,4 @@
-import { Upgrade, UpgradeData, UpgradeClass, SlotGrantingUpgradeData } from '../game/upgrade';
+import { Upgrade, UpgradeData, UpgradeClass, SlotGrantingUpgradeData, IgnitionGrantingUpgradeData } from '../game/upgrade';
 import { UpgradeType } from '../game/upgradeType';
 import { Faction } from '../game/faction';
 import { CommanderUpgrade } from '../upgrades/commanderUpgrade';
@@ -8,9 +8,11 @@ import { CustomCommander } from '../campaign/customCommander';
 import { CustomCommanderUpgrade } from '../upgrades/customCommanderUpgrade';
 import { ResourceType } from '../game/resource';
 import { Traits } from '../game/traits';
+import { IgnitionGrantingUpgrade } from '../upgrades/ignitionGrantingUpgrade';
+import { Armament } from '../game/armament';
 
 export class UpgradeFactory {
-    upgradeData: (UpgradeData | SlotGrantingUpgradeData)[];
+    upgradeData: (UpgradeData | SlotGrantingUpgradeData | IgnitionGrantingUpgradeData)[];
 
 
     private correctOldIds(id: number): number {
@@ -36,12 +38,19 @@ export class UpgradeFactory {
         }
 
         if (data.upgradeClass === UpgradeClass.SlotGranting) {
-            let slotData = <SlotGrantingUpgradeData>data;
+            const slotData = <SlotGrantingUpgradeData>data;
             return new SlotGrantingUpgrade(slotData.id, slotData.name, slotData.type,
                 slotData.faction, slotData.text, slotData.modification, slotData.points,
                 slotData.unique, slotData.grantedType, slotData.canEquipToShipWithMatchingSlot,
                 data.sizeRestriction, data.shipRestriction, data.traitRestriction,
                 data.startingResources, data.resupplyResources, slotData.removedTypes);
+        }
+        if (data.upgradeClass === UpgradeClass.IgnitionGranting) {
+            const igData = <IgnitionGrantingUpgradeData>data;
+            return new IgnitionGrantingUpgrade(data.id, data.name, data.type, data.faction,
+                data.text, data.modification, data.points, data.unique,
+                data.sizeRestriction, data.shipRestriction, data.traitRestriction,
+                data.startingResources, data.resupplyResources, igData.ignitionArmament);
         }
         if (data.upgradeClass === UpgradeClass.Normal) {
             return new Upgrade(data.id, data.name, data.type, data.faction,
@@ -54,13 +63,18 @@ export class UpgradeFactory {
     }
 
     getUpgradesOfType(type: UpgradeType, faction: Faction): Upgrade[] {
-        let data = this.upgradeData.filter(ud => ud.type === type &&
-            (ud.faction === faction || ud.faction === Faction.Any));
+        const data = this.upgradeData.filter(ud => ud.type === type &&
+            (Array.isArray(ud.faction) 
+            ? (ud.faction.indexOf(Faction.Any) >= 0 || ud.faction.indexOf(faction) >= 0) 
+            : (ud.faction === faction || ud.faction === Faction.Any)));
         return data.map(d => this.instantiateUpgrade(d.id));
     }
 
     getUpgradeMatchingCriteria(faction: Faction, name: string, points: number): Upgrade {
-        let data = this.upgradeData.find(x => (x.faction === faction || x.faction === Faction.Any) &&
+        const data = this.upgradeData.find(x => 
+            (Array.isArray(x.faction) 
+                ? (x.faction.indexOf(Faction.Any) >= 0 || x.faction.indexOf(faction) >= 0) 
+                : (x.faction === faction || x.faction === Faction.Any)) &&
             x.points === points && x.name.toLowerCase() === name.toLowerCase());
         return data ? this.instantiateUpgrade(data.id) : null;
     }
@@ -220,6 +234,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 36, upgradeClass: UpgradeClass.Commander,
                 text: 'At the start of each Ship Phase, you may reveal and discard 1 command dial from this card. If you do, until the end of the round, when a friendly ship spends only a matching command token to resolve a command, that ship resolves that command as if it had spent a dial and a token of the same type instead.',
                 startingResources: { quantity: 4, types: [ResourceType.Any] }
+            },
+            {
+                id: 1705, name: 'TF-1726', type: UpgradeType.Commander, faction: Faction.Separatists,
+                unique: true, modification: false, points: 26, upgradeClass: UpgradeClass.Commander,
+                text: 'Once per activation, while a friendly ship is attacking a ship, the attacker adds 1 black die to its attack pool for each raid token the defender has, to a maximum of 2 additional dice.'
             },
             // REPUBLIC
             {
@@ -582,11 +601,38 @@ export class UpgradeFactory {
                 id: 2703, name: 'Foreman\'s Labor', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'Before you suffer damage from an attack, if the defending hull zone has at least 1 shield remaining, you may exhaust this card to reduce the total damage by 1.'
-            },            
+            },
             {
                 id: 2704, name: 'Invisible Hand', type: UpgradeType.Title, faction: Faction.Separatists,
                 unique: true, modification: false, points: 9, upgradeClass: UpgradeClass.Normal,
                 text: 'While deploying fleets, if you are in the play area, while you would deploy a squadron with Swarm, you may set that squadron aside next to your ship instead. You may set aside up to 5 squadrons in this way. Squadron: For each squadron you would activate with this command, you may place 1 of your set-aside squadrons within distance 3. It cannot move this activation, and if it has AI, increase its AI value by 1.'
+            },
+            {
+                id: 2705, name: 'Invincible', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.SlotGranting,
+                grantedType: UpgradeType.DefensiveRetrofit, canEquipToShipWithMatchingSlot: true,
+                text: 'You gain 1 additional Defensive Retrofit icon in your upgrade bar.'
+            },
+            {
+                id: 2706, name: 'Lucid Voice', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 8, upgradeClass: UpgradeClass.Normal,
+                text: 'Treat your rear hull zone\'s printed battery armament as 3 red dice. The battery armament of your left and right hull zones are each increased by 1 black die and decreased by 1 blue die.'
+            },
+            {
+                id: 2707, name: 'Gilded Aegis', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'At the end of the Command Phase or Ship Phase, you may discard a Redirect defense token to move shields to 1 of your hull zones. If you do, the number of shields in that zone cannot exceed a maximum of "6". You cannot recover shields in that zone while it is greater than its maximum shield value.'
+            },
+            {
+                id: 2708, name: 'Nova Defiant', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'When you are deployed, you must choose 1 of each type of command token for this card. Your command vlaue is increased to 4. You can be assigned more than 1 of each type of command token. When you reveal a command, you may discard all fo the tokens from this card to gain them.',
+                startingResources: { quantity: 4, types: [ ResourceType.ConcentrateFire, ResourceType.Engineering, ResourceType.Navigation, ResourceType.Squadron ]}
+            },
+            {
+                id: 2709, name: 'Patriot Fist', type: UpgradeType.Title, faction: Faction.Separatists,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'While attacking a ship at medium-long range, if this is your first attack during your activation, you may add 2 blue dice to your attack pool. If you do, you cannot attack again during this activation.'
             },
             // Republic titles
             {
@@ -609,6 +655,32 @@ export class UpgradeFactory {
                 id: 2803, name: 'Swift Return', type: UpgradeType.Title, faction: Faction.Republic,
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'During your Determine Course step, if you are at distance 1-2 of an obstacle, you may change your speed by 1 or increase 1 yaw value by 1.'
+            },
+            {
+                id: 2804, name: 'FB-88', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'Before you reveal a command, you may discard your top command dial.'
+            },
+            {
+                id: 2805, name: 'TB-73', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'After you deploy, gain 1 additional Evade defense token.'
+            },
+            {
+                id: 2806, name: 'Tranquility', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'While defending, after the Spend Defense Tokens step, you spent fewer than 2 defense tokens, you may move up to 2 shields from 1 of your hull zones to the defending hull zone. If you do, the number of shields in that zone cannot exceed a maximum of "6". You cannot recover shields while any zone is greater than its maximum shield value.'
+            },
+            {
+                id: 2807, name: 'Triumphant', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'While another friendly non-flotilla ship resolves a Squadron command, up to 3 squadrons without Adept that it activates can be at close range of you (even if the squadrons are beyond close-medium range of that ship). This effect is not active during the first round.'
+            },
+            {
+                id: 2808, name: 'Resolute', type: UpgradeType.Title, faction: Faction.Republic,
+                unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
+                text: 'You must choose at least 2 types of command tokens for this card. After you resolve a command by spending a dial, you may discard 1 matching command token from this card to gain that token.',
+                startingResources: { quantity: 4, types: [ ResourceType.Engineering, ResourceType.Squadron, ResourceType.ConcentrateFire ]}
             },
             // Ion Cannons
             {
@@ -650,6 +722,12 @@ export class UpgradeFactory {
                 id: 3008, name: 'SW-7 Ion Batteries', type: UpgradeType.IonCannons, faction: Faction.Any,
                 unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
                 text: 'While attacking a ship, each of your unspent blue accuracy icons add 1 damage to the damage total.'
+            },
+            {
+                id: 3009, name: 'Point Defense Ion Cannons', type: UpgradeType.IonCannons, faction: Faction.Any,
+                unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                sizeRestriction: [Size.SmallFlotilla, Size.Small, Size.Medium, Size.Large],
+                text: 'While defending at close range or distance 1, during the Spend Defense Tokens step, you may force the attacker to reroll 1 die of your choice.'
             },
             // Weapons Team
             {
@@ -788,6 +866,24 @@ export class UpgradeFactory {
                 text: 'During the Squadron Phase, when it is your turn to activate squadrons, you may exhaust this card to choose a number of unactivated, friendly squadrons at close-long range up to your squadron value. This turn, activate each of those squadrons. While attacking, each of those squadrons with AI are treated as if activated by a squadron command.',
                 resupplyResources: { quantity: 1, types: [ResourceType.Engineering, ResourceType.Squadron] }
             },
+            {
+                id: 5014, name: 'SPHA-T', type: UpgradeType.OffensiveRetrofit, faction: Faction.Republic,
+                unique: false, modification: true, points: 7, upgradeClass: UpgradeClass.IgnitionGranting,
+                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
+                shipRestriction: [206, 207],
+                ignitionArmament: new Armament(0, 5, 1),
+                text: '"Star Destroyer" only. Decrease your squadron value by 2. Ignition [Close]: Each of your front, left, or right firing arcs is also a special firing arc. You have a special battery armament of 5 blue dice and 1 black die. After you place your targeting token, exhaust this card. While this card is exhausted, you cannot place targeting tokens.'
+            },
+            {
+                id: 5015, name: 'B2 Rocket Troopers', type: UpgradeType.OffensiveRetrofit, faction: Faction.Separatists,
+                unique: false, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
+                text: 'While performing a non-Salvo attack against a ship at close-medium range, you may exhaust this card. If you do, the defender gains 1 raid token of your choice. While attacking a squadron, you may exhaust this card. If you do, add 1 die of a color already in your attack pool to your attack pool.'
+            },
+            {
+                id: 5016, name: 'Flak Guns', type: UpgradeType.OffensiveRetrofit, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'Treat each die in your anti-squadron armament as black. While performing a Salvo attack, the black dice in your battery armament can be used at medium range and the blue dice in your battery armament can be used at long range.'
+            },
             // Boarding Team - 6
             {
                 id: 6000, name: 'Darth Vader', type: UpgradeType.BoardingTeam, faction: Faction.Empire,
@@ -886,6 +982,21 @@ export class UpgradeFactory {
                 id: 8004, name: 'Take Evasive Action!', type: UpgradeType.FleetCommand, faction: Faction.Any,
                 unique: true, modification: false, points: 6, upgradeClass: UpgradeClass.Normal,
                 text: 'At the start of the Ship Phase, you may discard this card or spend a navigation token. If you do, until the end of the round, each friendly ship may increase the last yaw value of its current speed by 1 during its Determine Course step.'
+            },
+            {
+                id: 8005, name: 'Hot Landing', type: UpgradeType.FleetCommand, faction: [Faction.Separatists, Faction.Republic],
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'At the start of the Squadron Phase, friendly squadrons with Adept gain Grit until the end of the phase. When a friendly squadron with Adept is destroyed, you may choose 1 enemey ship at distance 1-2 of that squadron. If you do, that ship gains 1 raid token of your choice.'
+            },
+            {
+                id: 8006, name: 'Mercy Mission', type: UpgradeType.FleetCommand, faction: Faction.Republic,
+                unique: true, modification: false, points: 0, upgradeClass: UpgradeClass.Normal,
+                text: 'Before deploying fleets, un-equip this card and choose 1 friendly small ship that is not your flagship. Equip this card to the chosen ship (even if it does not have a fleet command icon in its upgrade bar). At the end of the game, if you are within the enemy deployment zone, increase your score by 40 points; if you were destroyed, increase your fleet value by 20 points.'
+            },
+            {
+                id: 8007, name: 'Jedi Hostage', type: UpgradeType.FleetCommand, faction: Faction.Separatists,
+                unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'When an enemy ship declares you as the target of a non-Salvo attack, if this card is readied, the attacker gains a raid token of its choice, if able. When an enemy ship at close range reveals a command, it may discard a Squadron dial to exhaust this card. While defending, if this card is exhausted, you cannot spend more than 1 defense token.'
             },
             // Fleet Support - 9
             {
@@ -1414,16 +1525,16 @@ export class UpgradeFactory {
                 text: 'While attacking a squadron, before you gather dice, if the defender is not engaged with a friendly squadron, you may replace all of the blue dice in your anti-squadron armament with red dice.'
             },
             {
-                id: 12013, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Separatists,
+                id: 12013, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: [Faction.Separatists, Faction.Republic],
                 unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
                 resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
                 text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
             },
+            //12014 skipped (old dupe of swivel-mount)
             {
-                id: 12014, name: 'Swivel-Mount Batteries', type: UpgradeType.Turbolaser, faction: Faction.Republic,
-                unique: false, modification: true, points: 8, upgradeClass: UpgradeClass.Normal,
-                resupplyResources: { quantity: 1, types: [ResourceType.ConcentrateFire] },
-                text: 'When you reveal a command, you may exhaust this card to choose 1 of your hull zones and mark it with a focus token.  While attacking a ship from that hull zone, add 1 die of any color from an adjacent hull zone\'s armament to your attack pool.  While attacking from adjacent hull zones, remove 1 die from your attack pool.  When you ready this card, remove that focus token.'
+                id: 12015, name: 'DBY-827 Heavy Turbolaser', type: UpgradeType.Turbolaser, faction: Faction.Any,
+                unique: false, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
+                text: 'While you perform a Salvo attack, you may change 1 die to a face with a critical icon.'
             },
             // Experimental Retrofit - 13
             {
@@ -1482,6 +1593,12 @@ export class UpgradeFactory {
                 id: 14006, name: 'Reactive Gunnery', type: UpgradeType.DefensiveRetrofit, faction: Faction.Any,
                 unique: false, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
                 text: 'While defending, you may exhaust this card and spend a readied defense token to resolve the salvo defense effect instead of that token\'s effect. You cannot resolve the salvo defense effect more than once per attack.'
+            },
+            {
+                id: 14007, name: 'Thermal Shields', type: UpgradeType.DefensiveRetrofit, faction: [Faction.Separatists, Faction.Republic],
+                unique: false, modification: false, points: 5, upgradeClass: UpgradeClass.Normal,
+                text: 'While defending, after the attacker gathers dice, you may spend 1 brace token. If you do, choose and remove half of the dice in the attack pool, rounded down.',
+                sizeRestriction: [ Size.Medium, Size.Large ]
             },
             // Superweapon - 15
             {

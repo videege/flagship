@@ -22,8 +22,16 @@ export class NotesService {
 
   // tslint:disable-next-line:member-ordering
   static _notes: Notes = {
-    version: '0.0.2',
+    version: '0.0.3',
     notes: [
+      {
+        title: 'Final Wave 10 Upgrades',
+        date: new Date('2021-04-12'),
+        content: [
+                  `Added additional upgrades spoiled before the release of wave 10.`,
+                  `Various new effects added to the statistics simulator, including SPHA-T, which will show the ignition arc in the simulator.`
+                ]
+      },
       {
         title: 'Additional Wave 10 Upgrades',
         date: new Date('2021-03-20'),

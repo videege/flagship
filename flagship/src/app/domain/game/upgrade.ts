@@ -4,18 +4,20 @@ import { Ship } from './ship';
 import { UpgradeSlot } from './upgradeSlot';
 import { Size } from './size';
 import { Resources } from './resource';
+import { Armament } from './armament';
 
 export enum UpgradeClass {
   Normal,
   Commander,
-  SlotGranting
+  SlotGranting,
+  IgnitionGranting
 }
 
 export interface UpgradeData {
   id: number;
   name: string;
   type: UpgradeType;
-  faction: Faction;
+  faction: Faction | Faction[];
   text: string;
   modification: boolean;
   points: number;
@@ -34,11 +36,15 @@ export interface SlotGrantingUpgradeData extends UpgradeData {
   removedTypes: UpgradeType[];
 }
 
+export interface IgnitionGrantingUpgradeData extends UpgradeData {
+  ignitionArmament: Armament;
+}
+
 export class Upgrade implements UpgradeData {
   upgradeClass: UpgradeClass;
 
   constructor(public id: number, public name: string, public type: UpgradeType, 
-    public faction: Faction, public text: string, public modification: boolean,
+    public faction: Faction | Faction[], public text: string, public modification: boolean,
     public points: number, public unique: boolean, public sizeRestriction: Size[] = null,
     public shipRestriction: number[] = null, public traitRestriction: string[] = null,
     public startingResources: Resources = null, public resupplyResources: Resources = null) {
@@ -56,10 +62,19 @@ export class Upgrade implements UpgradeData {
 
     return this.traitRestriction.join(', ') + ' only.';
   }
+
+  getFactions(): Faction[] {
+    if (Array.isArray(this.faction)) { 
+      return this.faction; 
+    }
+
+    return [ this.faction ];
+  }
   
   canEquipToShip(ship: Ship): boolean {
     // Can't equip if wrong faction
-    if (this.faction !== ship.faction && this.faction !== Faction.Any) {
+    const factions = this.getFactions();
+    if (factions.indexOf(Faction.Any) === -1 && factions.indexOf(ship.faction) === -1) {
       return false;
     }
 

@@ -39,13 +39,13 @@ export class ShipFactory {
     // republic
     acclamator: [2800, 2801],
     consular: [2802, 2803],
-    peltaRepublic: [],
-    venator: [],
+    peltaRepublic: [2804, 2805],
+    venator: [2806, 2807, 2808],
     // separatists
     munificent: [2700, 2701],
     hardcell: [2702, 2703],
-    providence: [2704],
-    recusant: [],
+    providence: [2704, 2705, 2706],
+    recusant: [2707, 2708, 2709],
   };
 
   static shipData: (ShipData|IgnitionCapableShipData|HugeShipData)[] = [
@@ -876,8 +876,8 @@ export class ShipFactory {
       points: 45, hull: 5, command: 2, squadron: 1, engineering: 4, size: Size.Small,
       defenseTokens: [DefenseToken.Evade, DefenseToken.Brace, DefenseToken.Redirect],
       leftShields: 2, rightShields: 2, frontShields: 3, rearShields: 1,
-      frontArmament: new Armament(2, 1, 0), rearArmament: new Armament(2, 0, 0),
-      leftArmament: new Armament(1, 1, 0), rightArmament: new Armament(1, 1, 0),
+      frontArmament: new Armament(2, 0, 1), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(1, 0, 1), rightArmament: new Armament(1, 0, 1),
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(2, [1, 1], null, null),
       upgradeSlots: [
@@ -919,7 +919,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.venator,
-      traits: [Traits.clone, Traits.jedi]
+      traits: [Traits.clone, Traits.bombard]
     },
     // Separatists
     {
