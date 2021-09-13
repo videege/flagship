@@ -15,6 +15,7 @@ import { Battle } from './battle';
 import { Fleet } from '../game/fleet';
 import { ObjectiveFactory } from '../factories/objectiveFactory';
 import { ObjectiveType } from '../game/objective';
+import { CampaignEra } from './campaignEra';
 
 export interface SerializedCampaign {
     id: string;
@@ -23,6 +24,7 @@ export interface SerializedCampaign {
     playerUids: string[];
     inviteToken: string;
     type: CampaignType;
+    era: CampaignEra;
     name: string;
     startDate: Date;
     statusDate: Date;
@@ -39,6 +41,7 @@ export class Campaign {
     public playerUids: string[] = [];
     public inviteToken: string;
     public type: CampaignType;
+    public era: CampaignEra;
     public name: string;
     public startDate: Date;
     public statusDate: Date;
@@ -62,6 +65,7 @@ export class Campaign {
             playerUids: this.playerUids,
             inviteToken: this.inviteToken,
             type: this.type,
+            era: this.era,
             startDate: this.startDate,
             statusDate: this.statusDate,
             history: this.history.map(x => x.serialize()),
@@ -87,6 +91,7 @@ export class Campaign {
         campaign.playerUids = data.playerUids || [];
         campaign.inviteToken = data.inviteToken || null;
         campaign.type = data.type;
+        campaign.era = data.era;
         campaign.startDate = data.startDate;
         campaign.statusDate = data.statusDate;
         campaign.history = data.history.map(x => CampaignState.hydrate(x));
@@ -164,7 +169,7 @@ export class Campaign {
     }
 
     public getTeamForFaction(faction: Faction): Team {
-        return faction === Faction.Empire ? this.empire : this.rebels;
+        return faction === this.empire.faction ? this.empire : this.rebels;
     }
 
     public campaignOwner(): CampaignUser {
@@ -207,12 +212,12 @@ export class Campaign {
     public getLosingFaction(): Faction {
         if (this.empire.campaignPoints !== this.rebels.campaignPoints) {
             return this.empire.campaignPoints < this.rebels.campaignPoints
-                ? Faction.Empire : Faction.Rebels;
+                ? this.empire.faction : this.rebels.faction;
         } else {
-            let empireLocations = this.locations.filter(x => x.controllingFaction === Faction.Empire);
-            let rebelLocations = this.locations.filter(x => x.controllingFaction === Faction.Rebels);
+            let empireLocations = this.locations.filter(x => x.controllingFaction === this.empire.faction);
+            let rebelLocations = this.locations.filter(x => x.controllingFaction === this.rebels.faction);
             return empireLocations.length < rebelLocations.length
-                ? Faction.Empire : Faction.Rebels;
+                ? this.empire.faction : this.rebels.faction;
         }
     }
 
@@ -223,8 +228,8 @@ export class Campaign {
         turn.act = newAct ? current.act + 1 : current.act;
         turn.turn = newAct ? 1 : current.turn + 1;
         turn.initiativeFaction = this.empire.campaignPoints < this.rebels.campaignPoints
-            ? Faction.Empire
-            : Faction.Rebels;
+            ? this.empire.faction
+            : this.rebels.faction;
         if (!newAct) {
             turn.imperialPointsScored = current.imperialPointsScored;
             turn.rebelPointsScored = current.rebelPointsScored;
@@ -236,8 +241,8 @@ export class Campaign {
         // update the roster with stats, and the current turn
         let currentState = this.currentState();
         let winningFaction = battle.getWinnerFaction(this.empire);
-        let winningTeam = winningFaction === Faction.Empire ? this.empire : this.rebels;
-        let losingTeam = winningFaction === Faction.Empire ? this.rebels : this.empire;
+        let winningTeam = winningFaction === this.empire.faction ? this.empire : this.rebels;
+        let losingTeam = winningFaction === this.empire.faction ? this.rebels : this.empire;
         let winningResult = battle.attackersWon() ? battle.attackerResult : battle.defenderResult;
         let losingResult = battle.attackersWon() ? battle.defenderResult : battle.attackerResult;
         let winningPlayerIds = battle.attackersWon() ?
@@ -247,8 +252,8 @@ export class Campaign {
 
         winningTeam.campaignPoints += winningResult.earnedPoints;
         losingTeam.campaignPoints += losingResult.earnedPoints;
-        currentState.imperialPointsScored += winningFaction === Faction.Empire ? winningResult.earnedPoints : losingResult.earnedPoints;
-        currentState.rebelPointsScored += winningFaction === Faction.Empire ? losingResult.earnedPoints : winningResult.earnedPoints;
+        currentState.imperialPointsScored += winningFaction === this.empire.faction ? winningResult.earnedPoints : losingResult.earnedPoints;
+        currentState.rebelPointsScored += winningFaction === this.empire.faction ? losingResult.earnedPoints : winningResult.earnedPoints;
 
         let winningPlayers = winningTeam.players.filter(p => winningPlayerIds.includes(p.id));
         let losingPlayers = losingTeam.players.filter(p => losingPlayerIds.includes(p.id));

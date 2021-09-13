@@ -10,7 +10,7 @@ export interface SerializedCampaignLocation {
     chosenObjective: number;
     playedCampaignObjectives: number[];
 }
- 
+
 export class CampaignLocation {
     public id: number;
     public name: string;
@@ -35,10 +35,24 @@ export class CampaignLocation {
     }
 
     public controlLabel(): string {
-        if (this.controllingFaction === null) 
+        if (this.controllingFaction === null)
             return "Unoccupied";
-        
-        let faction = this.controllingFaction === Faction.Empire ? "Imperial" : "Rebel";
+
+        let faction;
+        switch (this.controllingFaction) {
+            case Faction.Empire:
+                faction = "Imperial";
+                break;
+            case Faction.Rebels:
+                faction = "Rebel";
+                break;
+            case Faction.Republic:
+                faction = "Republic";
+                break;
+            case Faction.Separatists:
+                faction = "Separatist";
+                break;
+        }
         let type = this.controlType === LocationControlType.Base ? "Base" : "Presence";
         return `${faction} ${type}`;
     }
@@ -82,7 +96,7 @@ export class CampaignLocation {
             playedCampaignObjectives: this.playedCampaignObjectives
         };
     }
-    
+
     static newLocation(id: number, name: string, objectives: number[], strategicEffects: StrategicEffectType[],
         baseAssaultBonus: number, sectors: number[], rewards: LocationReward[], controllingFaction: Faction = null,
         controlType: LocationControlType = null, chosenObjective: number = null,

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, factionAdjective } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
 import { StrategicEffectType, StrategicEffects } from 'src/app/domain/campaign/strategicEffectType';
@@ -83,12 +83,13 @@ export class CampaignLocationsComponent implements OnInit, OnChanges {
   public setLocationControl(location: CampaignLocation) {
     let ref = this.dialog.open(LocationControlDialogComponent, {
       width: '450px',
-      data: new LocationControlDialogData(location)
+      data: new LocationControlDialogData(location, this.campaign.era)
     });
     ref.afterClosed().subscribe((data: LocationControlDialogData) => {
       if (data) {
         let change = null;
-        if (data.faction !== Faction.Empire && data.faction !== Faction.Rebels) {
+        if (data.faction !== Faction.Empire && data.faction !== Faction.Rebels &&
+            data.faction !== Faction.Separatists && data.faction !== Faction.Republic) {
           if (location.controllingFaction != null) {
             location.setUnoccupied();
             change = 'unoccupied';
@@ -98,14 +99,14 @@ export class CampaignLocationsComponent implements OnInit, OnChanges {
             if (location.controllingFaction != data.faction ||
               location.controlType != LocationControlType.Presence) {
               location.setPresence(data.faction);
-              change = `${data.faction === Faction.Empire ? "Imperial presence" : "Rebel presence"}`;
+              change = `${factionAdjective(data.faction)} presence`;
             }
           } else {
             if (location.controllingFaction != data.faction ||
               location.controlType != LocationControlType.Base ||
               location.chosenObjective != data.chosenObjective) {
               location.setBase(data.faction, data.chosenObjective);
-              change = `${data.faction === Faction.Empire ? "Imperial base" : "Rebel base"}`;
+              change = `${factionAdjective(data.faction)} base`;
             }
           }
         }

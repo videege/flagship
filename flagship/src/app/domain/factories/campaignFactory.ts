@@ -8,15 +8,17 @@ import { StrategicEffectType } from '../campaign/strategicEffectType';
 import { SerializedCustomCommander } from '../campaign/customCommander';
 import { Campaign } from '../campaign/campaign';
 import { CampaignLocationFactory } from './campaignLocationFactory';
+import { CampaignEra } from '../campaign/campaignEra';
 
 export class CampaignFactory {
 
-    public createCampaign(name: string, type: CampaignType, owner: firebase.User) {
+    public createCampaign(name: string, type: CampaignType, era: CampaignEra, owner: firebase.User) {
         let campaign = new Campaign();
         campaign.id = null;
         campaign.inviteToken = null;
         campaign.name = name;
         campaign.type = type;
+        campaign.era = era;
         campaign.ownerUid = owner.uid;
         campaign.campaignUsers = [{
             uid: campaign.ownerUid,
@@ -25,11 +27,11 @@ export class CampaignFactory {
           }];
         campaign.playerUids = [owner.uid];
         campaign.empire = new Team();
-        campaign.empire.faction = Faction.Empire;
-        campaign.empire.name = 'Galactic Empire';
+        campaign.empire.faction = era === CampaignEra.CivilWar ? Faction.Empire : Faction.Separatists;
+        campaign.empire.name = era === CampaignEra.CivilWar ? 'Galactic Empire' : 'Separatist Alliance';
         campaign.rebels = new Team();
-        campaign.rebels.faction = Faction.Rebels;
-        campaign.rebels.name = 'Rebel Alliance';
+        campaign.rebels.faction = era === CampaignEra.CivilWar ? Faction.Rebels : Faction.Republic;
+        campaign.rebels.name = era === CampaignEra.CivilWar ? 'Rebel Alliance' : ' Galactic Republic';
         let now = new Date();
         campaign.startDate = now;
         campaign.statusDate = now;
@@ -44,5 +46,5 @@ export class CampaignFactory {
         return campaign;
     }
 
-   
+
 }

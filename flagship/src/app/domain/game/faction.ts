@@ -21,3 +21,33 @@ export function oppositeFaction(faction: Faction): Faction {
       return null;
   }
 }
+
+export function factionNoun(faction: Faction): string {
+  switch(faction) {
+    case Faction.Empire:
+      return "Empire";
+    case Faction.Rebels:
+      return "Rebels";
+    case Faction.Republic:
+      return "Republic";
+    case Faction.Separatists:
+      return "Separatists";
+    default:
+      return null;
+  }
+}
+
+export function factionAdjective(faction: Faction): string {
+  switch(faction) {
+    case Faction.Empire:
+      return "Imperial";
+    case Faction.Rebels:
+      return "Rebel";
+    case Faction.Republic:
+      return "Republic";
+    case Faction.Separatists:
+      return "Separatist";
+    default:
+      return null;
+  }
+}
