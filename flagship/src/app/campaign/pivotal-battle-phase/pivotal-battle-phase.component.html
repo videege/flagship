@@ -1,7 +1,7 @@
 <form>
     <h3>Declare {{ label }} Battle</h3>
     <p>
-        The {{ factionAdjective(declaringFaction) }} team will
+        The {{ getFactionAdjective(declaringFaction) }} team will
         declare this battle, choosing the battle's objective and location.
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
@@ -49,9 +49,9 @@
     <div *ngIf="reward">
         <h4>Battle Outcome</h4>
         <p>
-            {{ factionAdjective(reward.winnerFaction) }} team wins with a
+            {{ getFactionAdjective(reward.winnerFaction) }} team wins with a
             margin of victory of {{ reward.marginOfVictory }} points.
-            {{ factionAdjective(reward.winnerFaction) }} team will receive
+            {{ getFactionAdjective(reward.winnerFaction) }} team will receive
             <strong>{{ reward.winnerCampaignPoints(isClimactic) }} campaign points</strong>
             <span *ngIf="isClimactic">
                 ({{ reward.flatCampaignPoints }} + 2 &times; {{ reward.victoryBonus }} [Climactic 2X Victory Bonus]).
@@ -62,11 +62,11 @@
 
         </p>
         <p>
-            {{ factionAdjective(reward.winnerFaction) }} team commanders will
+            {{ getFactionAdjective(reward.winnerFaction) }} team commanders will
             receive {{ reward.winningTeamXP }} XP each.
         </p>
         <p>
-            {{ factionAdjective(reward.winnerFaction) }} team commanders will
+            {{ getFactionAdjective(reward.winnerFaction) }} team commanders will
             receive {{ reward.losingTeamXP }} XP each.
         </p>
         <div *ngIf="pivotalObjective === objTypes.Conquest && !reward.attackersWon">
@@ -92,7 +92,7 @@
                 <p>
                     Because the attacking team won, that team may choose up to two locations in this area
                     that are unoccupied or have an enemy presence and convert them to be locations with
-                    {{ factionAdjective(reward.winnerFaction) }} presence. The
+                    {{ getFactionAdjective(reward.winnerFaction) }} presence. The
                     attacking team will gain additional campaign points equal to each location's victory bonus
                     value.
                 </p>
@@ -124,17 +124,17 @@
             <div *ngIf="reward.attackersWon">
                 <p>
                     Because the attacking team won, the {{ location.controlLabel() }} at {{ location.name }}
-                    will be destroyed. The {{ factionAdjective(reward.winnerFaction) }}
+                    will be destroyed. The {{ getFactionAdjective(reward.winnerFaction) }}
                     team will also gain one Resource token and one Skilled Spacers token.
                 </p>
             </div>
             <div *ngIf="!reward.attackersWon">
                 <p>
                     Because the defending team won, the
-                    {{ factionAdjective(reward.winnerFaction) }}
+                    {{ getFactionAdjective(reward.winnerFaction) }}
                     team may relocate their base from {{ location.name }} to any location that is unoccupied or has
                     friendly
-                    presence. The {{ factionAdjective(reward.winnerFaction) }} team will gain
+                    presence. The {{ getFactionAdjective(reward.winnerFaction) }} team will gain
                     that location's victory bonus value in campaign points, and may gain a strategic effect token from
                     the new base location.
                 </p>
