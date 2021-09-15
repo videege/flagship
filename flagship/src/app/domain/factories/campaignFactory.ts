@@ -39,6 +39,7 @@ export class CampaignFactory {
         initialState.act = 0;
         initialState.turn = 0;
         initialState.phase = Phase.CampaignSetup;
+        initialState.initiativeFaction = campaign.rebels.faction;
         initialState.events = [];
         campaign.history = [initialState];
         let factory = new CampaignLocationFactory();

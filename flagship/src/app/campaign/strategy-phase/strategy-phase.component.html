@@ -117,20 +117,20 @@
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
         <mat-form-field fxFlex.gt-xs *ngIf="imperialSkilledSpacersMax > 0">
-            <mat-label>Imperial Skilled Spacers</mat-label>
+            <mat-label>{{ getFactionAdjective(campaign.empire.faction) }} Skilled Spacers</mat-label>
             <input matInput [(ngModel)]="imperialSkilledSpacersSpent" (ngModelChange)="formChanged()" name="iss"
                 required type="number" min="0" [max]="imperialSkilledSpacersMax" />
         </mat-form-field>
         <span *ngIf="imperialSkilledSpacersMax === 0" fxFlex.gt-xs>
-            The Imperial team does not have any Skilled Spacers tokens.
+            The {{ getFactionAdjective(campaign.empire.faction) }} team does not have any Skilled Spacers tokens.
         </span>
         <mat-form-field fxFlex.gt-xs *ngIf="rebelSkilledSpacersMax > 0">
-            <mat-label>Rebel Skilled Spacers</mat-label>
+            <mat-label>{{ getFactionAdjective(campaign.rebels.faction) }} Skilled Spacers</mat-label>
             <input matInput [(ngModel)]="rebelSkilledSpacersSpent" (ngModelChange)="formChanged()" name="rss" required
                 type="number" min="0" [max]="rebelSkilledSpacersMax" />
         </mat-form-field>
         <span *ngIf="rebelSkilledSpacersMax === 0" fxFlex.gt-xs>
-            The Rebel team does not have any Skilled Spacers tokens.
+            The {{ getFactionAdjective(campaign.rebels.faction) }} team does not have any Skilled Spacers tokens.
         </span>
     </div>
     <flagship-issues-list [issues]="issues">

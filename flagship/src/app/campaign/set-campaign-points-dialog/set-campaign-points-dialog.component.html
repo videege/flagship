@@ -10,11 +10,11 @@
     </p>
     <form fxLayout="column">
         <mat-form-field>
-            <input placeholder="Empire Score" matInput type="number" [(ngModel)]="empireScore" required min="0"
+            <input [placeholder]="era == 1 ? 'Seperatist Score' : 'Empire Score'" matInput type="number" [(ngModel)]="empireScore" required min="0"
                 name="empireScore" />
         </mat-form-field>
         <mat-form-field>
-            <input placeholder="Rebel Score" matInput type="number" [(ngModel)]="rebelScore" required min="0"
+            <input [placeholder]="era == 1 ? 'Republic Score' : 'Rebel Score'" matInput type="number" [(ngModel)]="rebelScore" required min="0"
                 name="rebelScore" />
         </mat-form-field>
     </form>

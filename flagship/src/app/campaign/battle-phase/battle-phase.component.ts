@@ -18,7 +18,7 @@ import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
 import { Ship } from 'src/app/domain/game/ship';
 import { Squadron } from 'src/app/domain/game/squadron';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, factionNoun } from 'src/app/domain/game/faction';
 import { Team } from 'src/app/domain/campaign/team';
 import { StrategicEffectType } from 'src/app/domain/campaign/strategicEffectType';
 
@@ -57,7 +57,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
   @Output() phaseComplete = new EventEmitter<void>();
 
   public states = BattleState;
-  public factions = Faction;
+  public getNameOfFaction = factionNoun;
 
   completeButtonOptions = indeterminateOptions('Finish Battle Phase');
   objectiveFactory = new ObjectiveFactory();
@@ -102,7 +102,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
     this.removeSpentTokens(this.empireTokens, this.campaign.empire);
     this.removeSpentTokens(this.rebelTokens, this.campaign.rebels);
     let currentState = this.campaign.currentState();
-    
+
     for (let i = 0; i < this.battles.length; i++) {
       let battle = this.battles[i];
       battle.objectiveId = this.battleObjectives[i].id;
@@ -132,7 +132,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
       }
       currentState.updateBattle(battle);
     }
-    
+
     currentState.setPhase(Phase.Management);
     this.campaignService.updateCampaign(this.campaign).then(() => {
       this.phaseComplete.emit();
@@ -187,7 +187,7 @@ export class BattlePhaseComponent implements OnInit, OnChanges {
         mod.eligibleSquadronsForScarring = fleet.squadrons.filter(x => !x.isScarred);
         mod.eligibleShipsForVeteran = fleet.ships.filter(x => !x.isVeteran);
         mod.eligibleSquadronsForVeteran = fleet.squadrons.filter(x => !x.isVeteran && x.unique);
-        mod.maxVeterans = 1 + (this.campaign.getFactionOfPlayer(participant.playerId) === Faction.Empire
+        mod.maxVeterans = 1 + (this.campaign.getFactionOfPlayer(participant.playerId) === this.campaign.empire.faction
           ? this.currentState.imperialSkilledSpacersSpent
           : this.currentState.rebelSkilledSpacersSpent);
         this.fleetMods[participant.fleetId] = mod;

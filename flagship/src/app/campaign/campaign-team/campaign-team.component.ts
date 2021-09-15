@@ -39,7 +39,6 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   @Input() team: Team;
 
   public faction: string;
-  public factionIcon: string;
   public playerMap: { [id: string]: CampaignUser } = {};
   public canAddPlayers = false;
   public tokenCounts: TokenCount[] = [];
@@ -77,7 +76,6 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   private setup(): void {
     this.canAddPlayers = this.campaign.currentState().phase === Phase.CampaignSetup;
     this.faction = factionNoun(this.team.faction);
-    this.factionIcon = this.team.faction === Faction.Empire ? "ffi-imperial" : "ffi-rebel";
     this.playerMap = {};
     for (const player of this.team.players) {
       this.playerMap[player.id] = this.campaign.campaignUsers.find(x => x.uid === player.playerUid);

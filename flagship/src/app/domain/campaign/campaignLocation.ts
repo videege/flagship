@@ -1,4 +1,4 @@
-import { Faction } from '../game/faction';
+import { Faction, factionAdjective } from '../game/faction';
 import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
@@ -38,21 +38,7 @@ export class CampaignLocation {
         if (this.controllingFaction === null)
             return "Unoccupied";
 
-        let faction;
-        switch (this.controllingFaction) {
-            case Faction.Empire:
-                faction = "Imperial";
-                break;
-            case Faction.Rebels:
-                faction = "Rebel";
-                break;
-            case Faction.Republic:
-                faction = "Republic";
-                break;
-            case Faction.Separatists:
-                faction = "Separatist";
-                break;
-        }
+        let faction = factionAdjective(this.controllingFaction);
         let type = this.controlType === LocationControlType.Base ? "Base" : "Presence";
         return `${faction} ${type}`;
     }

@@ -154,9 +154,9 @@ export class Campaign {
 
     public getFactionOfPlayer(playerId: string): Faction {
         if (this.empire.players.find(x => x.id === playerId))
-            return Faction.Empire;
+            return this.empire.faction;
         if (this.rebels.players.find(x => x.id === playerId))
-            return Faction.Rebels;
+            return this.rebels.faction;
         return null;
     }
 
