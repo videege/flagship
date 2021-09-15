@@ -31,7 +31,7 @@ export class CampaignFactory {
         campaign.empire.name = era === CampaignEra.CivilWar ? 'Galactic Empire' : 'Separatist Alliance';
         campaign.rebels = new Team();
         campaign.rebels.faction = era === CampaignEra.CivilWar ? Faction.Rebels : Faction.Republic;
-        campaign.rebels.name = era === CampaignEra.CivilWar ? 'Rebel Alliance' : ' Galactic Republic';
+        campaign.rebels.name = era === CampaignEra.CivilWar ? 'Rebel Alliance' : 'Galactic Republic';
         let now = new Date();
         campaign.startDate = now;
         campaign.statusDate = now;

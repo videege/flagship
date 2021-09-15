@@ -22,8 +22,16 @@ export class NotesService {
 
   // tslint:disable-next-line:member-ordering
   static _notes: Notes = {
-    version: '0.0.3',
+    version: '0.0.4-alpha.1',
     notes: [
+      {
+        title: 'Clone Wars Rebellion in the Rim',
+        date: new Date('2021-04-12'),
+        content: [
+                  `Added support for playing Rebellion in the Rim with Clone Wars Factions.`,
+                  `For now the Seperatist Alliance replaces the Galactic Empire, and the Galactic Republic replaces the Rebel Alliance`
+                ]
+      },
       {
         title: 'Final Wave 10 Upgrades',
         date: new Date('2021-04-12'),
