@@ -57,6 +57,25 @@ export class CampaignLocation {
         return `${faction} ${type}`;
     }
 
+    public icon(): string {
+        let icon: string;
+        switch (this.controllingFaction) {
+            case Faction.Empire:
+                icon = "ffi ffi-imperial";
+                break;
+            case Faction.Rebels:
+                icon = "ffi ffi-rebel";
+                break;
+            case Faction.Republic:
+                icon = "swg swg-galrep";
+                break;
+            case Faction.Separatists:
+                icon = "swg swg-separ";
+                break;
+        }
+        return icon;
+    }
+
     public setBase(faction: Faction, chosenObjective: number) {
         this.controllingFaction = faction;
         this.controlType = LocationControlType.Base;
