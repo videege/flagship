@@ -34,7 +34,6 @@ class ConditionStatus {
 }
 
 class Upkeep {
-  getFactionAdjective = factionAdjective;
   constructor(public faction: Faction) {
 
   }
@@ -93,7 +92,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   factions = Faction;
   phases = Phase;
-  oppositeFaction = oppositeFaction
+  getFactionAdjective = factionAdjective;
 
   effects = StrategicEffects;
   currentState: CampaignState;
