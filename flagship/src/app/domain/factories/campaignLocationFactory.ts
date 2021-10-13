@@ -45,7 +45,7 @@ export class CampaignLocationFactory {
 
     private ritrLocations: StaticLocationData[] = [
         {
-            id: 1, name: 'Atollon', objectives: [5, 109], effects: [StrategicEffectType.Destiny],
+            id: 1, name: 'Atollon', objectives: [5, 203], effects: [StrategicEffectType.Destiny],
             baseAssaultBonus: 0, sectors: [2], rewards: [LocationReward.upgradeReward(UpgradeType.Turbolaser, 10)]
         },
         {
