@@ -1,7 +1,7 @@
 <form>
     <h3>Declare {{ label }} Battle</h3>
     <p>
-        The {{ declaringFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will
+        The {{ getFactionAdjective(declaringFaction) }} team will
         declare this battle, choosing the battle's objective and location.
     </p>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="8px">
@@ -29,7 +29,7 @@
         <div *ngFor="let result of [attackerResult, defenderResult]; let first = first; let index = index;"
             fxFlex.gt-xs>
             <h4>
-                {{ result.faction === factions.Empire ? "Empire" : "Rebels" }}
+                {{ getNameOfFaction(result.faction) }}
                 ({{ first ? "Attacker" : "Defender" }})
             </h4>
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="start center">
@@ -49,9 +49,9 @@
     <div *ngIf="reward">
         <h4>Battle Outcome</h4>
         <p>
-            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team wins with a
+            {{ getFactionAdjective(reward.winnerFaction) }} team wins with a
             margin of victory of {{ reward.marginOfVictory }} points.
-            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will receive
+            {{ getFactionAdjective(reward.winnerFaction) }} team will receive
             <strong>{{ reward.winnerCampaignPoints(isClimactic) }} campaign points</strong>
             <span *ngIf="isClimactic">
                 ({{ reward.flatCampaignPoints }} + 2 &times; {{ reward.victoryBonus }} [Climactic 2X Victory Bonus]).
@@ -62,11 +62,11 @@
 
         </p>
         <p>
-            {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team commanders will
+            {{ getFactionAdjective(reward.winnerFaction) }} team commanders will
             receive {{ reward.winningTeamXP }} XP each.
         </p>
         <p>
-            {{ reward.winnerFaction === factions.Empire ? 'Rebel' : 'Imperial' }} team commanders will
+            {{ getFactionAdjective(reward.winnerFaction) }} team commanders will
             receive {{ reward.losingTeamXP }} XP each.
         </p>
         <div *ngIf="pivotalObjective === objTypes.Conquest && !reward.attackersWon">
@@ -92,7 +92,7 @@
                 <p>
                     Because the attacking team won, that team may choose up to two locations in this area
                     that are unoccupied or have an enemy presence and convert them to be locations with
-                    {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} presence. The
+                    {{ getFactionAdjective(reward.winnerFaction) }} presence. The
                     attacking team will gain additional campaign points equal to each location's victory bonus
                     value.
                 </p>
@@ -124,17 +124,17 @@
             <div *ngIf="reward.attackersWon">
                 <p>
                     Because the attacking team won, the {{ location.controlLabel() }} at {{ location.name }}
-                    will be destroyed. The {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }}
+                    will be destroyed. The {{ getFactionAdjective(reward.winnerFaction) }}
                     team will also gain one Resource token and one Skilled Spacers token.
                 </p>
             </div>
             <div *ngIf="!reward.attackersWon">
                 <p>
                     Because the defending team won, the
-                    {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }}
+                    {{ getFactionAdjective(reward.winnerFaction) }}
                     team may relocate their base from {{ location.name }} to any location that is unoccupied or has
                     friendly
-                    presence. The {{ reward.winnerFaction === factions.Empire ? 'Imperial' : 'Rebel' }} team will gain
+                    presence. The {{ getFactionAdjective(reward.winnerFaction) }} team will gain
                     that location's victory bonus value in campaign points, and may gain a strategic effect token from
                     the new base location.
                 </p>

@@ -8,6 +8,7 @@ import { SetCampaignPointsDialogComponent, SetCampaignPointsDialogData } from '.
 import { CampaignService } from 'src/app/core/services/campaign.service';
 import { CampaignEvent, CampaignEventType } from 'src/app/domain/campaign/campaignEvent';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { factionAdjective } from 'src/app/domain/game/faction';
 
 @Component({
   selector: 'flagship-campaign-info',
@@ -50,7 +51,7 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
   setActScore() {
     let ref = this.dialog.open(SetCampaignPointsDialogComponent, {
       data: new SetCampaignPointsDialogData(this.currentState.act, this.currentState.imperialPointsScored,
-        this.currentState.rebelPointsScored),
+        this.currentState.rebelPointsScored, this.campaign.era),
       maxWidth: '350px'
     });
     ref.afterClosed().subscribe((data: SetCampaignPointsDialogData) => {
@@ -60,7 +61,7 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
         let difference = this.currentState.imperialPointsScored - data.empireScore;
         this.campaign.empire.campaignPoints -= difference;
         this.currentState.addEvent(new CampaignEvent(CampaignEventType.ManualScoreChange,
-          `Imperial Point Score Change from ${this.currentState.imperialPointsScored} to ${data.empireScore}.`,
+          `${factionAdjective(this.campaign.empire.faction)} Point Score Change from ${this.currentState.imperialPointsScored} to ${data.empireScore}.`,
           this.user.uid, new Date()));
         this.currentState.imperialPointsScored = data.empireScore;
 
@@ -69,23 +70,17 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
         let difference = this.currentState.rebelPointsScored - data.rebelScore;
         this.campaign.rebels.campaignPoints -= difference;
         this.currentState.addEvent(new CampaignEvent(CampaignEventType.ManualScoreChange,
-          `Rebel Point Score Change from ${this.currentState.rebelPointsScored} to ${data.rebelScore}.`,
+          `${factionAdjective(this.campaign.rebels.faction)} Point Score Change from ${this.currentState.rebelPointsScored} to ${data.rebelScore}.`,
           this.user.uid, new Date()));
         this.currentState.rebelPointsScored = data.rebelScore;
       }
       this.campaignService.updateCampaign(this.campaign).then();
-      /*
-      winningTeam.campaignPoints += winningResult.earnedPoints;
-        losingTeam.campaignPoints += losingResult.earnedPoints;
-        currentState.imperialPointsScored += winningFaction === Faction.Empire ? winningResult.earnedPoints : losingResult.earnedPoints;
-        currentState.rebelPointsScored += winningFaction === Faction.Empire ? losingResult.earnedPoints : winningResult.earnedPoints;
-*/
     });
   }
 
   setCampaignScore() {
     let ref = this.dialog.open(SetCampaignPointsDialogComponent, {
-      data: new SetCampaignPointsDialogData(null, this.campaign.empire.campaignPoints, this.campaign.rebels.campaignPoints),
+      data: new SetCampaignPointsDialogData(null, this.campaign.empire.campaignPoints, this.campaign.rebels.campaignPoints, this.campaign.era),
       maxWidth: '350px'
     });
     ref.afterClosed().subscribe((data: SetCampaignPointsDialogData) => {
@@ -94,7 +89,7 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
       if (this.campaign.empire.campaignPoints !== data.empireScore) {
         this.currentState.addEvent(new CampaignEvent(
           CampaignEventType.ManualScoreChange,
-          `Imperial Campaign Point Score Change from ${this.campaign.empire.campaignPoints} to ${data.empireScore}.`,
+          `${factionAdjective(this.campaign.empire.faction)} Campaign Point Score Change from ${this.campaign.empire.campaignPoints} to ${data.empireScore}.`,
           this.user.uid,
           new Date()));
         this.campaign.empire.campaignPoints = data.empireScore;
@@ -103,7 +98,7 @@ export class CampaignInfoComponent implements OnInit, OnChanges {
       if (this.campaign.rebels.campaignPoints !== data.rebelScore) {
         this.currentState.addEvent(new CampaignEvent(
           CampaignEventType.ManualScoreChange,
-          `Rebel Campaign Point Score Change from ${this.currentState.rebelPointsScored} to ${data.rebelScore}.`,
+          `${factionAdjective(this.campaign.rebels.faction)} Campaign Point Score Change from ${this.currentState.rebelPointsScored} to ${data.rebelScore}.`,
           this.user.uid,
           new Date()));
         this.campaign.rebels.campaignPoints = data.rebelScore;

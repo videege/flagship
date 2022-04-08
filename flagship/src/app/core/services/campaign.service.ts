@@ -8,6 +8,7 @@ import { CampaignType } from 'src/app/domain/campaign/campaignType';
 import { CampaignFactory } from 'src/app/domain/factories/campaignFactory';
 import { Invite } from 'src/app/domain/campaign/invite';
 import { FleetService } from './fleet.service';
+import { CampaignEra } from 'src/app/domain/campaign/campaignEra';
 
 @Injectable({
   providedIn: 'root'
@@ -77,10 +78,10 @@ export class CampaignService {
     return doc.update(invite);
   }
 
-  public createCampaign(name: string, type: CampaignType): Promise<Campaign> {
+  public createCampaign(name: string, type: CampaignType, era: CampaignEra): Promise<Campaign> {
     if (!this.user) throw new Error("User not logged in.");
 
-    let campaign = this.campaignFactory.createCampaign(name, type, this.user);
+    let campaign = this.campaignFactory.createCampaign(name, type, era, this.user);
     let serializedCampaign = campaign.serialize();
     return new Promise<Campaign>((resolve, reject) => {
       this.db.collection('campaigns')

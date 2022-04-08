@@ -8,13 +8,13 @@
             <h4 style="text-align: center;">Campaign Score</h4>
             <div fxLayout="row" class="campaign-score">
                 <div fxLayout="column" fxFlex>
-                    <i class="ffi ffi-imperial" style="font-size:48px;"></i>
+                    <flagship-faction-icon [faction]="campaign.empire.faction"></flagship-faction-icon>
                     <span>{{ campaign.empire.campaignPoints }} points</span>
                 </div>
                 <h3 fxFlex>&mdash;</h3>
                 <!--todo: make this disappear on small-->
                 <div fxLayout="column" fxFlex>
-                    <i class="ffi ffi-rebel" style="font-size:48px;"></i>
+                    <flagship-faction-icon [faction]="campaign.rebels.faction"></flagship-faction-icon>
                     <span>{{ campaign.rebels.campaignPoints }} points</span>
                 </div>
             </div>
@@ -23,13 +23,13 @@
             <h4 style="text-align: center;">Act {{ currentState.actInRomanNumerals() }} Score</h4>
             <div fxLayout="row" class="campaign-score">
                 <div fxLayout="column" fxFlex>
-                    <i class="ffi ffi-imperial" style="font-size:48px;"></i>
+                    <flagship-faction-icon [faction]="campaign.empire.faction"></flagship-faction-icon>
                     <span>{{ currentState.imperialPointsScored }} points</span>
                 </div>
                 <h3 fxFlex>&mdash;</h3>
                 <!--todo: make this disappear on small-->
                 <div fxLayout="column" fxFlex>
-                    <i class="ffi ffi-rebel" style="font-size:48px;"></i>
+                    <flagship-faction-icon [faction]="campaign.rebels.faction"></flagship-faction-icon>
                     <span>{{ currentState.rebelPointsScored }} points</span>
                 </div>
             </div>

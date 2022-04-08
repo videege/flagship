@@ -6,7 +6,13 @@
     </p>
     <form [formGroup]="form" fxLayout="column">
         <label>Controlling Faction</label>
-        <mat-radio-group aria-label="Faction" formControlName="faction" fxLayout="column" fxLayout.gt-xs="row"
+        <mat-radio-group *ngIf="getData().era == 1" aria-label="Faction" formControlName="faction" fxLayout="column" fxLayout.gt-xs="row"
+            fxLayoutGap="4px">
+            <mat-radio-button value="4" fxFlex.gt-xs>Separatists</mat-radio-button>
+            <mat-radio-button value="3" fxFlex.gt-xs>Republic</mat-radio-button>
+            <mat-radio-button value="-1" fxFlex.gt-xs>Unoccupied</mat-radio-button>
+        </mat-radio-group>
+        <mat-radio-group *ngIf="getData().era == 2" aria-label="Faction" formControlName="faction" fxLayout="column" fxLayout.gt-xs="row"
             fxLayoutGap="4px">
             <mat-radio-button value="0" fxFlex.gt-xs>Empire</mat-radio-button>
             <mat-radio-button value="1" fxFlex.gt-xs>Rebels</mat-radio-button>

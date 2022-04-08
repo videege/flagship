@@ -9,7 +9,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
-import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
+import { Faction, factionAdjective, factionNoun, oppositeFaction } from 'src/app/domain/game/faction';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { BattleReward } from 'src/app/domain/campaign/battleReward';
 import { BattleType } from 'src/app/domain/campaign/battleType';
@@ -92,7 +92,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
   factions = Faction;
   phases = Phase;
-  oppositeFaction = oppositeFaction
+  getFactionAdjective = factionAdjective;
 
   effects = StrategicEffects;
   currentState: CampaignState;
@@ -100,8 +100,8 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   issues: Issue[] = [];
 
   outcomes: BattleOutcome[] = [];
-  empireUpkeep = new Upkeep(Faction.Empire);
-  rebelUpkeep = new Upkeep(Faction.Rebels);
+  empireUpkeep: Upkeep;
+  rebelUpkeep: Upkeep;
 
   completeButtonOptions = indeterminateOptions('Finish Management Phase');
   specialBattleType: BattleType = null;
@@ -137,13 +137,11 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
       x.controlType === LocationControlType.Base);
   }
 
-  public getNameOfFaction(faction: Faction): string {
-    return faction === Faction.Empire ? "Empire" : "Rebels"
-  }
+  public getNameOfFaction = factionNoun;
 
   public getRewardText(player: CampaignPlayer, outcome: BattleOutcome): string {
     let faction = this.campaign.getFactionOfPlayer(player.id);
-    let factionName = this.getNameOfFaction(faction);
+    let factionName = factionNoun(faction);
     let winner = outcome.winningPlayers.includes(player);
     let bases = this.getBases(faction);
     let locationRewards = outcome.location.rewards;
@@ -213,7 +211,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     }
 
     for (const upkeep of [this.empireUpkeep, this.rebelUpkeep]) {
-      let team = upkeep.faction === Faction.Empire ? this.campaign.empire : this.campaign.rebels;
+      let team = upkeep.faction === this.campaign.empire.faction ? this.campaign.empire : this.campaign.rebels;
       for (const base of upkeep.newBases) {
         let location = this.campaign.locations.find(x => x.id === base.id);
         location.setBase(upkeep.faction, 301); //todo fix?
@@ -269,21 +267,23 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   }
 
   private setup() {
+    this.empireUpkeep = new Upkeep(this.campaign.empire.faction);
+    this.rebelUpkeep = new Upkeep(this.campaign.rebels.faction);
     this.currentState = this.campaign.currentState();
     let battles = this.currentState.getBattles();
     this.players = this.campaign.getPlayersMap();
 
     // Set eligible base locations (eligible locations do not include locations won this turn)
     this.empireUpkeep.eligibleBaseLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Empire && x.controlType === LocationControlType.Presence);
+      .filter(x => x.controllingFaction === this.campaign.empire.faction && x.controlType === LocationControlType.Presence);
     this.rebelUpkeep.eligibleBaseLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Presence);
+      .filter(x => x.controllingFaction === this.campaign.rebels.faction && x.controlType === LocationControlType.Presence);
 
     this.empireUpkeep.tokenLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Empire && x.controlType === LocationControlType.Base &&
+      .filter(x => x.controllingFaction === this.campaign.empire.faction && x.controlType === LocationControlType.Base &&
         x.hasEffects());
     this.rebelUpkeep.tokenLocations = this.campaign.locations
-      .filter(x => x.controllingFaction === Faction.Rebels && x.controlType === LocationControlType.Base &&
+      .filter(x => x.controllingFaction === this.campaign.rebels.faction && x.controlType === LocationControlType.Base &&
         x.hasEffects());
 
     this.empireUpkeep.currentResourceTokens = this.campaign.empire.tokensOfType(StrategicEffectType.Resources);
@@ -330,7 +330,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
 
       this.outcomes.push(outcome);
       if (location.hasEffects()) {
-        if (outcome.winningFaction === Faction.Empire) {
+        if (outcome.winningFaction === this.campaign.empire.faction) {
           this.empireUpkeep.tokenLocations = this.empireUpkeep.tokenLocations.concat(location);
         } else {
           this.rebelUpkeep.tokenLocations = this.rebelUpkeep.tokenLocations.concat(location);
@@ -356,7 +356,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
   }
 
   private getUpkeepFor(faction: Faction) {
-    return faction === Faction.Empire ? this.empireUpkeep : this.rebelUpkeep;
+    return faction === this.campaign.empire.faction ? this.empireUpkeep : this.rebelUpkeep;
   }
 
   private setupConditionStatuses(upkeep: Upkeep, team: Team) {
@@ -367,7 +367,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
         status.condition = p.condition;
         let outcome = this.outcomes.find(x => x.battle.playerIsParticipant(p.id));
         if (p.condition === Condition.LowMorale &&
-          outcome.battle.objectiveId === 309) { //recruit allies 
+          outcome.battle.objectiveId === 309) { //recruit allies
           status.canRemoveForFree = true;
         } else if ((p.condition === Condition.LowFuel || p.condition === Condition.LowSupplies) &&
           outcome.battle.objectiveId === 310) { //steal supplies
@@ -423,7 +423,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
     this.issues = [];
 
     for (const upkeep of [this.empireUpkeep, this.rebelUpkeep]) {
-      const factionName = upkeep.faction === Faction.Empire ? 'Imperials' : 'Rebels';
+      const factionName = factionNoun(upkeep.faction);
       let resources = upkeep.currentResourceTokens;
       let projectedResourceTokens = upkeep.projectedResourceTokens();
       for (const newBase of upkeep.newBases) {
@@ -432,7 +432,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
         if (resources < 0) {
           this.issues.push({
             severity: IssueSeverity.Error,
-            text: `${factionName} do not have enough resource tokens to build a new base at ${newBase.name}.`
+            text: `The ${factionName} ${factionName.endsWith('s') ? 'do' : 'does'} not have enough resource tokens to build a new base at ${newBase.name}.`
           });
         }
       }
@@ -441,7 +441,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
         if (upkeep.tokenChoices[tokenLocation.id] === null) {
           this.issues.push({
             severity: IssueSeverity.Error,
-            text: `${factionName} must choose a strategic effect token for ${tokenLocation.name}.`
+            text: `The ${factionName} must choose a strategic effect token for ${tokenLocation.name}.`
           });
         }
       }
@@ -453,7 +453,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
           if (projectedSkilledSpacersTokens < 0) {
             this.issues.push({
               severity: IssueSeverity.Error,
-              text: `${factionName} do not have enough projected Skilled Spacers tokens to remove the Low Morale condition from ${condition.player.name}.`
+              text: `The ${factionName} ${factionName.endsWith('s') ? 'do' : 'does'} not have enough projected Skilled Spacers tokens to remove the Low Morale condition from ${condition.player.name}.`
             });
           }
         } else if (condition.willSpendToken) {
@@ -461,7 +461,7 @@ export class ManagementPhaseComponent implements OnInit, OnChanges {
           if (projectedResourceTokens < 0) {
             this.issues.push({
               severity: IssueSeverity.Error,
-              text: `${factionName} do not have enough projected Resource tokens to remove the ${condition.condition} condition from ${condition.player.name}.`
+              text: `The ${factionName} ${factionName.endsWith('s') ? 'do' : 'does'} have enough projected Resource tokens to remove the ${condition.condition} condition from ${condition.player.name}.`
             });
           }
         }

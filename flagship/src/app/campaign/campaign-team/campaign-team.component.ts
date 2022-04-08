@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Team } from 'src/app/domain/campaign/team';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, factionNoun } from 'src/app/domain/game/faction';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -39,7 +39,6 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
   @Input() team: Team;
 
   public faction: string;
-  public factionIcon: string;
   public playerMap: { [id: string]: CampaignUser } = {};
   public canAddPlayers = false;
   public tokenCounts: TokenCount[] = [];
@@ -76,8 +75,7 @@ export class CampaignTeamComponent implements OnInit, OnChanges {
 
   private setup(): void {
     this.canAddPlayers = this.campaign.currentState().phase === Phase.CampaignSetup;
-    this.faction = this.team.faction === Faction.Empire ? "Empire" : "Rebels";
-    this.factionIcon = this.team.faction === Faction.Empire ? "ffi-imperial" : "ffi-rebel";
+    this.faction = factionNoun(this.team.faction);
     this.playerMap = {};
     for (const player of this.team.players) {
       this.playerMap[player.id] = this.campaign.campaignUsers.find(x => x.uid === player.playerUid);

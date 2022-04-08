@@ -25,7 +25,7 @@
                 {{ upkeep.currentResourceTokens }})</h5>
             <mat-form-field
                 *ngIf="upkeep.eligibleBaseLocations.length && upkeep.currentResourceTokens >= 2; else noBases">
-                <mat-label>New {{ upkeep.faction === factions.Empire ? "Imperial" : "Rebel" }} Base(s)</mat-label>
+                <mat-label>New {{ getFactionAdjective(upkeep.faction) }} Base(s)</mat-label>
                 <mat-select [(ngModel)]="upkeep.newBases" name="{{ 'newbases-' + index }}"
                     (selectionChange)="formChanged()" required multiple>
                     <mat-option *ngFor="let location of upkeep.eligibleBaseLocations" [value]="location">
@@ -166,12 +166,12 @@
         <div *ngIf="canBeClimactic">
             <p>
                 <strong>Heads up!</strong> Because the
-                {{ losingFaction === factions.Empire ? "Imperial" : "Rebel" }} team is losing by at least
+                {{ getFactionAdjective(losingFaction) }} team is losing by at least
                 5 campaign points, that team may choose that the upcoming Pivotal Battle will instead be
                 the <strong>Climactic Battle</strong>. If you choose this option, the campaign will end
                 after the battle.
             </p>
-            <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()" 
+            <mat-checkbox [(ngModel)]="willBeClimactic" (change)="formChanged()"
                 name="climactic">
                 Begin Climactic Battle
             </mat-checkbox>

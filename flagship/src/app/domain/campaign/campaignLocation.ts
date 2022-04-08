@@ -1,4 +1,4 @@
-import { Faction } from '../game/faction';
+import { Faction, factionAdjective } from '../game/faction';
 import { LocationControlType } from './locationControlType';
 import { StrategicEffectType } from './strategicEffectType';
 import { LocationReward } from './locationReward';
@@ -10,7 +10,7 @@ export interface SerializedCampaignLocation {
     chosenObjective: number;
     playedCampaignObjectives: number[];
 }
- 
+
 export class CampaignLocation {
     public id: number;
     public name: string;
@@ -35,12 +35,31 @@ export class CampaignLocation {
     }
 
     public controlLabel(): string {
-        if (this.controllingFaction === null) 
+        if (this.controllingFaction === null)
             return "Unoccupied";
-        
-        let faction = this.controllingFaction === Faction.Empire ? "Imperial" : "Rebel";
+
+        let faction = factionAdjective(this.controllingFaction);
         let type = this.controlType === LocationControlType.Base ? "Base" : "Presence";
         return `${faction} ${type}`;
+    }
+
+    public icon(): string {
+        let icon: string;
+        switch (this.controllingFaction) {
+            case Faction.Empire:
+                icon = "ffi ffi-imperial";
+                break;
+            case Faction.Rebels:
+                icon = "ffi ffi-rebel";
+                break;
+            case Faction.Republic:
+                icon = "swg swg-galrep";
+                break;
+            case Faction.Separatists:
+                icon = "swg swg-separ";
+                break;
+        }
+        return icon;
     }
 
     public setBase(faction: Faction, chosenObjective: number) {
@@ -82,7 +101,7 @@ export class CampaignLocation {
             playedCampaignObjectives: this.playedCampaignObjectives
         };
     }
-    
+
     static newLocation(id: number, name: string, objectives: number[], strategicEffects: StrategicEffectType[],
         baseAssaultBonus: number, sectors: number[], rewards: LocationReward[], controllingFaction: Faction = null,
         controlType: LocationControlType = null, chosenObjective: number = null,

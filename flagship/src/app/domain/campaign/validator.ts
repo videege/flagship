@@ -1,7 +1,7 @@
 import { Campaign } from './campaign';
 import { Issue, IssueSeverity } from './issue';
 import { Team } from './team';
-import { Faction } from '../game/faction';
+import { Faction, factionAdjective } from '../game/faction';
 import { CampaignLocation } from './campaignLocation';
 import { LocationControlType } from './locationControlType';
 import { CampaignUser } from './campaignUser';
@@ -22,16 +22,16 @@ export class RITRValidator implements Validator {
             issues.push(this.error('Teams are unbalanced. Each team should have the same number of players.'));
         }
         if (!this.teamHasCorrectNumberOfPlayers(campaign.empire)) {
-            issues.push(this.error('The Empire team has an incorrect number of players. Each team should have 2 or 3 players.'))
+            issues.push(this.error(`The ${factionAdjective(campaign.empire.faction)} team has an incorrect number of players. Each team should have 2 or 3 players.`))
         }
         if (!this.teamHasCorrectNumberOfPlayers(campaign.rebels)) {
-            issues.push(this.error('The Rebel team has an incorrect number of players. Each team should have 2 or 3 players.'))
+            issues.push(this.error(`The ${factionAdjective(campaign.rebels.faction)} team has an incorrect number of players. Each team should have 2 or 3 players.`))
         }
         if (!this.teamHasPlacedBases(campaign.empire, campaign.locations)) {
-            issues.push(this.error('The Empire team has the incorrect number of bases placed.  Each team should have 1 base per player.'))
+            issues.push(this.error(`The ${factionAdjective(campaign.empire.faction)} team has the incorrect number of bases placed.  Each team should have 1 base per player.`))
         }
         if (!this.teamHasPlacedBases(campaign.rebels, campaign.locations)) {
-            issues.push(this.error('The Rebel team has the incorrect number of bases placed.  Each team should have 1 base per player.'))
+            issues.push(this.error(`The ${factionAdjective(campaign.rebels.faction)} team has the incorrect number of bases placed.  Each team should have 1 base per player.`))
         }
 
         let playersControllingBothSides = this.getPlayersControllingBothSides(campaign);
@@ -57,11 +57,11 @@ export class RITRValidator implements Validator {
 
                 let fleetUniques = fleet.getEquippedUniqueNames();
                 for (const unique of fleetUniques) {
-                    if ((fleet.faction === Faction.Empire ? empireUniques : rebelUniques).includes(unique)) {
+                    if ((fleet.faction === campaign.empire.faction ? empireUniques : rebelUniques).includes(unique)) {
                         issues.push(this.error(`${player.name}'s fleet has ${unique} equipped, which is already equipped in a teammate's fleet.`));
                     }
                 }
-                if (fleet.faction === Faction.Empire) {
+                if (fleet.faction === campaign.empire.faction) {
                     empireUniques = empireUniques.concat(fleetUniques);
                 } else {
                     rebelUniques = rebelUniques.concat(fleetUniques);

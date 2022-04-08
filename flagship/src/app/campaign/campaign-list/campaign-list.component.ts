@@ -11,6 +11,7 @@ import { FleetService } from 'src/app/core/services/fleet.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { forkJoin, from, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { CampaignEra } from 'src/app/domain/campaign/campaignEra';
 
 @Component({
   selector: 'flagship-campaign-list',
@@ -68,12 +69,13 @@ export class CampaignListComponent implements OnInit {
       width: '450px',
       data: <CampaignEditorData>{
         name: null,
-        type: CampaignType.RITR
+        type: CampaignType.RITR,
+        era: CampaignEra.CivilWar
       }
     });
     ref.afterClosed().subscribe((data: CampaignEditorData) => {
       if (data) {
-        this.campaignService.createCampaign(data.name, data.type)
+        this.campaignService.createCampaign(data.name, data.type, data.era)
           .then(() => {
             this.snackbar.open(`${data.name} created.`, 'OK', { duration: 1500 });
           });

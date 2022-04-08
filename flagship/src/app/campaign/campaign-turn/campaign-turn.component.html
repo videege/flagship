@@ -7,7 +7,7 @@
         <mat-card-subtitle>{{ phaseName }} Phase</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>{{ currentState.initiativeFaction === factions.Empire ? "Imperial" : "Rebel" }} team has initiative this turn.</p>
+        <p>{{ getFactionAdjective(currentState.initiativeFaction) }} team has initiative this turn.</p>
         <mat-vertical-stepper [linear]="true" #stepper>
             <mat-step label="Strategy Phase" [editable]="false" [completed]="currentState.phase !== phases.Strategy">
                 <flagship-strategy-phase *ngIf="currentState.phase === phases.Strategy" [campaign]="campaign"
@@ -27,7 +27,7 @@
                 </flagship-management-phase>
             </mat-step>
             <mat-step label="Pivotal / Climactic Battle" [editable]="false" [completed]="false">
-                <flagship-pivotal-battle-phase [campaign]="campaign" 
+                <flagship-pivotal-battle-phase [campaign]="campaign"
                     *ngIf="currentState.phase === phases.PivotalBattle || currentState.phase === phases.ClimacticBattle"
                     (validityChange)="pbValidityChanged($event)" >
                 </flagship-pivotal-battle-phase>

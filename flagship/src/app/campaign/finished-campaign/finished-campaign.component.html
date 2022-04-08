@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            {{ winner === factions.Empire ? "Empire Wins!" : "Rebels Win!" }}
+            {{ winner }} {{ winner.endsWith('s') ? 'Win!' : 'Wins!' }}
         </mat-card-title>
         <mat-card-subtitle>Campaign Finished</mat-card-subtitle>
     </mat-card-header>

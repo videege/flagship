@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Campaign } from 'src/app/domain/campaign/campaign';
-import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
+import { Faction, factionNoun, oppositeFaction } from 'src/app/domain/game/faction';
 
 @Component({
   selector: 'flagship-finished-campaign',
@@ -10,9 +10,7 @@ import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
 export class FinishedCampaignComponent implements OnInit {
   @Input() campaign: Campaign;
 
-  factions = Faction;
-
-  winner: Faction;
+  winner: string;
   marginOfVictory: number;
   outcomes = {
     stalemate: {
@@ -33,7 +31,7 @@ export class FinishedCampaignComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.winner = oppositeFaction(this.campaign.getLosingFaction())
+    this.winner = factionNoun(oppositeFaction(this.campaign.getLosingFaction()));
     this.marginOfVictory = Math.abs(this.campaign.empire.campaignPoints - this.campaign.rebels.campaignPoints);
     if (this.marginOfVictory <= 1) {
       this.outcome = this.outcomes.stalemate;

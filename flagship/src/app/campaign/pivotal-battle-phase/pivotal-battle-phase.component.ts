@@ -7,7 +7,7 @@ import { CampaignService } from 'src/app/core/services/campaign.service';
 import { FleetService } from 'src/app/core/services/fleet.service';
 import { PivotalObjective } from 'src/app/domain/campaign/pivotalObjective';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
-import { Faction, oppositeFaction } from 'src/app/domain/game/faction';
+import { Faction, factionAdjective, factionNoun, oppositeFaction } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { LocationControlType } from 'src/app/domain/campaign/locationControlType';
 import { Issue, IssueSeverity } from 'src/app/domain/campaign/issue';
@@ -66,7 +66,8 @@ export class PivotalBattlePhaseComponent implements OnInit {
   @Output() validityChange = new EventEmitter<boolean>();
   @Output() phaseComplete = new EventEmitter<void>();
 
-  factions = Faction;
+  getNameOfFaction = factionNoun;
+  getFactionAdjective = factionAdjective;
   objTypes = PivotalObjective;
   effects = StrategicEffectType;
   effectUtils = StrategicEffects;
@@ -120,7 +121,7 @@ export class PivotalBattlePhaseComponent implements OnInit {
     let losingTeam = this.campaign.getTeamForFaction(oppositeFaction(this.reward.winnerFaction));
     // XP, victory points
     winningTeam.campaignPoints += this.reward.winnerCampaignPoints(this.isClimactic);
-    if (this.reward.winnerFaction === Faction.Empire) {
+    if (this.reward.winnerFaction === this.campaign.empire.faction) {
       this.currentState.imperialPointsScored += this.reward.winnerCampaignPoints(this.isClimactic);
     } else {
       this.currentState.rebelPointsScored += this.reward.winnerCampaignPoints(this.isClimactic);
@@ -174,7 +175,7 @@ export class PivotalBattlePhaseComponent implements OnInit {
       }
     }
 
-    let battle = Battle.declareBattle(null, 
+    let battle = Battle.declareBattle(null,
       `${this.isClimactic ? 'Climactic' : 'Pivotal'} Battle at ${this.location.name}`,
       this.location, this.campaign.getTeamForFaction(this.attackerResult.faction).players,
       this.campaign.getTeamForFaction(this.defenderResult.faction).players,
@@ -234,7 +235,7 @@ export class PivotalBattlePhaseComponent implements OnInit {
 
   private setFleetPointTotals() {
     for (const result of [this.attackerResult, this.defenderResult]) {
-      let team = result.faction === Faction.Empire ? this.campaign.empire : this.campaign.rebels;
+      let team = result.faction === this.campaign.empire.faction ? this.campaign.empire : this.campaign.rebels;
       let fleetIds = team.players.map(x => x.fleetId);
       let total = 0;
       for (const fleetId of fleetIds) {

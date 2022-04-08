@@ -5,7 +5,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Battle } from 'src/app/domain/campaign/battle';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { BattleState } from 'src/app/domain/campaign/battleState';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, factionNoun } from 'src/app/domain/game/faction';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { ObjectiveFactory } from 'src/app/domain/factories/objectiveFactory';
 
@@ -64,7 +64,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
         }
         this.events.push({
           title: `End of Act ${lastState.actInRomanNumerals()}`,
-          content: `Rebels scored ${lastState.rebelPointsScored} points - Empire scored ${lastState.imperialPointsScored} points.`,
+          content: `${factionNoun(this.campaign.rebels.faction)} scored ${lastState.rebelPointsScored} points - ${factionNoun(this.campaign.empire.faction)} scored ${lastState.imperialPointsScored} points.`,
           side: null,
           dot: {
             icon: icon,
@@ -81,7 +81,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
       if (state.phase === Phase.Finished) {
         this.events.push({
           title: `End of Campaign`,
-          content: `Rebels scored ${this.campaign.rebels.campaignPoints} points - Empire scored ${this.campaign.empire.campaignPoints} points.`,
+          content: `${factionNoun(this.campaign.rebels.faction)} scored ${this.campaign.rebels.campaignPoints} points - ${factionNoun(this.campaign.empire.faction)} scored ${this.campaign.empire.campaignPoints} points.`,
           side: null,
           dot: {
             icon: 'done_all',
@@ -115,9 +115,27 @@ export class EventTimelineComponent implements OnInit, OnChanges {
           dotSize: 30
         };
       } else {
+        const getIcon = () => {
+          let factionIcon;
+          switch (battle.getWinnerFaction(this.campaign.empire)) {
+            case Faction.Empire:
+              factionIcon = 'ffi ffi-imperial';
+              break;
+            case Faction.Rebels:
+              factionIcon = 'ffi ffi-rebel';
+              break;
+            case Faction.Republic:
+              factionIcon = 'swg swg-galrep';
+              break;
+            case Faction.Separatists:
+              factionIcon = 'swg swg-separ';
+              break;
+          }
+
+          return `${factionIcon} timeline-icon`;
+        }
         return {
-          icon: battle.getWinnerFaction(this.campaign.empire) === Faction.Empire
-            ? 'ffi ffi-imperial timeline-icon' : 'ffi ffi-rebel timeline-icon',
+          icon: getIcon(),
           isMatIcon: false,
           dotClass: 'primary',
           dotSize: 45
@@ -134,7 +152,7 @@ export class EventTimelineComponent implements OnInit, OnChanges {
 
   getContent(event: CampaignEvent): string {
     if (event.eventType === CampaignEventType.Battle) {
-      let battle = <Battle>event; 
+      let battle = <Battle>event;
       // map players
       let attackers = battle.attackingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");
       let defenders = battle.defendingPlayers.map(x => this.players[x.playerId] ? this.players[x.playerId].name : "Missing Player").join(", ");

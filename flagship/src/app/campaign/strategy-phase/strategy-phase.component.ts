@@ -5,7 +5,7 @@ import { CampaignState } from 'src/app/domain/campaign/campaignState';
 import { Phase } from 'src/app/domain/campaign/phase';
 import { CampaignEventType } from 'src/app/domain/campaign/campaignEvent';
 import { Battle } from 'src/app/domain/campaign/battle';
-import { Faction } from 'src/app/domain/game/faction';
+import { Faction, factionAdjective, factionNoun } from 'src/app/domain/game/faction';
 import { CampaignLocation } from 'src/app/domain/campaign/campaignLocation';
 import { CampaignPlayer } from 'src/app/domain/campaign/campaignPlayer';
 import { Condition } from 'src/app/domain/campaign/condition';
@@ -36,11 +36,11 @@ export class DeclaredBattle {
     if (this.location.controllingFaction === null) {
       return `Skirmish at ${name}`;
     }
-    let controllingFaction = this.location.controllingFaction === Faction.Empire ? "Imperial" : "Rebel";
+
     if (this.location.controlType === LocationControlType.Presence) {
-      return `Incursion into ${controllingFaction} Territory at ${name}`;
+      return `Incursion into ${factionAdjective(this.location.controllingFaction)} Territory at ${name}`;
     } else {
-      return `Assault on ${controllingFaction} Base at ${name}`;
+      return `Assault on ${factionAdjective(this.location.controllingFaction)} Base at ${name}`;
     }
     //return `Battle of ${name}`;
   }
@@ -57,6 +57,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
   @Output() validityChange = new EventEmitter<boolean>();
   @Output() phaseComplete = new EventEmitter<void>();
   completeButtonOptions = indeterminateOptions('Finish Strategy Phase');
+  getFactionAdjective = factionAdjective;
 
   currentState: CampaignState;
   battles: DeclaredBattle[];
@@ -102,11 +103,11 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
   public completePhase() {
     this.completeButtonOptions.active = true;
     if (this.nonInitiativeTeamDiplomatsArea >= 1) {
-      (this.currentState.initiativeFaction === Faction.Empire ?
+      (this.currentState.initiativeFaction === this.campaign.empire.faction ?
         this.campaign.rebels : this.campaign.empire).removeToken(StrategicEffectType.Diplomats, 1);
     }
     if (this.initiativeTeamDiplomatsArea >= 1) {
-      (this.currentState.initiativeFaction === Faction.Empire ?
+      (this.currentState.initiativeFaction === this.campaign.rebels.faction ?
         this.campaign.empire : this.campaign.rebels).removeToken(StrategicEffectType.Diplomats, 1);
     }
     if (this.imperialSkilledSpacersSpent > 0) {
@@ -160,14 +161,14 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     for (let i = 0; i < this.numberOfBattlesRequired; i++) {
       this.battles.push(new DeclaredBattle());
     }
-    let isEmpire = this.currentState.initiativeFaction === Faction.Empire;
+    let isEmpire = this.currentState.initiativeFaction === this.campaign.empire.faction;
 
     this.availableInitiativePlayers = [].concat(isEmpire ? this.campaign.empire.players : this.campaign.rebels.players);
     this.availableNonInitiativePlayers = [].concat(isEmpire ? this.campaign.rebels.players : this.campaign.empire.players);
-    this.availableInitiativeLocations = [].concat(this.campaign.locations.filter(x => x.controllingFaction !== (isEmpire ? Faction.Empire : Faction.Rebels)));
-    this.availableNonInitiativeLocations = [].concat(this.campaign.locations.filter(x => x.controllingFaction !== (isEmpire ? Faction.Rebels : Faction.Empire)));
-    this.initiativeTeamLabel = isEmpire ? "Imperial" : "Rebel";
-    this.nonInitiativeTeamLabel = isEmpire ? "Rebel" : "Imperial";
+    this.availableInitiativeLocations = [].concat(this.campaign.locations.filter(x => x.controllingFaction !== (isEmpire ? this.campaign.empire.faction : this.campaign.rebels.faction)));
+    this.availableNonInitiativeLocations = [].concat(this.campaign.locations.filter(x => x.controllingFaction !== (isEmpire ? this.campaign.rebels.faction : this.campaign.empire.faction)));
+    this.initiativeTeamLabel = isEmpire ? factionAdjective(this.campaign.empire.faction) : factionAdjective(this.campaign.rebels.faction);
+    this.nonInitiativeTeamLabel = isEmpire ? factionAdjective(this.campaign.rebels.faction) : factionAdjective(this.campaign.empire.faction);
     this.canInitiativeTeamUseDiplomats = isEmpire
       ? this.campaign.empire.tokensOfType(StrategicEffectType.Diplomats) >= 1
       : this.campaign.rebels.tokensOfType(StrategicEffectType.Diplomats) >= 1;
@@ -330,7 +331,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
 
       if (battle.attackerSpendingAllyToken) {
         let faction = this.campaign.getFactionOfPlayer(battle.attackingPlayer.id);
-        if (faction === Faction.Empire) {
+        if (faction === this.campaign.empire.faction) {
           empireAllyTokens += 1;
         } else {
           rebelAllyTokens += 1;
@@ -338,7 +339,7 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       }
       if (battle.defenderSpendingAllyToken) {
         let faction = this.campaign.getFactionOfPlayer(battle.defendingPlayer.id);
-        if (faction === Faction.Empire) {
+        if (faction === this.campaign.empire.faction) {
           empireAllyTokens += 1;
         } else {
           rebelAllyTokens += 1;
@@ -348,14 +349,14 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
       if (empireAllyTokens > 1) {
         this.issues.push({
           severity: IssueSeverity.Error,
-          text: "The Imperials may only spend 1 Ally Token in this phase."
+          text: `The ${factionNoun(this.campaign.empire.faction)} may only spend 1 Ally Token in this phase.`
         });
         return;
       }
       if (rebelAllyTokens > 1) {
         this.issues.push({
           severity: IssueSeverity.Error,
-          text: "The Rebels may only spend 1 Ally Token in this phase."
+          text: `The ${factionNoun(this.campaign.rebels.faction)} may only spend 1 Ally Token in this phase.`
         });
         return;
       }
@@ -432,14 +433,14 @@ export class StrategyPhaseComponent implements OnInit, OnChanges {
     if (this.imperialSkilledSpacersSpent > this.imperialSkilledSpacersMax) {
       this.issues.push({
         severity: IssueSeverity.Error,
-        text: `The Imperial team cannot spend more than ${this.imperialSkilledSpacersMax} Skilled Spacers token(s).`
+        text: `The ${factionAdjective(this.campaign.empire.faction)} team cannot spend more than ${this.imperialSkilledSpacersMax} Skilled Spacers token(s).`
       });
       return;
     }
     if (this.rebelSkilledSpacersSpent > this.rebelSkilledSpacersMax) {
       this.issues.push({
         severity: IssueSeverity.Error,
-        text: `The Rebel team cannot spend more than ${this.rebelSkilledSpacersMax} Skilled Spacers token(s).`
+        text: `The ${factionAdjective(this.campaign.rebels.faction)} team cannot spend more than ${this.rebelSkilledSpacersMax} Skilled Spacers token(s).`
       });
       return;
     }

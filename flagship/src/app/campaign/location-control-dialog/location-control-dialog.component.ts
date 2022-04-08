@@ -5,13 +5,14 @@ import { LocationControlType } from 'src/app/domain/campaign/locationControlType
 import { Faction } from 'src/app/domain/game/faction';
 import { CampaignLocationFactory } from 'src/app/domain/factories/campaignLocationFactory';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CampaignEra } from 'src/app/domain/campaign/campaignEra';
 
 export class LocationControlDialogData {
   faction: Faction;
   controlType: LocationControlType;
   chosenObjective: number;
 
-  constructor(public location: CampaignLocation) {
+  constructor(public location: CampaignLocation, public era: CampaignEra) {
 
   }
 }
@@ -30,13 +31,13 @@ export class LocationControlDialogComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<LocationControlDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: LocationControlDialogData) { 
+    @Inject(MAT_DIALOG_DATA) public data: LocationControlDialogData) {
     }
 
   ngOnInit() {
     let faction = (this.data.location.controllingFaction != null ? this.data.location.controllingFaction : "-1").toString();
     let controlType = faction !== "-1" ? this.data.location.controlType.toString() : null;
-    
+
     this.form.patchValue({
       faction: faction,
       controlType: controlType,
@@ -45,14 +46,14 @@ export class LocationControlDialogComponent implements OnInit {
   }
 
   getData(): LocationControlDialogData {
-    let data = new LocationControlDialogData(this.data.location);
+    let data = new LocationControlDialogData(this.data.location, this.data.era);
     let faction = this.form.get('faction').value;
     if (faction === "-1") {
       return data;
     }
     data.faction = +faction;
     data.controlType = +this.form.get('controlType').value;
-    data.chosenObjective = data.controlType === LocationControlType.Base 
+    data.chosenObjective = data.controlType === LocationControlType.Base
       ? +this.form.get('chosenObjective').value
       : null;
     return data;

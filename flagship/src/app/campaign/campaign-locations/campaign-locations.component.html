@@ -17,14 +17,10 @@
                 {{ location.name }}
             </mat-panel-title>
             <mat-panel-description>
-                <i *ngIf="location.controllingFaction != null" class="ffi faction-icon"
-                    [ngClass]="{'ffi-imperial': location.controllingFaction === factions.Empire, 'ffi-rebel': location.controllingFaction === factions.Rebels}"></i>
-                <span *ngIf="location.controlType == null">Unoccupied</span>
-                <span *ngIf="location.controlType === controlTypes.Presence">
-                    {{ location.controllingFaction === factions.Empire ? "Imperial Presence": "Rebel Presence" }}
-                </span>
-                <span *ngIf="location.controlType === controlTypes.Base">
-                    {{ location.controllingFaction === factions.Empire ? "Imperial Base": "Rebel Base" }}
+                <i *ngIf="location.controllingFaction != null" class="faction-icon"
+                    [ngClass]="location.icon()"></i>
+                <span>
+                    {{ location.controlLabel() }}
                 </span>
             </mat-panel-description>
         </mat-expansion-panel-header>

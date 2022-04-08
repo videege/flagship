@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CampaignEra } from 'src/app/domain/campaign/campaignEra';
 
 export class SetCampaignPointsDialogData {
   constructor(public act: number,
     public empireScore: number,
-    public rebelScore: number) {
+    public rebelScore: number,
+    public era: CampaignEra) {
   }
 }
 
@@ -17,6 +19,7 @@ export class SetCampaignPointsDialogComponent implements OnInit {
   public isForCampaign = false;
   public empireScore = null;
   public rebelScore = null;
+  public era = null;
 
   constructor(public dialogRef: MatDialogRef<SetCampaignPointsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SetCampaignPointsDialogData) {
@@ -25,6 +28,7 @@ export class SetCampaignPointsDialogComponent implements OnInit {
   ngOnInit() {
     this.rebelScore = this.data.rebelScore;
     this.empireScore = this.data.empireScore;
+    this.era = this.data.era;
     this.isForCampaign = this.data.act === null;
   }
 
@@ -34,6 +38,6 @@ export class SetCampaignPointsDialogComponent implements OnInit {
 
   setScore() {
     this.dialogRef.close(new SetCampaignPointsDialogData(this.data.act,
-      this.empireScore, this.rebelScore));
+      this.empireScore, this.rebelScore, this.data.era));
   }
 }

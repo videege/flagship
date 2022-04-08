@@ -1,7 +1,9 @@
 <div fxLayout="column" fxLayoutGap="8px">
     <mat-card>
         <mat-card-header>
-            <i mat-card-avatar class="ffi {{ factionIcon }}" style="font-size:36px;"></i>
+            <i mat-card-avatar class="ffi" style="font-size:36px;">
+                <flagship-faction-icon [faction]="team.faction"></flagship-faction-icon>
+            </i>
             <mat-card-title>{{ faction }}</mat-card-title>
             <mat-card-subtitle>{{ team.name || "No team name set" }}</mat-card-subtitle>
         </mat-card-header>
@@ -57,7 +59,9 @@
     </mat-card>
     <mat-card>
         <mat-card-header>
-            <i mat-card-avatar class="ffi {{ factionIcon }}" style="font-size:36px;"></i>
+            <i mat-card-avatar class="ffi" style="font-size:36px;">
+                <flagship-faction-icon [faction]="team.faction"></flagship-faction-icon>
+            </i>
             <mat-card-title>Token Inventory</mat-card-title>
             <mat-card-subtitle>{{ team.name || "No team name set" }}</mat-card-subtitle>
         </mat-card-header>
