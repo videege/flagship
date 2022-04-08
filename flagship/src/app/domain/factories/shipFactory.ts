@@ -23,6 +23,7 @@ export class ShipFactory {
     interdictor: [2012],
     onager: [2023, 2024, 2025],
     onagerSD: [2023, 2010, 2024, 2025],
+    venatorEmpire: [2010],
     // rebels
     assaultFrigate: [2500, 2501],
     cr90: [2502, 2503, 2504, 2505],
@@ -36,24 +37,27 @@ export class ShipFactory {
     mc75: [2513, 2514, 2515],
     starhawkMarkI: [2527, 2528, 2529],
     starhawkMarkII: [2529],
+    providenceRebels: [],
     // republic
     acclamator: [2800, 2801],
     consular: [2802, 2803],
     peltaRepublic: [2804, 2805],
     venator: [2806, 2807, 2808],
+    vsdRepublic: [],
     // separatists
     munificent: [2700, 2701],
     hardcell: [2702, 2703],
     providence: [2704, 2705, 2706],
     recusant: [2707, 2708, 2709],
+    gozantiSeparatists: []
   };
 
-  static shipData: (ShipData|IgnitionCapableShipData|HugeShipData)[] = [
+  static shipData: (ShipData | IgnitionCapableShipData | HugeShipData)[] = [
     {
       id: 1, name: 'Imperial I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
       points: 110, hull: 11, command: 3, squadron: 4, engineering: 4, size: Size.Large,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Redirect, DefenseToken.Contain],
-      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2, 
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2,
       frontArmament: new Armament(3, 2, 3), rearArmament: new Armament(1, 2, 0),
       leftArmament: new Armament(2, 0, 2), rightArmament: new Armament(2, 0, 2),
       antiSquadronArmament: new Armament(0, 1, 1),
@@ -331,7 +335,7 @@ export class ShipFactory {
       id: 19, name: 'Star Dreadnought Command Prototype', shipClass: ShipClass.Huge, faction: Faction.Empire,
       points: 220, hull: 22, command: 4, squadron: 5, engineering: 4, size: Size.Huge,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
-        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
       leftShields: 3, rightShields: 3, frontShields: 6, rearShields: 2, leftAuxShields: 3, rightAuxShields: 3,
       frontArmament: new Armament(4, 4, 0), rearArmament: new Armament(1, 1, 1),
       leftArmament: new Armament(3, 1, 1), rightArmament: new Armament(3, 1, 1),
@@ -351,7 +355,7 @@ export class ShipFactory {
       id: 20, name: 'Star Dreadnought Assault Prototype', shipClass: ShipClass.Huge, faction: Faction.Empire,
       points: 250, hull: 22, command: 4, squadron: 5, engineering: 4, size: Size.Huge,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
-        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
       leftShields: 3, rightShields: 3, frontShields: 6, rearShields: 2, leftAuxShields: 3, rightAuxShields: 3,
       frontArmament: new Armament(5, 4, 0), rearArmament: new Armament(1, 1, 1),
       leftArmament: new Armament(3, 2, 1), rightArmament: new Armament(3, 2, 1),
@@ -371,7 +375,7 @@ export class ShipFactory {
       id: 21, name: 'Executor I-Class Star Dreadnought', shipClass: ShipClass.Huge, faction: Faction.Empire,
       points: 381, hull: 33, command: 4, squadron: 6, engineering: 5, size: Size.Huge,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
-        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
       leftShields: 5, rightShields: 5, frontShields: 6, rearShields: 3, leftAuxShields: 5, rightAuxShields: 5,
       frontArmament: new Armament(5, 4, 0), rearArmament: new Armament(2, 1, 1),
       leftArmament: new Armament(3, 3, 1), rightArmament: new Armament(3, 3, 1),
@@ -392,7 +396,7 @@ export class ShipFactory {
       id: 22, name: 'Executor II-Class Star Dreadnought', shipClass: ShipClass.Huge, faction: Faction.Empire,
       points: 411, hull: 33, command: 4, squadron: 6, engineering: 5, size: Size.Huge,
       defenseTokens: [DefenseToken.Brace, DefenseToken.Brace, DefenseToken.Redirect,
-        DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
+      DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Contain],
       leftShields: 5, rightShields: 5, frontShields: 6, rearShields: 3, leftAuxShields: 5, rightAuxShields: 5,
       frontArmament: new Armament(5, 5, 0), rearArmament: new Armament(2, 1, 1),
       leftArmament: new Armament(4, 3, 1), rightArmament: new Armament(4, 3, 1),
@@ -442,6 +446,23 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
       allowedTitles: ShipFactory.titles.onagerSD, traits: []
+    },
+    {
+      id: 25, name: 'Venator II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
+      points: 100, hull: 9, command: 3, squadron: 3, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Contain, DefenseToken.Salvo],
+      leftShields: 3, rightShields: 3, frontShields: 4, rearShields: 2,
+      frontArmament: new Armament(2, 2, 2), rearArmament: new Armament(1, 1, 1),
+      leftArmament: new Armament(2, 2, 0), rightArmament: new Armament(2, 2, 0),
+      antiSquadronArmament: new Armament(0, 1, 1),
+      navigationChart: new NavigationChart(1, [1, 1], [0, 1, 0], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
+        new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
+      ],
+      allowedTitles: ShipFactory.titles.venatorEmpire,
+      traits: [Traits.bombard]
     },
     // Rebel (Scum) 
     {
@@ -789,6 +810,24 @@ export class ShipFactory {
       ],
       allowedTitles: ShipFactory.titles.starhawkMarkII, traits: []
     },
+    {
+      id: 123, name: 'Providence-class Carrier', shipClass: ShipClass.Normal, faction: Faction.Rebels,
+      points: 95, hull: 9, command: 3, squadron: 2, engineering: 4, size: Size.Large,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo, DefenseToken.Evade],
+      leftShields: 3, rightShields: 3, frontShields: 5, rearShields: 2,
+      frontArmament: new Armament(2, 1, 2), rearArmament: new Armament(1, 1, 1),
+      leftArmament: new Armament(2, 2, 2), rightArmament: new Armament(2, 2, 2),
+      antiSquadronArmament: new Armament(0, 0, 2),
+      navigationChart: new NavigationChart(2, [1, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
+        new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.SupportTeam)
+      ],
+      allowedTitles: ShipFactory.titles.providenceRebels,
+      traits: [Traits.comms, Traits.transport]
+    },
     // Republic
     {
       id: 200, name: 'Acclamator I-class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -816,11 +855,11 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(1, [1, 0], [0, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.Officer),
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.acclamator, 
+      allowedTitles: ShipFactory.titles.acclamator,
       traits: [Traits.clone, Traits.bombard, Traits.transport]
     },
     {
@@ -833,10 +872,10 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 0, 1),
       navigationChart: new NavigationChart(2, [2, 1], [1, 1, 1], [1, 0, 1, 1]),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.consular, 
+      allowedTitles: ShipFactory.titles.consular,
       traits: [Traits.clone]
     },
     {
@@ -849,10 +888,10 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 2, 0),
       navigationChart: new NavigationChart(2, [2, 1], [1, 1, 1], [1, 0, 1, 1]),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.consular, 
+      allowedTitles: ShipFactory.titles.consular,
       traits: [Traits.senate, Traits.clone]
     },
     {
@@ -865,10 +904,10 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 0),
       navigationChart: new NavigationChart(2, [1, 1], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.peltaRepublic, 
+      allowedTitles: ShipFactory.titles.peltaRepublic,
       traits: [Traits.clone, Traits.medical]
     },
     {
@@ -881,10 +920,10 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(2, [1, 1], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.peltaRepublic, 
+      allowedTitles: ShipFactory.titles.peltaRepublic,
       traits: [Traits.clone, Traits.transport]
     },
     {
@@ -897,7 +936,7 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 2, 0),
       navigationChart: new NavigationChart(1, [1, 1], [0, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.FleetCommand), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
@@ -914,12 +953,28 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(1, [1, 1], [0, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.venator,
       traits: [Traits.clone, Traits.bombard]
+    },
+    {
+      id: 208, name: 'Victory I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Republic,
+      points: 75, hull: 8, command: 3, squadron: 3, engineering: 4, size: Size.Medium,
+      defenseTokens: [DefenseToken.Brace, DefenseToken.Redirect, DefenseToken.Salvo],
+      leftShields: 3, rightShields: 3, frontShields: 3, rearShields: 1,
+      frontArmament: new Armament(3, 0, 3), rearArmament: new Armament(2, 0, 0),
+      leftArmament: new Armament(2, 0, 1), rightArmament: new Armament(2, 0, 1),
+      antiSquadronArmament: new Armament(0, 1, 0),
+      navigationChart: new NavigationChart(1, [0, 1], null, null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Ordnance)
+      ],
+      allowedTitles: ShipFactory.titles.vsdRepublic, traits: [Traits.clone]
     },
     // Separatists
     {
@@ -932,8 +987,8 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(1, 0, 0),
       navigationChart: new NavigationChart(1, [1, 2], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer),  new UpgradeSlot(UpgradeType.SupportTeam),
-        new UpgradeSlot(UpgradeType.OffensiveRetrofit),  new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.munificent,
@@ -949,8 +1004,8 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(1, 0, 1),
       navigationChart: new NavigationChart(1, [1, 2], null, null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer),  new UpgradeSlot(UpgradeType.SupportTeam),
-        new UpgradeSlot(UpgradeType.DefensiveRetrofit),  new UpgradeSlot(UpgradeType.IonCannons),
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.munificent,
@@ -966,10 +1021,10 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 1),
       navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit), 
-        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),  
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
+        new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),
       ],
-      allowedTitles: ShipFactory.titles.hardcell, 
+      allowedTitles: ShipFactory.titles.hardcell,
       traits: [Traits.droid, Traits.transport]
     },
     {
@@ -982,7 +1037,7 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 0),
       navigationChart: new NavigationChart(1, [1, 1], [1, 1, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.Officer),
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
       allowedTitles: ShipFactory.titles.hardcell,
@@ -998,12 +1053,12 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 0, 2),
       navigationChart: new NavigationChart(2, [1, 1], [1, 0, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.FleetCommand), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.FleetCommand),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.providence, 
+      allowedTitles: ShipFactory.titles.providence,
       traits: [Traits.droid, Traits.comms, Traits.transport]
     },
     {
@@ -1016,12 +1071,12 @@ export class ShipFactory {
       antiSquadronArmament: new Armament(0, 1, 0),
       navigationChart: new NavigationChart(2, [1, 1], [1, 0, 0], null),
       upgradeSlots: [
-        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam), 
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.providence, 
+      allowedTitles: ShipFactory.titles.providence,
       traits: [Traits.droid, Traits.bombard, Traits.transport]
     },
     {
@@ -1058,13 +1113,28 @@ export class ShipFactory {
       allowedTitles: ShipFactory.titles.recusant,
       traits: [Traits.droid]
     },
+    {
+      id: 308, name: 'Gozanti-Class Cruisers', shipClass: ShipClass.Normal, faction: Faction.Separatists,
+      points: 27, hull: 1, command: 1, squadron: 2, engineering: 2, size: Size.SmallFlotilla,
+      defenseTokens: [DefenseToken.Scatter, DefenseToken.Evade],
+      leftShields: 1, rightShields: 1, frontShields: 1, rearShields: 1,
+      frontArmament: new Armament(0, 1, 0), rearArmament: new Armament(0, 0, 0),
+      leftArmament: new Armament(0, 1, 0), rightArmament: new Armament(0, 1, 0),
+      antiSquadronArmament: new Armament(0, 0, 1),
+      navigationChart: new NavigationChart(2, [1, 1], [1, 1, 0], null),
+      upgradeSlots: [
+        new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
+        new UpgradeSlot(UpgradeType.IonCannons)
+      ],
+      allowedTitles: ShipFactory.titles.gozantiSeparatists, traits: [Traits.droid]
+    },
   ];
 
   constructor() {
 
   }
 
-  getShips(faction: Faction): (ShipData | IgnitionCapableShipData)[]  {
+  getShips(faction: Faction): (ShipData | IgnitionCapableShipData)[] {
     return ShipFactory.shipData.filter(x => x.faction === faction);
   }
 
@@ -1082,9 +1152,12 @@ export class ShipFactory {
     if (upgradeSlots.find(u => u.type === UpgradeType.OffensiveRetrofit) &&
       upgradeSlots.find(u => u.type === UpgradeType.WeaponsTeam) &&
       !upgradeSlots.find(u => u.type === UpgradeType.BoardingTeam)) {
-      // add a boarding team slot in
-      // currently there are no ships that can fit two boarding teams
-      upgradeSlots.push(new UpgradeSlot(UpgradeType.BoardingTeam));
+      let offensiveRetrofitSlots = upgradeSlots.filter(x => x.type === UpgradeType.OffensiveRetrofit).length;
+      let weaponsTeamSlots = upgradeSlots.filter(x => x.type === UpgradeType.WeaponsTeam).length;
+      let boardingTeamSlots = Math.min(offensiveRetrofitSlots, weaponsTeamSlots);
+      for (let i = 0; i < boardingTeamSlots; i++) {
+        upgradeSlots.push(new UpgradeSlot(UpgradeType.BoardingTeam));
+      }
     }
 
     // All ships currently have titles
@@ -1108,9 +1181,9 @@ export class ShipFactory {
     if (data.shipClass === ShipClass.Normal) {
       let ship = new Ship(uid, data.id, data.name, data.shipClass, data.faction,
         data.size, data.hull, data.command, data.squadron, data.engineering, data.points,
-        data.defenseTokens, data.frontShields, 
+        data.defenseTokens, data.frontShields,
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
-        data.frontArmament, 
+        data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
         upgradeSlots, data.allowedTitles, data.traits);
       ship.isScarred = isScarred;
@@ -1119,22 +1192,22 @@ export class ShipFactory {
     } else if (data.shipClass === ShipClass.Huge) {
       let ship = new HugeShip(uid, data.id, data.name, data.shipClass, data.faction,
         data.size, data.hull, data.command, data.squadron, data.engineering, data.points,
-        data.defenseTokens, data.frontShields, 
+        data.defenseTokens, data.frontShields,
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
-        data.frontArmament, 
+        data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
         upgradeSlots, data.allowedTitles, data.traits,
-        (<HugeShipData>data).leftAuxShields,  (<HugeShipData>data).rightAuxShields,
-        (<HugeShipData>data).leftAuxArmament,  (<HugeShipData>data).rightAuxArmament);
+        (<HugeShipData>data).leftAuxShields, (<HugeShipData>data).rightAuxShields,
+        (<HugeShipData>data).leftAuxArmament, (<HugeShipData>data).rightAuxArmament);
       ship.isScarred = isScarred;
       ship.isVeteran = isVeteran;
       return ship;
     } else if (data.shipClass === ShipClass.IgnitionCapable) {
       let ship = new IgnitionCapableShip(uid, data.id, data.name, data.shipClass, data.faction,
         data.size, data.hull, data.command, data.squadron, data.engineering, data.points,
-        data.defenseTokens, data.frontShields, 
+        data.defenseTokens, data.frontShields,
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
-        data.frontArmament, 
+        data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
         upgradeSlots, data.allowedTitles, data.traits, (<IgnitionCapableShipData>data).ignitionArmament);
       ship.isScarred = isScarred;

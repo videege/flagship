@@ -320,6 +320,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Counter, 1), new Keyword(KeywordType.Escort, null)],
             text: ''
         },
+        {
+            id: 40, name: 'Darth Vader', shipName: 'TIE Defender Squadron',
+            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 25,
+            speed: 5, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Evade],
+            antiSquadronArmament: new Armament(1, 1, 2), batteryArmament: new Armament(2, 0, 0),
+            keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Rogue)],
+            text: 'While attacking a unique squadron, each of your critical icons adds 1 damage to the damage total.'
+        },
         // REBELS
         {
             id: 100, name: 'Biggs Darklighter', shipName: 'X-Wing Squadron',
@@ -617,6 +625,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Swarm)],
             text: ''
         },
+        {
+            id: 137, name: 'Hera Syndulla', shipName: 'X-Wing Squadron',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: false, points: 23,
+            speed: 3, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 2, 1), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Dodge, 1), new Keyword(KeywordType.Bomber)],
+            text: 'When you are activated, friendly squadrons at distance 1 that have Escort gain Adept 1 until the end of the round.'
+        },
         // SEPARATISTS
         {
             id: 200, name: 'Vulture-class Droid Fighter Squadron', shipName: 'Vulture-class Droid Fighter Squadron',
@@ -802,7 +818,15 @@ export class SquadronFactory {
             antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 0, 1),
             keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Swarm)],
             text: 'After you perform an attack, you may move up to distance 1, even if you are engaged.'
-        }
+        },
+        {
+            id: 312, name: 'Anakin Skywalker', shipName: 'Delta-7 Aethersprite Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 24,
+            speed: 4, hull: 4, defenseTokens: [DefenseToken.Brace, DefenseToken.Scatter],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Dodge, 1)],
+            text: 'While attacking a squadron during your activation, at the end of the Resolve Damage step, you may choose up to 2 enemy squadrons at distance 1 of the defender. If the defender was damaged, the chosen squadrons suffer 1 damage.'
+        },
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {

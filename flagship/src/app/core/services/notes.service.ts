@@ -22,14 +22,23 @@ export class NotesService {
 
   // tslint:disable-next-line:member-ordering
   static _notes: Notes = {
-    version: '0.0.4-alpha.1',
+    version: '0.0.5',
     notes: [
       {
+        title: 'Rapid Reinforcements I',
+        date: new Date('2022-04-08'),
+        content: [
+                  `Added ships and squadrons released in AMG's Rapid Reinforcements I expansion.`,
+                  `Please note: the unique restrictions on some ships are not current enforced.  This will be added in a future release.`
+                ]
+      },
+      {
         title: 'Clone Wars Rebellion in the Rim',
-        date: new Date('2021-04-12'),
+        date: new Date('2022-04-08'),
         content: [
                   `Added support for playing Rebellion in the Rim with Clone Wars Factions.`,
-                  `For now the Seperatist Alliance replaces the Galactic Empire, and the Galactic Republic replaces the Rebel Alliance`
+                  `For now the Seperatist Alliance replaces the Galactic Empire, and the Galactic Republic replaces the Rebel Alliance.`,
+                  `Huge thank you to Jeff Wilson (jawilson) for contributing this feature!`
                 ]
       },
       {
