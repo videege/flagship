@@ -91,7 +91,7 @@ export class Campaign {
         campaign.playerUids = data.playerUids || [];
         campaign.inviteToken = data.inviteToken || null;
         campaign.type = data.type;
-        campaign.era = data.era;
+        campaign.era = data.era || CampaignEra.CivilWar;
         campaign.startDate = data.startDate;
         campaign.statusDate = data.statusDate;
         campaign.history = data.history.map(x => CampaignState.hydrate(x));
