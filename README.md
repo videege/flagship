@@ -26,10 +26,11 @@ Thanks to the many contributors helping improve Flagship.  I'll do my best to ke
 - @rythos42
 - @rkbodenner
 - @plester1
+- @jawilson
 
 ### Disclaimer
 
-This software is not endorsed by Disney, Lucasfilm Ltd. or Fantasy Flight Games and is intended 
+This software is not endorsed by Disney, Lucasfilm Ltd., Fantasy Flight Games or Atomic Mass Games and is intended 
 for entertainment purposes only.  Star Wars, all iconography, all names and pictures of characters,
 vehicles, and any other Star Wars items are registered trademarks and/or copyrights of Lucasfilm Ltd.
 or their respective trademark and copyright holders.
