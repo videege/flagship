@@ -37,7 +37,7 @@
     "firebase": "^7.24.0",
     "guid-typescript": "^1.0.9",
     "mat-progress-buttons": "^9.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-auth-firebaseui": "^4.4.0",
     "ngx-clipboard": "^12.2.1",
     "ngx-moment": "^3.4.0",
