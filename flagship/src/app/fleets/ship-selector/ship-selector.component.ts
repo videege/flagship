@@ -22,7 +22,7 @@ export class ShipSelectorComponent implements OnInit {
 
   ngOnInit() {
     //let allUpgrades = this.shipFactory.ships
-    this.ships = this.shipFactory.getShips(this.data.fleet.faction).sort((a, b) => {
+    this.ships = this.shipFactory.getShips(this.data.fleet.faction, this.data.fleet.ships.filter(x => x.unique).map(x => x.name)).sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
       return 0;

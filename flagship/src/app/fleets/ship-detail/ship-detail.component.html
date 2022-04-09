@@ -3,7 +3,10 @@
     <flagship-ship-icon [ship]="ship" mat-card-avatar *ngIf="!(isExtraSmall | async).matches"></flagship-ship-icon>
     <mat-card-title fxLayout="row">
       <span>
-        <span style="margin-right:4px">{{ ship.name }}</span>
+        <span style="margin-right:4px">         
+          {{ ship.unique ? "&#9679;&nbsp;" : "" }}
+          {{ ship.name }}
+        </span>
         <mat-icon *ngIf="ship.isFlagship()" class="flagship-icon">flag</mat-icon>
       </span>
       <span fxFlex></span>

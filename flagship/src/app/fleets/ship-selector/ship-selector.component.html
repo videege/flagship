@@ -1,7 +1,7 @@
 <div mat-dialog-content>
   <mat-action-list dense>
     <mat-list-item *ngFor="let ship of ships; last as last" (click)="selectShip(ship)">
-      <p matLine>{{ ship.name }}</p>
+      <p matLine>{{ ship.unique ? "&#9679;&nbsp;" : "" }}{{ ship.name }}</p>
       <span style="margin-left: 8px;">{{ ship.points }}</span>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
     </mat-list-item>

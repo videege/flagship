@@ -2,7 +2,10 @@
   <mat-card fxFlex.gt-sm="50">
     <mat-card-header>
       <mat-card-title>
-        <span style="margin-right:4px">{{ ship.name }}</span>
+        <span style="margin-right:4px">
+          {{ ship.unique ? "&#9679;&nbsp;" : "" }}
+          {{ ship.name }}
+        </span>
         <span fxFlex></span>
         <span class="points">
           {{ ship.currentPoints() }}&nbsp;

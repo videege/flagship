@@ -67,7 +67,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons)
       ],
-      allowedTitles: ShipFactory.titles.isd, traits: []
+      allowedTitles: ShipFactory.titles.isd, traits: [], unique: false
     },
     {
       id: 2, name: 'Imperial II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -83,7 +83,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
       ],
-      allowedTitles: ShipFactory.titles.isd, traits: []
+      allowedTitles: ShipFactory.titles.isd, traits: [], unique: false
     },
     {
       id: 3, name: 'Imperial Star Destroyer Cymoon Refit', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -99,7 +99,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.isd, traits: []
+      allowedTitles: ShipFactory.titles.isd, traits: [], unique: false
     },
     {
       id: 4, name: 'Imperial Star Destroyer Kuat Refit', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -115,7 +115,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.isd, traits: []
+      allowedTitles: ShipFactory.titles.isd, traits: [], unique: false
     },
     {
       id: 5, name: 'Arquitens-Class Command Cruiser', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -130,7 +130,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.arquitens, traits: []
+      allowedTitles: ShipFactory.titles.arquitens, traits: [], unique: false
     },
     {
       id: 6, name: 'Arquitens-Class Light Cruiser', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -145,7 +145,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.arquitens, traits: []
+      allowedTitles: ShipFactory.titles.arquitens, traits: [], unique: false
     },
     {
       id: 7, name: 'Gladiator I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -160,7 +160,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.gladiator, traits: []
+      allowedTitles: ShipFactory.titles.gladiator, traits: [], unique: false
     },
     {
       id: 8, name: 'Gladiator II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -175,7 +175,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.gladiator, traits: []
+      allowedTitles: ShipFactory.titles.gladiator, traits: [], unique: false
     },
     {
       id: 9, name: 'Gozanti-Class Assault Carriers', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -190,7 +190,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.gozanti, traits: []
+      allowedTitles: ShipFactory.titles.gozanti, traits: [], unique: false
     },
     {
       id: 10, name: 'Gozanti-Class Cruisers', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -205,7 +205,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.gozanti, traits: []
+      allowedTitles: ShipFactory.titles.gozanti, traits: [], unique: false
     },
     {
       id: 11, name: 'Interdictor-Class Combat Refit', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -221,7 +221,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.ExperimentalRetrofit)
       ],
-      allowedTitles: ShipFactory.titles.interdictor, traits: []
+      allowedTitles: ShipFactory.titles.interdictor, traits: [], unique: false
     },
     {
       id: 12, name: 'Interdictor-Class Suppression Refit', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -237,7 +237,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.ExperimentalRetrofit), new UpgradeSlot(UpgradeType.ExperimentalRetrofit)
       ],
-      allowedTitles: ShipFactory.titles.interdictor, traits: []
+      allowedTitles: ShipFactory.titles.interdictor, traits: [], unique: false
     },
     {
       id: 13, name: 'Quasar Fire I-Class Cruiser-Carrier', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -252,7 +252,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
       ],
-      allowedTitles: ShipFactory.titles.quasar, traits: []
+      allowedTitles: ShipFactory.titles.quasar, traits: [], unique: false
     },
     {
       id: 14, name: 'Quasar Fire II-Class Cruiser-Carrier', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -267,7 +267,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
       ],
-      allowedTitles: ShipFactory.titles.quasar, traits: []
+      allowedTitles: ShipFactory.titles.quasar, traits: [], unique: false
     },
     {
       id: 15, name: 'Raider I-Class Corvette', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -282,7 +282,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
       ],
-      allowedTitles: ShipFactory.titles.raider, traits: []
+      allowedTitles: ShipFactory.titles.raider, traits: [], unique: false
     },
     {
       id: 16, name: 'Raider II-Class Corvette', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -297,7 +297,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
       ],
-      allowedTitles: ShipFactory.titles.raider, traits: []
+      allowedTitles: ShipFactory.titles.raider, traits: [], unique: false
     },
     {
       id: 17, name: 'Victory I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -313,7 +313,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.vsd, traits: []
+      allowedTitles: ShipFactory.titles.vsd, traits: [], unique: false
     },
     {
       id: 18, name: 'Victory II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -329,7 +329,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.vsd, traits: []
+      allowedTitles: ShipFactory.titles.vsd, traits: [], unique: false
     },
     {
       id: 19, name: 'Star Dreadnought Command Prototype', shipClass: ShipClass.Huge, faction: Faction.Empire,
@@ -349,7 +349,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.FleetCommand),
         new UpgradeSlot(UpgradeType.FleetCommand)
       ],
-      allowedTitles: ShipFactory.titles.ssd, traits: []
+      allowedTitles: ShipFactory.titles.ssd, traits: [], unique: false
     },
     {
       id: 20, name: 'Star Dreadnought Assault Prototype', shipClass: ShipClass.Huge, faction: Faction.Empire,
@@ -369,7 +369,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.ssd, traits: []
+      allowedTitles: ShipFactory.titles.ssd, traits: [], unique: false
     },
     {
       id: 21, name: 'Executor I-Class Star Dreadnought', shipClass: ShipClass.Huge, faction: Faction.Empire,
@@ -390,7 +390,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.FleetCommand), new UpgradeSlot(UpgradeType.FleetCommand),
         new UpgradeSlot(UpgradeType.FleetCommand), new UpgradeSlot(UpgradeType.FleetCommand)
       ],
-      allowedTitles: ShipFactory.titles.ssd, traits: []
+      allowedTitles: ShipFactory.titles.ssd, traits: [], unique: false
     },
     {
       id: 22, name: 'Executor II-Class Star Dreadnought', shipClass: ShipClass.Huge, faction: Faction.Empire,
@@ -411,7 +411,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.FleetCommand)
       ],
-      allowedTitles: ShipFactory.titles.ssd, traits: []
+      allowedTitles: ShipFactory.titles.ssd, traits: [], unique: false
     },
     {
       id: 23, name: 'Onager-Class Testbed', shipClass: ShipClass.IgnitionCapable, faction: Faction.Empire,
@@ -428,7 +428,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
-      allowedTitles: ShipFactory.titles.onager, traits: []
+      allowedTitles: ShipFactory.titles.onager, traits: [], unique: false
     },
     {
       id: 24, name: 'Onager-Class Star Destroyer', shipClass: ShipClass.IgnitionCapable, faction: Faction.Empire,
@@ -445,7 +445,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.Turbolaser),
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
-      allowedTitles: ShipFactory.titles.onagerSD, traits: []
+      allowedTitles: ShipFactory.titles.onagerSD, traits: [], unique: false
     },
     {
       id: 25, name: 'Venator II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Empire,
@@ -462,7 +462,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.venatorEmpire,
-      traits: [Traits.bombard]
+      traits: [Traits.bombard], unique: true
     },
     // Rebel (Scum) 
     {
@@ -479,7 +479,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.assaultFrigate, traits: []
+      allowedTitles: ShipFactory.titles.assaultFrigate, traits: [], unique: false
     },
     {
       id: 102, name: 'Assault Frigate Mark II B', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -495,7 +495,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.assaultFrigate, traits: []
+      allowedTitles: ShipFactory.titles.assaultFrigate, traits: [], unique: false
     },
     {
       id: 103, name: 'CR90A Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -510,7 +510,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.cr90, traits: []
+      allowedTitles: ShipFactory.titles.cr90, traits: [], unique: false
     },
     {
       id: 104, name: 'CR90B Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -525,7 +525,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.IonCannons)
       ],
-      allowedTitles: ShipFactory.titles.cr90, traits: []
+      allowedTitles: ShipFactory.titles.cr90, traits: [], unique: false
     },
     {
       id: 105, name: 'GR-75 Combat Retrofits', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -540,7 +540,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.gr75, traits: []
+      allowedTitles: ShipFactory.titles.gr75, traits: [], unique: false
     },
     {
       id: 106, name: 'GR-75 Medium Transports', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -555,7 +555,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.FleetSupport)
       ],
-      allowedTitles: ShipFactory.titles.gr75, traits: []
+      allowedTitles: ShipFactory.titles.gr75, traits: [], unique: false
     },
     {
       id: 107, name: 'Hammerhead Scout Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -570,7 +570,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.hammerhead, traits: []
+      allowedTitles: ShipFactory.titles.hammerhead, traits: [], unique: false
     },
     {
       id: 108, name: 'Hammerhead Torpedo Corvette', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -585,7 +585,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.hammerhead, traits: []
+      allowedTitles: ShipFactory.titles.hammerhead, traits: [], unique: false
     },
     {
       id: 109, name: 'MC30c Scout Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -601,7 +601,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc30c, traits: []
+      allowedTitles: ShipFactory.titles.mc30c, traits: [], unique: false
     },
     {
       id: 110, name: 'MC30c Torpedo Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -617,7 +617,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc30c, traits: []
+      allowedTitles: ShipFactory.titles.mc30c, traits: [], unique: false
     },
     {
       id: 111, name: 'MC75 Armored Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -634,7 +634,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc75, traits: []
+      allowedTitles: ShipFactory.titles.mc75, traits: [], unique: false
     },
     {
       id: 112, name: 'MC75 Ordnance Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -650,7 +650,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.mc75, traits: []
+      allowedTitles: ShipFactory.titles.mc75, traits: [], unique: false
     },
     {
       id: 113, name: 'MC80 Assault Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -666,7 +666,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc80ho, traits: []
+      allowedTitles: ShipFactory.titles.mc80ho, traits: [], unique: false
     },
     {
       id: 114, name: 'MC80 Command Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -682,7 +682,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.DefensiveRetrofit),
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc80ho, traits: []
+      allowedTitles: ShipFactory.titles.mc80ho, traits: [], unique: false
     },
     {
       id: 115, name: 'MC80 Battle Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -698,7 +698,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc80lib, traits: []
+      allowedTitles: ShipFactory.titles.mc80lib, traits: [], unique: false
     },
     {
       id: 116, name: 'MC80 Star Cruiser', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -714,7 +714,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.IonCannons),
         new UpgradeSlot(UpgradeType.Turbolaser), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.mc80lib, traits: []
+      allowedTitles: ShipFactory.titles.mc80lib, traits: [], unique: false
     },
     {
       id: 117, name: 'Modified Pelta-Class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -729,7 +729,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.FleetCommand)
       ],
-      allowedTitles: ShipFactory.titles.pelta, traits: []
+      allowedTitles: ShipFactory.titles.pelta, traits: [], unique: false
     },
     {
       id: 118, name: 'Modified Pelta-Class Command Ship', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -744,7 +744,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.FleetCommand)
       ],
-      allowedTitles: ShipFactory.titles.pelta, traits: []
+      allowedTitles: ShipFactory.titles.pelta, traits: [], unique: false
     },
     {
       id: 119, name: 'Nebulon-B Escort Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -759,7 +759,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.nebulon, traits: []
+      allowedTitles: ShipFactory.titles.nebulon, traits: [], unique: false
     },
     {
       id: 120, name: 'Nebulon-B Support Frigate', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -774,7 +774,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.SupportTeam),
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.nebulon, traits: []
+      allowedTitles: ShipFactory.titles.nebulon, traits: [], unique: false
     },
     {
       id: 121, name: 'Starhawk-Class Battleship Mark I', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -791,7 +791,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
-      allowedTitles: ShipFactory.titles.starhawkMarkI, traits: []
+      allowedTitles: ShipFactory.titles.starhawkMarkI, traits: [], unique: false
     },
     {
       id: 122, name: 'Starhawk-Class Battleship Mark II', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -808,7 +808,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.IonCannons), new UpgradeSlot(UpgradeType.Turbolaser),
         new UpgradeSlot(UpgradeType.Superweapon)
       ],
-      allowedTitles: ShipFactory.titles.starhawkMarkII, traits: []
+      allowedTitles: ShipFactory.titles.starhawkMarkII, traits: [], unique: false
     },
     {
       id: 123, name: 'Providence-class Carrier', shipClass: ShipClass.Normal, faction: Faction.Rebels,
@@ -826,7 +826,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.SupportTeam)
       ],
       allowedTitles: ShipFactory.titles.providenceRebels,
-      traits: [Traits.comms, Traits.transport]
+      traits: [Traits.comms, Traits.transport], unique: true
     },
     // Republic
     {
@@ -843,7 +843,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.WeaponsTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
-      allowedTitles: ShipFactory.titles.acclamator, traits: [Traits.clone, Traits.transport]
+      allowedTitles: ShipFactory.titles.acclamator, traits: [Traits.clone, Traits.transport], unique: false
     },
     {
       id: 201, name: 'Acclamator II-class Assault Ship', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -860,7 +860,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.acclamator,
-      traits: [Traits.clone, Traits.bombard, Traits.transport]
+      traits: [Traits.clone, Traits.bombard, Traits.transport], unique: false
     },
     {
       id: 202, name: 'Consular-class Charger C70', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -876,7 +876,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.consular,
-      traits: [Traits.clone]
+      traits: [Traits.clone], unique: false
     },
     {
       id: 203, name: 'Consular-class Armed Cruiser', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -892,7 +892,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Ordnance)
       ],
       allowedTitles: ShipFactory.titles.consular,
-      traits: [Traits.senate, Traits.clone]
+      traits: [Traits.senate, Traits.clone], unique: false
     },
     {
       id: 204, name: 'Pelta-Class Medical Frigate', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -908,7 +908,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.OffensiveRetrofit), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
       allowedTitles: ShipFactory.titles.peltaRepublic,
-      traits: [Traits.clone, Traits.medical]
+      traits: [Traits.clone, Traits.medical], unique: false
     },
     {
       id: 205, name: 'Pelta-Class Transport Frigate', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -924,7 +924,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
       allowedTitles: ShipFactory.titles.peltaRepublic,
-      traits: [Traits.clone, Traits.transport]
+      traits: [Traits.clone, Traits.transport], unique: false
     },
     {
       id: 206, name: 'Venator I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -941,7 +941,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.venator,
-      traits: [Traits.clone, Traits.jedi, Traits.comms]
+      traits: [Traits.clone, Traits.jedi, Traits.comms], unique: false
     },
     {
       id: 207, name: 'Venator II-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -958,7 +958,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.venator,
-      traits: [Traits.clone, Traits.bombard]
+      traits: [Traits.clone, Traits.bombard], unique: false
     },
     {
       id: 208, name: 'Victory I-Class Star Destroyer', shipClass: ShipClass.Normal, faction: Faction.Republic,
@@ -974,7 +974,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.OffensiveRetrofit),
         new UpgradeSlot(UpgradeType.Ordnance), new UpgradeSlot(UpgradeType.Ordnance)
       ],
-      allowedTitles: ShipFactory.titles.vsdRepublic, traits: [Traits.clone]
+      allowedTitles: ShipFactory.titles.vsdRepublic, traits: [Traits.clone], unique: false
     },
     // Separatists
     {
@@ -992,7 +992,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.munificent,
-      traits: [Traits.droid, Traits.bombard, Traits.comms]
+      traits: [Traits.droid, Traits.bombard, Traits.comms], unique: false
     },
     {
       id: 301, name: 'Munificent-class Star Frigate', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1009,7 +1009,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.munificent,
-      traits: [Traits.droid, Traits.bombard, Traits.transport]
+      traits: [Traits.droid, Traits.bombard, Traits.transport], unique: false
     },
     {
       id: 302, name: 'Hardcell-class Battle Refit', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1025,7 +1025,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.DefensiveRetrofit), new UpgradeSlot(UpgradeType.Turbolaser),
       ],
       allowedTitles: ShipFactory.titles.hardcell,
-      traits: [Traits.droid, Traits.transport]
+      traits: [Traits.droid, Traits.transport], unique: false
     },
     {
       id: 303, name: 'Hardcell-class Transport', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1041,7 +1041,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.SupportTeam), new UpgradeSlot(UpgradeType.FleetSupport)
       ],
       allowedTitles: ShipFactory.titles.hardcell,
-      traits: [Traits.droid, Traits.transport]
+      traits: [Traits.droid, Traits.transport], unique: false
     },
     {
       id: 304, name: 'Providence-class Carrier', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1059,7 +1059,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.providence,
-      traits: [Traits.droid, Traits.comms, Traits.transport]
+      traits: [Traits.droid, Traits.comms, Traits.transport], unique: false
     },
     {
       id: 305, name: 'Providence-class Dreadnought', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1077,7 +1077,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.providence,
-      traits: [Traits.droid, Traits.bombard, Traits.transport]
+      traits: [Traits.droid, Traits.bombard, Traits.transport], unique: false
     },
     {
       id: 306, name: 'Recusant-Class Light Destroyer', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1094,7 +1094,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.recusant,
-      traits: [Traits.droid]
+      traits: [Traits.droid], unique: false
     },
     {
       id: 307, name: 'Recusant-Class Support Destroyer', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1111,7 +1111,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Turbolaser)
       ],
       allowedTitles: ShipFactory.titles.recusant,
-      traits: [Traits.droid]
+      traits: [Traits.droid], unique: false
     },
     {
       id: 308, name: 'Gozanti-Class Cruisers', shipClass: ShipClass.Normal, faction: Faction.Separatists,
@@ -1126,7 +1126,7 @@ export class ShipFactory {
         new UpgradeSlot(UpgradeType.Officer), new UpgradeSlot(UpgradeType.WeaponsTeam),
         new UpgradeSlot(UpgradeType.IonCannons)
       ],
-      allowedTitles: ShipFactory.titles.gozantiSeparatists, traits: [Traits.droid]
+      allowedTitles: ShipFactory.titles.gozantiSeparatists, traits: [Traits.droid], unique: false
     },
   ];
 
@@ -1134,8 +1134,12 @@ export class ShipFactory {
 
   }
 
-  getShips(faction: Faction): (ShipData | IgnitionCapableShipData)[] {
-    return ShipFactory.shipData.filter(x => x.faction === faction);
+  getShips(faction: Faction, existingUniques: string[] = []): (ShipData | IgnitionCapableShipData)[] {
+    let shipData = ShipFactory.shipData.filter(x => x.faction === faction);
+    if (existingUniques) {
+      shipData = shipData.filter((data) => !existingUniques.includes(data.name));
+    }
+    return shipData;
   }
 
   instantiateShip(id: number, customCommander: CustomCommander = null,
@@ -1185,7 +1189,7 @@ export class ShipFactory {
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
         data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
-        upgradeSlots, data.allowedTitles, data.traits);
+        upgradeSlots, data.allowedTitles, data.traits, data.unique);
       ship.isScarred = isScarred;
       ship.isVeteran = isVeteran;
       return ship;
@@ -1196,7 +1200,7 @@ export class ShipFactory {
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
         data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
-        upgradeSlots, data.allowedTitles, data.traits,
+        upgradeSlots, data.allowedTitles, data.traits, data.unique,
         (<HugeShipData>data).leftAuxShields, (<HugeShipData>data).rightAuxShields,
         (<HugeShipData>data).leftAuxArmament, (<HugeShipData>data).rightAuxArmament);
       ship.isScarred = isScarred;
@@ -1209,7 +1213,8 @@ export class ShipFactory {
         data.leftShields, data.rightShields, data.rearShields, data.antiSquadronArmament,
         data.frontArmament,
         data.leftArmament, data.rightArmament, data.rearArmament, data.navigationChart,
-        upgradeSlots, data.allowedTitles, data.traits, (<IgnitionCapableShipData>data).ignitionArmament);
+        upgradeSlots, data.allowedTitles, data.traits, data.unique,
+        (<IgnitionCapableShipData>data).ignitionArmament);
       ship.isScarred = isScarred;
       ship.isVeteran = isVeteran;
       return ship;

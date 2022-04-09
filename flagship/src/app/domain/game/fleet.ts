@@ -262,8 +262,9 @@ export class Fleet {
       .filter(u => u.isEnabled && u.isFilled() && u.upgrade.unique).map(u => u.upgrade.name);
 
     let squadronUniques = this.squadrons.filter(s => s.unique).map(u => u.name);
+    let shipUniques = this.ships.filter(s => s.unique).map(s => s.name);
 
-    return upgradeUniques.concat(squadronUniques);
+    return upgradeUniques.concat(squadronUniques).concat(shipUniques);
   }
 
   hasUniqueNameEquipped(name: string): boolean {
