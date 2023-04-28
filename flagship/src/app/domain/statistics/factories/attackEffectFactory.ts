@@ -148,6 +148,13 @@ export class AttackEffectFactory {
             },
             // pool additions
             {
+                id: 1806, appliesToFleet: true, factory: () => {
+                    return new AdditionModification('Anakin Skywalker (Salvo)', 1,
+                        true, this.orders.existingAddition, AdditionRestriction.Existing,
+                        FiringArc.Rear)
+                }
+            },
+            {
                 id: 2022, appliesToFleet: false, factory: () => {
                     return new AdditionModification('Ravager (Concentrate Token)', 1,
                         true, this.orders.existingAddition, AdditionRestriction.Existing)

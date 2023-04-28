@@ -328,6 +328,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Rogue)],
             text: 'While attacking a unique squadron, each of your critical icons adds 1 damage to the damage total.'
         },
+        {
+            id: 41, name: 'Vult Skerris', shipName: 'TIE Interceptor Squadron',
+            faction: Faction.Empire, unique: true, shipUnique: false, irregular: false, points: 18,
+            speed: 5, hull: 3, defenseTokens: [DefenseToken.Scatter, DefenseToken.Evade],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 1, 0),
+            keywords: [new Keyword(KeywordType.Counter, 4), new Keyword(KeywordType.Swarm)],
+            text: 'During the Squadron phase, you cannot make non-counter attacks.'
+        },
         // REBELS
         {
             id: 100, name: 'Biggs Darklighter', shipName: 'X-Wing Squadron',
@@ -633,6 +641,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Dodge, 1), new Keyword(KeywordType.Bomber)],
             text: 'When you are activated, friendly squadrons at distance 1 that have Escort gain Adept 1 until the end of the round.'
         },
+        {
+            id: 138, name: 'Fenn Rau', shipName: 'Mandalorian Gauntlet Fighter',
+            faction: Faction.Rebels, unique: true, shipUnique: false, irregular: true, points: 24,
+            speed: 4, hull: 7, defenseTokens: [DefenseToken.Brace],
+            antiSquadronArmament: new Armament(1, 2, 0), batteryArmament: new Armament(0, 1, 1),
+            keywords: [new Keyword(KeywordType.Assault), new Keyword(KeywordType.Escort)],
+            text: 'When you are chosen to activate by a squadron command, after the activation is resolved, choose up to 2 non-unique squadrons at distance 1. The chosen squads may activate as if they were chosen by the squadron command.'
+        },
         // SEPARATISTS
         {
             id: 200, name: 'Vulture-class Droid Fighter Squadron', shipName: 'Vulture-class Droid Fighter Squadron',
@@ -721,6 +737,14 @@ export class SquadronFactory {
             antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 0, 1),
             keywords: [new Keyword(KeywordType.Relay, 2), new Keyword(KeywordType.Screen)],
             text: 'While attacking a ship or squadron with no readied defense tokens, each of your critical icons adds 1 to the damage total.'
+        },
+        {
+            id: 211, name: 'Wat Tambor', shipName: 'Belbullab-22 Starfighter Squadron',
+            faction: Faction.Separatists, unique: true, shipUnique: false, irregular: false, points: 20,
+            speed: 4, hull: 5, defenseTokens: [DefenseToken.Brace, DefenseToken.Evade],
+            antiSquadronArmament: new Armament(0, 2, 2), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Escort), new Keyword(KeywordType.Relay, 1), new Keyword(KeywordType.Screen)],
+            text: ''
         },
         // REPUBLIC
         {
@@ -827,6 +851,14 @@ export class SquadronFactory {
             keywords: [new Keyword(KeywordType.Adept, 2), new Keyword(KeywordType.Counter, 2), new Keyword(KeywordType.Dodge, 1)],
             text: 'While attacking a squadron during your activation, at the end of the Resolve Damage step, you may choose up to 2 enemy squadrons at distance 1 of the defender. If the defender was damaged, the chosen squadrons suffer 1 damage.'
         },
+        {
+            id: 313, name: 'Matchstick', shipName: 'BTL-B Y-Wing Squadron',
+            faction: Faction.Republic, unique: true, shipUnique: false, irregular: false, points: 14,
+            speed: 3, hull: 6, defenseTokens: [DefenseToken.Brace, DefenseToken.Brace],
+            antiSquadronArmament: new Armament(0, 1, 1), batteryArmament: new Armament(0, 0, 1),
+            keywords: [new Keyword(KeywordType.Bomber), new Keyword(KeywordType.Heavy)],
+            text: 'While you are unengaged, friendly squadrons with Bomber at Distance 1 gain Rogue.'
+        }
     ];
 
     getSquadrons(faction: Faction): SquadronData[] {

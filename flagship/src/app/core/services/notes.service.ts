@@ -22,8 +22,17 @@ export class NotesService {
 
   // tslint:disable-next-line:member-ordering
   static _notes: Notes = {
-    version: '0.0.5',
+    version: '0.0.6',
     notes: [
+      {
+        title: 'Rapid Reinforcements II',
+        date: new Date('2023-04-27'),
+        content: [
+                  `Added upgrades and squadrons released in AMG's Rapid Reinforcements II expansion.`,
+                  `Unique ship restrictions are now properly enforced.`,
+                  `Anakin Skywalker salvo effect is modeled in the statistics feature.`
+                ]
+      },
       {
         title: 'Rapid Reinforcements I',
         date: new Date('2022-04-08'),

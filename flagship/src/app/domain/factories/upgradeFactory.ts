@@ -207,6 +207,12 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship resolves a command by spending a command dial, if it has not resolved another command this round, it may resolve that command as if it spent a matching command token. If it does, that ship may not resolve additional commands this round.'
             },
+            {
+                id: 1511, name: 'General Draven', type: UpgradeType.Commander, faction: Faction.Rebels,
+                unique: true, modification: false, points: 28, upgradeClass: UpgradeClass.Commander,
+                text: 'Choose command dials for this card after deploying fleets. At the start of each Ship Phase, you may reveal and discard 1 command dial from this card. If you do, until the end of the round, when an enemy ship spends a matching command dial, it resolves that dial as though it spent a token of the same type instead.',
+                startingResources: { quantity: 2, types: [ResourceType.Dial] }
+            },
             // SEPARATIST
             {
                 id: 1700, name: 'Kraken', type: UpgradeType.Commander, faction: Faction.Separatists,
@@ -272,6 +278,11 @@ export class UpgradeFactory {
                 id: 1805, name: 'Admiral Yularen', type: UpgradeType.Commander, faction: Faction.Republic,
                 unique: true, modification: false, points: 24, upgradeClass: UpgradeClass.Commander,
                 text: 'When a friendly ship resolves a squadron command, if it spent a squadron token, it may activate 1 additional squadron. When a friendly ship resolves an engineering command, it may spend engineering points on the following repair effect: Repair Squadron: Spend 2 points to choose a friendly squadron at distance 1-3. That squadron recovers 1 hull point.'
+            },
+            {
+                id: 1806, name: 'Anakin Skywalker', type: UpgradeType.Commander, faction: Faction.Republic,
+                unique: true, modification: false, points: 29, upgradeClass: UpgradeClass.Commander,
+                text: 'While a friendly ship performs a Salvo attack, it may add 1 die to its attack pool of a color already in its attack pool. Once per activation, after a friendly ship performs an attack that targets an enemy ship, that friendly ship may spend 1 Salvo defense token. If it does, it may perform a Salvo attack targeting the same enemy ship.'
             },
             // Titles
             {
@@ -1190,8 +1201,7 @@ export class UpgradeFactory {
             {
                 id: 10213, name: 'Governor Pryce', type: UpgradeType.Officer, faction: Faction.Empire,
                 unique: true, modification: false, points: 7, upgradeClass: UpgradeClass.Normal,
-                text: 'Medium or large ship only. After deploying fleets, you may place 1 round token on this card. If you do, during the round matching that round token, you must activate at the end of the Ship Phase (after all other ships have activated).',
-                sizeRestriction: [Size.Medium, Size.Large]
+                text: 'Once per activation, while performing an attack against an enemy ship, you may spend 1 shield from the attacking hull zone to change 1 die face to any result.'
             },
             {
                 id: 10214, name: 'Iden Versio', type: UpgradeType.Officer, faction: Faction.Empire,
@@ -1370,6 +1380,11 @@ export class UpgradeFactory {
                 unique: true, modification: false, points: 3, upgradeClass: UpgradeClass.Normal,
                 text: 'At the start of the Squadron Phase, you may discard any number of tokens from this card. For each token you discard in this way, 1 additional squadron at close-long range of you may be activated during each of your fleet\'s turns to activate squadrons this phase.',
                 startingResources: { quantity: 2, types: [ResourceType.Squadron]}
+            },
+            {
+                id: 10708, name: 'Asajj Ventress', type: UpgradeType.Officer, faction: Faction.Separatists,
+                unique: true, modification: false, points: 4, upgradeClass: UpgradeClass.Normal,
+                text: 'After you perform an attack targeting a ship that has 1 or more raid tokens, if the defender suffered one or more damage, you may remove 1 raid token and 1 command token from the defender. If you do, gain a matching command token.'
             },
             // Republic Officers
             {
