@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Read .nvmrc
+        run: echo ::set-output name=NODE_VERSION::$(cat ./flagship/.nvmrc)
+        id: nvm
       - name: Install Dependencies
         run: |
           cd ./flagship

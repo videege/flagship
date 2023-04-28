@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Read .nvmrc
+        run: echo ::set-output name=NODE_VERSION::$(cat ./flagship/.nvmrc)
+        id: nvm
+      - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
       - name: Install Dependencies
         run: |
           cd ./flagship
